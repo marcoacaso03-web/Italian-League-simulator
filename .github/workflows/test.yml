@@ -1,4 +1,4 @@
-name: Test FBref Access
+name: Test Cloudflare Bypass
 
 on:
   workflow_dispatch:
@@ -6,18 +6,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Python + Playwright
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install dependencies
-        run: |
+      - run: |
           pip install playwright
           playwright install chromium
-
-      - name: Test FBref access
-        run: python scripts/test_fbref_access.py
+      - name: Test CF wait
+        run: python scripts/test_cf_wait.py
+      - name: Show HTML snippet
+        if: always()
+        run: head -50 /tmp/fbref_loaded.html 2>/dev/null || echo "no file"
