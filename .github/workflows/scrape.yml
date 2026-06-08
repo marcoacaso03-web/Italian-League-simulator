@@ -34,7 +34,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r scripts/requirements.txt
-          pip install playwright
           playwright install chromium
 
       - name: Scrape FBref (Playwright)
@@ -45,8 +44,6 @@ jobs:
           else
             python scrape_gh_actions.py --seasons ${{ inputs.seasons }}
           fi
-        env:
-          DEBUG: ${{ inputs.debug }}
 
       - name: Validate output
         run: |
