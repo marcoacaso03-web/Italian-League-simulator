@@ -27,10 +27,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r scripts/requirements.txt
-          pip install playwright
           playwright install chromium
 
-      - name: Scrape with Playwright
+      - name: Scrape FBref (Playwright)
         run: |
           cd scripts
           if [ "${{ inputs.seasons }}" = "all" ]; then
@@ -38,18 +37,6 @@ jobs:
           else
             python scrape_gh_actions.py --seasons ${{ inputs.seasons }}
           fi
-        continue-on-error: true
-
-      - name: Fallback — SeleniumBase (if Playwright failed)
-        if: failure()
-        run: |
-          cd scripts
-          if [ "${{ inputs.seasons }}" = "all" ]; then
-            python scrape_serie_a_v6.py
-          else
-            python scrape_serie_a_v6.py --seasons ${{ inputs.seasons }}
-          fi
-        continue-on-error: true
 
       - name: Validate
         run: |
