@@ -1,0 +1,82 @@
+name: Scrape FBref Serie A
+
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: 'Seasons to scrape (space-separated, e.g. "2023-2024 2024-2025" or "all")'
+        required: false
+        default: 'all'
+      debug:
+        description: 'Enable debug logging'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r scripts/requirements.txt
+          pip install playwright
+          playwright install chromium
+
+      - name: Scrape FBref (Playwright)
+        run: |
+          cd scripts
+          if [ "${{ inputs.seasons }}" = "all" ]; then
+            python scrape_gh_actions.py
+          else
+            python scrape_gh_actions.py --seasons ${{ inputs.seasons }}
+          fi
+        env:
+          DEBUG: ${{ inputs.debug }}
+
+      - name: Validate output
+        run: |
+          python3 -c "
+          import json
+          clubs = json.load(open('data/clubs.json'))
+          players = json.load(open('data/players.json'))
+          total_seasons = sum(len(p['seasons']) for p in players)
+          print(f'✅ clubs.json: {len(clubs)} clubs')
+          print(f'✅ players.json: {len(players)} players ({total_seasons} season records)')
+          if len(clubs) == 0:
+              raise Exception('No clubs found!')
+          if len(players) == 0:
+              raise Exception('No players found!')
+          if len(players) < 100:
+              raise Exception(f'Too few players ({len(players)}), expected 1000+')
+          print(f'✅ Validation passed!')
+          "
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/clubs.json data/players.json
+          git diff --staged --quiet || git commit -m "data: update clubs.json + players.json [skip ci]"
+          git push
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: serie-a-data
+          path: data/
+          retention-days: 30
