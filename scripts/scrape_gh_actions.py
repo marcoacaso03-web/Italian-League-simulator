@@ -122,37 +122,12 @@ async def fetch_page(url):
     
     for attempt in range(3):
         try:
-            # Use domcontentloaded + wait for tables
             await page.goto(url, wait_until="domcontentloaded", timeout=45000)
-            
-            # Wait for tables to appear
-            try:
-                await page.wait_for_selector("table", timeout=20000)
-            except:
-                pass
-            
-            # Wait for network to settle (but don't fail on timeout)
-            try:
-                await page.wait_for_load_state("networkidle", timeout=30000)
-            except:
-                pass  # networkidle can timeout on slow sites, that's OK
-            
+            await asyncio.sleep(3)  # brief pause for any JS rendering
             html = await page.content()
             await page.close()
-            
-            if "<table" in html and len(html) > 5000:
+            if len(html) > 1000:
                 return html
-            
-            # If no tables, might still be on CF challenge
-            if "just a moment" in html.lower() or "checking" in html.lower():
-                log.info(f"  Cloudflare challenge, waiting...")
-                await page.wait_for_load_state("networkidle", timeout=20000)
-                html = await page.content()
-                await page.close()
-                return html
-            
-            return html
-            
         except Exception as e:
             log.warning(f"  Attempt {attempt+1} failed: {e}")
             if attempt < 2:
