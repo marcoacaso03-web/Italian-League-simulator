@@ -137,10 +137,7 @@ def calculate_rating(pos_cat: str, stats: dict) -> float:
         raw = apps + goals + assists
         norm = 1.0
 
-    if norm == 0:
-        norm = 1.0
-
-    rating = (raw / norm) * 100 + min_bonus
+    rating = (raw / norm) + min_bonus
     return max(1.0, min(99.0, round(rating, 1)))
 
 
@@ -375,17 +372,36 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
     Returns (clubs: list[dict], player_seasons: list[dict])
     """
     if season_slug == "current":
-        url = f"{BASE_URL}/en/comps/11/Serie-A-Stats"
+        url = f"{BASE_URL}/en/comps/11/stats/Serie-A-Stats"
+        fallback_url = f"{BASE_URL}/en/comps/11/Serie-A-Stats"
     else:
-        url = f"{BASE_URL}/en/comps/11/{season_slug}/{season_slug}-Serie-A-Stats"
+        url = f"{BASE_URL}/en/comps/11/{season_slug}/stats/{season_slug}-Serie-A-Stats"
+        fallback_url = f"{BASE_URL}/en/comps/11/{season_slug}/{season_slug}-Serie-A-Stats"
+
     log.info(f"Scraping {season_label} (slug={season_slug}): {url}")
 
-    resp = _get_with_retry(url)
-    soup = BeautifulSoup(resp.content, "lxml")
-
-    # Extract ALL tables (including those in HTML comments)
-    all_tables = extract_all_tables(soup)
-    log.info(f"  Found {len(all_tables)} tables: {list(all_tables.keys())[:10]}...")
+    fetched_fallback = False
+    try:
+        resp = _get_with_retry(url)
+        soup = BeautifulSoup(resp.content, "lxml")
+        all_tables = extract_all_tables(soup)
+        log.info(f"  Found {len(all_tables)} tables on stats page: {list(all_tables.keys())[:10]}...")
+        
+        has_players = any("stats_standard" in tid or "stats_players_standard" in tid or "stats_summary" in tid for tid in all_tables)
+        if not has_players:
+            log.info("  No player stats tables found on stats page. Fetching fallback squad page.")
+            resp = _get_with_retry(fallback_url)
+            soup = BeautifulSoup(resp.content, "lxml")
+            all_tables = extract_all_tables(soup)
+            fetched_fallback = True
+            log.info(f"  Found {len(all_tables)} tables on fallback page: {list(all_tables.keys())[:10]}...")
+    except Exception as e:
+        log.warning(f"  Failed to fetch player stats page {url}: {e}. Trying fallback squad page: {fallback_url}")
+        resp = _get_with_retry(fallback_url)
+        soup = BeautifulSoup(resp.content, "lxml")
+        all_tables = extract_all_tables(soup)
+        fetched_fallback = True
+        log.info(f"  Found {len(all_tables)} tables on fallback page: {list(all_tables.keys())[:10]}...")
 
     # --- CLUBS from standings table ---
     clubs = []
@@ -453,64 +469,111 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
             }
         log.info(f"  Standard stats: {len(player_data)} player-club-seasons")
 
-    # Defensive stats
-    for tid in sorted(all_tables.keys()):
-        if "stats_defense" in tid and "keeper" not in tid:
-            table = all_tables[tid]
-            rows = parse_table_rows(table)
-            merged = 0
-            for row in rows:
-                name = row.get("player", "")
-                club = row.get("team", "") or row.get("squad", "")
-                key = f"{name}|{club}|{season_label}"
-                if key in player_data:
-                    player_data[key]["tackles_won"] = _safe_int(row.get("tackles_won", "0"))
-                    player_data[key]["errors"] = _safe_int(row.get("errors_leading_to_goal", "0"))
-                    merged += 1
-            log.info(f"  Defense stats: merged {merged} rows")
-            break
+    # Fetch and merge defensive, keeper, and passing stats if players were found
+    if player_data:
+        # 1. Defensive stats page
+        if season_slug == "current":
+            def_url = f"{BASE_URL}/en/comps/11/defense/Serie-A-Stats"
+        else:
+            def_url = f"{BASE_URL}/en/comps/11/{season_slug}/defense/{season_slug}-Serie-A-Stats"
+        
+        log.info(f"Scraping defense stats for {season_label}: {def_url}")
+        time.sleep(2)  # Polite delay
+        try:
+            def_resp = _get_with_retry(def_url)
+            def_soup = BeautifulSoup(def_resp.content, "lxml")
+            def_tables = extract_all_tables(def_soup)
+            
+            # Defense merge
+            for tid in sorted(def_tables.keys()):
+                if "stats_defense" in tid and "keeper" not in tid:
+                    table = def_tables[tid]
+                    rows = parse_table_rows(table)
+                    merged = 0
+                    for row in rows:
+                        name = row.get("player", "")
+                        club = row.get("team", "") or row.get("squad", "")
+                        key = f"{name}|{club}|{season_label}"
+                        if key in player_data:
+                            player_data[key]["tackles_won"] = _safe_int(row.get("tackles_won", "0"))
+                            player_data[key]["errors"] = _safe_int(row.get("errors_leading_to_goal", "0"))
+                            merged += 1
+                    log.info(f"  Defense stats: merged {merged} rows")
+                    break
+        except Exception as e:
+            log.warning(f"  Failed to fetch/merge defense stats: {e}")
 
-    # Keeper stats
-    for tid in sorted(all_tables.keys()):
-        if "stats_keeper" in tid and "adv" not in tid:
-            table = all_tables[tid]
-            rows = parse_table_rows(table)
-            merged = 0
-            for row in rows:
-                name = row.get("player", "")
-                club = row.get("team", "") or row.get("squad", "")
-                key = f"{name}|{club}|{season_label}"
-                if key in player_data:
-                    player_data[key]["save_pct"] = _safe_float(row.get("save_pct", "0"))
-                    player_data[key]["goals_against"] = _safe_int(row.get("goals_against", "0"))
-                    player_data[key]["clean_sheets"] = max(
-                        player_data[key]["clean_sheets"],
-                        _safe_int(row.get("clean_sheets", "0"))
-                    )
-                    player_data[key]["position"] = "GK"  # Override
-                    merged += 1
-            log.info(f"  Keeper stats: merged {merged} rows")
-            break
+        # 2. Keeper stats page
+        if season_slug == "current":
+            keeper_url = f"{BASE_URL}/en/comps/11/keepers/Serie-A-Stats"
+        else:
+            keeper_url = f"{BASE_URL}/en/comps/11/{season_slug}/keepers/{season_slug}-Serie-A-Stats"
+            
+        log.info(f"Scraping keeper stats for {season_label}: {keeper_url}")
+        time.sleep(2)  # Polite delay
+        try:
+            keeper_resp = _get_with_retry(keeper_url)
+            keeper_soup = BeautifulSoup(keeper_resp.content, "lxml")
+            keeper_tables = extract_all_tables(keeper_soup)
+            
+            # Keeper merge
+            for tid in sorted(keeper_tables.keys()):
+                if "stats_keeper" in tid and "adv" not in tid:
+                    table = keeper_tables[tid]
+                    rows = parse_table_rows(table)
+                    merged = 0
+                    for row in rows:
+                        name = row.get("player", "")
+                        club = row.get("team", "") or row.get("squad", "")
+                        key = f"{name}|{club}|{season_label}"
+                        if key in player_data:
+                            player_data[key]["save_pct"] = _safe_float(row.get("save_pct", "0"))
+                            player_data[key]["goals_against"] = _safe_int(row.get("goals_against", "0"))
+                            player_data[key]["clean_sheets"] = max(
+                                player_data[key]["clean_sheets"],
+                                _safe_int(row.get("clean_sheets", "0"))
+                            )
+                            player_data[key]["position"] = "GK"  # Override
+                            merged += 1
+                    log.info(f"  Keeper stats: merged {merged} rows")
+                    break
+        except Exception as e:
+            log.warning(f"  Failed to fetch/merge keeper stats: {e}")
 
-    # Passing stats (for key_passes → approximate via progressive_passes or passes_total)
-    for tid in sorted(all_tables.keys()):
-        if "stats_passing" in tid and "types" not in tid:
-            table = all_tables[tid]
-            rows = parse_table_rows(table)
-            merged = 0
-            for row in rows:
-                name = row.get("player", "")
-                club = row.get("team", "") or row.get("squad", "")
-                key = f"{name}|{club}|{season_label}"
-                if key in player_data:
-                    # FBref passing: 'assisted_shots' is actually key_passes
-                    kp = _safe_int(row.get("assisted_shots", "0"))
-                    if kp == 0:
-                        kp = _safe_int(row.get("passes_live", "0"))
-                    player_data[key]["key_passes"] = kp
-                    merged += 1
-            log.info(f"  Passing stats: merged {merged} rows")
-            break
+        # 3. Passing stats page
+        if season_slug == "current":
+            passing_url = f"{BASE_URL}/en/comps/11/passing/Serie-A-Stats"
+        else:
+            passing_url = f"{BASE_URL}/en/comps/11/{season_slug}/passing/{season_slug}-Serie-A-Stats"
+            
+        log.info(f"Scraping passing stats for {season_label}: {passing_url}")
+        time.sleep(2)  # Polite delay
+        try:
+            passing_resp = _get_with_retry(passing_url)
+            passing_soup = BeautifulSoup(passing_resp.content, "lxml")
+            passing_tables = extract_all_tables(passing_soup)
+            
+            # Passing merge
+            for tid in sorted(passing_tables.keys()):
+                if "stats_passing" in tid and "types" not in tid:
+                    table = passing_tables[tid]
+                    rows = parse_table_rows(table)
+                    merged = 0
+                    for row in rows:
+                        name = row.get("player", "")
+                        club = row.get("team", "") or row.get("squad", "")
+                        key = f"{name}|{club}|{season_label}"
+                        if key in player_data:
+                            # FBref passing: 'assisted_shots' is actually key_passes
+                            kp = _safe_int(row.get("assisted_shots", "0"))
+                            if kp == 0:
+                                kp = _safe_int(row.get("passes_live", "0"))
+                            player_data[key]["key_passes"] = kp
+                            merged += 1
+                    log.info(f"  Passing stats: merged {merged} rows")
+                    break
+        except Exception as e:
+            log.warning(f"  Failed to fetch/merge passing stats: {e}")
 
     # Also grab clubs from player data if we didn't get them from standings
     if not clubs:
@@ -522,7 +585,7 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
                 clubs.append({"id": club_id, "name": club_name})
                 seen.add(club_id)
 
-    log.info(f"  → {len(clubs)} clubs, {len(player_data)} player records")
+    log.info(f"  -> {len(clubs)} clubs, {len(player_data)} player records")
     return clubs, list(player_data.values())
 
 
@@ -531,6 +594,11 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
 # ===========================================================================
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seasons", nargs="+", help="Specifica le stagioni da scaricare (es. 2024-2025)")
+    args = parser.parse_args()
+
     start_time = time.time()
     log.info("=" * 60)
     log.info("38-0 Serie A -- FBref Scraper v2")
@@ -545,7 +613,10 @@ def main():
         sys.exit(1)
 
     # Filter to 1992/93 - 2025/26
-    target = {k: v for k, v in seasons.items() if k >= "1992-1993"}
+    if args.seasons:
+        target = {s: seasons.get(s, s) for s in args.seasons}
+    else:
+        target = {k: v for k, v in seasons.items() if k >= "1992-1993"}
     log.info(f"\nScraping {len(target)} seasons from {list(target.keys())[0]} to {list(target.keys())[-1]}")
 
     # Step 2: Scrape each season
@@ -626,6 +697,19 @@ def main():
             "seasons": seasons_list,
         })
         pid += 1
+
+    # --- Normalize ratings globally to [60, 99] ---
+    # Collect all raw ratings across every player-season
+    raw_ratings = [s["rating"] for p in players_list for s in p["seasons"]]
+    if raw_ratings:
+        r_min = min(raw_ratings)
+        r_max = max(raw_ratings)
+        r_range = r_max - r_min if r_max != r_min else 1.0
+        log.info(f"  Normalizing ratings from raw [{r_min:.2f}, {r_max:.2f}] -> [60, 99]")
+        for p in players_list:
+            for s in p["seasons"]:
+                normalized = 60.0 + (s["rating"] - r_min) / r_range * 39.0
+                s["rating"] = round(max(60.0, min(99.0, normalized)), 1)
 
     players_path = OUT_DIR / "players.json"
     with open(players_path, "w", encoding="utf-8") as f:

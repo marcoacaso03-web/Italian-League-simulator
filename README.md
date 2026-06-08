@@ -1,5 +1,7 @@
 # ⚽ Italian League Simulator (38-0 Serie A)
 
+venv
+D:\CatBoost\.venv\Scripts\Activate.ps1
 Replica di [38-0.app](https://38-0.app/) con i dati della **Serie A italiana** 🇮🇹
 
 Un gioco web di draft calcio: scegli formazione, drafti giocatori one-by-one (slot machine), costruisci la tua XI e simuli un'intera stagione di 38 giornate.

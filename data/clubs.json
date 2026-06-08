@@ -68,10 +68,6 @@
     "name": "Fiorentina"
   },
   {
-    "id": "foggia",
-    "name": "Foggia"
-  },
-  {
     "id": "frosinone",
     "name": "Frosinone"
   },
@@ -128,10 +124,6 @@
     "name": "Novara"
   },
   {
-    "id": "padova",
-    "name": "Padova"
-  },
-  {
     "id": "palermo",
     "name": "Palermo"
   },
@@ -154,10 +146,6 @@
   {
     "id": "pisa",
     "name": "Pisa"
-  },
-  {
-    "id": "reggiana",
-    "name": "Reggiana"
   },
   {
     "id": "reggina",
