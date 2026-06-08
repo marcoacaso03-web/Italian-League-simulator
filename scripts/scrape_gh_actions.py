@@ -122,17 +122,20 @@ async def fetch_page(url):
     
     for attempt in range(3):
         try:
-            # Use domcontentloaded (faster) + wait for tables
-            await page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            # Use domcontentloaded + wait for tables
+            await page.goto(url, wait_until="domcontentloaded", timeout=45000)
             
-            # Wait for tables to appear (FBref renders them via JS)
+            # Wait for tables to appear
             try:
-                await page.wait_for_selector("table", timeout=15000)
+                await page.wait_for_selector("table", timeout=20000)
             except:
                 pass
             
-            # Extra wait for Cloudflare challenge to resolve
-            await page.wait_for_load_state("networkidle", timeout=15000)
+            # Wait for network to settle (but don't fail on timeout)
+            try:
+                await page.wait_for_load_state("networkidle", timeout=30000)
+            except:
+                pass  # networkidle can timeout on slow sites, that's OK
             
             html = await page.content()
             await page.close()
