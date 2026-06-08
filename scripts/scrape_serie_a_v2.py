@@ -26,12 +26,14 @@ import sys
 import time
 import logging
 import html
+import atexit
 from collections import defaultdict
 from pathlib import Path
 from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup, Comment
+from seleniumbase import Driver
 
 try:
     from tqdm import tqdm
@@ -51,14 +53,6 @@ log = logging.getLogger(__name__)
 
 OUT_DIR = Path(__file__).parent.parent / "data"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-
-SESSION = requests.Session()
-SESSION.headers.update({
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
-    "Accept-Language": "en-US,en;q=0.9,it;q=0.8",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-})
 
 BASE_URL = "https://fbref.com"
 
@@ -188,68 +182,39 @@ def extract_all_tables(soup: BeautifulSoup) -> dict:
 
 def get_all_seasons() -> dict:
     """
-    Scrape Serie A main page + history page to get all season IDs.
-    Returns { "1992-1993": season_id, ..., "2024-2025": season_id }
+    Scrape the Serie A history page to get all season slugs.
+    FBref now uses YYYY-YYYY slugs in URLs instead of numeric IDs.
+    Returns { "2003-2004": "2003-2004", ..., "2025-2026": "current" }
     """
     seasons = {}
 
-    # Method 1: Main comps page
-    url = f"{BASE_URL}/en/comps/11/Serie-A-Stats"
+    url = f"{BASE_URL}/en/comps/11/history/Serie-A-Seasons"
     log.info(f"Discovering seasons from {url}")
     try:
         resp = _get_with_retry(url)
         soup = BeautifulSoup(resp.content, "lxml")
-
-        # Find all links to historical Serie A seasons
         for a in soup.find_all("a", href=True):
             href = a["href"]
-            m = re.match(r"/en/comps/11/(\d+)/", href)
+            text = a.get_text(strip=True)
+            # Match YYYY-YYYY season URLs: /en/comps/11/2024-2025/2024-2025-Serie-A-Stats
+            m = re.match(r"/en/comps/11/(\d{4}-\d{4})/", href)
             if m:
-                season_id = int(m.group(1))
-                text = a.get_text(strip=True)
+                slug = m.group(1)
+                seasons[slug] = slug
+            # Match current season link: /en/comps/11/Serie-A-Stats with a year label
+            elif href == "/en/comps/11/Serie-A-Stats":
                 label = _extract_season_label(text)
-                if label:
-                    seasons[label] = season_id
+                if label and label not in seasons:
+                    seasons[label] = "current"
     except Exception as e:
-        log.warning(f"Failed to get seasons from main page: {e}")
-
-    # Method 2: History page (often more complete)
-    url2 = f"{BASE_URL}/en/comps/11/history/Serie-A-Seasons"
-    log.info(f"Discovering seasons from history page: {url2}")
-    try:
-        resp = _get_with_retry(url2)
-        soup = BeautifulSoup(resp.content, "lxml")
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            m = re.match(r"/en/comps/11/(\d+)/", href)
-            if m:
-                season_id = int(m.group(1))
-                text = a.get_text(strip=True)
-                label = _extract_season_label(text)
-                if label:
-                    seasons[label] = season_id
-    except Exception as e:
-        log.warning(f"Failed to get seasons from history: {e}")
-
-    # Method 3: Look at season selector dropdown
-    if len(seasons) < 5:
-        try:
-            resp = _get_with_retry(f"{BASE_URL}/en/comps/11/Serie-A-Stats")
-            soup = BeautifulSoup(resp.content, "lxml")
-            for select in soup.find_all("select"):
-                for option in select.find_all("option"):
-                    val = option.get("value", "")
-                    m = re.search(r"/comps/11/(\d+)/", val)
-                    if m:
-                        season_id = int(m.group(1))
-                        label = _extract_season_label(option.get_text(strip=True))
-                        if label:
-                            seasons[label] = season_id
-        except Exception:
-            pass
+        log.warning(f"Failed to get seasons from history page: {e}")
 
     seasons = dict(sorted(seasons.items()))
-    log.info(f"Discovered {len(seasons)} seasons: {list(seasons.keys())[:3]}...{list(seasons.keys())[-3:]}")
+    if seasons:
+        keys = list(seasons.keys())
+        log.info(f"Discovered {len(seasons)} seasons: {keys[:3]}...{keys[-3:]}")
+    else:
+        log.info("Discovered 0 seasons")
     return seasons
 
 
@@ -274,28 +239,82 @@ def _extract_season_label(text: str) -> str | None:
 # ROBUST HTTP GET WITH RETRY
 # ===========================================================================
 
-def _get_with_retry(url: str, max_retries: int = 3) -> requests.Response:
+_DRIVER = None
+
+def get_driver():
+    global _DRIVER
+    if _DRIVER is None:
+        log.info("Initializing SeleniumBase Driver in UC mode...")
+        _DRIVER = Driver(uc=True, headless=True)
+    return _DRIVER
+
+def close_driver():
+    global _DRIVER
+    if _DRIVER is not None:
+        log.info("Closing SeleniumBase Driver...")
+        try:
+            _DRIVER.quit()
+        except Exception:
+            pass
+        _DRIVER = None
+
+atexit.register(close_driver)
+
+class SeleniumResponse:
+    def __init__(self, content: bytes, text: str, status_code: int = 200):
+        self.content = content
+        self.text = text
+        self.status_code = status_code
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise requests.exceptions.HTTPError(f"HTTP Error {self.status_code}")
+
+def _get_with_retry(url: str, max_retries: int = 3):
+    driver = get_driver()
     for attempt in range(max_retries):
         try:
-            resp = SESSION.get(url, timeout=30)
-            if resp.status_code == 429:
-                wait = 30 * (attempt + 1)
-                log.warning(f"Rate limited (429). Waiting {wait}s... (attempt {attempt+1}/{max_retries})")
-                time.sleep(wait)
-                continue
-            resp.raise_for_status()
-            return resp
-        except requests.exceptions.ConnectionError as e:
+            log.info(f"Fetching URL via SeleniumBase: {url} (attempt {attempt+1}/{max_retries})")
+            driver.get(url)
+            
+            # Wait up to 15 seconds for a table to load, or until Cloudflare challenge passes
+            start = time.time()
+            success = False
+            while time.time() - start < 15:
+                source = driver.page_source
+                if "<table" in source:
+                    success = True
+                    break
+                if "just a moment" not in source.lower() and "ci siamo quasi" not in source.lower() and "<body" in source.lower():
+                    success = True
+                    break
+                time.sleep(0.5)
+            
+            if not success:
+                title = driver.title.lower()
+                if "404" in title or "not found" in title:
+                    raise requests.exceptions.HTTPError("404 Not Found")
+                elif "429" in title or "too many requests" in title or "ci siamo quasi" in title or "just a moment" in title:
+                    wait = 30 * (attempt + 1)
+                    log.warning(f"Rate limited or challenged. Waiting {wait}s...")
+                    time.sleep(wait)
+                    close_driver()
+                    driver = get_driver()
+                    continue
+                else:
+                    raise RuntimeError(f"Failed to load content. Title: {driver.title}")
+            
+            source_utf8 = driver.page_source
+            content = source_utf8.encode("utf-8")
+            return SeleniumResponse(content, source_utf8, 200)
+            
+        except Exception as e:
             wait = 10 * (attempt + 1)
-            log.warning(f"Connection error: {e}. Retrying in {wait}s...")
+            log.warning(f"Error fetching {url}: {e}. Retrying in {wait}s...")
             time.sleep(wait)
-        except requests.exceptions.HTTPError as e:
-            if e.response.status_code >= 500:
-                wait = 15 * (attempt + 1)
-                log.warning(f"Server error {e.response.status_code}. Retrying in {wait}s...")
-                time.sleep(wait)
-            else:
-                raise
+            close_driver()
+            driver = get_driver()
+            
     raise RuntimeError(f"Failed to fetch {url} after {max_retries} attempts")
 
 
@@ -349,13 +368,17 @@ def parse_table_rows(table) -> list[dict]:
     return rows_data
 
 
-def scrape_season(season_label: str, season_id: int) -> tuple:
+def scrape_season(season_label: str, season_slug: str) -> tuple:
     """
     Scrape one Serie A season.
+    season_slug is either 'YYYY-YYYY' or 'current' for the ongoing season.
     Returns (clubs: list[dict], player_seasons: list[dict])
     """
-    url = f"{BASE_URL}/en/comps/11/{season_id}/stats/Serie-A-Stats"
-    log.info(f"Scraping {season_label} (id={season_id}): {url}")
+    if season_slug == "current":
+        url = f"{BASE_URL}/en/comps/11/Serie-A-Stats"
+    else:
+        url = f"{BASE_URL}/en/comps/11/{season_slug}/{season_slug}-Serie-A-Stats"
+    log.info(f"Scraping {season_label} (slug={season_slug}): {url}")
 
     resp = _get_with_retry(url)
     soup = BeautifulSoup(resp.content, "lxml")
@@ -510,7 +533,7 @@ def scrape_season(season_label: str, season_id: int) -> tuple:
 def main():
     start_time = time.time()
     log.info("=" * 60)
-    log.info("⚽ 38-0 Serie A — FBref Scraper v2")
+    log.info("38-0 Serie A -- FBref Scraper v2")
     log.info("=" * 60)
 
     # Step 1: Discover seasons
@@ -535,15 +558,15 @@ def main():
     else:
         pbar = season_items
 
-    for i, (season_label, season_id) in enumerate(pbar):
+    for i, (season_label, season_slug) in enumerate(pbar):
         if not HAS_TQDM:
             log.info(f"\n{'='*40}")
             log.info(f"Season {i+1}/{len(season_items)}: {season_label}")
 
         try:
-            clubs, players = scrape_season(season_label, season_id)
+            clubs, players = scrape_season(season_label, season_slug)
         except Exception as e:
-            log.error(f"  ❌ Failed: {e}")
+            log.error(f"  FAILED: {e}")
             continue
 
         # Collect clubs
@@ -579,7 +602,7 @@ def main():
     clubs_path = OUT_DIR / "clubs.json"
     with open(clubs_path, "w", encoding="utf-8") as f:
         json.dump(clubs_list, f, ensure_ascii=False, indent=2)
-    log.info(f"\n✅ clubs.json: {len(clubs_list)} clubs → {clubs_path}")
+    log.info(f"\nOK clubs.json: {len(clubs_list)} clubs -> {clubs_path}")
 
     # players.json
     players_list = []
@@ -614,8 +637,8 @@ def main():
     elapsed = time.time() - start_time
 
     log.info(f"\n{'='*60}")
-    log.info(f"✅ players.json: {len(players_list)} players ({total_seasons} total seasons) → {players_path}")
-    log.info(f"\n📊 RIEPILOGO:")
+    log.info(f"OK players.json: {len(players_list)} players ({total_seasons} total seasons) -> {players_path}")
+    log.info(f"\nRIEPILOGO:")
     log.info(f"   Club: {len(clubs_list)}")
     log.info(f"   Giocatori: {len(players_list)}")
     log.info(f"   Stagioni giocatore: {total_seasons}")
@@ -623,7 +646,7 @@ def main():
         log.info(f"   Rating min/max/mean: {min(all_ratings):.1f} / {max(all_ratings):.1f} / {sum(all_ratings)/len(all_ratings):.1f}")
     log.info(f"   Tempo: {elapsed:.0f}s ({elapsed/60:.1f}min)")
     log.info(f"{'='*60}")
-    log.info("🎉 FATTO!")
+    log.info("FATTO!")
 
 
 if __name__ == "__main__":
