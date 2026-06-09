@@ -9,6 +9,7 @@ MIGLIORAMENTI vs v1:
 - Rate limiting intelligente (backoff su 429)
 - Progress bar
 - Resume da punto di interruzione
+- Ruoli specifici (CB, LB, RB, CM, CAM, ST...) salvati in players.json
 
 ESEGUIRE DAL PROPRIO PC/MAC:
     pip install requests beautifulsoup4 lxml pandas tqdm
@@ -16,7 +17,7 @@ ESEGUIRE DAL PROPRIO PC/MAC:
 
 Output:
     data/clubs.json    → [{id, name}]
-    data/players.json  → [{id, name, position, seasons: [{club, season, rating, apps, goals, assists}]}]
+    data/players.json  → [{id, name, position, position_category, seasons: [{club, season, rating, apps, goals, assists}]}]
 """
 
 import json
@@ -60,45 +61,117 @@ BASE_URL = "https://fbref.com"
 # POSITION CLASSIFICATION
 # ===========================================================================
 
-POSITION_MAP = {
-    "GK": "GK", "GKMF": "GK",
-    "CB": "DEF", "DF": "DEF", "FB": "DEF",
-    "LB": "DEF", "RB": "DEF", "WB": "DEF",
-    "LWB": "DEF", "RWB": "DEF", "SW": "DEF",
-    "DMF": "MID", "MF": "MID", "CM": "MID",
-    "CDM": "MID", "CAM": "MID", "AMF": "MID",
-    "LM": "MID", "RM": "MID",
-    "LW": "ATT", "RW": "ATT",
-    "FW": "ATT", "ST": "ATT", "CF": "ATT",
-    "LF": "ATT", "RF": "ATT",
-    "LMF": "MID", "RMF": "MID",
+# Mappa ruolo FBref → ruolo specifico normalizzato
+POSITION_SPECIFIC_MAP = {
+    # Portieri
+    "GK": "GK",
+    "GKMF": "GK",
+    # Difensori
+    "CB": "CB",
+    "SW": "CB",   # Stopper/libero → CB
+    "DF": "CB",   # Generico → CB come default
+    "LB": "LB",
+    "RB": "RB",
+    "WB": "WB",   # Terzino/ala di fascia senza distinzione L/R
+    "LWB": "LWB",
+    "RWB": "RWB",
+    "FB": "WB",   # Full-back generico → WB
+    # Centrocampisti
+    "CDM": "CDM",
+    "DMF": "CDM",
+    "CM": "CM",
+    "MF": "CM",   # Generico → CM
+    "CAM": "CAM",
+    "AMF": "CAM",
+    "LM": "LM",
+    "LMF": "LM",
+    "RM": "RM",
+    "RMF": "RM",
+    # Attaccanti
+    "LW": "LW",
+    "RW": "RW",
+    "ST": "ST",
+    "CF": "CF",
+    "FW": "ST",   # Forward generico → ST
+    "LF": "LW",
+    "RF": "RW",
+}
+
+# Mappa ruolo specifico → categoria (usata per il calcolo del rating)
+SPECIFIC_TO_CATEGORY = {
+    "GK":  "GK",
+    "CB":  "DEF", "LB": "DEF", "RB": "DEF",
+    "WB":  "DEF", "LWB": "DEF", "RWB": "DEF",
+    "CDM": "MID", "CM": "MID", "CAM": "MID",
+    "LM":  "MID", "RM": "MID",
+    "LW":  "ATT", "RW": "ATT",
+    "ST":  "ATT", "CF": "ATT",
 }
 
 
-def classify_position(pos: str) -> str:
+def classify_position(pos: str) -> tuple[str, str]:
+    """
+    Restituisce (ruolo_specifico, categoria_rating).
+    Esempi:
+      "CB"  → ("CB",  "DEF")
+      "CAM" → ("CAM", "MID")
+      "LW"  → ("LW",  "ATT")
+    """
     if not pos:
-        return "MID"
+        return ("CM", "MID")  # default
+
     primary = pos.split(",")[0].strip().upper()
-    if primary in POSITION_MAP:
-        return POSITION_MAP[primary]
-    if len(primary) >= 2 and primary[:2] in POSITION_MAP:
-        return POSITION_MAP[primary[:2]]
+
+    # Lookup diretto
+    if primary in POSITION_SPECIFIC_MAP:
+        specific = POSITION_SPECIFIC_MAP[primary]
+        category = SPECIFIC_TO_CATEGORY.get(specific, "MID")
+        return (specific, category)
+
+    # Prefisso a 3 caratteri
+    if len(primary) >= 3 and primary[:3] in POSITION_SPECIFIC_MAP:
+        specific = POSITION_SPECIFIC_MAP[primary[:3]]
+        category = SPECIFIC_TO_CATEGORY.get(specific, "MID")
+        return (specific, category)
+
+    # Prefisso a 2 caratteri
+    if len(primary) >= 2 and primary[:2] in POSITION_SPECIFIC_MAP:
+        specific = POSITION_SPECIFIC_MAP[primary[:2]]
+        category = SPECIFIC_TO_CATEGORY.get(specific, "MID")
+        return (specific, category)
+
+    # Fallback per parole chiave
     if "GK" in primary:
-        return "GK"
-    if any(x in primary for x in ["CB", "LB", "RB", "WB", "DF"]):
-        return "DEF"
-    if any(x in primary for x in ["MF", "CM", "DM", "AM", "LM", "RM"]):
-        return "MID"
-    if any(x in primary for x in ["FW", "ST", "CF", "LW", "RW", "WF"]):
-        return "ATT"
-    return "MID"
+        return ("GK", "GK")
+    if any(x in primary for x in ["CB", "SW"]):
+        return ("CB", "DEF")
+    if any(x in primary for x in ["LB",]):
+        return ("LB", "DEF")
+    if any(x in primary for x in ["RB",]):
+        return ("RB", "DEF")
+    if any(x in primary for x in ["WB", "FB", "DF"]):
+        return ("WB", "DEF")
+    if any(x in primary for x in ["CDM", "DM"]):
+        return ("CDM", "MID")
+    if any(x in primary for x in ["CAM", "AM"]):
+        return ("CAM", "MID")
+    if any(x in primary for x in ["MF", "CM"]):
+        return ("CM", "MID")
+    if any(x in primary for x in ["LW", "LF"]):
+        return ("LW", "ATT")
+    if any(x in primary for x in ["RW", "RF"]):
+        return ("RW", "ATT")
+    if any(x in primary for x in ["ST", "CF", "FW"]):
+        return ("ST", "ATT")
+
+    return ("CM", "MID")  # default finale
 
 
 # ===========================================================================
 # RATING CALCULATION
 # ===========================================================================
 
-def calculate_rating(pos_cat: str, stats: dict) -> float:
+def calculate_rating(pos_category: str, stats: dict) -> float:
     """
     Position-specific rating, normalized to approximately 1-99.
 
@@ -121,16 +194,16 @@ def calculate_rating(pos_cat: str, stats: dict) -> float:
     # Minutes-based bonus: more minutes = higher floor
     min_bonus = min(minutes / 3420, 1.0) * 10 if minutes else 0
 
-    if pos_cat == "ATT":
+    if pos_category == "ATT":
         raw = goals * 3 + assists * 1.5 + apps * 0.5
         norm = 1.05
-    elif pos_cat == "MID":
+    elif pos_category == "MID":
         raw = goals * 2 + assists * 2 + apps * 0.5 + key_passes * 1
         norm = 1.455
-    elif pos_cat == "DEF":
+    elif pos_category == "DEF":
         raw = apps * 1 + tackles_won * 0.5 + clean_sheets * 1.5 - errors * 2
         norm = 0.875
-    elif pos_cat == "GK":
+    elif pos_category == "GK":
         raw = clean_sheets * 2 + save_pct * 0.3 - goals_against * 0.3
         norm = 0.435
     else:
@@ -273,7 +346,7 @@ def _get_with_retry(url: str, max_retries: int = 3):
         try:
             log.info(f"Fetching URL via SeleniumBase: {url} (attempt {attempt+1}/{max_retries})")
             driver.get(url)
-            
+
             # Wait up to 15 seconds for a table to load, or until Cloudflare challenge passes
             start = time.time()
             success = False
@@ -286,7 +359,7 @@ def _get_with_retry(url: str, max_retries: int = 3):
                     success = True
                     break
                 time.sleep(0.5)
-            
+
             if not success:
                 title = driver.title.lower()
                 if "404" in title or "not found" in title:
@@ -300,18 +373,18 @@ def _get_with_retry(url: str, max_retries: int = 3):
                     continue
                 else:
                     raise RuntimeError(f"Failed to load content. Title: {driver.title}")
-            
+
             source_utf8 = driver.page_source
             content = source_utf8.encode("utf-8")
             return SeleniumResponse(content, source_utf8, 200)
-            
+
         except Exception as e:
             wait = 10 * (attempt + 1)
             log.warning(f"Error fetching {url}: {e}. Retrying in {wait}s...")
             time.sleep(wait)
             close_driver()
             driver = get_driver()
-            
+
     raise RuntimeError(f"Failed to fetch {url} after {max_retries} attempts")
 
 
@@ -386,7 +459,7 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
         soup = BeautifulSoup(resp.content, "lxml")
         all_tables = extract_all_tables(soup)
         log.info(f"  Found {len(all_tables)} tables on stats page: {list(all_tables.keys())[:10]}...")
-        
+
         has_players = any("stats_standard" in tid or "stats_players_standard" in tid or "stats_summary" in tid for tid in all_tables)
         if not has_players:
             log.info("  No player stats tables found on stats page. Fetching fallback squad page.")
@@ -417,20 +490,16 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
             break
 
     if not clubs:
-        # Fallback: get clubs from player data
         log.info("  No standings table found, will extract clubs from player data")
 
     # --- PLAYER STATS ---
-    # Build a dict keyed by "name|club|season" to merge across tables
     player_data = {}
 
-    # Standard stats table
     std_table = None
     for tid in sorted(all_tables.keys()):
         if "stats_standard" in tid or "stats_players_standard" in tid:
             std_table = all_tables[tid]
             break
-    # Also try "summary" table
     if not std_table:
         for tid in sorted(all_tables.keys()):
             if "stats_summary" in tid:
@@ -444,16 +513,19 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
             club = row.get("team", "") or row.get("squad", "")
             if not name or not club:
                 continue
-            pos = row.get("position", "")
+            pos_raw = row.get("position", "")
             apps = _safe_int(row.get("games", "0"))
             if apps == 0:
                 continue
 
+            specific_pos, pos_category = classify_position(pos_raw)
+
             key = f"{name}|{club}|{season_label}"
             player_data[key] = {
                 "name": name,
-                "position": classify_position(pos),
-                "pos_detail": pos,
+                "position": specific_pos,       # ruolo specifico: CB, LB, RB, CM, CAM, ST...
+                "position_category": pos_category,  # categoria rating: GK, DEF, MID, ATT
+                "pos_raw": pos_raw,             # valore grezzo FBref (debug)
                 "club": club,
                 "season": season_label,
                 "apps": apps,
@@ -469,22 +541,20 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
             }
         log.info(f"  Standard stats: {len(player_data)} player-club-seasons")
 
-    # Fetch and merge defensive, keeper, and passing stats if players were found
     if player_data:
         # 1. Defensive stats page
         if season_slug == "current":
             def_url = f"{BASE_URL}/en/comps/11/defense/Serie-A-Stats"
         else:
             def_url = f"{BASE_URL}/en/comps/11/{season_slug}/defense/{season_slug}-Serie-A-Stats"
-        
+
         log.info(f"Scraping defense stats for {season_label}: {def_url}")
-        time.sleep(2)  # Polite delay
+        time.sleep(2)
         try:
             def_resp = _get_with_retry(def_url)
             def_soup = BeautifulSoup(def_resp.content, "lxml")
             def_tables = extract_all_tables(def_soup)
-            
-            # Defense merge
+
             for tid in sorted(def_tables.keys()):
                 if "stats_defense" in tid and "keeper" not in tid:
                     table = def_tables[tid]
@@ -508,15 +578,14 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
             keeper_url = f"{BASE_URL}/en/comps/11/keepers/Serie-A-Stats"
         else:
             keeper_url = f"{BASE_URL}/en/comps/11/{season_slug}/keepers/{season_slug}-Serie-A-Stats"
-            
+
         log.info(f"Scraping keeper stats for {season_label}: {keeper_url}")
-        time.sleep(2)  # Polite delay
+        time.sleep(2)
         try:
             keeper_resp = _get_with_retry(keeper_url)
             keeper_soup = BeautifulSoup(keeper_resp.content, "lxml")
             keeper_tables = extract_all_tables(keeper_soup)
-            
-            # Keeper merge
+
             for tid in sorted(keeper_tables.keys()):
                 if "stats_keeper" in tid and "adv" not in tid:
                     table = keeper_tables[tid]
@@ -533,7 +602,8 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
                                 player_data[key]["clean_sheets"],
                                 _safe_int(row.get("clean_sheets", "0"))
                             )
-                            player_data[key]["position"] = "GK"  # Override
+                            player_data[key]["position"] = "GK"
+                            player_data[key]["position_category"] = "GK"
                             merged += 1
                     log.info(f"  Keeper stats: merged {merged} rows")
                     break
@@ -545,15 +615,14 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
             passing_url = f"{BASE_URL}/en/comps/11/passing/Serie-A-Stats"
         else:
             passing_url = f"{BASE_URL}/en/comps/11/{season_slug}/passing/{season_slug}-Serie-A-Stats"
-            
+
         log.info(f"Scraping passing stats for {season_label}: {passing_url}")
-        time.sleep(2)  # Polite delay
+        time.sleep(2)
         try:
             passing_resp = _get_with_retry(passing_url)
             passing_soup = BeautifulSoup(passing_resp.content, "lxml")
             passing_tables = extract_all_tables(passing_soup)
-            
-            # Passing merge
+
             for tid in sorted(passing_tables.keys()):
                 if "stats_passing" in tid and "types" not in tid:
                     table = passing_tables[tid]
@@ -564,7 +633,6 @@ def scrape_season(season_label: str, season_slug: str) -> tuple:
                         club = row.get("team", "") or row.get("squad", "")
                         key = f"{name}|{club}|{season_label}"
                         if key in player_data:
-                            # FBref passing: 'assisted_shots' is actually key_passes
                             kp = _safe_int(row.get("assisted_shots", "0"))
                             if kp == 0:
                                 kp = _safe_int(row.get("passes_live", "0"))
@@ -612,7 +680,6 @@ def main():
         log.error("If FBref is blocking you, try again later or use a VPN.")
         sys.exit(1)
 
-    # Filter to 1992/93 - 2025/26
     if args.seasons:
         target = {s: seasons.get(s, s) for s in args.seasons}
     else:
@@ -640,14 +707,13 @@ def main():
             log.error(f"  FAILED: {e}")
             continue
 
-        # Collect clubs
         for c in clubs:
             if c["id"] not in all_clubs:
                 all_clubs[c["id"]] = c
 
-        # Process players
         for p in players:
-            rating = calculate_rating(p["position"], p)
+            # Il rating viene calcolato sulla categoria (DEF/MID/ATT/GK)
+            rating = calculate_rating(p["position_category"], p)
             season_entry = {
                 "club": p["club"],
                 "season": p["season"],
@@ -659,11 +725,11 @@ def main():
             name_key = p["name"].strip()
             all_player_seasons[name_key].append({
                 "name": p["name"],
-                "position": p["position"],
+                "position": p["position"],           # specifico: CB, LB, CM...
+                "position_category": p["position_category"],  # categoria: DEF, MID, ATT, GK
                 "season_entry": season_entry,
             })
 
-        # Rate limit: 4s base, extra pause every 5 requests
         if i < len(season_items) - 1:
             sleep = 4 + (2 if i % 5 == 4 else 0)
             time.sleep(sleep)
@@ -681,11 +747,17 @@ def main():
     for name_key in sorted(all_player_seasons.keys()):
         entries = all_player_seasons[name_key]
 
-        # Primary position = most frequent
+        # Primary position = ruolo specifico più frequente
         pos_counts = defaultdict(int)
         for e in entries:
             pos_counts[e["position"]] += 1
         primary_pos = max(pos_counts, key=pos_counts.get)
+
+        # Primary category = categoria più frequente
+        cat_counts = defaultdict(int)
+        for e in entries:
+            cat_counts[e["position_category"]] += 1
+        primary_cat = max(cat_counts, key=cat_counts.get)
 
         seasons_list = sorted([e["season_entry"] for e in entries], key=lambda x: x["season"])
         name = entries[0]["name"]
@@ -693,13 +765,13 @@ def main():
         players_list.append({
             "id": f"p{pid:05d}",
             "name": name,
-            "position": primary_pos,
+            "position": primary_pos,           # es. "CB", "LB", "CAM", "ST"...
+            "position_category": primary_cat,  # es. "DEF", "MID", "ATT", "GK"
             "seasons": seasons_list,
         })
         pid += 1
 
     # --- Normalize ratings globally to [60, 99] ---
-    # Collect all raw ratings across every player-season
     raw_ratings = [s["rating"] for p in players_list for s in p["seasons"]]
     if raw_ratings:
         r_min = min(raw_ratings)
