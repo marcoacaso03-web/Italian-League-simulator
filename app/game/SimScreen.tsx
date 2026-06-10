@@ -11,8 +11,7 @@ interface Props {
   onComplete: (result: SeasonResult, overall: TeamOverall) => void;
 }
 
-const TICK_MS = 1000; // 1 secondo per giornata
-const MAX_VISIBLE = 7; // partite visibili nello scroll
+const TICK_MS = 900;
 
 function outcomeColors(o: 'W' | 'D' | 'L') {
   if (o === 'W') return { bg: 'bg-emerald-500/15', border: 'border-emerald-500/30', badge: 'bg-emerald-500', score: 'text-emerald-400' };
@@ -23,10 +22,11 @@ function outcomeColors(o: 'W' | 'D' | 'L') {
 export default function SimScreen({ slots, onComplete }: Props) {
   const [snapshots, setSnapshots] = useState<MatchdaySnapshot[]>([]);
   const [currentMd, setCurrentMd] = useState(0);
-  const [playerPos, setPlayerPos]  = useState<number | null>(null);
-  const [playerPts, setPlayerPts]  = useState(0);
-  const hasRun = useRef(false);
-  const listRef = useRef<HTMLDivElement>(null);
+  const [playerPos, setPlayerPos] = useState<number | null>(null);
+  const [playerPts, setPlayerPts] = useState(0);
+  const resultRef = useRef<{ result: SeasonResult; overall: TeamOverall } | null>(null);
+  const hasRun    = useRef(false);
+  const listRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (hasRun.current) return;
@@ -34,14 +34,16 @@ export default function SimScreen({ slots, onComplete }: Props) {
 
     const overall = calcTeamOverall(slots);
     const result  = simulateSeason(slots, overall);
+    resultRef.current = { result, overall };
 
     let i = 0;
     const tick = () => {
       if (i >= result.matchdaySnapshots.length) {
-        setTimeout(() => onComplete(result, overall), 600);
+        setTimeout(() => onComplete(result, overall), 800);
         return;
       }
       const snap = result.matchdaySnapshots[i];
+      // Aggiorna header + aggiungi snapshot nello stesso batch
       setCurrentMd(snap.matchday);
       setPlayerPos(snap.playerPosition);
       setPlayerPts(snap.playerPoints);
@@ -61,17 +63,20 @@ export default function SimScreen({ slots, onComplete }: Props) {
 
   const progress = (currentMd / 38) * 100;
 
-  // Mostra solo le ultime MAX_VISIBLE giornate (con partita) per non sovraccaricare la UI
-  const visibleSnaps = snapshots
-    .filter((s) => s.playerMatch !== null)
-    .slice(-MAX_VISIBLE);
+  // Tutte le partite con match (sempre tutte, scrollabili)
+  const visibleSnaps = snapshots.filter((s) => s.playerMatch !== null);
+
+  function handleSkip() {
+    if (resultRef.current) {
+      onComplete(resultRef.current.result, resultRef.current.overall);
+    }
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-white">
 
       {/* ── Sticky header ── */}
       <div className="sticky top-0 z-20 bg-[#0a0a0f]/95 backdrop-blur-sm px-4 pt-5 pb-3 border-b border-white/5">
-        {/* Pos + Punti */}
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">POSIZIONE</p>
@@ -85,27 +90,18 @@ export default function SimScreen({ slots, onComplete }: Props) {
           </div>
         </div>
 
-        {/* Matchweek + progress + Skip */}
         <div className="flex items-center justify-between mb-2">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
             MATCHWEEK <span className="text-white">{currentMd}</span> / 38
           </p>
           <button
-            onClick={() => {
-              // Salta: calcola il risultato finale e vai subito
-              if (hasRun.current) {
-                const overall = calcTeamOverall(slots);
-                const result  = simulateSeason(slots, overall);
-                onComplete(result, overall);
-              }
-            }}
+            onClick={handleSkip}
             className="text-xs font-semibold text-slate-400 hover:text-white transition-colors"
           >
             Skip all →
           </button>
         </div>
 
-        {/* Barra progresso */}
         <div className="h-1 w-full bg-white/5 rounded-full">
           <div
             className="h-1 rounded-full bg-emerald-500 transition-all duration-700"
@@ -114,7 +110,7 @@ export default function SimScreen({ slots, onComplete }: Props) {
         </div>
       </div>
 
-      {/* ── Lista partite ── */}
+      {/* ── Lista partite — scroll completo ── */}
       <div
         ref={listRef}
         className="flex-1 overflow-y-auto px-4 py-4 space-y-2"
@@ -123,9 +119,6 @@ export default function SimScreen({ slots, onComplete }: Props) {
         {visibleSnaps.map((snap) => {
           const m = snap.playerMatch!;
           const c = outcomeColors(m.outcome);
-          const scoreStr = m.isHome
-            ? `${m.playerGoals}–${m.opponentGoals}`
-            : `${m.opponentGoals}–${m.playerGoals}`;
           const displayScore = `${m.playerGoals}–${m.opponentGoals}`;
 
           return (
@@ -133,26 +126,19 @@ export default function SimScreen({ slots, onComplete }: Props) {
               key={snap.matchday}
               className={`rounded-2xl border px-4 py-3 ${c.bg} ${c.border} transition-all`}
             >
-              {/* Riga principale */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  {/* Badge W/D/L */}
                   <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${c.badge}`}>
                     <span className="text-xs font-black text-white">{m.outcome}</span>
                   </div>
-                  {/* Avversario */}
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-sm font-black text-white">{m.opponentName}</span>
-                      <span className="text-xs text-slate-500">({m.isHome ? 'H' : 'A'})</span>
-                    </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-black text-white">{m.opponentName}</span>
+                    <span className="text-xs text-slate-500">({m.isHome ? 'H' : 'A'})</span>
                   </div>
                 </div>
-                {/* Risultato */}
                 <span className={`text-lg font-black tabular-nums ${c.score}`}>{displayScore}</span>
               </div>
 
-              {/* Marcatori */}
               {m.scorers.length > 0 && (
                 <div className="mt-1.5 flex items-start gap-1">
                   <span className="text-slate-500 text-xs mt-0.5 flex-shrink-0">⚽</span>
@@ -165,7 +151,6 @@ export default function SimScreen({ slots, onComplete }: Props) {
           );
         })}
 
-        {/* Placeholder se non ancora partite */}
         {visibleSnaps.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 gap-3 text-slate-600">
             <span className="text-4xl animate-spin" style={{ animationDuration: '2s' }}>⚽</span>
