@@ -1,4 +1,3 @@
-'use client' in this file is not needed — pure TS lib
 import type { DraftSlot } from '@/lib/draft';
 
 // ─── Serie A 25/26 — 19 squadre AI (+ player = 20 totali, 38 giornate esatte) ─
@@ -32,8 +31,6 @@ export const SERIE_A_2526: SerieATeam[] = [
   { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67 },
   { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66 },
   { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65 },
-  // Monza rimosso — il 20° slot è occupato dal player (La Tua Squadra)
-  // Sassuolo retrocesso → posto preso dal player
 ];
 
 // ─── Overall ──────────────────────────────────────────────────────────────────
@@ -189,38 +186,32 @@ function generateScorerEvents(numGoals: number, pool: string[]): GoalEvent[] {
 
 /**
  * Genera un calendario round-robin bilanciato (algoritmo cerchio fisso).
- * Con N squadre pari produce N-1 giornate × N/2 partite ciascuna.
  * Con 20 squadre → 19 giornate (andata) + 19 (ritorno) = 38 giornate × 10 partite.
  * Il player gioca esattamente una partita per giornata, garantito.
  */
 function buildRoundRobin(teamIds: string[]): [string, string][][] {
-  const n = teamIds.length; // deve essere pari (20)
+  const n = teamIds.length;
   const rounds: [string, string][][] = [];
   const ids = [...teamIds];
 
-  // Algoritmo cerchio: fissa l'ultimo elemento, ruota gli altri
   for (let r = 0; r < n - 1; r++) {
     const round: [string, string][] = [];
     for (let i = 0; i < n / 2; i++) {
       round.push([ids[i], ids[n - 1 - i]]);
     }
     rounds.push(round);
-    // Ruota: sposta tutti tranne il primo
     const last = ids[n - 1];
     for (let i = n - 1; i > 1; i--) ids[i] = ids[i - 1];
     ids[1] = last;
   }
 
-  // Ritorno: inverti home/away + shuffle ordine giornate di ritorno
   const returnRounds = rounds.map((r) => r.map(([h, a]) => [a, h] as [string, string]));
-
-  // Shuffle leggero delle giornate di ritorno per variare l'ordine
   for (let i = returnRounds.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [returnRounds[i], returnRounds[j]] = [returnRounds[j], returnRounds[i]];
   }
 
-  return [...rounds, ...returnRounds]; // 38 giornate
+  return [...rounds, ...returnRounds];
 }
 
 // ─── Main simulation ──────────────────────────────────────────────────────────
@@ -232,8 +223,7 @@ export function simulateSeason(
   const playerRating = overall.overall;
   const scorerPool = buildScorerPool(slots);
 
-  // 20 squadre esatte: 19 AI + player
-  const allTeamIds = ['player', ...SERIE_A_2526.map((t) => t.id)]; // length = 20
+  const allTeamIds = ['player', ...SERIE_A_2526.map((t) => t.id)];
 
   const standingsMap = new Map<string, TeamStanding>();
   SERIE_A_2526.forEach((t) => {
@@ -250,14 +240,12 @@ export function simulateSeason(
   const getRating = (id: string) =>
     id === 'player' ? playerRating : (SERIE_A_2526.find((t) => t.id === id)?.rating ?? 70);
 
-  // Calendario round-robin bilanciato → 38 giornate × 10 partite, player gioca sempre
   const schedule = buildRoundRobin(allTeamIds);
-
   const matchdaySnapshots: MatchdaySnapshot[] = [];
 
   for (let md = 0; md < 38; md++) {
     const gamesThisRound = schedule[md];
-    let playerMatch!: MatchResult; // garantito presente ogni giornata
+    let playerMatch!: MatchResult;
 
     for (const [homeId, awayId] of gamesThisRound) {
       const [hg, ag] = matchGoals(getRating(homeId), getRating(awayId));
