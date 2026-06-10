@@ -33,7 +33,7 @@ export interface SetupConfig {
 
 const MIN_YEAR = 1992;
 const MAX_YEAR = 2026;
-const TOTAL_SEASONS = MAX_YEAR - MIN_YEAR;
+const TOTAL_SEASONS = MAX_YEAR - MIN_YEAR + 1; // 35 stagioni totali (1992/93 … 2026/27)
 
 const ERA_PRESETS: { id: EraPreset; label: string; sub?: string; from: number }[] = [
   { id: 'all', label: 'All-time', from: 1992 },
@@ -93,8 +93,8 @@ function EraSlider({ fromYear, toYear, onFromChange, onToChange }: {
   fromYear: number; toYear: number;
   onFromChange: (v: number) => void; onToChange: (v: number) => void;
 }) {
-  const fromPct = ((fromYear - MIN_YEAR) / TOTAL_SEASONS) * 100;
-  const toPct   = ((toYear - MIN_YEAR) / TOTAL_SEASONS) * 100;
+  const fromPct = ((fromYear - MIN_YEAR) / (TOTAL_SEASONS - 1)) * 100;
+  const toPct   = ((toYear - MIN_YEAR) / (TOTAL_SEASONS - 1)) * 100;
   const seasonCount = toYear - fromYear + 1;
   return (
     <div className="w-full">
