@@ -28,6 +28,25 @@ function catLabel(cat: string): string {
     default:    return cat;
   }
 }
+
+/** Etichetta leggibile dello slot (es. "Left", "Centre", "Goalkeeper", "Striker", ...) */
+function slotPositionLabel(id: string): string {
+  const labels: Record<string, string> = {
+    gk: 'Goalkeeper',
+    rb: 'Right', lb: 'Left',
+    'cb-1': 'Centre', 'cb-2': 'Centre',
+    'cb-r': 'Centre', 'cb-c': 'Centre', 'cb-l': 'Centre',
+    'cdm-r': 'Defensive', 'cdm-l': 'Defensive',
+    'cm-r': 'Central', 'cm-c': 'Central', 'cm-l': 'Central',
+    cam: 'Attacking',
+    rm: 'Right', lm: 'Left',
+    rw: 'Right', lw: 'Left',
+    st: 'Striker', 'st-r': 'Striker', 'st-l': 'Striker',
+    cf: 'Forward',
+  };
+  return labels[id] ?? id.toUpperCase();
+}
+
 function slotFullLabel(id: string): string {
   const labels: Record<string, string> = {
     gk: 'Goalkeeper (GK)',
@@ -51,13 +70,27 @@ function diffColor(d: SetupConfig['difficulty']): string {
   return d === 'easy' ? '#22c55e' : d === 'normal' ? '#f59e0b' : '#ef4444';
 }
 
+/** Abbreviazione ruolo da mostrare nel badge (RF, CB, GK, ST, …) */
+function slotBadge(fs: { id: string; acceptedPositions: string[] }): string {
+  return (fs.acceptedPositions[0] ?? fs.id).toUpperCase();
+}
+
+/** Iniziali del cognome del giocatore (max 2 char) */
+function playerInitials(name: string): string {
+  const parts = name.trim().split(' ');
+  const last = parts[parts.length - 1];
+  return last.slice(0, 2).toUpperCase();
+}
+
 // ─── Campo SVG ────────────────────────────────────────────────────────────────
 interface PitchProps { formation: string; slots: DraftSlot[]; }
 function Pitch({ formation, slots }: PitchProps) {
   const formSlots = FORMATION_SLOTS[formation] ?? [];
   const slotMap = new Map(slots.map((s) => [s.formationSlot.id, s]));
+
   return (
-    <div className="relative w-full" style={{ aspectRatio: '7/10', maxHeight: '52vw', maxWidth: '100%' }}>
+    <div className="relative w-full" style={{ aspectRatio: '7/10', maxHeight: '54vw', maxWidth: '100%' }}>
+      {/* Campo SVG */}
       <svg viewBox="0 0 100 143" className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         {Array.from({ length: 8 }).map((_, i) => (
           <rect key={i} x="0" y={i * 18} width="100" height="18" fill={i % 2 === 0 ? '#1a4a1a' : '#1e5520'} />
@@ -71,29 +104,80 @@ function Pitch({ formation, slots }: PitchProps) {
         <rect x="20" y="4" width="60" height="23" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="0.6" />
         <rect x="33" y="4" width="34" height="11" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="0.6" />
       </svg>
+
+      {/* Slot nodes */}
       {formSlots.map((fs) => {
         const ds = slotMap.get(fs.id);
-        const filled = ds?.player != null;
-        const color = catColor(fs.category);
+        const player = ds?.player ?? null;
+        const color  = catColor(fs.category);
+        const badge  = slotBadge(fs);
+        const posLabel = slotPositionLabel(fs.id);
+        const surname  = player ? player.name.trim().split(' ').pop() ?? '' : '';
+        const initials = player ? playerInitials(player.name) : '';
+
         return (
-          <div key={fs.id} className="absolute flex flex-col items-center"
-            style={{ left: `${fs.x}%`, top: `${(fs.y / 143) * 100}%`, transform: 'translate(-50%,-50%)', zIndex: 10 }}>
+          <div
+            key={fs.id}
+            className="absolute flex flex-col items-center"
+            style={{
+              left:      `${fs.x}%`,
+              top:       `${(fs.y / 143) * 100}%`,
+              transform: 'translate(-50%, -50%)',
+              zIndex:    10,
+              gap:       2,
+            }}
+          >
+            {/* 1. Badge ruolo (sopra) */}
             <div style={{
-              width: 28, height: 28, borderRadius: '50%',
-              border: filled ? `2px solid ${color}` : `2px dashed rgba(255,255,255,0.45)`,
-              backgroundColor: filled ? color + '33' : 'rgba(0,0,0,0.4)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background:   player ? color : 'rgba(0,0,0,0.55)',
+              border:       player ? 'none' : '1px solid rgba(255,255,255,0.25)',
+              borderRadius: 4,
+              padding:      '1px 5px',
+              fontSize:     8,
+              fontWeight:   900,
+              color:        player ? '#000' : 'rgba(255,255,255,0.55)',
+              letterSpacing: 0.3,
+              lineHeight:   '1.4',
+              whiteSpace:   'nowrap',
             }}>
-              <span style={{ fontSize: 7, fontWeight: 900, color: filled ? color : 'rgba(255,255,255,0.5)', letterSpacing: '-0.5px', textTransform: 'uppercase' }}>
-                {filled ? ds?.player?.position.slice(0, 2) : fs.acceptedPositions[0].slice(0, 2)}
-              </span>
+              {badge}
             </div>
+
+            {/* 2. Cerchio giocatore */}
             <div style={{
-              marginTop: 2, background: 'rgba(0,0,0,0.75)', borderRadius: 3,
-              padding: '1px 4px', fontSize: 7, fontWeight: 700, whiteSpace: 'nowrap',
-              color: filled ? color : 'rgba(255,255,255,0.6)',
+              width:           32,
+              height:          32,
+              borderRadius:    '50%',
+              background:      player ? color : 'transparent',
+              border:          player
+                ? `2px solid ${color}`
+                : '2px dashed rgba(255,255,255,0.35)',
+              display:         'flex',
+              alignItems:      'center',
+              justifyContent:  'center',
+              boxShadow:       player ? `0 0 8px ${color}55` : 'none',
             }}>
-              {filled ? (ds?.player?.name.split(' ').pop() ?? fs.label) : fs.label}
+              {player ? (
+                <span style={{ fontSize: 10, fontWeight: 900, color: '#fff', letterSpacing: -0.5 }}>
+                  {initials}
+                </span>
+              ) : null}
+            </div>
+
+            {/* 3. Cognome / Label posizione (sotto) */}
+            <div style={{
+              background:   'rgba(0,0,0,0.75)',
+              borderRadius: 3,
+              padding:      '1px 5px',
+              fontSize:     7,
+              fontWeight:   700,
+              color:        player ? '#fff' : 'rgba(255,255,255,0.55)',
+              whiteSpace:   'nowrap',
+              maxWidth:     52,
+              overflow:     'hidden',
+              textOverflow: 'ellipsis',
+            }}>
+              {player ? surname : posLabel}
             </div>
           </div>
         );
@@ -116,7 +200,6 @@ function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: Slot
 
   return (
     <div className="rounded-2xl border border-emerald-500/30 bg-[#0d1f18] p-4 space-y-4">
-      {/* Titolo + Cancel */}
       <div className="flex items-center justify-between">
         <p className="text-base font-black text-white">
           Place <span className="text-emerald-400">{player.name}</span>
@@ -129,7 +212,6 @@ function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: Slot
         </button>
       </div>
 
-      {/* AVAILABLE */}
       <div>
         <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">
           Available ({availableSlots.length})
@@ -151,7 +233,6 @@ function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: Slot
         </div>
       </div>
 
-      {/* UNAVAILABLE */}
       {unavailable.length > 0 && (
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
@@ -315,7 +396,6 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
 
         {state.currentSpin && state.phase === 'picking' && (
           <div className="space-y-3">
-            {/* SQUAD SPUN header */}
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-1">SQUAD SPUN</p>
               <div className="flex items-center gap-2">
@@ -328,7 +408,6 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
               </p>
             </div>
 
-            {/* SlotPicker inline — appare sopra la lista quando un giocatore ha più slot */}
             {pendingPlayer && (
               <SlotPicker
                 player={pendingPlayer}
@@ -339,7 +418,6 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
               />
             )}
 
-            {/* Lista giocatori */}
             <div className="space-y-2">
               {state.currentSpin.players.map((player) => {
                 const compat = findCompatibleSlots(state.slots, player);
@@ -360,7 +438,6 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
               })}
             </div>
 
-            {/* Azioni */}
             <div className="flex gap-2 pt-1">
               {state.rerollsLeft > 0 && (
                 <button onClick={reroll} className="flex-1 py-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm font-bold hover:bg-white/10 transition-colors">
@@ -374,7 +451,6 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
           </div>
         )}
 
-        {/* Sorteggia */}
         {state.phase === 'idle' && remaining.length > 0 && (
           <button onClick={doSpin} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98]">
             🎲 Sorteggia
