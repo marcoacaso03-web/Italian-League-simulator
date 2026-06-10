@@ -2,7 +2,7 @@ import type { SetupConfig } from '@/app/game/page';
 import { getClubSeasonPool, getSquad, getPrimeSquad } from '@/lib/data';
 import { FORMATION_SLOTS, type FormationSlot } from '@/lib/formations';
 
-// ─── Tipi ────────────────────────────────────────────────────────────────────
+// ─── Tipi ─────────────────────────────────────────────────────────────────────
 
 export interface DraftedPlayer {
   id: string;
@@ -14,9 +14,9 @@ export interface DraftedPlayer {
   apps: number;
   goals: number;
   assists: number;
-  /** Rating effettivo usato per il gioco (stagione o prime a seconda del config) */
+  /** Rating effettivo (stagione o prime) */
   rating: number;
-  /** Presente solo in prime mode: conferma che rating == massimo storico */
+  /** Solo in prime mode: conferma che rating == max storico */
   primeRating?: number;
 }
 
@@ -28,7 +28,6 @@ export interface DraftSlot {
 export interface SpinResult {
   club: string;
   season: string;
-  /** Già filtrati per posizioni compatibili (position_first) o tutti (squad_first) */
   players: DraftedPlayer[];
 }
 
@@ -36,38 +35,57 @@ export interface DraftState {
   slots: DraftSlot[];
   currentSpin: SpinResult | null;
   rerollsLeft: number;
+  /**
+   * idle     → aspetta azione utente
+   * spinning → animazione club+anno in corso, lista nascosta
+   * picking  → animazione finita, lista visibile
+   * complete → tutti gli slot riempiti
+   */
   phase: 'idle' | 'spinning' | 'picking' | 'complete';
-  /** position_first: quale slot l'utente ha selezionato */
   activeSlotId: string | null;
 }
 
 // ─── Costanti ─────────────────────────────────────────────────────────────────
 
-/**
- * Mappa difficoltà → numero di reroll.
- * Unica fonte di verità: usata da initialRerolls() e dall'UI.
- */
+/** Mappa difficoltà → reroll. Unica fonte di verità. */
 export const REROLLS_BY_DIFFICULTY: Record<SetupConfig['difficulty'], number> = {
   easy:   3,
   normal: 1,
   hard:   0,
 };
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+/**
+ * Coppie di posizioni intercambiabili solo quando entrambi gli slot
+ * esistono in formazione E sono ancora vuoti.
+ * Esempio: un RM può occupare LM se lo slot LM è ancora libero.
+ * CB/LB/RB non fanno parte di queste coppie: non si mescolano mai.
+ */
+const WINGER_PAIRS: ReadonlyArray<[string, string]> = [
+  ['LM', 'RM'],
+  ['LW', 'RW'],
+];
 
-/** Costruisce i DraftSlot iniziali per la formazione scelta */
+/** Mirror di una posizione nelle coppie intercambiabili, oppure null */
+function mirrorPosition(pos: string): string | null {
+  for (const [a, b] of WINGER_PAIRS) {
+    if (pos === a) return b;
+    if (pos === b) return a;
+  }
+  return null;
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
 export function buildSlots(formation: string): DraftSlot[] {
   const formationSlots = FORMATION_SLOTS[formation];
   if (!formationSlots) throw new Error(`Formazione sconosciuta: ${formation}`);
   return formationSlots.map((fs) => ({ formationSlot: fs, player: null }));
 }
 
-/** Anni stagione: '2004/05' → 2004 */
 export function seasonYear(season: string): number {
   return parseInt(season.split('/')[0], 10);
 }
 
-/** Filtra il pool club+stagione per era */
 function filteredPool(config: SetupConfig) {
   return getClubSeasonPool().filter((e) => {
     const y = seasonYear(e.season);
@@ -79,21 +97,103 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-/** Calcola position_category dalla posizione specifica */
 function toCategory(position: string): string {
   if (position === 'GK') return 'GK';
-  if (['CB','RB','LB','WB','LWB','RWB'].includes(position)) return 'DEF';
-  if (['CDM','CM','CAM','LM','RM'].includes(position)) return 'MID';
+  if (['CB', 'RB', 'LB', 'WB', 'LWB', 'RWB'].includes(position)) return 'DEF';
+  if (['CDM', 'CM', 'CAM', 'LM', 'RM'].includes(position)) return 'MID';
   return 'ATT';
 }
 
+// ─── Compatibilità slot ────────────────────────────────────────────────────────
+
 /**
- * Esegue uno spin.
+ * Dato un giocatore e i DraftSlot correnti, restituisce tutti gli slot vuoti
+ * in cui può giocare secondo le regole:
  *
- * - `positionFilter`: acceptedPositions dello slot (position_first)
- *   oppure `[]` per nessun filtro (squad_first)
- * - `config.ratingsMode`: 'career' → rating della stagione sorteggiata;
- *   'prime' → rating massimo storico del giocatore (via getPrimeSquad)
+ * 1. Match diretto: slot.acceptedPositions include player.position
+ * 2. Match laterale: player.position ha un mirror (es. RM→LM) e
+ *    - lo slot del mirror è vuoto
+ *    - lo slot "naturale" del giocatore è ANCHE ancora vuoto in formazione
+ *    → in questo caso l'utente sceglie in quale dei due andare.
+ *
+ * Se solo uno slot è compatibile → auto-assegnazione. Se più di uno → SlotPicker.
+ */
+export function findCompatibleSlots(
+  slots: DraftSlot[],
+  player: DraftedPlayer
+): DraftSlot[] {
+  const emptySlotList = slots.filter((s) => s.player === null);
+
+  // 1. Slot diretti (match esatto)
+  const direct = emptySlotList.filter((s) =>
+    s.formationSlot.acceptedPositions.includes(player.position)
+  );
+
+  // 2. Slot speculari (solo per posizioni WINGER_PAIRS)
+  const mirror = mirrorPosition(player.position);
+  let mirrorSlots: DraftSlot[] = [];
+  if (mirror !== null) {
+    // Lo slot specchio è usabile solo se anche almeno un direct slot esiste
+    // (il giocatore deve avere il suo slot naturale ancora libero per poter
+    // scegliere tra i due lati — altrimenti gioca solo sul lato naturale)
+    const naturalHasEmpty = direct.length > 0;
+    if (naturalHasEmpty) {
+      mirrorSlots = emptySlotList.filter((s) =>
+        s.formationSlot.acceptedPositions.includes(mirror)
+      );
+    }
+  }
+
+  // Unione senza duplicati
+  const seen = new Set<string>();
+  const result: DraftSlot[] = [];
+  for (const s of [...direct, ...mirrorSlots]) {
+    if (!seen.has(s.formationSlot.id)) {
+      seen.add(s.formationSlot.id);
+      result.push(s);
+    }
+  }
+  return result;
+}
+
+/**
+ * Trova il singolo slot migliore in auto-assegnazione:
+ * - Se esiste esattamente 1 slot compatibile (diretto o specchio) → lo ritorna
+ * - Altrimenti null (l'UI mostrerà SlotPicker)
+ */
+export function findBestSlot(
+  slots: DraftSlot[],
+  player: DraftedPlayer
+): DraftSlot | null {
+  const compatible = findCompatibleSlots(slots, player);
+  return compatible.length === 1 ? compatible[0] : null;
+}
+
+export function assignToSlot(
+  slots: DraftSlot[],
+  slotId: string,
+  player: DraftedPlayer
+): DraftSlot[] {
+  return slots.map((s) =>
+    s.formationSlot.id === slotId ? { ...s, player } : s
+  );
+}
+
+export function initialRerolls(difficulty: SetupConfig['difficulty']): number {
+  return REROLLS_BY_DIFFICULTY[difficulty];
+}
+
+export function emptySlots(slots: DraftSlot[]): DraftSlot[] {
+  return slots.filter((s) => s.player === null);
+}
+
+// ─── Spin ──────────────────────────────────────────────────────────────────────
+
+/**
+ * Esegue il sorteggio club+stagione e prepara la lista giocatori.
+ * positionFilter:
+ *   - squad_first  → [] (nessun filtro, tutti i giocatori)
+ *   - position_first → acceptedPositions dello slot selezionato
  */
 export function spin(
   config: SetupConfig,
@@ -107,7 +207,6 @@ export function spin(
 
   const entry = pickRandom(pool);
 
-  // Prime mode: rating = max storico del giocatore; career: rating della stagione
   const rawSquad =
     config.ratingsMode === 'prime'
       ? getPrimeSquad(entry.club, entry.season)
@@ -127,52 +226,11 @@ export function spin(
   return { club: entry.club, season: entry.season, players };
 }
 
-/**
- * Trova lo slot vuoto più compatibile per un giocatore (squad_first).
- * Priorità: exact match posizione specifica.
- * Ritorna null se ambiguo (0 o >1 slot) → l'UI mostrerà SlotPicker.
- */
-export function findBestSlot(
-  slots: DraftSlot[],
-  player: DraftedPlayer
-): DraftSlot | null {
-  const empty = slots.filter((s) => s.player === null);
-  const compatible = empty.filter((s) =>
-    s.formationSlot.acceptedPositions.includes(player.position)
-  );
-  return compatible.length === 1 ? compatible[0] : null;
-}
+// ─── Display ──────────────────────────────────────────────────────────────────
 
 /**
- * Assegna un giocatore a uno slot specifico (per id).
- * Restituisce i nuovi slots (immutabile).
- */
-export function assignToSlot(
-  slots: DraftSlot[],
-  slotId: string,
-  player: DraftedPlayer
-): DraftSlot[] {
-  return slots.map((s) =>
-    s.formationSlot.id === slotId ? { ...s, player } : s
-  );
-}
-
-/** Rerolls iniziali per difficoltà — unica fonte di verità */
-export function initialRerolls(difficulty: SetupConfig['difficulty']): number {
-  return REROLLS_BY_DIFFICULTY[difficulty];
-}
-
-/** Slot ancora vuoti */
-export function emptySlots(slots: DraftSlot[]): DraftSlot[] {
-  return slots.filter((s) => s.player === null);
-}
-
-/**
- * Rating da mostrare in UI.
- * Regole (in ordine di priorità):
- *   1. Se difficulty === 'hard' → sempre '??' (indipendentemente da showRatings)
- *   2. Se showRatings === 'off'  → '??'
- *   3. Altrimenti                → valore numerico
+ * Ritorna la stringa rating da mostrare.
+ * Priorità: hard → sempre '??', poi showRatings='off' → '??', altrimenti valore.
  */
 export function displayRating(
   rating: number,
@@ -183,7 +241,6 @@ export function displayRating(
   return String(rating);
 }
 
-/** Classe colore Tailwind per il rating */
 export function ratingColorClass(rating: number): string {
   if (rating >= 85) return 'text-emerald-400';
   if (rating >= 72) return 'text-amber-400';

@@ -1,5 +1,5 @@
 'use client';
-import { useReducer, useCallback } from 'react';
+import { useReducer, useCallback, useRef } from 'react';
 import type { SetupConfig } from '@/app/game/page';
 import {
   buildSlots,
@@ -14,27 +14,39 @@ import {
   type SpinResult,
 } from '@/lib/draft';
 
-// ─── Actions ─────────────────────────────────────────────────────────────────
+// ─── Actions ──────────────────────────────────────────────────────────────────
 
 type Action =
-  | { type: 'SPIN';         result: SpinResult }
+  | { type: 'SPIN';         result: SpinResult }   // avvia animazione
+  | { type: 'REVEAL' }                              // animazione finita → mostra lista
   | { type: 'PICK';         player: DraftedPlayer; slotId?: string }
   | { type: 'SELECT_SLOT';  slotId: string }
-  | { type: 'REROLL';       result: SpinResult }
+  | { type: 'REROLL';       result: SpinResult }   // nuovo spin (mantiene fase spinning)
   | { type: 'CANCEL_PICK' };
 
-// ─── Reducer ─────────────────────────────────────────────────────────────────
+// ─── Reducer ──────────────────────────────────────────────────────────────────
 
 function reducer(state: DraftState, action: Action): DraftState {
   switch (action.type) {
 
     case 'SPIN':
-    case 'REROLL': {
-      const rerollsLeft = action.type === 'REROLL'
-        ? state.rerollsLeft - 1
-        : state.rerollsLeft;
-      return { ...state, currentSpin: action.result, phase: 'picking', rerollsLeft };
-    }
+      // Salva il risultato ma mostra solo l'animazione (lista nascosta)
+      return { ...state, currentSpin: action.result, phase: 'spinning' };
+
+    case 'REROLL':
+      // Reroll: nuova animazione, decrementa reroll
+      return {
+        ...state,
+        currentSpin: action.result,
+        phase: 'spinning',
+        rerollsLeft: state.rerollsLeft - 1,
+      };
+
+    case 'REVEAL':
+      // L'animazione ha finito → mostra la lista
+      return state.phase === 'spinning'
+        ? { ...state, phase: 'picking' }
+        : state;
 
     case 'SELECT_SLOT':
       return { ...state, activeSlotId: action.slotId, phase: 'idle' };
@@ -43,12 +55,7 @@ function reducer(state: DraftState, action: Action): DraftState {
       const slotId = action.slotId
         ?? findBestSlot(state.slots, action.player)?.formationSlot.id
         ?? null;
-
-      if (!slotId) {
-        // Nessun match automatico: rimane in 'picking' con ambiguità gestita dall'UI
-        return state;
-      }
-
+      if (!slotId) return state;
       const newSlots = assignToSlot(state.slots, slotId, action.player);
       const done = emptySlots(newSlots).length === 0;
       return {
@@ -71,7 +78,8 @@ function reducer(state: DraftState, action: Action): DraftState {
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
 export function useDraft(config: SetupConfig) {
-  const usedCombos = new Set<string>(); // in-memory, resettato a ogni nuova partita
+  // usedCombos persiste per tutta la vita del componente (non resettato a ogni render)
+  const usedCombosRef = useRef(new Set<string>());
 
   const [state, dispatch] = useReducer(reducer, {
     slots: buildSlots(config.formation),
@@ -81,11 +89,16 @@ export function useDraft(config: SetupConfig) {
     activeSlotId: null,
   });
 
+  /** Chiamato da SlotMachine quando l'animazione finisce */
+  const reveal = useCallback(() => {
+    dispatch({ type: 'REVEAL' });
+  }, []);
+
   /** Spin per squad_first: nessun filtro posizione */
   const spinSquadFirst = useCallback(() => {
-    const result = spin(config, usedCombos, []);
+    const result = spin(config, usedCombosRef.current, []);
     if (!result) return;
-    usedCombos.add(`${result.club}|||${result.season}`);
+    usedCombosRef.current.add(`${result.club}|||${result.season}`);
     dispatch({ type: 'SPIN', result });
   }, [config]);
 
@@ -94,9 +107,9 @@ export function useDraft(config: SetupConfig) {
     dispatch({ type: 'SELECT_SLOT', slotId });
     const slot = state.slots.find((s) => s.formationSlot.id === slotId);
     if (!slot) return;
-    const result = spin(config, usedCombos, slot.formationSlot.acceptedPositions);
+    const result = spin(config, usedCombosRef.current, slot.formationSlot.acceptedPositions);
     if (!result) return;
-    usedCombos.add(`${result.club}|||${result.season}`);
+    usedCombosRef.current.add(`${result.club}|||${result.season}`);
     dispatch({ type: 'SPIN', result });
   }, [config, state.slots]);
 
@@ -110,13 +123,13 @@ export function useDraft(config: SetupConfig) {
       ? (state.slots.find((s) => s.formationSlot.id === state.activeSlotId)
           ?.formationSlot.acceptedPositions ?? [])
       : [];
-    const result = spin(config, usedCombos, posFilter);
+    const result = spin(config, usedCombosRef.current, posFilter);
     if (!result) return;
-    usedCombos.add(`${result.club}|||${result.season}`);
+    usedCombosRef.current.add(`${result.club}|||${result.season}`);
     dispatch({ type: 'REROLL', result });
   }, [config, state.rerollsLeft, state.activeSlotId, state.slots]);
 
   const cancel = useCallback(() => dispatch({ type: 'CANCEL_PICK' }), []);
 
-  return { state, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel };
+  return { state, reveal, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel };
 }
