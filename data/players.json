@@ -435,7 +435,7 @@
   {
     "id": "p00014",
     "name": "Abdoulaye Camara",
-    "position": "defence",
+    "position": "CB",
     "seasons": [
       {
         "club": "Udinese",
@@ -444,7 +444,7 @@
         "apps": 1,
         "goals": 0,
         "assists": 0,
-        "specific_position": "defence"
+        "specific_position": "CB"
       }
     ]
   },
@@ -1534,7 +1534,7 @@
   {
     "id": "p00045",
     "name": "Adrian Przyborek",
-    "position": "MID",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Lazio",
@@ -1542,7 +1542,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -2181,7 +2182,7 @@
   {
     "id": "p00061",
     "name": "Agust\u00edn Albarrac\u00edn",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Cagliari",
@@ -2189,14 +2190,15 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
   {
     "id": "p00062",
     "name": "Agust\u00edn Martegani",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Salernitana",
@@ -2204,7 +2206,8 @@
         "rating": 63.5,
         "apps": 18,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -2506,7 +2509,7 @@
   {
     "id": "p00073",
     "name": "Akande Ajide",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Roma",
@@ -2514,14 +2517,15 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
   {
     "id": "p00074",
     "name": "Akeem Omolade",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Torino",
@@ -2529,7 +2533,8 @@
         "rating": 60.8,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -2643,7 +2648,7 @@
   {
     "id": "p00080",
     "name": "Alan Matturro",
-    "position": "MID",
+    "position": "CB, LB",
     "seasons": [
       {
         "club": "Genoa",
@@ -2651,7 +2656,8 @@
         "rating": 60.6,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, LB"
       },
       {
         "club": "Genoa",
@@ -2659,7 +2665,8 @@
         "rating": 67.9,
         "apps": 13,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, LB"
       }
     ]
   },
@@ -10060,7 +10067,7 @@
   {
     "id": "p00250",
     "name": "Ali Adnan Kadhim",
-    "position": "MID",
+    "position": "LB",
     "seasons": [
       {
         "club": "Udinese",
@@ -10068,7 +10075,8 @@
         "rating": 66.7,
         "apps": 28,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB"
       },
       {
         "club": "Udinese",
@@ -10076,7 +10084,8 @@
         "rating": 69.9,
         "apps": 14,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB"
       },
       {
         "club": "Udinese",
@@ -10084,7 +10093,8 @@
         "rating": 65.3,
         "apps": 23,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB"
       },
       {
         "club": "Atalanta",
@@ -10092,7 +10102,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB"
       }
     ]
   },
@@ -10172,7 +10183,7 @@
   {
     "id": "p00255",
     "name": "Alieu Fadera",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Como",
@@ -10180,7 +10191,8 @@
         "rating": 67.5,
         "apps": 28,
         "goals": 1,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Sassuolo",
@@ -10188,7 +10200,8 @@
         "rating": 68.9,
         "apps": 28,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -10395,7 +10408,7 @@
   {
     "id": "p00264",
     "name": "Alphadjo Ciss\u00e8",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -10403,7 +10416,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       },
       {
         "club": "Hellas Verona",
@@ -10411,7 +10425,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -10975,7 +10990,7 @@
   {
     "id": "p00279",
     "name": "Anass Salah-Eddine",
-    "position": "MID",
+    "position": "LB, CM",
     "seasons": [
       {
         "club": "Roma",
@@ -10983,7 +10998,8 @@
         "rating": 60.7,
         "apps": 3,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, CM"
       }
     ]
   },
@@ -13266,7 +13282,7 @@
   {
     "id": "p00329",
     "name": "Andrea Lisuzzo",
-    "position": "defence",
+    "position": "CB",
     "seasons": [
       {
         "club": "Novara",
@@ -13275,7 +13291,7 @@
         "apps": 21,
         "goals": 0,
         "assists": 0,
-        "specific_position": "defence"
+        "specific_position": "CB"
       }
     ]
   },
@@ -15200,7 +15216,7 @@
   {
     "id": "p00373",
     "name": "Andrias Edmundsson",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -15208,7 +15224,8 @@
         "rating": 72.5,
         "apps": 15,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -15584,7 +15601,7 @@
   {
     "id": "p00387",
     "name": "Andy Pelmard",
-    "position": "DEF",
+    "position": "CB, RB",
     "seasons": [
       {
         "club": "Lecce",
@@ -15592,7 +15609,8 @@
         "rating": 62.5,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       }
     ]
   },
@@ -15624,7 +15642,7 @@
   {
     "id": "p00389",
     "name": "Ange-Yoan Bonny",
-    "position": "ATT",
+    "position": "ST, SS",
     "seasons": [
       {
         "club": "Parma",
@@ -15632,7 +15650,8 @@
         "rating": 78.7,
         "apps": 37,
         "goals": 6,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "ST, SS"
       },
       {
         "club": "Inter",
@@ -15640,7 +15659,8 @@
         "rating": 75.2,
         "apps": 33,
         "goals": 5,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "ST, SS"
       }
     ]
   },
@@ -16121,7 +16141,7 @@
   {
     "id": "p00400",
     "name": "Anselmo de Moraes",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Genoa",
@@ -16129,7 +16149,8 @@
         "rating": 60.4,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Palermo",
@@ -16137,7 +16158,8 @@
         "rating": 61.1,
         "apps": 5,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -16478,7 +16500,7 @@
   {
     "id": "p00413",
     "name": "Antoine Bernede",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -16486,7 +16508,8 @@
         "rating": 62.7,
         "apps": 14,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Hellas Verona",
@@ -16494,7 +16517,8 @@
         "rating": 68.3,
         "apps": 32,
         "goals": 1,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -16517,7 +16541,7 @@
   {
     "id": "p00415",
     "name": "Antoine Makoumbou",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Cagliari",
@@ -16525,7 +16549,8 @@
         "rating": 67.7,
         "apps": 32,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Cagliari",
@@ -16533,7 +16558,8 @@
         "rating": 68.3,
         "apps": 33,
         "goals": 0,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -19230,7 +19256,7 @@
   {
     "id": "p00477",
     "name": "Ardon Jashari",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Milan",
@@ -19238,7 +19264,8 @@
         "rating": 62.9,
         "apps": 14,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -19260,7 +19287,7 @@
   {
     "id": "p00479",
     "name": "Arijon Ibrahimovi\u0107",
-    "position": "MID",
+    "position": "LW, CAM",
     "seasons": [
       {
         "club": "Frosinone",
@@ -19268,7 +19295,8 @@
         "rating": 63.4,
         "apps": 16,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LW, CAM"
       },
       {
         "club": "Lazio",
@@ -19276,7 +19304,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, CAM"
       }
     ]
   },
@@ -19642,7 +19671,7 @@
   {
     "id": "p00489",
     "name": "Armel Bella Kotchap",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -19650,7 +19679,8 @@
         "rating": 72.5,
         "apps": 19,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -20302,7 +20332,7 @@
   {
     "id": "p00513",
     "name": "Assane Gnoukouri",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Inter",
@@ -20310,7 +20340,8 @@
         "rating": 60.5,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Inter",
@@ -20318,7 +20349,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Inter",
@@ -20326,7 +20358,8 @@
         "rating": 60.3,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -20471,7 +20504,7 @@
   {
     "id": "p00521",
     "name": "Axel C\u00e9dric Konan",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Lecce",
@@ -20479,7 +20512,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lecce",
@@ -20487,7 +20521,8 @@
         "rating": 63.3,
         "apps": 9,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lecce",
@@ -20495,7 +20530,8 @@
         "rating": 75.5,
         "apps": 31,
         "goals": 6,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lecce",
@@ -20503,7 +20539,8 @@
         "rating": 71.5,
         "apps": 20,
         "goals": 6,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lecce",
@@ -20511,7 +20548,8 @@
         "rating": 77.2,
         "apps": 33,
         "goals": 6,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Torino",
@@ -20519,7 +20557,8 @@
         "rating": 60.8,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lecce",
@@ -20527,7 +20566,8 @@
         "rating": 63.8,
         "apps": 13,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       }
     ]
   },
@@ -20591,7 +20631,7 @@
   {
     "id": "p00525",
     "name": "Babis Lykogiannis",
-    "position": "DEF",
+    "position": "LB, LWB",
     "seasons": [
       {
         "club": "Cagliari",
@@ -20599,7 +20639,8 @@
         "rating": 62.5,
         "apps": 11,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Cagliari",
@@ -20607,7 +20648,8 @@
         "rating": 67.4,
         "apps": 11,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Cagliari",
@@ -20615,7 +20657,8 @@
         "rating": 72.1,
         "apps": 20,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Cagliari",
@@ -20623,7 +20666,8 @@
         "rating": 81.5,
         "apps": 31,
         "goals": 4,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Cagliari",
@@ -20631,7 +20675,8 @@
         "rating": 66.1,
         "apps": 28,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Bologna",
@@ -20639,7 +20684,8 @@
         "rating": 72.5,
         "apps": 21,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Bologna",
@@ -20647,7 +20693,8 @@
         "rating": 72.0,
         "apps": 22,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Bologna",
@@ -20655,7 +20702,8 @@
         "rating": 71.7,
         "apps": 17,
         "goals": 0,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "LB, LWB"
       },
       {
         "club": "Bologna",
@@ -20663,7 +20711,8 @@
         "rating": 67.2,
         "apps": 10,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, LWB"
       }
     ]
   },
@@ -20736,7 +20785,7 @@
   {
     "id": "p00529",
     "name": "Balthazar Pierret",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Lecce",
@@ -20744,7 +20793,8 @@
         "rating": 65.7,
         "apps": 30,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Lecce",
@@ -20752,7 +20802,8 @@
         "rating": 60.0,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -21025,7 +21076,7 @@
   {
     "id": "p00534",
     "name": "Ben Cremaschi",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Parma",
@@ -21033,14 +21084,15 @@
         "rating": 60.8,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
   {
     "id": "p00535",
     "name": "Ben Godfrey",
-    "position": "DEF",
+    "position": "CB, RB",
     "seasons": [
       {
         "club": "Atalanta",
@@ -21048,7 +21100,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       }
     ]
   },
@@ -21203,7 +21256,7 @@
   {
     "id": "p00543",
     "name": "Benjam\u00edn Dom\u00ednguez",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Bologna",
@@ -21211,7 +21264,8 @@
         "rating": 67.1,
         "apps": 24,
         "goals": 3,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Bologna",
@@ -21219,7 +21273,8 @@
         "rating": 63.9,
         "apps": 15,
         "goals": 0,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -21373,7 +21428,7 @@
   {
     "id": "p00547",
     "name": "Berkan Kutlu",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Genoa",
@@ -21381,7 +21436,8 @@
         "rating": 60.6,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -21797,7 +21853,7 @@
   {
     "id": "p00558",
     "name": "Bob Murphy Omoregbe",
-    "position": "ATT",
+    "position": "RW, ST",
     "seasons": [
       {
         "club": "Milan",
@@ -21805,7 +21861,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, ST"
       }
     ]
   },
@@ -22597,7 +22654,7 @@
   {
     "id": "p00576",
     "name": "Brando Bettazzi",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Pisa",
@@ -22605,7 +22662,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -22655,7 +22713,7 @@
   {
     "id": "p00578",
     "name": "Branimir Mlacic",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Udinese",
@@ -22663,7 +22721,8 @@
         "rating": 63.7,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -22809,7 +22868,7 @@
   {
     "id": "p00586",
     "name": "Brooke Norton-Cuffy",
-    "position": "MID",
+    "position": "RB, RWB",
     "seasons": [
       {
         "club": "Genoa",
@@ -22817,7 +22876,8 @@
         "rating": 62.3,
         "apps": 14,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, RWB"
       },
       {
         "club": "Genoa",
@@ -22825,7 +22885,8 @@
         "rating": 67.5,
         "apps": 27,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB, RWB"
       }
     ]
   },
@@ -23029,7 +23090,7 @@
   {
     "id": "p00592",
     "name": "Bruno Fontes da Mota",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Sampdoria",
@@ -23037,7 +23098,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -23547,7 +23609,7 @@
   {
     "id": "p00608",
     "name": "Bryan Zaragoza",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Roma",
@@ -23555,7 +23617,8 @@
         "rating": 60.8,
         "apps": 4,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -23781,7 +23844,7 @@
   {
     "id": "p00616",
     "name": "Calvin Stengs",
-    "position": "ATT",
+    "position": "CAM, RW",
     "seasons": [
       {
         "club": "Pisa",
@@ -23789,7 +23852,8 @@
         "rating": 60.4,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, RW"
       }
     ]
   },
@@ -24693,7 +24757,7 @@
   {
     "id": "p00648",
     "name": "Cas Odenthal",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Sassuolo",
@@ -24701,14 +24765,15 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p00649",
     "name": "Casper Tengstedt",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -24716,7 +24781,8 @@
         "rating": 73.5,
         "apps": 25,
         "goals": 6,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -24963,7 +25029,7 @@
   {
     "id": "p00656",
     "name": "Cesare Casadei",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Torino",
@@ -24971,7 +25037,8 @@
         "rating": 63.9,
         "apps": 15,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Torino",
@@ -24979,7 +25046,8 @@
         "rating": 69.7,
         "apps": 33,
         "goals": 6,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -25291,7 +25359,7 @@
   {
     "id": "p00666",
     "name": "Cheick Oumar Conde",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Venezia",
@@ -25299,14 +25367,15 @@
         "rating": 61.0,
         "apps": 9,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
   {
     "id": "p00667",
     "name": "Cheikh Niasse",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -25314,7 +25383,8 @@
         "rating": 62.0,
         "apps": 11,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Hellas Verona",
@@ -25322,14 +25392,15 @@
         "rating": 63.9,
         "apps": 19,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CDM, CM"
       }
     ]
   },
   {
     "id": "p00668",
     "name": "Cher Ndour",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -25337,7 +25408,8 @@
         "rating": 61.3,
         "apps": 9,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Fiorentina",
@@ -25345,14 +25417,15 @@
         "rating": 67.9,
         "apps": 33,
         "goals": 3,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
   {
     "id": "p00669",
     "name": "Cheveyo Muy",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Milan",
@@ -25360,7 +25433,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -25435,7 +25509,7 @@
   {
     "id": "p00672",
     "name": "Christ-Owen Kouassi",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Lecce",
@@ -25443,7 +25517,8 @@
         "rating": 63.1,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -26857,7 +26932,7 @@
   {
     "id": "p00703",
     "name": "Christos Kourfalidis",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Cagliari",
@@ -26865,7 +26940,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -26911,7 +26987,7 @@
   {
     "id": "p00706",
     "name": "Chukwubuikem Ikwuemesi",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Salernitana",
@@ -26919,7 +26995,8 @@
         "rating": 67.3,
         "apps": 25,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -28264,7 +28341,7 @@
   {
     "id": "p00735",
     "name": "Corrie Ndaba",
-    "position": "DEF",
+    "position": "CB, LB",
     "seasons": [
       {
         "club": "Lecce",
@@ -28272,7 +28349,8 @@
         "rating": 67.5,
         "apps": 14,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, LB"
       }
     ]
   },
@@ -31012,7 +31090,7 @@
   {
     "id": "p00786",
     "name": "Dachi Lordkipanidze",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Cremonese",
@@ -31020,7 +31098,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -35003,7 +35082,7 @@
   {
     "id": "p00871",
     "name": "Dany Mota",
-    "position": "MID",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Monza",
@@ -35011,7 +35090,8 @@
         "rating": 73.6,
         "apps": 29,
         "goals": 5,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST, LW"
       },
       {
         "club": "Monza",
@@ -35019,7 +35099,8 @@
         "rating": 70.5,
         "apps": 34,
         "goals": 4,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "ST, LW"
       },
       {
         "club": "Monza",
@@ -35027,14 +35108,15 @@
         "rating": 70.1,
         "apps": 31,
         "goals": 5,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST, LW"
       }
     ]
   },
   {
     "id": "p00872",
     "name": "Daouda Peeters",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Juventus",
@@ -35042,7 +35124,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -35664,7 +35747,7 @@
   {
     "id": "p00885",
     "name": "Darryl Bakola",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Sassuolo",
@@ -35672,7 +35755,8 @@
         "rating": 61.1,
         "apps": 6,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -35695,7 +35779,7 @@
   {
     "id": "p00887",
     "name": "David Akpan Ankeye",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Genoa",
@@ -35703,7 +35787,8 @@
         "rating": 60.8,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       },
       {
         "club": "Genoa",
@@ -35711,7 +35796,8 @@
         "rating": 60.4,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -38894,7 +38980,7 @@
   {
     "id": "p00962",
     "name": "Denilho Cleonise",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Genoa",
@@ -38902,7 +38988,8 @@
         "rating": 60.2,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -39277,7 +39364,7 @@
   {
     "id": "p00976",
     "name": "Devyne Rensch",
-    "position": "MID",
+    "position": "RB, CB",
     "seasons": [
       {
         "club": "Roma",
@@ -39285,7 +39372,8 @@
         "rating": 62.6,
         "apps": 14,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB, CB"
       },
       {
         "club": "Roma",
@@ -39293,7 +39381,8 @@
         "rating": 67.0,
         "apps": 24,
         "goals": 1,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "RB, CB"
       }
     ]
   },
@@ -40410,7 +40499,7 @@
   {
     "id": "p01009",
     "name": "Dimitri Bisoli",
-    "position": "MID",
+    "position": "CM, RM",
     "seasons": [
       {
         "club": "Brescia",
@@ -40418,7 +40507,8 @@
         "rating": 66.6,
         "apps": 25,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, RM"
       }
     ]
   },
@@ -41540,7 +41630,7 @@
   {
     "id": "p01043",
     "name": "Dominic Vavassori",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Atalanta",
@@ -41548,7 +41638,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -41660,7 +41751,7 @@
   {
     "id": "p01047",
     "name": "Donyell Malen",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Roma",
@@ -41668,7 +41759,8 @@
         "rating": 81.8,
         "apps": 18,
         "goals": 14,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST, RW"
       }
     ]
   },
@@ -42014,7 +42106,7 @@
   {
     "id": "p01061",
     "name": "Duccio Degl'Innocenti",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Empoli",
@@ -42022,7 +42114,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -42526,7 +42619,7 @@
   {
     "id": "p01074",
     "name": "Ebenezer Akinsanmiro",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Inter",
@@ -42534,7 +42627,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Pisa",
@@ -42542,14 +42636,15 @@
         "rating": 65.1,
         "apps": 24,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       }
     ]
   },
   {
     "id": "p01075",
     "name": "Ebenezer Annan",
-    "position": "DEF",
+    "position": "LB, LWB",
     "seasons": [
       {
         "club": "Bologna",
@@ -42557,7 +42652,8 @@
         "rating": 60.3,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, LWB"
       }
     ]
   },
@@ -42682,7 +42778,7 @@
   {
     "id": "p01080",
     "name": "Eddy Kouadio",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -42690,7 +42786,8 @@
         "rating": 61.8,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -42852,7 +42949,7 @@
   {
     "id": "p01086",
     "name": "Edimar Fraga",
-    "position": "DEF",
+    "position": "LB",
     "seasons": [
       {
         "club": "Chievo",
@@ -42860,7 +42957,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB"
       }
     ]
   },
@@ -43302,7 +43400,7 @@
   {
     "id": "p01098",
     "name": "Edon Zhegrova",
-    "position": "MID",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Juventus",
@@ -43310,7 +43408,8 @@
         "rating": 62.6,
         "apps": 19,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -43454,7 +43553,7 @@
   {
     "id": "p01106",
     "name": "Eivind Helland",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Bologna",
@@ -43462,14 +43561,15 @@
         "rating": 64.0,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p01107",
     "name": "El Bilal Tour\u00e9",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Atalanta",
@@ -43477,14 +43577,15 @@
         "rating": 64.4,
         "apps": 11,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       }
     ]
   },
   {
     "id": "p01108",
     "name": "Elayis Tavsan",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -43492,7 +43593,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -44901,7 +45003,7 @@
   {
     "id": "p01143",
     "name": "Emil Ceide",
-    "position": "ATT",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Sassuolo",
@@ -44909,7 +45011,8 @@
         "rating": 60.8,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Sassuolo",
@@ -44917,7 +45020,8 @@
         "rating": 64.4,
         "apps": 19,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Sassuolo",
@@ -44925,7 +45029,8 @@
         "rating": 61.9,
         "apps": 11,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -45918,7 +46023,7 @@
   {
     "id": "p01164",
     "name": "Em\u00edlson Cribari",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Empoli",
@@ -45926,7 +46031,8 @@
         "rating": 76.4,
         "apps": 30,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Empoli",
@@ -45934,7 +46040,8 @@
         "rating": 76.9,
         "apps": 31,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -45942,7 +46049,8 @@
         "rating": 63.9,
         "apps": 8,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Lazio",
@@ -45950,7 +46058,8 @@
         "rating": 75.2,
         "apps": 28,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Lazio",
@@ -45958,7 +46067,8 @@
         "rating": 72.4,
         "apps": 23,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Lazio",
@@ -45966,7 +46076,8 @@
         "rating": 76.8,
         "apps": 31,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Lazio",
@@ -45974,7 +46085,8 @@
         "rating": 69.0,
         "apps": 17,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Siena",
@@ -45982,7 +46094,8 @@
         "rating": 69.6,
         "apps": 18,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Lazio",
@@ -45990,7 +46103,8 @@
         "rating": 64.9,
         "apps": 10,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Napoli",
@@ -45998,7 +46112,8 @@
         "rating": 64.4,
         "apps": 9,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -46188,7 +46303,7 @@
   {
     "id": "p01172",
     "name": "Enrico Delprato",
-    "position": "DEF",
+    "position": "RB, CB",
     "seasons": [
       {
         "club": "Parma",
@@ -46196,7 +46311,8 @@
         "rating": 82.4,
         "apps": 34,
         "goals": 4,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, CB"
       },
       {
         "club": "Parma",
@@ -46204,7 +46320,8 @@
         "rating": 83.7,
         "apps": 35,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, CB"
       }
     ]
   },
@@ -46275,7 +46392,7 @@
   {
     "id": "p01177",
     "name": "Enzo Barrenechea",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Juventus",
@@ -46283,7 +46400,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Frosinone",
@@ -46291,7 +46409,8 @@
         "rating": 68.4,
         "apps": 36,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -47002,7 +47121,7 @@
   {
     "id": "p01195",
     "name": "Estanis",
-    "position": "ATT",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Bologna",
@@ -47010,7 +47129,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -47404,7 +47524,7 @@
   {
     "id": "p01205",
     "name": "Eug\u00eanio R\u00f4mulo Togni",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Pescara",
@@ -47412,7 +47532,8 @@
         "rating": 65.2,
         "apps": 17,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -48005,7 +48126,7 @@
   {
     "id": "p01221",
     "name": "Fabien Centonze",
-    "position": "DEF",
+    "position": "RB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -48013,7 +48134,8 @@
         "rating": 66.8,
         "apps": 10,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB"
       }
     ]
   },
@@ -50363,7 +50485,7 @@
   {
     "id": "p01275",
     "name": "Fallou Cham",
-    "position": "MID",
+    "position": "CB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -50371,7 +50493,8 @@
         "rating": 60.7,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -50481,7 +50604,7 @@
   {
     "id": "p01278",
     "name": "Faride Alidou",
-    "position": "ATT",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -50489,14 +50612,15 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
   {
     "id": "p01279",
     "name": "Faris Pemi Moumbagna",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Cremonese",
@@ -50504,14 +50628,15 @@
         "rating": 60.7,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
   {
     "id": "p01280",
     "name": "Far\u00e9s Ghedjemis",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Frosinone",
@@ -50519,14 +50644,15 @@
         "rating": 61.0,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
   {
     "id": "p01281",
     "name": "Faustino Anjorin",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Empoli",
@@ -50534,7 +50660,8 @@
         "rating": 66.6,
         "apps": 22,
         "goals": 2,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CAM, CM"
       },
       {
         "club": "Torino",
@@ -50542,7 +50669,8 @@
         "rating": 62.0,
         "apps": 15,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -52998,7 +53126,7 @@
   {
     "id": "p01335",
     "name": "Felipe dal Belo",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Udinese",
@@ -53006,7 +53134,8 @@
         "rating": 61.4,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53014,7 +53143,8 @@
         "rating": 67.9,
         "apps": 16,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53022,7 +53152,8 @@
         "rating": 76.6,
         "apps": 31,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53030,7 +53161,8 @@
         "rating": 79.2,
         "apps": 35,
         "goals": 3,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53038,7 +53170,8 @@
         "rating": 66.1,
         "apps": 12,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53046,7 +53179,8 @@
         "rating": 71.7,
         "apps": 22,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53054,7 +53188,8 @@
         "rating": 68.6,
         "apps": 16,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53062,7 +53197,8 @@
         "rating": 61.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Fiorentina",
@@ -53070,7 +53206,8 @@
         "rating": 69.4,
         "apps": 18,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Cesena",
@@ -53078,7 +53215,8 @@
         "rating": 63.3,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Fiorentina",
@@ -53086,7 +53224,8 @@
         "rating": 62.1,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Fiorentina",
@@ -53094,7 +53233,8 @@
         "rating": 61.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Siena",
@@ -53102,7 +53242,8 @@
         "rating": 78.5,
         "apps": 34,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Parma",
@@ -53110,7 +53251,8 @@
         "rating": 71.6,
         "apps": 22,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Inter",
@@ -53118,7 +53260,8 @@
         "rating": 61.6,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Parma",
@@ -53126,7 +53269,8 @@
         "rating": 65.7,
         "apps": 11,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53134,7 +53278,8 @@
         "rating": 73.9,
         "apps": 26,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -53142,7 +53287,8 @@
         "rating": 85.6,
         "apps": 32,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "SPAL",
@@ -53150,7 +53296,8 @@
         "rating": 84.0,
         "apps": 30,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "SPAL",
@@ -53158,7 +53305,8 @@
         "rating": 81.7,
         "apps": 30,
         "goals": 3,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CB"
       },
       {
         "club": "SPAL",
@@ -53166,7 +53314,8 @@
         "rating": 69.0,
         "apps": 15,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -53198,7 +53347,7 @@
   {
     "id": "p01337",
     "name": "Fellipe Jack",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Como",
@@ -53206,7 +53355,8 @@
         "rating": 63.9,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -54127,7 +54277,7 @@
   {
     "id": "p01364",
     "name": "Filip Marchwi\u0144ski",
-    "position": "MID",
+    "position": "CAM, ST",
     "seasons": [
       {
         "club": "Lecce",
@@ -54135,7 +54285,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, ST"
       }
     ]
   },
@@ -55054,7 +55205,7 @@
   {
     "id": "p01394",
     "name": "Fisayo Dele-Bashiru",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Lazio",
@@ -55062,7 +55213,8 @@
         "rating": 65.6,
         "apps": 20,
         "goals": 3,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Lazio",
@@ -55070,7 +55222,8 @@
         "rating": 64.8,
         "apps": 24,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -55249,7 +55402,7 @@
   {
     "id": "p01403",
     "name": "Florinel Coman",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Cagliari",
@@ -55257,7 +55410,8 @@
         "rating": 61.7,
         "apps": 9,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -58523,7 +58677,7 @@
   {
     "id": "p01481",
     "name": "Frederic Guilbert",
-    "position": "DEF",
+    "position": "RB",
     "seasons": [
       {
         "club": "Lecce",
@@ -58531,7 +58685,8 @@
         "rating": 85.0,
         "apps": 31,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB"
       }
     ]
   },
@@ -59546,7 +59701,7 @@
   {
     "id": "p01513",
     "name": "Gaby Jean",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Lecce",
@@ -59554,7 +59709,8 @@
         "rating": 71.7,
         "apps": 19,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Lecce",
@@ -59562,7 +59718,8 @@
         "rating": 63.7,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -60085,7 +60242,7 @@
   {
     "id": "p01526",
     "name": "Gaetano Oristanio",
-    "position": "ATT",
+    "position": "CAM, SS",
     "seasons": [
       {
         "club": "Cagliari",
@@ -60093,7 +60250,8 @@
         "rating": 68.5,
         "apps": 25,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CAM, SS"
       },
       {
         "club": "Venezia",
@@ -60101,7 +60259,8 @@
         "rating": 74.4,
         "apps": 37,
         "goals": 3,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CAM, SS"
       },
       {
         "club": "Parma",
@@ -60109,7 +60268,8 @@
         "rating": 65.5,
         "apps": 20,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, SS"
       }
     ]
   },
@@ -60567,7 +60727,7 @@
   {
     "id": "p01543",
     "name": "Gennaro Borrelli",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Frosinone",
@@ -60575,7 +60735,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       },
       {
         "club": "Cagliari",
@@ -60583,7 +60744,8 @@
         "rating": 72.5,
         "apps": 27,
         "goals": 5,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -62927,7 +63089,7 @@
   {
     "id": "p01600",
     "name": "Gianluca Atzori",
-    "position": "defence",
+    "position": "CB",
     "seasons": [
       {
         "club": "Empoli",
@@ -62936,7 +63098,7 @@
         "apps": 12,
         "goals": 1,
         "assists": 0,
-        "specific_position": "defence"
+        "specific_position": "CB"
       }
     ]
   },
@@ -65082,7 +65244,7 @@
   {
     "id": "p01641",
     "name": "Gift Orban",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -65090,14 +65252,15 @@
         "rating": 76.4,
         "apps": 28,
         "goals": 7,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST"
       }
     ]
   },
   {
     "id": "p01642",
     "name": "Gil Basti\u00e3o Dias",
-    "position": "ATT",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -65105,7 +65268,8 @@
         "rating": 70.1,
         "apps": 27,
         "goals": 2,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -65187,7 +65351,7 @@
   {
     "id": "p01645",
     "name": "Gino Infantino",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -65195,7 +65359,8 @@
         "rating": 60.5,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -65292,7 +65457,7 @@
   {
     "id": "p01650",
     "name": "Giorgi Kvernadze",
-    "position": "ATT",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Frosinone",
@@ -65300,7 +65465,8 @@
         "rating": 60.6,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -70083,7 +70249,7 @@
   {
     "id": "p01758",
     "name": "Guly do Prado",
-    "position": "ATT",
+    "position": "CAM, RW",
     "seasons": [
       {
         "club": "Perugia",
@@ -70091,14 +70257,15 @@
         "rating": 63.5,
         "apps": 14,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CAM, RW"
       }
     ]
   },
   {
     "id": "p01759",
     "name": "Gustav Isaksen",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Lazio",
@@ -70106,7 +70273,8 @@
         "rating": 70.1,
         "apps": 28,
         "goals": 3,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       },
       {
         "club": "Lazio",
@@ -70114,7 +70282,8 @@
         "rating": 70.5,
         "apps": 37,
         "goals": 4,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "RW, LW"
       },
       {
         "club": "Lazio",
@@ -70122,7 +70291,8 @@
         "rating": 73.4,
         "apps": 30,
         "goals": 5,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -70974,7 +71144,7 @@
   {
     "id": "p01783",
     "name": "Henrik Meister",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Pisa",
@@ -70982,7 +71152,8 @@
         "rating": 69.0,
         "apps": 28,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -71125,7 +71296,7 @@
   {
     "id": "p01787",
     "name": "Herculano Nabian",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Empoli",
@@ -71133,7 +71304,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -71474,7 +71646,7 @@
   {
     "id": "p01794",
     "name": "Hilmir Mikaelsson",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Venezia",
@@ -71482,7 +71654,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -71548,7 +71721,7 @@
   {
     "id": "p01797",
     "name": "Honest Ahanor",
-    "position": "MID",
+    "position": "LB, CB",
     "seasons": [
       {
         "club": "Genoa",
@@ -71556,7 +71729,8 @@
         "rating": 60.8,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, CB"
       },
       {
         "club": "Atalanta",
@@ -71564,7 +71738,8 @@
         "rating": 75.8,
         "apps": 22,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, CB"
       }
     ]
   },
@@ -71587,7 +71762,7 @@
   {
     "id": "p01799",
     "name": "Houssem Aouar",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Roma",
@@ -71595,7 +71770,8 @@
         "rating": 64.9,
         "apps": 16,
         "goals": 4,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -71807,7 +71983,7 @@
   {
     "id": "p01805",
     "name": "Hugo Enyinnaya",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Bari",
@@ -71815,7 +71991,8 @@
         "rating": 61.3,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -72502,7 +72679,7 @@
   {
     "id": "p01826",
     "name": "Ignace Van Der Brempt",
-    "position": "DEF",
+    "position": "RB",
     "seasons": [
       {
         "club": "Como",
@@ -72510,7 +72687,8 @@
         "rating": 77.0,
         "apps": 20,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB"
       },
       {
         "club": "Como",
@@ -72518,7 +72696,8 @@
         "rating": 73.0,
         "apps": 20,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB"
       }
     ]
   },
@@ -73243,7 +73422,7 @@
   {
     "id": "p01846",
     "name": "Ioan Verme\u0219an",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -73251,7 +73430,8 @@
         "rating": 60.8,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -73344,7 +73524,7 @@
   {
     "id": "p01850",
     "name": "Isaac",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -73352,7 +73532,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -73599,7 +73780,7 @@
   {
     "id": "p01857",
     "name": "Ismael Konate",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Empoli",
@@ -73607,7 +73788,8 @@
         "rating": 62.6,
         "apps": 12,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -74410,7 +74592,7 @@
   {
     "id": "p01877",
     "name": "Ivan Smol\u010di\u0107",
-    "position": "DEF",
+    "position": "CB, RB",
     "seasons": [
       {
         "club": "Como",
@@ -74418,7 +74600,8 @@
         "rating": 66.5,
         "apps": 9,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       },
       {
         "club": "Como",
@@ -74426,7 +74609,8 @@
         "rating": 79.7,
         "apps": 28,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB, RB"
       }
     ]
   },
@@ -75004,7 +75188,7 @@
   {
     "id": "p01897",
     "name": "Jackson Tchatchoua",
-    "position": "DEF",
+    "position": "RB, RWB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -75012,7 +75196,8 @@
         "rating": 79.3,
         "apps": 26,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "RB, RWB"
       },
       {
         "club": "Hellas Verona",
@@ -75020,14 +75205,15 @@
         "rating": 70.9,
         "apps": 36,
         "goals": 2,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "RB, RWB"
       }
     ]
   },
   {
     "id": "p01898",
     "name": "Jacob Ondrejka",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Parma",
@@ -75035,7 +75221,8 @@
         "rating": 64.5,
         "apps": 12,
         "goals": 5,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Parma",
@@ -75043,7 +75230,8 @@
         "rating": 63.5,
         "apps": 16,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -75066,7 +75254,7 @@
   {
     "id": "p01900",
     "name": "Jacobo Ram\u00f3n",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Como",
@@ -75074,7 +75262,8 @@
         "rating": 84.6,
         "apps": 32,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -75594,7 +75783,7 @@
   {
     "id": "p01917",
     "name": "Jakub Iskra",
-    "position": "MID",
+    "position": "RB",
     "seasons": [
       {
         "club": "SPAL",
@@ -75602,7 +75791,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB"
       }
     ]
   },
@@ -75695,7 +75885,7 @@
   {
     "id": "p01920",
     "name": "Jakub Piotrowski",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Udinese",
@@ -75703,7 +75893,8 @@
         "rating": 67.2,
         "apps": 33,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -75726,7 +75917,7 @@
   {
     "id": "p01922",
     "name": "James Abankwah",
-    "position": "DEF",
+    "position": "CB, RB",
     "seasons": [
       {
         "club": "Udinese",
@@ -75734,7 +75925,8 @@
         "rating": 60.8,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       },
       {
         "club": "Udinese",
@@ -75742,7 +75934,8 @@
         "rating": 62.7,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       }
     ]
   },
@@ -75781,7 +75974,7 @@
   {
     "id": "p01925",
     "name": "Jamil Siebert",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Lecce",
@@ -75789,7 +75982,8 @@
         "rating": 74.5,
         "apps": 21,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -75843,7 +76037,7 @@
   {
     "id": "p01929",
     "name": "Jan-Carlo Simic",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Milan",
@@ -75851,7 +76045,8 @@
         "rating": 61.8,
         "apps": 4,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -75913,7 +76108,7 @@
   {
     "id": "p01933",
     "name": "Jari Vandeputte",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Cremonese",
@@ -75921,7 +76116,8 @@
         "rating": 69.5,
         "apps": 32,
         "goals": 1,
-        "assists": 5
+        "assists": 5,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -76501,7 +76697,7 @@
   {
     "id": "p01949",
     "name": "Jay Idzes",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Venezia",
@@ -76509,7 +76705,8 @@
         "rating": 86.0,
         "apps": 35,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Sassuolo",
@@ -76517,7 +76714,8 @@
         "rating": 82.5,
         "apps": 35,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -76895,7 +77093,7 @@
   {
     "id": "p01962",
     "name": "Jeff Ekhator",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Genoa",
@@ -76903,7 +77101,8 @@
         "rating": 66.8,
         "apps": 24,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       },
       {
         "club": "Genoa",
@@ -76911,7 +77110,8 @@
         "rating": 69.8,
         "apps": 30,
         "goals": 3,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -76977,7 +77177,7 @@
   {
     "id": "p01965",
     "name": "Jens Cajuste",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Napoli",
@@ -76985,7 +77185,8 @@
         "rating": 65.5,
         "apps": 26,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -77103,7 +77304,7 @@
   {
     "id": "p01969",
     "name": "Jeppe Corfitzen",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Lecce",
@@ -77111,7 +77312,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -77231,7 +77433,7 @@
   {
     "id": "p01972",
     "name": "Jeremy Sarmiento",
-    "position": "MID",
+    "position": "LW, CAM",
     "seasons": [
       {
         "club": "Cremonese",
@@ -77239,7 +77441,8 @@
         "rating": 60.7,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, CAM"
       }
     ]
   },
@@ -78390,7 +78593,7 @@
   {
     "id": "p02016",
     "name": "John Yeboah",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Venezia",
@@ -78398,7 +78601,8 @@
         "rating": 69.0,
         "apps": 33,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -78448,7 +78652,7 @@
   {
     "id": "p02018",
     "name": "Joi Nuredini",
-    "position": "ATT",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Genoa",
@@ -78456,7 +78660,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -78497,7 +78702,7 @@
   {
     "id": "p02020",
     "name": "Jonas Rouhi",
-    "position": "DEF",
+    "position": "LB",
     "seasons": [
       {
         "club": "Juventus",
@@ -78505,7 +78710,8 @@
         "rating": 62.3,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB"
       }
     ]
   },
@@ -79162,7 +79368,7 @@
   {
     "id": "p02038",
     "name": "Jordan Majchrzak",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Roma",
@@ -79170,7 +79376,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -79263,7 +79470,7 @@
   {
     "id": "p02041",
     "name": "Jordi Mboula",
-    "position": "MID",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -79271,7 +79478,8 @@
         "rating": 62.0,
         "apps": 11,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -79364,7 +79572,7 @@
   {
     "id": "p02044",
     "name": "Jorge Francisco Vargas",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Reggina",
@@ -79372,7 +79580,8 @@
         "rating": 73.9,
         "apps": 26,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Reggina",
@@ -79380,7 +79589,8 @@
         "rating": 75.0,
         "apps": 28,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Empoli",
@@ -79388,7 +79598,8 @@
         "rating": 69.1,
         "apps": 17,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Livorno",
@@ -79396,7 +79607,8 @@
         "rating": 72.9,
         "apps": 24,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Livorno",
@@ -79404,14 +79616,15 @@
         "rating": 76.9,
         "apps": 31,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p02045",
     "name": "Jorge Horacio Serna",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Como",
@@ -79419,7 +79632,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -79645,7 +79859,7 @@
   {
     "id": "p02053",
     "name": "Joseph Liteta",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Cagliari",
@@ -79653,7 +79867,8 @@
         "rating": 60.4,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -79676,7 +79891,7 @@
   {
     "id": "p02055",
     "name": "Joseph Nonge",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Juventus",
@@ -79684,7 +79899,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -80861,7 +81077,7 @@
   {
     "id": "p02092",
     "name": "Jo\u00ebl Schingtienne",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Venezia",
@@ -80869,7 +81085,8 @@
         "rating": 72.1,
         "apps": 16,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -82010,7 +82227,7 @@
   {
     "id": "p02120",
     "name": "Julio Ricardo Cruz",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Bologna",
@@ -82018,7 +82235,8 @@
         "rating": 75.8,
         "apps": 27,
         "goals": 7,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST"
       },
       {
         "club": "Bologna",
@@ -82026,7 +82244,8 @@
         "rating": 83.9,
         "apps": 33,
         "goals": 10,
-        "assists": 6
+        "assists": 6,
+        "specific_position": "ST"
       },
       {
         "club": "Bologna",
@@ -82034,7 +82253,8 @@
         "rating": 81.9,
         "apps": 28,
         "goals": 10,
-        "assists": 5
+        "assists": 5,
+        "specific_position": "ST"
       },
       {
         "club": "Inter",
@@ -82042,7 +82262,8 @@
         "rating": 75.0,
         "apps": 22,
         "goals": 7,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "ST"
       },
       {
         "club": "Inter",
@@ -82050,7 +82271,8 @@
         "rating": 71.5,
         "apps": 18,
         "goals": 5,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "ST"
       },
       {
         "club": "Inter",
@@ -82058,7 +82280,8 @@
         "rating": 85.6,
         "apps": 31,
         "goals": 15,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST"
       },
       {
         "club": "Inter",
@@ -82066,7 +82289,8 @@
         "rating": 71.9,
         "apps": 15,
         "goals": 7,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       },
       {
         "club": "Inter",
@@ -82074,7 +82298,8 @@
         "rating": 83.7,
         "apps": 28,
         "goals": 13,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "ST"
       },
       {
         "club": "Inter",
@@ -82082,7 +82307,8 @@
         "rating": 67.0,
         "apps": 17,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST"
       },
       {
         "club": "Lazio",
@@ -82090,7 +82316,8 @@
         "rating": 70.7,
         "apps": 25,
         "goals": 4,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -82354,7 +82581,7 @@
   {
     "id": "p02127",
     "name": "Jurgen Ekkelenkamp",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Udinese",
@@ -82362,7 +82589,8 @@
         "rating": 69.2,
         "apps": 34,
         "goals": 3,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CAM, CM"
       },
       {
         "club": "Udinese",
@@ -82370,7 +82598,8 @@
         "rating": 70.7,
         "apps": 31,
         "goals": 5,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -83230,7 +83459,7 @@
   {
     "id": "p02150",
     "name": "Kamaldeen Sulemana",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Atalanta",
@@ -83238,7 +83467,8 @@
         "rating": 65.8,
         "apps": 25,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -84687,7 +84917,7 @@
   {
     "id": "p02193",
     "name": "Kialonda",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Lecce",
@@ -84695,7 +84925,8 @@
         "rating": 75.8,
         "apps": 24,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Lecce",
@@ -84703,14 +84934,15 @@
         "rating": 74.2,
         "apps": 23,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p02194",
     "name": "Kieron Bowie",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -84718,7 +84950,8 @@
         "rating": 68.2,
         "apps": 14,
         "goals": 4,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       }
     ]
   },
@@ -84900,7 +85133,7 @@
   {
     "id": "p02202",
     "name": "Kingstone Mutandwa",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Cagliari",
@@ -84908,7 +85141,8 @@
         "rating": 61.8,
         "apps": 5,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       },
       {
         "club": "Cagliari",
@@ -84916,7 +85150,8 @@
         "rating": 60.9,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -85041,7 +85276,7 @@
   {
     "id": "p02207",
     "name": "Konan N'dri",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Lecce",
@@ -85049,7 +85284,8 @@
         "rating": 61.5,
         "apps": 11,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Lecce",
@@ -85057,7 +85293,8 @@
         "rating": 65.0,
         "apps": 27,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -85281,7 +85518,7 @@
   {
     "id": "p02212",
     "name": "Kostas Tsimikas",
-    "position": "MID",
+    "position": "LB",
     "seasons": [
       {
         "club": "Roma",
@@ -85289,7 +85526,8 @@
         "rating": 62.8,
         "apps": 18,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB"
       }
     ]
   },
@@ -86095,7 +86333,7 @@
   {
     "id": "p02236",
     "name": "Laurs Skjellerup",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Sassuolo",
@@ -86103,7 +86341,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -88233,7 +88472,7 @@
   {
     "id": "p02291",
     "name": "Lior Kasa",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Genoa",
@@ -88241,7 +88480,8 @@
         "rating": 61.0,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -88296,7 +88536,7 @@
   {
     "id": "p02295",
     "name": "Lloyd Kelly",
-    "position": "DEF",
+    "position": "CB, LB",
     "seasons": [
       {
         "club": "Juventus",
@@ -88304,7 +88544,8 @@
         "rating": 68.8,
         "apps": 12,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, LB"
       },
       {
         "club": "Juventus",
@@ -88312,7 +88553,8 @@
         "rating": 86.5,
         "apps": 35,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB, LB"
       }
     ]
   },
@@ -89860,7 +90102,7 @@
   {
     "id": "p02333",
     "name": "Loum Tchaouna",
-    "position": "MID",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Salernitana",
@@ -89868,7 +90110,8 @@
         "rating": 70.4,
         "apps": 33,
         "goals": 4,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "RW, LW"
       },
       {
         "club": "Lazio",
@@ -89876,14 +90119,15 @@
         "rating": 64.2,
         "apps": 24,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
   {
     "id": "p02334",
     "name": "Lo\u00efs Openda",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Juventus",
@@ -89891,7 +90135,8 @@
         "rating": 66.0,
         "apps": 24,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -92903,7 +93148,7 @@
   {
     "id": "p02407",
     "name": "Lucas Da Cunha",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Como",
@@ -92911,7 +93156,8 @@
         "rating": 70.3,
         "apps": 36,
         "goals": 3,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Como",
@@ -92919,7 +93165,8 @@
         "rating": 73.2,
         "apps": 36,
         "goals": 6,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -92981,7 +93228,7 @@
   {
     "id": "p02411",
     "name": "Lucas Gourna-Douath",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Roma",
@@ -92989,7 +93236,8 @@
         "rating": 60.7,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -95038,7 +95286,7 @@
   {
     "id": "p02467",
     "name": "Luka Topalovi\u0107",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Inter",
@@ -95046,7 +95294,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       },
       {
         "club": "Inter",
@@ -95054,7 +95303,8 @@
         "rating": 60.3,
         "apps": 1,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -95665,7 +95915,7 @@
   {
     "id": "p02489",
     "name": "Maat Daniel Caprini",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -95673,7 +95923,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -95726,7 +95977,7 @@
   {
     "id": "p02492",
     "name": "Magnus Kofod Andersen",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Venezia",
@@ -95734,7 +95985,8 @@
         "rating": 63.4,
         "apps": 14,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -95904,7 +96156,7 @@
   {
     "id": "p02497",
     "name": "Malthe Hojholt",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Pisa",
@@ -95912,7 +96164,8 @@
         "rating": 62.9,
         "apps": 17,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -96044,7 +96297,7 @@
   {
     "id": "p02503",
     "name": "Mamedi Doucour\u00e9",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Genoa",
@@ -96052,7 +96305,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -96147,7 +96401,7 @@
   {
     "id": "p02505",
     "name": "Mandela Keita",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Parma",
@@ -96155,7 +96409,8 @@
         "rating": 66.9,
         "apps": 30,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Parma",
@@ -96163,7 +96418,8 @@
         "rating": 69.2,
         "apps": 37,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -96385,7 +96641,7 @@
   {
     "id": "p02511",
     "name": "Manu Gyabuaa",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Atalanta",
@@ -96393,7 +96649,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -96425,7 +96682,7 @@
   {
     "id": "p02513",
     "name": "Manuel Akanji",
-    "position": "defence",
+    "position": "CB",
     "seasons": [
       {
         "club": "Inter",
@@ -96434,7 +96691,7 @@
         "apps": 33,
         "goals": 2,
         "assists": 0,
-        "specific_position": "defence"
+        "specific_position": "CB"
       }
     ]
   },
@@ -106829,7 +107086,7 @@
   {
     "id": "p02744",
     "name": "Mateus Lusuardi",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Frosinone",
@@ -106837,7 +107094,8 @@
         "rating": 61.9,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Pisa",
@@ -106845,7 +107103,8 @@
         "rating": 61.7,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -107107,7 +107366,7 @@
   {
     "id": "p02756",
     "name": "Mathis Lambourde",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -107115,7 +107374,8 @@
         "rating": 62.2,
         "apps": 7,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -109850,7 +110110,7 @@
   {
     "id": "p02821",
     "name": "Mattia Pagliuca",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Bologna",
@@ -109858,7 +110118,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, RW"
       }
     ]
   },
@@ -112105,7 +112366,7 @@
   {
     "id": "p02874",
     "name": "Mauro Mayer",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Modena",
@@ -112113,7 +112374,8 @@
         "rating": 76.3,
         "apps": 30,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CB"
       },
       {
         "club": "Modena",
@@ -112121,7 +112383,8 @@
         "rating": 69.6,
         "apps": 18,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       }
     ]
   },
@@ -112424,7 +112687,7 @@
   {
     "id": "p02882",
     "name": "Maxence Caqueret",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Como",
@@ -112432,7 +112695,8 @@
         "rating": 66.0,
         "apps": 18,
         "goals": 2,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Como",
@@ -112440,7 +112704,8 @@
         "rating": 69.8,
         "apps": 30,
         "goals": 2,
-        "assists": 6
+        "assists": 6,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -114148,7 +114413,7 @@
   {
     "id": "p02930",
     "name": "Michele Collocolo",
-    "position": "MID",
+    "position": "CM, RM",
     "seasons": [
       {
         "club": "Cremonese",
@@ -114156,7 +114421,8 @@
         "rating": 61.1,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, RM"
       }
     ]
   },
@@ -115339,7 +115605,7 @@
   {
     "id": "p02964",
     "name": "Mikayil Ngor Faye",
-    "position": "MID",
+    "position": "CB, LB",
     "seasons": [
       {
         "club": "Cremonese",
@@ -115347,7 +115613,8 @@
         "rating": 61.0,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, LB"
       }
     ]
   },
@@ -117682,7 +117949,7 @@
   {
     "id": "p03021",
     "name": "Morten Hjulmand",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Lecce",
@@ -117690,7 +117957,8 @@
         "rating": 70.0,
         "apps": 35,
         "goals": 0,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -118130,7 +118398,7 @@
   {
     "id": "p03035",
     "name": "M\u00e1rio Jardel",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Ancona",
@@ -118138,7 +118406,8 @@
         "rating": 60.4,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -118247,7 +118516,7 @@
   {
     "id": "p03038",
     "name": "M\u00e1ximo Perrone",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Como",
@@ -118255,7 +118524,8 @@
         "rating": 67.0,
         "apps": 26,
         "goals": 0,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Como",
@@ -118263,7 +118533,8 @@
         "rating": 71.5,
         "apps": 36,
         "goals": 3,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -118842,7 +119113,7 @@
   {
     "id": "p03057",
     "name": "Neil El Aynaoui",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Roma",
@@ -118850,7 +119121,8 @@
         "rating": 65.8,
         "apps": 25,
         "goals": 1,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -119244,7 +119516,7 @@
   {
     "id": "p03068",
     "name": "Nesta Elphege",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Parma",
@@ -119252,7 +119524,8 @@
         "rating": 64.5,
         "apps": 9,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -119444,7 +119717,7 @@
   {
     "id": "p03077",
     "name": "Niccol\u00f2 Pisilli",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Roma",
@@ -119452,7 +119725,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Roma",
@@ -119460,7 +119734,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Roma",
@@ -119468,7 +119743,8 @@
         "rating": 66.5,
         "apps": 28,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Roma",
@@ -119476,7 +119752,8 @@
         "rating": 67.8,
         "apps": 25,
         "goals": 2,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -121490,7 +121767,7 @@
   {
     "id": "p03129",
     "name": "Nicolas-Gerrit K\u00fchn",
-    "position": "MID",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Como",
@@ -121498,7 +121775,8 @@
         "rating": 64.6,
         "apps": 23,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -122784,7 +123062,7 @@
   {
     "id": "p03160",
     "name": "Niels Nkounkou",
-    "position": "MID",
+    "position": "LB, LWB",
     "seasons": [
       {
         "club": "Torino",
@@ -122792,7 +123070,8 @@
         "rating": 62.1,
         "apps": 11,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "LB, LWB"
       }
     ]
   },
@@ -123454,7 +123733,7 @@
   {
     "id": "p03180",
     "name": "Nils Z\u00e4tterstr\u00f6m",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Genoa",
@@ -123462,7 +123741,8 @@
         "rating": 61.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -123485,7 +123765,7 @@
   {
     "id": "p03182",
     "name": "Noa Lang",
-    "position": "ATT",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Napoli",
@@ -123493,7 +123773,8 @@
         "rating": 66.0,
         "apps": 18,
         "goals": 1,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -123711,7 +123992,7 @@
   {
     "id": "p03190",
     "name": "Nunzio Lella",
-    "position": "MID",
+    "position": "CM, RM",
     "seasons": [
       {
         "club": "Venezia",
@@ -123719,7 +124000,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, RM"
       }
     ]
   },
@@ -123858,7 +124140,7 @@
   {
     "id": "p03195",
     "name": "Obite N'Dicka",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Roma",
@@ -123866,7 +124148,8 @@
         "rating": 77.6,
         "apps": 25,
         "goals": 0,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "CB"
       },
       {
         "club": "Roma",
@@ -123874,7 +124157,8 @@
         "rating": 87.0,
         "apps": 38,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Roma",
@@ -123882,14 +124166,15 @@
         "rating": 80.5,
         "apps": 31,
         "goals": 3,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p03196",
     "name": "Odilon Kossounou",
-    "position": "DEF",
+    "position": "CB, RB",
     "seasons": [
       {
         "club": "Atalanta",
@@ -123897,7 +124182,8 @@
         "rating": 71.4,
         "apps": 18,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       },
       {
         "club": "Atalanta",
@@ -123905,7 +124191,8 @@
         "rating": 72.6,
         "apps": 19,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       }
     ]
   },
@@ -124005,7 +124292,7 @@
   {
     "id": "p03200",
     "name": "Oier Zarraga",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Udinese",
@@ -124013,7 +124300,8 @@
         "rating": 63.2,
         "apps": 15,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Udinese",
@@ -124021,7 +124309,8 @@
         "rating": 64.2,
         "apps": 22,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       },
       {
         "club": "Udinese",
@@ -124029,7 +124318,8 @@
         "rating": 63.4,
         "apps": 24,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -124147,7 +124437,7 @@
   {
     "id": "p03204",
     "name": "Olaf Gorter",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Lecce",
@@ -124155,7 +124445,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -124251,7 +124542,7 @@
   {
     "id": "p03209",
     "name": "Oliver Jensen",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Parma",
@@ -124259,7 +124550,8 @@
         "rating": 67.5,
         "apps": 34,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -124692,7 +124984,7 @@
   {
     "id": "p03222",
     "name": "Omari Forson",
-    "position": "defence",
+    "position": "RW, CAM",
     "seasons": [
       {
         "club": "Monza",
@@ -124701,14 +124993,14 @@
         "apps": 9,
         "goals": 0,
         "assists": 0,
-        "specific_position": "defence"
+        "specific_position": "RW, CAM"
       }
     ]
   },
   {
     "id": "p03223",
     "name": "Omri Gandelman",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Lecce",
@@ -124716,7 +125008,8 @@
         "rating": 65.0,
         "apps": 19,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CAM"
       }
     ]
   },
@@ -124991,7 +125284,7 @@
   {
     "id": "p03234",
     "name": "Othniel Raterink",
-    "position": "DEF",
+    "position": "ST",
     "seasons": [
       {
         "club": "Cagliari",
@@ -124999,7 +125292,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -125054,7 +125348,7 @@
   {
     "id": "p03238",
     "name": "Oumar Solet",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Udinese",
@@ -125062,7 +125356,8 @@
         "rating": 74.5,
         "apps": 19,
         "goals": 1,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -125070,7 +125365,8 @@
         "rating": 91.9,
         "apps": 35,
         "goals": 3,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       }
     ]
   },
@@ -125165,7 +125461,7 @@
   {
     "id": "p03240",
     "name": "Oussama El Azzouzi",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Bologna",
@@ -125173,7 +125469,8 @@
         "rating": 64.9,
         "apps": 18,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Bologna",
@@ -125181,7 +125478,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -125898,7 +126196,7 @@
   {
     "id": "p03259",
     "name": "Pantelis Hatzidiakos",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Cagliari",
@@ -125906,7 +126204,8 @@
         "rating": 69.0,
         "apps": 13,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -129657,7 +129956,7 @@
   {
     "id": "p03342",
     "name": "Petar Su\u010di\u0107",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Inter",
@@ -129665,7 +129964,8 @@
         "rating": 68.5,
         "apps": 34,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -130416,7 +130716,7 @@
   {
     "id": "p03365",
     "name": "Pietro Comuzzo",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -130424,7 +130724,8 @@
         "rating": 61.7,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Fiorentina",
@@ -130432,7 +130733,8 @@
         "rating": 81.5,
         "apps": 33,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Fiorentina",
@@ -130440,7 +130742,8 @@
         "rating": 77.5,
         "apps": 27,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -130991,7 +131294,7 @@
   {
     "id": "p03377",
     "name": "Pontus Almqvist",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Lecce",
@@ -130999,7 +131302,8 @@
         "rating": 70.6,
         "apps": 30,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       },
       {
         "club": "Parma",
@@ -131007,7 +131311,8 @@
         "rating": 68.1,
         "apps": 29,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       },
       {
         "club": "Parma",
@@ -131015,7 +131320,8 @@
         "rating": 62.5,
         "apps": 13,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -131924,7 +132230,7 @@
   {
     "id": "p03400",
     "name": "Rafel Obrador",
-    "position": "MID",
+    "position": "LB",
     "seasons": [
       {
         "club": "Torino",
@@ -131932,7 +132238,8 @@
         "rating": 65.3,
         "apps": 16,
         "goals": 1,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "LB"
       }
     ]
   },
@@ -132288,7 +132595,7 @@
   {
     "id": "p03411",
     "name": "Rafik Belghali",
-    "position": "MID",
+    "position": "RB, RWB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -132296,7 +132603,8 @@
         "rating": 66.5,
         "apps": 26,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, RWB"
       }
     ]
   },
@@ -132342,7 +132650,7 @@
   {
     "id": "p03414",
     "name": "Rafiu Durosinmi",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Pisa",
@@ -132350,7 +132658,8 @@
         "rating": 64.1,
         "apps": 12,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -132552,7 +132861,7 @@
   {
     "id": "p03421",
     "name": "Randal Kolo Muani",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Juventus",
@@ -132560,7 +132869,8 @@
         "rating": 73.7,
         "apps": 16,
         "goals": 8,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST, RW"
       }
     ]
   },
@@ -132676,7 +132986,7 @@
   {
     "id": "p03424",
     "name": "Rare\u0219-C\u0103t\u0103lin Burnete",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Lecce",
@@ -132684,7 +132994,8 @@
         "rating": 60.4,
         "apps": 1,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       },
       {
         "club": "Lecce",
@@ -132692,7 +133003,8 @@
         "rating": 60.4,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -132901,7 +133213,7 @@
   {
     "id": "p03432",
     "name": "Reda Belahyane",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -132909,7 +133221,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Hellas Verona",
@@ -132917,7 +133230,8 @@
         "rating": 65.7,
         "apps": 22,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Lazio",
@@ -132925,7 +133239,8 @@
         "rating": 60.6,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Lazio",
@@ -132933,7 +133248,8 @@
         "rating": 63.2,
         "apps": 13,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -133250,7 +133566,7 @@
   {
     "id": "p03441",
     "name": "Renato Sanches",
-    "position": "MID",
+    "position": "CM, CAM",
     "seasons": [
       {
         "club": "Roma",
@@ -133258,14 +133574,15 @@
         "rating": 61.3,
         "apps": 7,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CAM"
       }
     ]
   },
   {
     "id": "p03442",
     "name": "Renato Veiga",
-    "position": "DEF",
+    "position": "CB, CDM",
     "seasons": [
       {
         "club": "Juventus",
@@ -133273,7 +133590,8 @@
         "rating": 69.5,
         "apps": 13,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB, CDM"
       }
     ]
   },
@@ -135017,7 +135335,7 @@
   {
     "id": "p03488",
     "name": "Richie Sagrado",
-    "position": "MID",
+    "position": "RB, RWB",
     "seasons": [
       {
         "club": "Venezia",
@@ -135025,7 +135343,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, RWB"
       }
     ]
   },
@@ -135263,7 +135582,7 @@
   {
     "id": "p03495",
     "name": "Riyad Idrissi",
-    "position": "MID",
+    "position": "LB",
     "seasons": [
       {
         "club": "Cagliari",
@@ -135271,7 +135590,8 @@
         "rating": 64.7,
         "apps": 23,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB"
       }
     ]
   },
@@ -137057,7 +137377,7 @@
   {
     "id": "p03536",
     "name": "Robinio Vaz",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Roma",
@@ -137065,7 +137385,8 @@
         "rating": 63.3,
         "apps": 12,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -138431,7 +138752,7 @@
   {
     "id": "p03569",
     "name": "Rosen Bozhinov",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Pisa",
@@ -138439,7 +138760,8 @@
         "rating": 65.5,
         "apps": 9,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -138832,7 +139154,7 @@
   {
     "id": "p03580",
     "name": "Rui Modesto",
-    "position": "MID",
+    "position": "RB, RM",
     "seasons": [
       {
         "club": "Udinese",
@@ -138840,7 +139162,8 @@
         "rating": 63.6,
         "apps": 20,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB, RM"
       },
       {
         "club": "Udinese",
@@ -138848,7 +139171,8 @@
         "rating": 60.7,
         "apps": 3,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB, RM"
       }
     ]
   },
@@ -139183,7 +139507,7 @@
   {
     "id": "p03589",
     "name": "R\u00faben Vinagre",
-    "position": "DEF",
+    "position": "LB, LWB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -139191,7 +139515,8 @@
         "rating": 65.8,
         "apps": 12,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, LWB"
       }
     ]
   },
@@ -139266,7 +139591,7 @@
   {
     "id": "p03592",
     "name": "Saba Goglichidze",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Empoli",
@@ -139274,7 +139599,8 @@
         "rating": 86.9,
         "apps": 33,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Udinese",
@@ -139282,14 +139608,15 @@
         "rating": 65.6,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p03593",
     "name": "Saba Sazonov",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Torino",
@@ -139297,7 +139624,8 @@
         "rating": 67.1,
         "apps": 12,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Torino",
@@ -139305,7 +139633,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -139452,7 +139781,7 @@
   {
     "id": "p03600",
     "name": "Salvador Ferrer",
-    "position": "DEF",
+    "position": "RB, CB",
     "seasons": [
       {
         "club": "Spezia",
@@ -139460,7 +139789,8 @@
         "rating": 71.2,
         "apps": 18,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "RB, CB"
       },
       {
         "club": "Spezia",
@@ -139468,7 +139798,8 @@
         "rating": 77.7,
         "apps": 27,
         "goals": 0,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "RB, CB"
       },
       {
         "club": "Spezia",
@@ -139476,7 +139807,8 @@
         "rating": 60.4,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, CB"
       }
     ]
   },
@@ -140252,7 +140584,7 @@
   {
     "id": "p03623",
     "name": "Sam Beukema",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Bologna",
@@ -140260,7 +140592,8 @@
         "rating": 78.9,
         "apps": 30,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Bologna",
@@ -140268,7 +140601,8 @@
         "rating": 85.4,
         "apps": 35,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       },
       {
         "club": "Napoli",
@@ -140276,7 +140610,8 @@
         "rating": 76.4,
         "apps": 24,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -140824,7 +141159,7 @@
   {
     "id": "p03634",
     "name": "Samuel Chukwueze",
-    "position": "MID",
+    "position": "RW",
     "seasons": [
       {
         "club": "Milan",
@@ -140832,7 +141167,8 @@
         "rating": 66.2,
         "apps": 24,
         "goals": 1,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "RW"
       },
       {
         "club": "Milan",
@@ -140840,7 +141176,8 @@
         "rating": 67.0,
         "apps": 26,
         "goals": 3,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "RW"
       },
       {
         "club": "Milan",
@@ -140848,7 +141185,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW"
       }
     ]
   },
@@ -141075,7 +141413,7 @@
   {
     "id": "p03642",
     "name": "Samuel Mbangula",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Juventus",
@@ -141083,7 +141421,8 @@
         "rating": 66.8,
         "apps": 23,
         "goals": 3,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -141115,7 +141454,7 @@
   {
     "id": "p03644",
     "name": "Samuel Ntanda",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Sampdoria",
@@ -141123,7 +141462,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -141583,7 +141923,7 @@
   {
     "id": "p03659",
     "name": "Sandro Kulenovi\u0107",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Torino",
@@ -141591,7 +141931,8 @@
         "rating": 63.0,
         "apps": 13,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -141784,7 +142125,7 @@
   {
     "id": "p03666",
     "name": "Santiago Gim\u00e9nez",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Milan",
@@ -141792,7 +142133,8 @@
         "rating": 69.9,
         "apps": 14,
         "goals": 5,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST"
       },
       {
         "club": "Milan",
@@ -141800,7 +142142,8 @@
         "rating": 64.3,
         "apps": 16,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "ST"
       }
     ]
   },
@@ -142020,7 +142363,7 @@
   {
     "id": "p03673",
     "name": "Sascha Britschgi",
-    "position": "MID",
+    "position": "CB",
     "seasons": [
       {
         "club": "Parma",
@@ -142028,7 +142371,8 @@
         "rating": 67.1,
         "apps": 29,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CB"
       }
     ]
   },
@@ -142124,7 +142468,7 @@
   {
     "id": "p03679",
     "name": "Sa\u00fal Coco",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Torino",
@@ -142132,7 +142476,8 @@
         "rating": 83.6,
         "apps": 32,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       },
       {
         "club": "Torino",
@@ -142140,7 +142485,8 @@
         "rating": 86.9,
         "apps": 35,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       }
     ]
   },
@@ -144190,7 +144536,7 @@
   {
     "id": "p03722",
     "name": "Seydou Fini",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Genoa",
@@ -144198,7 +144544,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       },
       {
         "club": "Genoa",
@@ -144206,7 +144553,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -144279,7 +144627,7 @@
   {
     "id": "p03726",
     "name": "Shon Weissman",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Salernitana",
@@ -144287,7 +144635,8 @@
         "rating": 63.4,
         "apps": 11,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -144469,7 +144818,7 @@
   {
     "id": "p03734",
     "name": "Silv\u00e8re Ganvoula M'Boussy",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Monza",
@@ -144477,7 +144826,8 @@
         "rating": 61.3,
         "apps": 7,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -145610,7 +145960,7 @@
   {
     "id": "p03766",
     "name": "Simone Lottici Tessadri",
-    "position": "MID",
+    "position": "CB",
     "seasons": [
       {
         "club": "Cremonese",
@@ -145618,7 +145968,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -147503,7 +147854,7 @@
   {
     "id": "p03806",
     "name": "Souleymane Tour\u00e9",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Udinese",
@@ -147511,7 +147862,8 @@
         "rating": 67.3,
         "apps": 12,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -149860,7 +150212,7 @@
   {
     "id": "p03853",
     "name": "Stephy Mavididi",
-    "position": "ATT",
+    "position": "LW, ST",
     "seasons": [
       {
         "club": "Juventus",
@@ -149868,7 +150220,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, ST"
       }
     ]
   },
@@ -150154,7 +150507,7 @@
   {
     "id": "p03863",
     "name": "Suat Serdar",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -150162,7 +150515,8 @@
         "rating": 66.0,
         "apps": 25,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Hellas Verona",
@@ -150170,7 +150524,8 @@
         "rating": 65.8,
         "apps": 22,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CM, CDM"
       },
       {
         "club": "Hellas Verona",
@@ -150178,7 +150533,8 @@
         "rating": 64.7,
         "apps": 20,
         "goals": 2,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -150722,7 +151078,7 @@
   {
     "id": "p03875",
     "name": "Tajon Buchanan",
-    "position": "DEF",
+    "position": "RW, RB",
     "seasons": [
       {
         "club": "Inter",
@@ -150730,7 +151086,8 @@
         "rating": 64.6,
         "apps": 10,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, RB"
       },
       {
         "club": "Inter",
@@ -150738,7 +151095,8 @@
         "rating": 62.4,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, RB"
       }
     ]
   },
@@ -150949,7 +151307,7 @@
   {
     "id": "p03882",
     "name": "Tarik Muharemovic",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Sassuolo",
@@ -150957,14 +151315,15 @@
         "rating": 82.9,
         "apps": 32,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p03883",
     "name": "Tariq Lamptey",
-    "position": "MID",
+    "position": "RB, RWB",
     "seasons": [
       {
         "club": "Fiorentina",
@@ -150972,7 +151331,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB, RWB"
       }
     ]
   },
@@ -151011,7 +151371,7 @@
   {
     "id": "p03886",
     "name": "Tete Morente",
-    "position": "MID",
+    "position": "LW, RW",
     "seasons": [
       {
         "club": "Lecce",
@@ -151019,7 +151379,8 @@
         "rating": 68.9,
         "apps": 31,
         "goals": 3,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LW, RW"
       },
       {
         "club": "Lecce",
@@ -151027,7 +151388,8 @@
         "rating": 63.6,
         "apps": 16,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, RW"
       }
     ]
   },
@@ -151350,7 +151712,7 @@
   {
     "id": "p03896",
     "name": "Thomas Campaniello",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Empoli",
@@ -151358,7 +151720,8 @@
         "rating": 60.2,
         "apps": 3,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -152022,7 +152385,7 @@
   {
     "id": "p03915",
     "name": "Tijjani Noslin",
-    "position": "ATT",
+    "position": "ST, RW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -152030,7 +152393,8 @@
         "rating": 72.3,
         "apps": 17,
         "goals": 5,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lazio",
@@ -152038,7 +152402,8 @@
         "rating": 66.9,
         "apps": 30,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST, RW"
       },
       {
         "club": "Lazio",
@@ -152046,7 +152411,8 @@
         "rating": 72.1,
         "apps": 29,
         "goals": 4,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST, RW"
       }
     ]
   },
@@ -152269,7 +152635,7 @@
   {
     "id": "p03925",
     "name": "Tja\u0161 Begi\u0107",
-    "position": "MID",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Parma",
@@ -152277,14 +152643,15 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
   {
     "id": "p03926",
     "name": "Tobias Slotsager",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -152292,7 +152659,8 @@
         "rating": 65.3,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -152799,7 +153167,7 @@
   {
     "id": "p03942",
     "name": "Tommaso Corazza",
-    "position": "DEF",
+    "position": "LB, RB",
     "seasons": [
       {
         "club": "Bologna",
@@ -152807,7 +153175,8 @@
         "rating": 64.8,
         "apps": 9,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LB, RB"
       }
     ]
   },
@@ -153144,7 +153513,7 @@
   {
     "id": "p03953",
     "name": "Tom\u00e1s Esteves",
-    "position": "DEF",
+    "position": "RB",
     "seasons": [
       {
         "club": "Pisa",
@@ -153152,7 +153521,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RB"
       }
     ]
   },
@@ -153362,7 +153732,7 @@
   {
     "id": "p03959",
     "name": "Tom\u00e1\u0161 Suslov",
-    "position": "MID",
+    "position": "CAM, RW",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -153370,7 +153740,8 @@
         "rating": 70.8,
         "apps": 32,
         "goals": 3,
-        "assists": 5
+        "assists": 5,
+        "specific_position": "CAM, RW"
       },
       {
         "club": "Hellas Verona",
@@ -153378,7 +153749,8 @@
         "rating": 66.8,
         "apps": 31,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CAM, RW"
       },
       {
         "club": "Hellas Verona",
@@ -153386,7 +153758,8 @@
         "rating": 62.2,
         "apps": 11,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, RW"
       }
     ]
   },
@@ -153664,7 +154037,7 @@
   {
     "id": "p03972",
     "name": "Triantafyllos Pasarid\u012bs",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Salernitana",
@@ -153672,14 +154045,15 @@
         "rating": 65.4,
         "apps": 8,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
   {
     "id": "p03973",
     "name": "Trivante Stewart",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Salernitana",
@@ -153687,7 +154061,8 @@
         "rating": 60.5,
         "apps": 4,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -153752,7 +154127,7 @@
   {
     "id": "p03976",
     "name": "Ulisses Garcia",
-    "position": "DEF",
+    "position": "LB",
     "seasons": [
       {
         "club": "Sassuolo",
@@ -153760,7 +154135,8 @@
         "rating": 68.9,
         "apps": 13,
         "goals": 1,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LB"
       }
     ]
   },
@@ -153817,7 +154193,7 @@
   {
     "id": "p03979",
     "name": "Unai N\u00fa\u00f1ez",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -153825,7 +154201,8 @@
         "rating": 72.9,
         "apps": 17,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -153984,7 +154361,7 @@
   {
     "id": "p03985",
     "name": "Vakoun Bayo",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Udinese",
@@ -153992,7 +154369,8 @@
         "rating": 64.1,
         "apps": 15,
         "goals": 0,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "ST"
       }
     ]
   },
@@ -155033,7 +155411,7 @@
   {
     "id": "p04009",
     "name": "Vasco Fa\u00edsca",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Vicenza",
@@ -155041,7 +155419,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
@@ -155154,7 +155533,7 @@
   {
     "id": "p04011",
     "name": "Vasilije Ad\u017ei\u0107",
-    "position": "MID",
+    "position": "CAM, CM",
     "seasons": [
       {
         "club": "Juventus",
@@ -155162,7 +155541,8 @@
         "rating": 60.5,
         "apps": 6,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       },
       {
         "club": "Juventus",
@@ -155170,7 +155550,8 @@
         "rating": 61.7,
         "apps": 10,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CAM, CM"
       }
     ]
   },
@@ -155329,7 +155710,7 @@
   {
     "id": "p04017",
     "name": "Victor Bernth Kristiansen",
-    "position": "DEF",
+    "position": "LB",
     "seasons": [
       {
         "club": "Bologna",
@@ -155337,7 +155718,8 @@
         "rating": 84.4,
         "apps": 32,
         "goals": 0,
-        "assists": 3
+        "assists": 3,
+        "specific_position": "LB"
       }
     ]
   },
@@ -156723,7 +157105,7 @@
   {
     "id": "p04053",
     "name": "Vivaldo Semedo",
-    "position": "ATT",
+    "position": "ST",
     "seasons": [
       {
         "club": "Udinese",
@@ -156731,7 +157113,8 @@
         "rating": 60.6,
         "apps": 5,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       },
       {
         "club": "Udinese",
@@ -156739,7 +157122,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST"
       }
     ]
   },
@@ -157845,7 +158229,7 @@
   {
     "id": "p04084",
     "name": "Wilfried Singo",
-    "position": "MID",
+    "position": "CB, RB",
     "seasons": [
       {
         "club": "Torino",
@@ -157853,7 +158237,8 @@
         "rating": 60.8,
         "apps": 4,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, RB"
       },
       {
         "club": "Torino",
@@ -157861,7 +158246,8 @@
         "rating": 67.2,
         "apps": 28,
         "goals": 1,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "CB, RB"
       },
       {
         "club": "Torino",
@@ -157869,7 +158255,8 @@
         "rating": 71.3,
         "apps": 35,
         "goals": 3,
-        "assists": 4
+        "assists": 4,
+        "specific_position": "CB, RB"
       },
       {
         "club": "Torino",
@@ -157877,7 +158264,8 @@
         "rating": 67.9,
         "apps": 31,
         "goals": 2,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB, RB"
       }
     ]
   },
@@ -158326,7 +158714,7 @@
   {
     "id": "p04099",
     "name": "Yael Trepy",
-    "position": "ATT",
+    "position": "ST, LW",
     "seasons": [
       {
         "club": "Cagliari",
@@ -158334,7 +158722,8 @@
         "rating": 62.3,
         "apps": 8,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "ST, LW"
       }
     ]
   },
@@ -158554,7 +158943,7 @@
   {
     "id": "p04106",
     "name": "Yellu Santiago",
-    "position": "MID",
+    "position": "CM, CDM",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -158562,7 +158951,8 @@
         "rating": 60.0,
         "apps": 2,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CM, CDM"
       }
     ]
   },
@@ -158662,7 +159052,7 @@
   {
     "id": "p04110",
     "name": "Ylber Ramadani",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Lecce",
@@ -158670,7 +159060,8 @@
         "rating": 68.2,
         "apps": 34,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Lecce",
@@ -158678,7 +159069,8 @@
         "rating": 66.8,
         "apps": 29,
         "goals": 1,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CDM, CM"
       },
       {
         "club": "Lecce",
@@ -158686,14 +159078,15 @@
         "rating": 69.0,
         "apps": 37,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CDM, CM"
       }
     ]
   },
   {
     "id": "p04111",
     "name": "Yllan Okou",
-    "position": "DEF",
+    "position": "CB, LB",
     "seasons": [
       {
         "club": "Hellas Verona",
@@ -158701,7 +159094,8 @@
         "rating": 60.0,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB, LB"
       }
     ]
   },
@@ -159134,7 +159528,7 @@
   {
     "id": "p04122",
     "name": "Zachary Athekame",
-    "position": "MID",
+    "position": "RB",
     "seasons": [
       {
         "club": "Milan",
@@ -159142,7 +159536,8 @@
         "rating": 66.4,
         "apps": 27,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "RB"
       }
     ]
   },
@@ -159181,7 +159576,7 @@
   {
     "id": "p04125",
     "name": "Zanos Savva",
-    "position": "ATT",
+    "position": "RW, LW",
     "seasons": [
       {
         "club": "Torino",
@@ -159189,7 +159584,8 @@
         "rating": 61.2,
         "apps": 2,
         "goals": 1,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "RW, LW"
       }
     ]
   },
@@ -159505,7 +159901,7 @@
   {
     "id": "p04134",
     "name": "Zito Luvumbo",
-    "position": "MID",
+    "position": "LW, ST",
     "seasons": [
       {
         "club": "Cagliari",
@@ -159513,7 +159909,8 @@
         "rating": 70.9,
         "apps": 30,
         "goals": 4,
-        "assists": 5
+        "assists": 5,
+        "specific_position": "LW, ST"
       },
       {
         "club": "Cagliari",
@@ -159521,7 +159918,8 @@
         "rating": 69.8,
         "apps": 26,
         "goals": 2,
-        "assists": 2
+        "assists": 2,
+        "specific_position": "LW, ST"
       },
       {
         "club": "Cagliari",
@@ -159529,7 +159927,8 @@
         "rating": 61.6,
         "apps": 12,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "LW, ST"
       }
     ]
   },
@@ -159875,7 +160274,7 @@
   {
     "id": "p04143",
     "name": "Z\u00e9 Pedro Figueiredo",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Cagliari",
@@ -159883,7 +160282,8 @@
         "rating": 76.1,
         "apps": 23,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CB"
       }
     ]
   },
@@ -159924,7 +160324,7 @@
   {
     "id": "p04145",
     "name": "\u00c1d\u00e1m Vass",
-    "position": "MID",
+    "position": "CDM, CM",
     "seasons": [
       {
         "club": "Brescia",
@@ -159932,7 +160332,8 @@
         "rating": 64.2,
         "apps": 20,
         "goals": 0,
-        "assists": 1
+        "assists": 1,
+        "specific_position": "CDM, CM"
       }
     ]
   },
@@ -160781,7 +161182,7 @@
   {
     "id": "p04166",
     "name": "\u00d3scar Omar Ayala",
-    "position": "DEF",
+    "position": "CB",
     "seasons": [
       {
         "club": "Bari",
@@ -160789,7 +161190,8 @@
         "rating": 60.1,
         "apps": 1,
         "goals": 0,
-        "assists": 0
+        "assists": 0,
+        "specific_position": "CB"
       }
     ]
   },
