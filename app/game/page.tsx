@@ -3,21 +3,33 @@
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import FormationSelector from '@/components/FormationSelector';
-// import DifficultySelector from '@/components/DifficultySelector';
+import DraftScreen from '@/app/game/DraftScreen';
+import type { DraftSlot } from '@/lib/draft';
 
 // ─────────────────────────────────────────────
-// Types
+// Types (exported so lib/ files can import them)
 // ─────────────────────────────────────────────
-type GamePhase = 'setup' | 'draft' | 'complete' | 'sim' | 'results';
-type DraftMode = 'squad_first' | 'position_first';
-type RatingsMode = 'career' | 'prime';
-type ShowRatings = 'on' | 'off';
-type Difficulty = 'easy' | 'normal' | 'hard';
-type EraPreset = 'all' | '2000s' | '2010s' | 'modern';
+export type GamePhase = 'setup' | 'draft' | 'complete' | 'sim' | 'results';
+export type DraftMode = 'squad_first' | 'position_first';
+export type RatingsMode = 'career' | 'prime';
+export type ShowRatings = 'on' | 'off';
+export type Difficulty = 'easy' | 'normal' | 'hard';
+export type EraPreset = 'all' | '2000s' | '2010s' | 'modern';
+
+export interface SetupConfig {
+  difficulty: Difficulty;
+  showRatings: ShowRatings;
+  draftMode: DraftMode;
+  ratingsMode: RatingsMode;
+  eraPreset: EraPreset;
+  eraFrom: number;
+  eraTo: number;
+  formation: string;
+}
 
 const MIN_YEAR = 1992;
 const MAX_YEAR = 2026;
-const TOTAL_SEASONS = MAX_YEAR - MIN_YEAR; // 34
+const TOTAL_SEASONS = MAX_YEAR - MIN_YEAR;
 
 const ERA_PRESETS: { id: EraPreset; label: string; sub?: string; from: number }[] = [
   { id: 'all', label: 'All-time', from: 1992 },
@@ -34,7 +46,7 @@ interface ToggleCardProps {
   onClick: () => void;
   title: string;
   sub: string;
-  accentColor: string; // tailwind color key: 'violet'|'emerald'|'teal'|'amber'|'red'
+  accentColor: string;
 }
 
 function ToggleCard({ active, onClick, title, sub, accentColor }: ToggleCardProps) {
@@ -79,9 +91,6 @@ function ToggleCard({ active, onClick, title, sub, accentColor }: ToggleCardProp
   );
 }
 
-// ─────────────────────────────────────────────
-// Section label
-// ─────────────────────────────────────────────
 function SectionLabel({ label }: { label: string }) {
   return (
     <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{label}</p>
@@ -103,14 +112,12 @@ function EraSlider({
 
   return (
     <div className="w-full">
-      {/* track */}
       <div className="relative h-1 rounded-full bg-white/10 mt-4 mb-2">
         <div
           className="absolute top-0 h-1 rounded-full bg-emerald-400"
           style={{ left: `${fromPct}%`, width: `${toPct - fromPct}%` }}
         />
       </div>
-      {/* two range inputs stacked */}
       <div className="relative">
         <input
           type="range" min={MIN_YEAR} max={MAX_YEAR} value={fromYear}
@@ -129,7 +136,6 @@ function EraSlider({
           className="w-full h-1 opacity-0 cursor-pointer relative z-20"
         />
       </div>
-      {/* visible thumbs */}
       <div className="relative h-0">
         <div
           className="absolute w-5 h-5 rounded-full bg-emerald-400 border-2 border-[#0a0a0f] shadow-[0_0_8px_rgba(52,211,153,0.5)] -translate-y-7 -translate-x-2.5"
@@ -140,7 +146,6 @@ function EraSlider({
           style={{ left: `${toPct}%` }}
         />
       </div>
-      {/* labels */}
       <div className="flex items-center justify-between mt-6">
         <span className="text-sm font-bold text-emerald-400">{fromYear}/{String(fromYear + 1).slice(2)}</span>
         <span className="text-xs text-slate-400 text-center">
@@ -158,17 +163,6 @@ function EraSlider({
 // ─────────────────────────────────────────────
 // Setup Screen
 // ─────────────────────────────────────────────
-interface SetupConfig {
-  difficulty: Difficulty;
-  showRatings: ShowRatings;
-  draftMode: DraftMode;
-  ratingsMode: RatingsMode;
-  eraPreset: EraPreset;
-  eraFrom: number;
-  eraTo: number;
-  formation: string;
-}
-
 function SetupScreen({ onStart }: { onStart: (cfg: SetupConfig) => void }) {
   const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   const [showRatings, setShowRatings] = useState<ShowRatings>('on');
@@ -188,7 +182,6 @@ function SetupScreen({ onStart }: { onStart: (cfg: SetupConfig) => void }) {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
-      {/* Header */}
       <div className="w-full max-w-md flex items-center justify-between mb-8">
         <Link href="/" className="text-slate-500 hover:text-white transition-colors text-sm flex items-center gap-1">
           ← Torna alla Home
@@ -336,36 +329,53 @@ function SetupScreen({ onStart }: { onStart: (cfg: SetupConfig) => void }) {
 }
 
 // ─────────────────────────────────────────────
-// Placeholder Draft / Simulation screens
-// ─────────────────────────────────────────────
-function DraftScreen({ config, onBack }: { config: SetupConfig; onBack: () => void }) {
-  return (
-    <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center px-4 text-center">
-      <div className="glass rounded-2xl p-10 max-w-md w-full animate-bounce-in">
-        <div className="text-5xl mb-6">⚽</div>
-        <h2 className="text-2xl font-black mb-2">Draft in arrivo!</h2>
-        <p className="text-slate-400 text-sm mb-2">Formazione: <span className="text-emerald-400 font-bold">{config.formation}</span></p>
-        <p className="text-slate-400 text-sm mb-2">Difficoltà: <span className="text-amber-400 font-bold capitalize">{config.difficulty}</span></p>
-        <p className="text-slate-400 text-sm mb-6">Era: <span className="text-emerald-400 font-bold">{config.eraFrom}/{String(config.eraFrom+1).slice(2)} – {config.eraTo}/{String(config.eraTo+1).slice(2)}</span></p>
-        <p className="text-slate-500 text-xs mb-8">La logica di draft (slot machine, selezione giocatori, simulazione 38 giornate) verrà integrata qui con i dati da <code className="text-emerald-400">data/players.json</code>.</p>
-        <button onClick={onBack} className="text-slate-400 hover:text-white text-sm transition-colors">← Torna al Setup</button>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────
 // Root Game Page
 // ─────────────────────────────────────────────
 export default function GamePage() {
   const [phase, setPhase] = useState<GamePhase>('setup');
   const [config, setConfig] = useState<SetupConfig | null>(null);
+  const [finalSlots, setFinalSlots] = useState<DraftSlot[] | null>(null);
 
   const handleStart = useCallback((cfg: SetupConfig) => {
     setConfig(cfg);
     setPhase('draft');
   }, []);
 
-  if (phase === 'setup' || !config) return <SetupScreen onStart={handleStart} />;
-  return <DraftScreen config={config} onBack={() => setPhase('setup')} />;
+  const handleDraftComplete = useCallback((slots: DraftSlot[]) => {
+    setFinalSlots(slots);
+    setPhase('complete');
+  }, []);
+
+  if (phase === 'setup' || !config) {
+    return <SetupScreen onStart={handleStart} />;
+  }
+
+  if (phase === 'draft') {
+    return (
+      <DraftScreen
+        config={config}
+        onBack={() => setPhase('setup')}
+        onComplete={handleDraftComplete}
+      />
+    );
+  }
+
+  // TODO: fase 'complete' → schermata recap squadra → sim
+  return (
+    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+      <div className="glass rounded-2xl p-10 text-center max-w-sm">
+        <p className="text-4xl mb-4">🎉</p>
+        <h2 className="text-xl font-black text-white mb-2">Squadra completata!</h2>
+        <p className="text-sm text-slate-400 mb-6">
+          {finalSlots?.filter(s => s.player).length} / {finalSlots?.length} giocatori draftati
+        </p>
+        <button
+          onClick={() => { setPhase('setup'); setFinalSlots(null); }}
+          className="text-sm text-slate-400 hover:text-white transition-colors"
+        >
+          ← Ricomincia
+        </button>
+      </div>
+    </div>
+  );
 }
