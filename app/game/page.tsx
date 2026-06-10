@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import FormationSelector from '@/components/FormationSelector';
-import DifficultySelector from '@/components/DifficultySelector';
+// import DifficultySelector from '@/components/DifficultySelector';
 
 // ─────────────────────────────────────────────
 // Types
