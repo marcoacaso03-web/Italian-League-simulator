@@ -1,6 +1,8 @@
+'use client' in this file is not needed — pure TS lib
 import type { DraftSlot } from '@/lib/draft';
 
-// ─── Serie A 25/26 ────────────────────────────────────────────────────────────
+// ─── Serie A 25/26 — 19 squadre AI (+ player = 20 totali, 38 giornate esatte) ─
+//   Il Sassuolo è retrocesso: la tua XI prende il suo posto in Serie A.
 
 export interface SerieATeam {
   id: string;
@@ -30,7 +32,8 @@ export const SERIE_A_2526: SerieATeam[] = [
   { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67 },
   { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66 },
   { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65 },
-  { id: 'mon', name: 'Monza',       abbr: 'MON', color: '#e11d48', rating: 64 },
+  // Monza rimosso — il 20° slot è occupato dal player (La Tua Squadra)
+  // Sassuolo retrocesso → posto preso dal player
 ];
 
 // ─── Overall ──────────────────────────────────────────────────────────────────
@@ -107,8 +110,8 @@ export interface TeamStanding {
 }
 
 export interface GoalEvent {
-  scorer: string;   // cognome del marcatore
-  minute: number;   // 1-90
+  scorer: string;
+  minute: number;
 }
 
 export interface MatchResult {
@@ -120,14 +123,14 @@ export interface MatchResult {
   playerGoals: number;
   opponentGoals: number;
   outcome: 'W' | 'D' | 'L';
-  scorers: GoalEvent[];  // marcatori del player team
+  scorers: GoalEvent[];
 }
 
 export interface MatchdaySnapshot {
   matchday: number;
   playerPoints: number;
   playerPosition: number;
-  playerMatch: MatchResult | null;  // null se il player non gioca in questa giornata
+  playerMatch: MatchResult; // sempre presente — il player gioca ogni giornata
 }
 
 export interface SeasonResult {
@@ -157,12 +160,10 @@ function matchGoals(homeRating: number, awayRating: number): [number, number] {
   return [poisson(homeLambda), poisson(awayLambda)];
 }
 
-/** Estrae i cognomi dei giocatori del player dalla rosa */
 function buildScorerPool(slots: DraftSlot[]): string[] {
   const names: string[] = [];
   for (const s of slots) {
     if (!s.player) continue;
-    // Usa l'ultimo token del nome come cognome
     const parts = s.player.name.trim().split(' ');
     names.push(parts[parts.length - 1]);
   }
@@ -173,19 +174,53 @@ function pickRandInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-/** Genera i goal events per i gol del player team */
 function generateScorerEvents(numGoals: number, pool: string[]): GoalEvent[] {
   const events: GoalEvent[] = [];
   const usedMinutes = new Set<number>();
   for (let i = 0; i < numGoals; i++) {
     let minute = pickRandInt(3, 90);
-    // Evita duplicati di minuto
     while (usedMinutes.has(minute)) minute = pickRandInt(3, 90);
     usedMinutes.add(minute);
     const scorer = pool[Math.floor(Math.random() * pool.length)];
     events.push({ scorer, minute });
   }
   return events.sort((a, b) => a.minute - b.minute);
+}
+
+/**
+ * Genera un calendario round-robin bilanciato (algoritmo cerchio fisso).
+ * Con N squadre pari produce N-1 giornate × N/2 partite ciascuna.
+ * Con 20 squadre → 19 giornate (andata) + 19 (ritorno) = 38 giornate × 10 partite.
+ * Il player gioca esattamente una partita per giornata, garantito.
+ */
+function buildRoundRobin(teamIds: string[]): [string, string][][] {
+  const n = teamIds.length; // deve essere pari (20)
+  const rounds: [string, string][][] = [];
+  const ids = [...teamIds];
+
+  // Algoritmo cerchio: fissa l'ultimo elemento, ruota gli altri
+  for (let r = 0; r < n - 1; r++) {
+    const round: [string, string][] = [];
+    for (let i = 0; i < n / 2; i++) {
+      round.push([ids[i], ids[n - 1 - i]]);
+    }
+    rounds.push(round);
+    // Ruota: sposta tutti tranne il primo
+    const last = ids[n - 1];
+    for (let i = n - 1; i > 1; i--) ids[i] = ids[i - 1];
+    ids[1] = last;
+  }
+
+  // Ritorno: inverti home/away + shuffle ordine giornate di ritorno
+  const returnRounds = rounds.map((r) => r.map(([h, a]) => [a, h] as [string, string]));
+
+  // Shuffle leggero delle giornate di ritorno per variare l'ordine
+  for (let i = returnRounds.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [returnRounds[i], returnRounds[j]] = [returnRounds[j], returnRounds[i]];
+  }
+
+  return [...rounds, ...returnRounds]; // 38 giornate
 }
 
 // ─── Main simulation ──────────────────────────────────────────────────────────
@@ -196,6 +231,9 @@ export function simulateSeason(
 ): SeasonResult {
   const playerRating = overall.overall;
   const scorerPool = buildScorerPool(slots);
+
+  // 20 squadre esatte: 19 AI + player
+  const allTeamIds = ['player', ...SERIE_A_2526.map((t) => t.id)]; // length = 20
 
   const standingsMap = new Map<string, TeamStanding>();
   SERIE_A_2526.forEach((t) => {
@@ -209,25 +247,17 @@ export function simulateSeason(
     isPlayer: true, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, points: 0,
   });
 
-  const allTeamIds = ['player', ...SERIE_A_2526.map((t) => t.id)];
   const getRating = (id: string) =>
     id === 'player' ? playerRating : (SERIE_A_2526.find((t) => t.id === id)?.rating ?? 70);
 
-  // Round-robin pairs
-  const pairs: [string, string][] = [];
-  for (let i = 0; i < allTeamIds.length; i++) {
-    for (let j = i + 1; j < allTeamIds.length; j++) {
-      pairs.push([allTeamIds[i], allTeamIds[j]]);
-      pairs.push([allTeamIds[j], allTeamIds[i]]);
-    }
-  }
+  // Calendario round-robin bilanciato → 38 giornate × 10 partite, player gioca sempre
+  const schedule = buildRoundRobin(allTeamIds);
 
-  const shuffled = [...pairs].sort(() => Math.random() - 0.5);
   const matchdaySnapshots: MatchdaySnapshot[] = [];
 
   for (let md = 0; md < 38; md++) {
-    const gamesThisRound = shuffled.slice(md * 10, md * 10 + 10);
-    let playerMatch: MatchResult | null = null;
+    const gamesThisRound = schedule[md];
+    let playerMatch!: MatchResult; // garantito presente ogni giornata
 
     for (const [homeId, awayId] of gamesThisRound) {
       const [hg, ag] = matchGoals(getRating(homeId), getRating(awayId));
@@ -239,7 +269,6 @@ export function simulateSeason(
       else if (hg < ag) { away.won++; away.points += 3; home.lost++; }
       else { home.drawn++; home.points++; away.drawn++; away.points++; }
 
-      // Traccia la partita del player
       const isPlayerHome = homeId === 'player';
       const isPlayerAway = awayId === 'player';
       if (isPlayerHome || isPlayerAway) {
@@ -248,7 +277,6 @@ export function simulateSeason(
         const oppId  = isPlayerHome ? awayId : homeId;
         const opp    = SERIE_A_2526.find((t) => t.id === oppId);
         const outcome: 'W' | 'D' | 'L' = pGoals > oGoals ? 'W' : pGoals < oGoals ? 'L' : 'D';
-        const scorers = generateScorerEvents(pGoals, scorerPool);
         playerMatch = {
           opponentId: oppId,
           opponentName: opp?.name ?? oppId,
@@ -258,7 +286,7 @@ export function simulateSeason(
           playerGoals: pGoals,
           opponentGoals: oGoals,
           outcome,
-          scorers,
+          scorers: generateScorerEvents(pGoals, scorerPool),
         };
       }
     }
