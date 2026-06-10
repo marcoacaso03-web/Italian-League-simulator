@@ -4,12 +4,16 @@ import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import FormationSelector from '@/components/FormationSelector';
 import DraftScreen from '@/app/game/DraftScreen';
+import SquadPreviewScreen from '@/app/game/SquadPreviewScreen';
+import SimScreen from '@/app/game/SimScreen';
+import ResultsScreen from '@/app/game/ResultsScreen';
 import type { DraftSlot } from '@/lib/draft';
+import type { SeasonResult, TeamOverall } from '@/lib/simulation';
 
 // ─────────────────────────────────────────────
 // Types (exported so lib/ files can import them)
 // ─────────────────────────────────────────────
-export type GamePhase = 'setup' | 'draft' | 'complete' | 'sim' | 'results';
+export type GamePhase = 'setup' | 'draft' | 'preview' | 'sim' | 'results';
 export type DraftMode = 'squad_first' | 'position_first';
 export type RatingsMode = 'career' | 'prime';
 export type ShowRatings = 'on' | 'off';
@@ -38,9 +42,6 @@ const ERA_PRESETS: { id: EraPreset; label: string; sub?: string; from: number }[
   { id: 'modern', label: 'Modern', sub: '(2016+)', from: 2016 },
 ];
 
-// ─────────────────────────────────────────────
-// Small toggle-card component
-// ─────────────────────────────────────────────
 interface ToggleCardProps {
   active: boolean;
   onClick: () => void;
@@ -58,20 +59,13 @@ function ToggleCard({ active, onClick, title, sub, accentColor }: ToggleCardProp
     red: 'border-red-500/60 bg-red-500/10',
   };
   const textActive: Record<string, string> = {
-    violet: 'text-violet-300',
-    emerald: 'text-emerald-300',
-    teal: 'text-teal-300',
-    amber: 'text-amber-300',
-    red: 'text-red-300',
+    violet: 'text-violet-300', emerald: 'text-emerald-300', teal: 'text-teal-300',
+    amber: 'text-amber-300', red: 'text-red-300',
   };
   const subActive: Record<string, string> = {
-    violet: 'text-violet-400/70',
-    emerald: 'text-emerald-400/70',
-    teal: 'text-teal-400/70',
-    amber: 'text-amber-400/70',
-    red: 'text-red-400/70',
+    violet: 'text-violet-400/70', emerald: 'text-emerald-400/70', teal: 'text-teal-400/70',
+    amber: 'text-amber-400/70', red: 'text-red-400/70',
   };
-
   return (
     <button
       onClick={onClick}
@@ -92,65 +86,36 @@ function ToggleCard({ active, onClick, title, sub, accentColor }: ToggleCardProp
 }
 
 function SectionLabel({ label }: { label: string }) {
-  return (
-    <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{label}</p>
-  );
+  return <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{label}</p>;
 }
 
-// ─────────────────────────────────────────────
-// Era range slider
-// ─────────────────────────────────────────────
-function EraSlider({
-  fromYear, toYear, onFromChange, onToChange,
-}: {
+function EraSlider({ fromYear, toYear, onFromChange, onToChange }: {
   fromYear: number; toYear: number;
   onFromChange: (v: number) => void; onToChange: (v: number) => void;
 }) {
   const fromPct = ((fromYear - MIN_YEAR) / TOTAL_SEASONS) * 100;
-  const toPct = ((toYear - MIN_YEAR) / TOTAL_SEASONS) * 100;
+  const toPct   = ((toYear - MIN_YEAR) / TOTAL_SEASONS) * 100;
   const seasonCount = toYear - fromYear + 1;
-
   return (
     <div className="w-full">
       <div className="relative h-1 rounded-full bg-white/10 mt-4 mb-2">
-        <div
-          className="absolute top-0 h-1 rounded-full bg-emerald-400"
-          style={{ left: `${fromPct}%`, width: `${toPct - fromPct}%` }}
-        />
+        <div className="absolute top-0 h-1 rounded-full bg-emerald-400" style={{ left: `${fromPct}%`, width: `${toPct - fromPct}%` }} />
       </div>
       <div className="relative">
-        <input
-          type="range" min={MIN_YEAR} max={MAX_YEAR} value={fromYear}
-          onChange={(e) => {
-            const v = Number(e.target.value);
-            if (v < toYear) onFromChange(v);
-          }}
-          className="absolute w-full h-1 opacity-0 cursor-pointer z-10"
-        />
-        <input
-          type="range" min={MIN_YEAR} max={MAX_YEAR} value={toYear}
-          onChange={(e) => {
-            const v = Number(e.target.value);
-            if (v > fromYear) onToChange(v);
-          }}
-          className="w-full h-1 opacity-0 cursor-pointer relative z-20"
-        />
+        <input type="range" min={MIN_YEAR} max={MAX_YEAR} value={fromYear}
+          onChange={(e) => { const v = Number(e.target.value); if (v < toYear) onFromChange(v); }}
+          className="absolute w-full h-1 opacity-0 cursor-pointer z-10" />
+        <input type="range" min={MIN_YEAR} max={MAX_YEAR} value={toYear}
+          onChange={(e) => { const v = Number(e.target.value); if (v > fromYear) onToChange(v); }}
+          className="w-full h-1 opacity-0 cursor-pointer relative z-20" />
       </div>
       <div className="relative h-0">
-        <div
-          className="absolute w-5 h-5 rounded-full bg-emerald-400 border-2 border-[#0a0a0f] shadow-[0_0_8px_rgba(52,211,153,0.5)] -translate-y-7 -translate-x-2.5"
-          style={{ left: `${fromPct}%` }}
-        />
-        <div
-          className="absolute w-5 h-5 rounded-full bg-emerald-400 border-2 border-[#0a0a0f] shadow-[0_0_8px_rgba(52,211,153,0.5)] -translate-y-7 -translate-x-2.5"
-          style={{ left: `${toPct}%` }}
-        />
+        <div className="absolute w-5 h-5 rounded-full bg-emerald-400 border-2 border-[#0a0a0f] shadow-[0_0_8px_rgba(52,211,153,0.5)] -translate-y-7 -translate-x-2.5" style={{ left: `${fromPct}%` }} />
+        <div className="absolute w-5 h-5 rounded-full bg-emerald-400 border-2 border-[#0a0a0f] shadow-[0_0_8px_rgba(52,211,153,0.5)] -translate-y-7 -translate-x-2.5" style={{ left: `${toPct}%` }} />
       </div>
       <div className="flex items-center justify-between mt-6">
         <span className="text-sm font-bold text-emerald-400">{fromYear}/{String(fromYear + 1).slice(2)}</span>
-        <span className="text-xs text-slate-400 text-center">
-          {seasonCount} di {TOTAL_SEASONS} stagioni
-        </span>
+        <span className="text-xs text-slate-400 text-center">{seasonCount} di {TOTAL_SEASONS} stagioni</span>
         <span className="text-sm font-bold text-emerald-400">{toYear}/{String(toYear + 1).slice(2)}</span>
       </div>
       <p className="text-xs text-slate-500 text-center mt-1 leading-snug">
@@ -164,165 +129,99 @@ function EraSlider({
 // Setup Screen
 // ─────────────────────────────────────────────
 function SetupScreen({ onStart }: { onStart: (cfg: SetupConfig) => void }) {
-  const [difficulty, setDifficulty] = useState<Difficulty>('normal');
+  const [difficulty, setDifficulty]   = useState<Difficulty>('normal');
   const [showRatings, setShowRatings] = useState<ShowRatings>('on');
-  const [draftMode, setDraftMode] = useState<DraftMode>('squad_first');
+  const [draftMode, setDraftMode]     = useState<DraftMode>('squad_first');
   const [ratingsMode, setRatingsMode] = useState<RatingsMode>('career');
-  const [eraPreset, setEraPreset] = useState<EraPreset>('all');
-  const [eraFrom, setEraFrom] = useState(MIN_YEAR);
-  const [eraTo, setEraTo] = useState(MAX_YEAR);
-  const [formation, setFormation] = useState('4-3-3');
+  const [eraPreset, setEraPreset]     = useState<EraPreset>('all');
+  const [eraFrom, setEraFrom]         = useState(MIN_YEAR);
+  const [eraTo, setEraTo]             = useState(MAX_YEAR);
+  const [formation, setFormation]     = useState('4-3-3');
 
   function handleEraPreset(preset: EraPreset) {
     setEraPreset(preset);
     const from = ERA_PRESETS.find((e) => e.id === preset)?.from ?? MIN_YEAR;
-    setEraFrom(from);
-    setEraTo(MAX_YEAR);
+    setEraFrom(from); setEraTo(MAX_YEAR);
   }
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md flex items-center justify-between mb-8">
-        <Link href="/" className="text-slate-500 hover:text-white transition-colors text-sm flex items-center gap-1">
-          ← Torna alla Home
-        </Link>
+        <Link href="/" className="text-slate-500 hover:text-white transition-colors text-sm flex items-center gap-1">← Torna alla Home</Link>
         <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">Italian League Simulator</span>
       </div>
-
       <div className="w-full max-w-md space-y-7">
 
-        {/* ── DIFFICULTY ── */}
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="DIFFICOLTÀ" />
           <div className="grid grid-cols-3 gap-3">
             {([
-              { id: 'easy' as Difficulty, label: 'Facile', sub: '3 reroll disponibili', color: 'emerald' },
-              { id: 'normal' as Difficulty, label: 'Normale', sub: '1 reroll disponibile', color: 'amber' },
-              { id: 'hard' as Difficulty, label: 'Difficile', sub: 'No reroll · rating nascosti', color: 'red' },
+              { id: 'easy' as Difficulty, label: 'Facile',    sub: '3 reroll disponibili',          color: 'emerald' },
+              { id: 'normal' as Difficulty, label: 'Normale', sub: '1 reroll disponibile',          color: 'amber' },
+              { id: 'hard' as Difficulty, label: 'Difficile', sub: 'No reroll · rating nascosti',   color: 'red' },
             ] as const).map((d) => (
-              <ToggleCard
-                key={d.id}
-                active={difficulty === d.id}
-                onClick={() => setDifficulty(d.id)}
-                title={d.label}
-                sub={d.sub}
-                accentColor={d.color}
-              />
+              <ToggleCard key={d.id} active={difficulty === d.id} onClick={() => setDifficulty(d.id)}
+                title={d.label} sub={d.sub} accentColor={d.color} />
             ))}
           </div>
         </section>
 
-        {/* ── SHOW RATINGS ── */}
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="MOSTRA RATING" />
           <div className="grid grid-cols-2 gap-3">
-            <ToggleCard
-              active={showRatings === 'on'}
-              onClick={() => setShowRatings('on')}
-              title="On"
-              sub="Overall giocatori visibili"
-              accentColor="violet"
-            />
-            <ToggleCard
-              active={showRatings === 'off'}
-              onClick={() => setShowRatings('off')}
-              title="Off"
-              sub="Blind mode — fidati del tuo istinto"
-              accentColor="violet"
-            />
+            <ToggleCard active={showRatings === 'on'}  onClick={() => setShowRatings('on')}  title="On"  sub="Overall giocatori visibili"               accentColor="violet" />
+            <ToggleCard active={showRatings === 'off'} onClick={() => setShowRatings('off')} title="Off" sub="Blind mode — fidati del tuo istinto"  accentColor="violet" />
           </div>
         </section>
 
-        {/* ── DRAFT MODE ── */}
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="MODALITÀ DRAFT" />
           <div className="grid grid-cols-2 gap-3">
-            <ToggleCard
-              active={draftMode === 'squad_first'}
-              onClick={() => setDraftMode('squad_first')}
-              title="Squad First"
-              sub="Gira un club, scegli il giocatore e il ruolo"
-              accentColor="emerald"
-            />
-            <ToggleCard
-              active={draftMode === 'position_first'}
-              onClick={() => setDraftMode('position_first')}
-              title="Position First"
-              sub="Scegli uno slot, poi gira un club per riempirlo"
-              accentColor="emerald"
-            />
+            <ToggleCard active={draftMode === 'squad_first'}    onClick={() => setDraftMode('squad_first')}    title="Squad First"    sub="Gira un club, scegli il giocatore e il ruolo"      accentColor="emerald" />
+            <ToggleCard active={draftMode === 'position_first'} onClick={() => setDraftMode('position_first')} title="Position First" sub="Scegli uno slot, poi gira un club per riempirlo" accentColor="emerald" />
           </div>
         </section>
 
-        {/* ── PLAYER RATINGS ── */}
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="RATING GIOCATORI" />
           <div className="grid grid-cols-2 gap-3">
-            <ToggleCard
-              active={ratingsMode === 'career'}
-              onClick={() => setRatingsMode('career')}
-              title="Career Seasons"
-              sub="Rating di quella stagione specifica"
-              accentColor="teal"
-            />
-            <ToggleCard
-              active={ratingsMode === 'prime'}
-              onClick={() => setRatingsMode('prime')}
-              title="Prime Mode"
-              sub="Ogni giocatore al suo massimo storico"
-              accentColor="teal"
-            />
+            <ToggleCard active={ratingsMode === 'career'} onClick={() => setRatingsMode('career')} title="Career Seasons" sub="Rating di quella stagione specifica"     accentColor="teal" />
+            <ToggleCard active={ratingsMode === 'prime'}  onClick={() => setRatingsMode('prime')}  title="Prime Mode"    sub="Ogni giocatore al suo massimo storico" accentColor="teal" />
           </div>
         </section>
 
-        {/* ── ERA ── */}
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="ERA" />
           <div className="grid grid-cols-4 gap-2 mb-5">
             {ERA_PRESETS.map((e) => {
               const active = eraPreset === e.id;
               return (
-                <button
-                  key={e.id}
-                  onClick={() => handleEraPreset(e.id)}
+                <button key={e.id} onClick={() => handleEraPreset(e.id)}
                   className={`rounded-xl border-2 py-2 px-1 text-center transition-all duration-200 ${
-                    active
-                      ? 'border-emerald-500/60 bg-emerald-500/10'
-                      : 'border-white/10 bg-white/[0.03] hover:border-white/20'
-                  }`}
-                >
-                  <p className={`text-xs font-bold ${
-                    active ? 'text-emerald-400' : 'text-slate-300'
-                  }`}>{e.label}</p>
-                  {e.sub && <p className={`text-[10px] ${
-                    active ? 'text-emerald-400/60' : 'text-slate-500'
-                  }`}>{e.sub}</p>}
+                    active ? 'border-emerald-500/60 bg-emerald-500/10' : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+                  }`}>
+                  <p className={`text-xs font-bold ${active ? 'text-emerald-400' : 'text-slate-300'}`}>{e.label}</p>
+                  {e.sub && <p className={`text-[10px] ${active ? 'text-emerald-400/60' : 'text-slate-500'}`}>{e.sub}</p>}
                 </button>
               );
             })}
           </div>
-          <EraSlider
-            fromYear={eraFrom}
-            toYear={eraTo}
+          <EraSlider fromYear={eraFrom} toYear={eraTo}
             onFromChange={(v) => { setEraFrom(v); setEraPreset('all'); }}
-            onToChange={(v) => { setEraTo(v); setEraPreset('all'); }}
-          />
+            onToChange={(v) =>   { setEraTo(v);   setEraPreset('all'); }} />
         </section>
 
-        {/* ── FORMATION ── */}
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="FORMAZIONE" />
           <FormationSelector value={formation} onChange={setFormation} />
         </section>
 
-        {/* ── START BUTTON ── */}
         <button
           onClick={() => onStart({ difficulty, showRatings, draftMode, ratingsMode, eraPreset, eraFrom, eraTo, formation })}
           className="w-full rounded-2xl bg-emerald-500 py-5 text-lg font-black text-black transition-all hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98] glow-emerald"
         >
           Inizia il Draft →
         </button>
-
       </div>
     </div>
   );
@@ -332,18 +231,26 @@ function SetupScreen({ onStart }: { onStart: (cfg: SetupConfig) => void }) {
 // Root Game Page
 // ─────────────────────────────────────────────
 export default function GamePage() {
-  const [phase, setPhase] = useState<GamePhase>('setup');
-  const [config, setConfig] = useState<SetupConfig | null>(null);
+  const [phase, setPhase]           = useState<GamePhase>('setup');
+  const [config, setConfig]         = useState<SetupConfig | null>(null);
   const [finalSlots, setFinalSlots] = useState<DraftSlot[] | null>(null);
+  const [simResult, setSimResult]   = useState<SeasonResult | null>(null);
+  const [simOverall, setSimOverall] = useState<TeamOverall | null>(null);
 
   const handleStart = useCallback((cfg: SetupConfig) => {
-    setConfig(cfg);
-    setPhase('draft');
+    setConfig(cfg); setPhase('draft');
   }, []);
 
   const handleDraftComplete = useCallback((slots: DraftSlot[]) => {
-    setFinalSlots(slots);
-    setPhase('complete');
+    setFinalSlots(slots); setPhase('preview');
+  }, []);
+
+  const handleSimComplete = useCallback((result: SeasonResult, overall: TeamOverall) => {
+    setSimResult(result); setSimOverall(overall); setPhase('results');
+  }, []);
+
+  const handleRestart = useCallback(() => {
+    setPhase('setup'); setFinalSlots(null); setSimResult(null); setSimOverall(null);
   }, []);
 
   if (phase === 'setup' || !config) {
@@ -352,30 +259,33 @@ export default function GamePage() {
 
   if (phase === 'draft') {
     return (
-      <DraftScreen
+      <DraftScreen config={config} onBack={() => setPhase('setup')} onComplete={handleDraftComplete} />
+    );
+  }
+
+  if (phase === 'preview' && finalSlots) {
+    return (
+      <SquadPreviewScreen
+        slots={finalSlots}
         config={config}
-        onBack={() => setPhase('setup')}
-        onComplete={handleDraftComplete}
+        onSimulate={() => setPhase('sim')}
+        onRestart={handleRestart}
       />
     );
   }
 
-  // TODO: fase 'complete' → schermata recap squadra → sim
+  if (phase === 'sim' && finalSlots) {
+    return <SimScreen slots={finalSlots} onComplete={handleSimComplete} />;
+  }
+
+  if (phase === 'results' && simResult && simOverall) {
+    return <ResultsScreen result={simResult} overall={simOverall} onRestart={handleRestart} />;
+  }
+
+  // fallback
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
-      <div className="glass rounded-2xl p-10 text-center max-w-sm">
-        <p className="text-4xl mb-4">🎉</p>
-        <h2 className="text-xl font-black text-white mb-2">Squadra completata!</h2>
-        <p className="text-sm text-slate-400 mb-6">
-          {finalSlots?.filter(s => s.player).length} / {finalSlots?.length} giocatori draftati
-        </p>
-        <button
-          onClick={() => { setPhase('setup'); setFinalSlots(null); }}
-          className="text-sm text-slate-400 hover:text-white transition-colors"
-        >
-          ← Ricomincia
-        </button>
-      </div>
+      <button onClick={handleRestart} className="text-slate-400 hover:text-white">↺ Ricomincia</button>
     </div>
   );
 }
