@@ -15,11 +15,12 @@ export interface PlayerSeason {
   assists: number;
 }
 
+// position_category viene derivato runtime da position (non è nel JSON)
 export interface Player {
   id: string;
   name: string;
-  position: string; // specific: GK, CB, LB, RB, LWB, RWB, CDM, CM, CAM, LM, RM, LW, RW, ST, CF
-  position_category: string; // GK, DEF, MID, ATT
+  position: string; // specifico: GK, CB, LB, RB, LWB, RWB, CDM, CM, CAM, LM, RM, LW, RW, ST, CF
+  position_category: string; // GK, DEF, MID, ATT — calcolato in loadPlayers()
   seasons: PlayerSeason[];
 }
 
@@ -33,16 +34,36 @@ export interface SquadPlayer {
   id: string;
   name: string;
   position: string;
+  position_category: string;
   apps: number;
   goals: number;
   assists: number;
   rating: number;
-  /** Rating massimo storico del giocatore (popolato solo in prime mode) */
   primeRating?: number;
 }
 
+// Tipo che rispecchia il JSON grezzo (senza position_category)
+interface RawPlayer {
+  id: string;
+  name: string;
+  position: string;
+  seasons: (PlayerSeason & { specific_position?: string })[];
+}
+
+export function toCategory(pos: string): string {
+  if (pos === 'GK') return 'GK';
+  if (['CB', 'RB', 'LB', 'WB', 'LWB', 'RWB'].includes(pos)) return 'DEF';
+  if (['CDM', 'CM', 'CAM', 'LM', 'RM'].includes(pos)) return 'MID';
+  return 'ATT';
+}
+
 const clubs: Club[] = clubsData as Club[];
-const players: Player[] = playersData as Player[];
+
+// Deriva position_category a runtime dal campo position
+const players: Player[] = (playersData as RawPlayer[]).map((p) => ({
+  ...p,
+  position_category: toCategory(p.position),
+}));
 
 export function loadClubs(): Club[] { return clubs; }
 export function loadPlayers(): Player[] { return players; }
@@ -72,6 +93,7 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
         id: p.id,
         name: p.name,
         position: p.position,
+        position_category: p.position_category,
         apps: ps.apps,
         goals: ps.goals,
         assists: ps.assists,
@@ -81,29 +103,16 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
     .sort((a, b) => b.rating - a.rating);
 }
 
-/**
- * Ritorna il rating massimo storico di un giocatore su tutte le sue stagioni.
- * Usato dalla Prime Mode.
- */
 export function getPrimeRating(playerId: string): number {
   const player = players.find((p) => p.id === playerId);
   if (!player || player.seasons.length === 0) return 0;
   return Math.max(...player.seasons.map((s) => s.rating));
 }
 
-/**
- * Come getSquad(), ma sostituisce `rating` con il massimo storico del giocatore.
- * Mantiene apps/goals/assists della stagione sorteggiata (contesto reale).
- * Aggiunge `primeRating` per l'UI (mostrare la stagione effettiva del prime).
- */
 export function getPrimeSquad(club: string, season: string): SquadPlayer[] {
   return getSquad(club, season).map((sp) => {
     const prime = getPrimeRating(sp.id);
-    return {
-      ...sp,
-      rating: prime,
-      primeRating: prime,
-    };
+    return { ...sp, rating: prime, primeRating: prime };
   });
 }
 

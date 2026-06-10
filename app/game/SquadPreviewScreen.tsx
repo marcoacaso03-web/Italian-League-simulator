@@ -1,10 +1,7 @@
 'use client';
 import React, { useMemo } from 'react';
 import type { DraftSlot } from '@/lib/draft';
-import type { SetupConfig } from '@/app/game/page';
 import { calcTeamOverall, preSeasonOdds } from '@/lib/simulation';
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function positionBadgeClass(cat: string): string {
   switch (cat) {
@@ -23,11 +20,7 @@ function ordinal(n: number): string {
   return `${n}°`;
 }
 
-interface OddsBarProps {
-  label: string;
-  pct: number;
-  barColor: string;
-}
+interface OddsBarProps { label: string; pct: number; barColor: string; }
 function OddsBar({ label, pct, barColor }: OddsBarProps) {
   return (
     <div className="space-y-1.5">
@@ -36,72 +29,48 @@ function OddsBar({ label, pct, barColor }: OddsBarProps) {
         <span className="text-sm font-bold text-white">{pct}%</span>
       </div>
       <div className="h-1.5 rounded-full bg-white/8">
-        <div
-          className="h-1.5 rounded-full transition-all duration-700"
-          style={{ width: `${Math.min(100, pct)}%`, backgroundColor: barColor }}
-        />
+        <div className="h-1.5 rounded-full transition-all duration-700" style={{ width: `${Math.min(100, pct)}%`, backgroundColor: barColor }} />
       </div>
     </div>
   );
 }
 
-interface StatBarProps {
-  label: string;
-  icon: string;
-  value: number;
-  barColor: string;
-}
+interface StatBarProps { label: string; icon: string; value: number; barColor: string; }
 function StatBar({ label, icon, value, barColor }: StatBarProps) {
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-sm text-slate-300">
-          <span>{icon}</span>{label}
-        </span>
+        <span className="flex items-center gap-2 text-sm text-slate-300"><span>{icon}</span>{label}</span>
         <span className="text-sm font-bold text-white">{value}</span>
       </div>
       <div className="h-2 rounded-full bg-white/8">
-        <div
-          className="h-2 rounded-full"
-          style={{ width: `${((value - 60) / 39) * 100}%`, backgroundColor: barColor }}
-        />
+        <div className="h-2 rounded-full" style={{ width: `${((value - 60) / 39) * 100}%`, backgroundColor: barColor }} />
       </div>
     </div>
   );
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
-
 interface Props {
   slots: DraftSlot[];
-  config: SetupConfig;
   onSimulate: () => void;
   onRestart: () => void;
 }
 
-export default function SquadPreviewScreen({ slots, config, onSimulate, onRestart }: Props) {
+export default function SquadPreviewScreen({ slots, onSimulate, onRestart }: Props) {
   const overall = useMemo(() => calcTeamOverall(slots), [slots]);
   const odds    = useMemo(() => preSeasonOdds(overall.overall), [overall.overall]);
-
   const filledSlots = slots.filter((s) => s.player !== null);
-  void config;
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-8">
       <div className="w-full max-w-md space-y-5">
 
-        {/* ── Lista giocatori ── */}
         <section className="glass rounded-2xl overflow-hidden">
           {filledSlots.map((s) => {
             const p = s.player!;
             return (
-              <div
-                key={s.formationSlot.id}
-                className="flex items-center gap-3 px-4 py-3 border-b border-white/5 last:border-b-0"
-              >
-                <span className={`flex-shrink-0 w-10 text-center rounded-lg px-1.5 py-0.5 text-xs font-black border ${
-                  positionBadgeClass(p.position_category)
-                }`}>
+              <div key={s.formationSlot.id} className="flex items-center gap-3 px-4 py-3 border-b border-white/5 last:border-b-0">
+                <span className={`flex-shrink-0 w-10 text-center rounded-lg px-1.5 py-0.5 text-xs font-black border ${positionBadgeClass(p.position_category)}`}>
                   {p.position}
                 </span>
                 <span className="flex-1 text-sm font-bold text-white truncate">{p.name}</span>
@@ -113,7 +82,6 @@ export default function SquadPreviewScreen({ slots, config, onSimulate, onRestar
           })}
         </section>
 
-        {/* ── Overall + reparti ── */}
         <section className="glass rounded-2xl p-5 space-y-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-1">OVERALL</p>
@@ -127,7 +95,6 @@ export default function SquadPreviewScreen({ slots, config, onSimulate, onRestar
           </div>
         </section>
 
-        {/* ── Pre-season odds ── */}
         <section className="glass rounded-2xl p-5 space-y-4">
           <div className="flex items-start justify-between">
             <div>
@@ -135,7 +102,6 @@ export default function SquadPreviewScreen({ slots, config, onSimulate, onRestar
               <p className="text-[10px] text-slate-600 mt-0.5">Basate su 20 stagioni di Serie A</p>
             </div>
           </div>
-
           <div className="flex items-end justify-between">
             <div>
               <p className="text-xs text-slate-500 uppercase tracking-widest">PROJECTED FINISH</p>
@@ -146,7 +112,6 @@ export default function SquadPreviewScreen({ slots, config, onSimulate, onRestar
               <p className="text-5xl font-black text-emerald-400 leading-none mt-1">{odds.expectedPoints}</p>
             </div>
           </div>
-
           <div className="space-y-3 pt-1">
             <OddsBar label="Win the league" pct={odds.scudetto}   barColor="#f59e0b" />
             <OddsBar label="Top 4"          pct={odds.top4}       barColor="#22c55e" />
@@ -154,25 +119,16 @@ export default function SquadPreviewScreen({ slots, config, onSimulate, onRestar
             <OddsBar label="Top 10"         pct={odds.top10}      barColor="#a855f7" />
             <OddsBar label="Relegation"     pct={odds.relegation} barColor="#ef4444" />
           </div>
-
           <p className="text-xs text-slate-500 leading-snug">
             Quello che un overall <span className="font-bold text-slate-300">{overall.overall}</span> dovrebbe produrre.
             Simula per vedere se riesci a fare meglio.
           </p>
         </section>
 
-        {/* ── CTA ── */}
-        <button
-          onClick={onSimulate}
-          className="w-full rounded-2xl bg-emerald-500 py-5 text-lg font-black text-black transition-all hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98]"
-        >
+        <button onClick={onSimulate} className="w-full rounded-2xl bg-emerald-500 py-5 text-lg font-black text-black transition-all hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98]">
           Simula Stagione →
         </button>
-
-        <button
-          onClick={onRestart}
-          className="w-full text-center text-sm text-slate-500 hover:text-white transition-colors py-2"
-        >
+        <button onClick={onRestart} className="w-full text-center text-sm text-slate-500 hover:text-white transition-colors py-2">
           ↺ Ricomincia
         </button>
 
