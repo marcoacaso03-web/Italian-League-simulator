@@ -1,5 +1,5 @@
 import type { SetupConfig } from '@/app/game/page';
-import { getClubSeasonPool, getSquad } from '@/lib/data';
+import { getClubSeasonPool, getSquad, getPrimeSquad } from '@/lib/data';
 import { FORMATION_SLOTS, type FormationSlot } from '@/lib/formations';
 
 // ─── Tipi ────────────────────────────────────────────────────────────────────
@@ -14,7 +14,10 @@ export interface DraftedPlayer {
   apps: number;
   goals: number;
   assists: number;
+  /** Rating effettivo usato per il gioco (stagione o prime a seconda del config) */
   rating: number;
+  /** Presente solo in prime mode: conferma che rating == massimo storico */
+  primeRating?: number;
 }
 
 export interface DraftSlot {
@@ -25,7 +28,8 @@ export interface DraftSlot {
 export interface SpinResult {
   club: string;
   season: string;
-  players: DraftedPlayer[];   // già filtrati per posizioni compatibili (position_first) o tutti (squad_first)
+  /** Già filtrati per posizioni compatibili (position_first) o tutti (squad_first) */
+  players: DraftedPlayer[];
 }
 
 export interface DraftState {
@@ -33,17 +37,29 @@ export interface DraftState {
   currentSpin: SpinResult | null;
   rerollsLeft: number;
   phase: 'idle' | 'spinning' | 'picking' | 'complete';
-  // position_first: quale slot l'utente ha selezionato
+  /** position_first: quale slot l'utente ha selezionato */
   activeSlotId: string | null;
 }
+
+// ─── Costanti ─────────────────────────────────────────────────────────────────
+
+/**
+ * Mappa difficoltà → numero di reroll.
+ * Unica fonte di verità: usata da initialRerolls() e dall'UI.
+ */
+export const REROLLS_BY_DIFFICULTY: Record<SetupConfig['difficulty'], number> = {
+  easy:   3,
+  normal: 1,
+  hard:   0,
+};
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /** Costruisce i DraftSlot iniziali per la formazione scelta */
 export function buildSlots(formation: string): DraftSlot[] {
-  const slots = FORMATION_SLOTS[formation];
-  if (!slots) throw new Error(`Formazione sconosciuta: ${formation}`);
-  return slots.map((fs) => ({ formationSlot: fs, player: null }));
+  const formationSlots = FORMATION_SLOTS[formation];
+  if (!formationSlots) throw new Error(`Formazione sconosciuta: ${formation}`);
+  return formationSlots.map((fs) => ({ formationSlot: fs, player: null }));
 }
 
 /** Anni stagione: '2004/05' → 2004 */
@@ -59,15 +75,25 @@ function filteredPool(config: SetupConfig) {
   });
 }
 
-/** Pesca club+stagione casuali dal pool, escludendo combo già usate */
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/** Calcola position_category dalla posizione specifica */
+function toCategory(position: string): string {
+  if (position === 'GK') return 'GK';
+  if (['CB','RB','LB','WB','LWB','RWB'].includes(position)) return 'DEF';
+  if (['CDM','CM','CAM','LM','RM'].includes(position)) return 'MID';
+  return 'ATT';
+}
+
 /**
  * Esegue uno spin.
- * - positionFilter: array di acceptedPositions da usare come filtro (position_first)
- *   oppure [] per nessun filtro (squad_first)
+ *
+ * - `positionFilter`: acceptedPositions dello slot (position_first)
+ *   oppure `[]` per nessun filtro (squad_first)
+ * - `config.ratingsMode`: 'career' → rating della stagione sorteggiata;
+ *   'prime' → rating massimo storico del giocatore (via getPrimeSquad)
  */
 export function spin(
   config: SetupConfig,
@@ -80,21 +106,20 @@ export function spin(
   if (pool.length === 0) return null;
 
   const entry = pickRandom(pool);
-  const allPlayers = getSquad(entry.club, entry.season);
 
-  const players: DraftedPlayer[] = allPlayers
+  // Prime mode: rating = max storico del giocatore; career: rating della stagione
+  const rawSquad =
+    config.ratingsMode === 'prime'
+      ? getPrimeSquad(entry.club, entry.season)
+      : getSquad(entry.club, entry.season);
+
+  const players: DraftedPlayer[] = rawSquad
     .filter((p) =>
-      positionFilter.length === 0
-        ? true
-        : positionFilter.includes(p.position)
+      positionFilter.length === 0 ? true : positionFilter.includes(p.position)
     )
     .map((p) => ({
       ...p,
-      position_category:
-        p.position === 'GK' ? 'GK'
-        : ['CB','RB','LB','WB','LWB','RWB'].includes(p.position) ? 'DEF'
-        : ['CDM','CM','CAM','LM','RM'].includes(p.position) ? 'MID'
-        : 'ATT',
+      position_category: toCategory(p.position),
       club: entry.club,
       season: entry.season,
     }));
@@ -104,25 +129,23 @@ export function spin(
 
 /**
  * Trova lo slot vuoto più compatibile per un giocatore (squad_first).
- * Priorità: exact match posizione → categoria compatibile
+ * Priorità: exact match posizione specifica.
+ * Ritorna null se ambiguo (0 o >1 slot) → l'UI mostrerà SlotPicker.
  */
 export function findBestSlot(
   slots: DraftSlot[],
   player: DraftedPlayer
 ): DraftSlot | null {
   const empty = slots.filter((s) => s.player === null);
-  // 1. Slot che accetta esattamente la posizione specifica
-  const exact = empty.find((s) =>
+  const compatible = empty.filter((s) =>
     s.formationSlot.acceptedPositions.includes(player.position)
   );
-  if (exact) return exact;
-  // 2. Nessun match esatto → null (l'UI chiederà all'utente)
-  return null;
+  return compatible.length === 1 ? compatible[0] : null;
 }
 
 /**
  * Assegna un giocatore a uno slot specifico (per id).
- * Restituisce i nuovi slots.
+ * Restituisce i nuovi slots (immutabile).
  */
 export function assignToSlot(
   slots: DraftSlot[],
@@ -134,9 +157,9 @@ export function assignToSlot(
   );
 }
 
-/** Rerolls iniziali per difficoltà */
+/** Rerolls iniziali per difficoltà — unica fonte di verità */
 export function initialRerolls(difficulty: SetupConfig['difficulty']): number {
-  return difficulty === 'easy' ? 3 : difficulty === 'normal' ? 1 : 0;
+  return REROLLS_BY_DIFFICULTY[difficulty];
 }
 
 /** Slot ancora vuoti */
@@ -144,15 +167,23 @@ export function emptySlots(slots: DraftSlot[]): DraftSlot[] {
   return slots.filter((s) => s.player === null);
 }
 
-/** Rating da mostrare (hard mode → nascosto) */
+/**
+ * Rating da mostrare in UI.
+ * Regole (in ordine di priorità):
+ *   1. Se difficulty === 'hard' → sempre '??' (indipendentemente da showRatings)
+ *   2. Se showRatings === 'off'  → '??'
+ *   3. Altrimenti                → valore numerico
+ */
 export function displayRating(
   rating: number,
-  showRatings: SetupConfig['showRatings']
+  showRatings: SetupConfig['showRatings'],
+  difficulty: SetupConfig['difficulty']
 ): string {
-  return showRatings === 'off' ? '??' : String(rating);
+  if (difficulty === 'hard' || showRatings === 'off') return '??';
+  return String(rating);
 }
 
-/** Colore rating */
+/** Classe colore Tailwind per il rating */
 export function ratingColorClass(rating: number): string {
   if (rating >= 85) return 'text-emerald-400';
   if (rating >= 72) return 'text-amber-400';

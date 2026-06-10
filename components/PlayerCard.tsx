@@ -7,8 +7,9 @@ import type { SetupConfig } from '@/app/game/page';
 interface Props {
   player: DraftedPlayer;
   showRatings: SetupConfig['showRatings'];
+  difficulty: SetupConfig['difficulty'];
   onPick: (player: DraftedPlayer) => void;
-  /** Se definito, mostra il badge di assegnazione allo slot */
+  /** Hint slot target (es. 'CB') */
   targetSlotLabel?: string;
   disabled?: boolean;
 }
@@ -16,13 +17,14 @@ interface Props {
 export default function PlayerCard({
   player,
   showRatings,
+  difficulty,
   onPick,
   targetSlotLabel,
   disabled = false,
 }: Props) {
   const rating = player.rating;
-  const ratingStr = displayRating(rating, showRatings);
-  const ratingColor = showRatings === 'off' ? 'text-slate-400' : ratingColorClass(rating);
+  const ratingStr = displayRating(rating, showRatings, difficulty);
+  const hidden = ratingStr === '??';
 
   return (
     <button
@@ -37,13 +39,14 @@ export default function PlayerCard({
       ].join(' ')}
     >
       {/* Rating badge */}
-      <div className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center font-black text-lg ${
-        showRatings === 'off'
+      <div className={[
+        'flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center font-black text-lg',
+        hidden
           ? 'bg-white/5 text-slate-400'
           : rating >= 85 ? 'bg-emerald-500/20 text-emerald-400'
           : rating >= 72 ? 'bg-amber-500/20 text-amber-400'
-          : 'bg-red-500/20 text-red-400'
-      }`}>
+          : 'bg-red-500/20 text-red-400',
+      ].join(' ')}>
         {ratingStr}
       </div>
 
@@ -51,13 +54,21 @@ export default function PlayerCard({
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-white truncate">{player.name}</p>
         <p className="text-xs text-slate-400 mt-0.5">
-          <span className={`font-semibold ${ratingColor}`}>{player.position}</span>
+          <span className={`font-semibold ${
+            hidden ? 'text-slate-400' : ratingColorClass(rating)
+          }`}>{player.position}</span>
           {' · '}{player.club}{' '}
           <span className="text-slate-500">{player.season}</span>
         </p>
         <p className="text-xs text-slate-500 mt-0.5">
           {player.apps} pres · {player.goals} gol · {player.assists} ast
         </p>
+        {/* Badge prime mode */}
+        {player.primeRating !== undefined && !hidden && (
+          <p className="text-[10px] text-violet-400 mt-0.5 font-semibold">
+            ★ Prime
+          </p>
+        )}
       </div>
 
       {/* Slot target badge */}

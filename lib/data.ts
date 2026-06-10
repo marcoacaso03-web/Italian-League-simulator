@@ -37,6 +37,8 @@ export interface SquadPlayer {
   goals: number;
   assists: number;
   rating: number;
+  /** Rating massimo storico del giocatore (popolato solo in prime mode) */
+  primeRating?: number;
 }
 
 const clubs: Club[] = clubsData as Club[];
@@ -77,6 +79,32 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
       };
     })
     .sort((a, b) => b.rating - a.rating);
+}
+
+/**
+ * Ritorna il rating massimo storico di un giocatore su tutte le sue stagioni.
+ * Usato dalla Prime Mode.
+ */
+export function getPrimeRating(playerId: string): number {
+  const player = players.find((p) => p.id === playerId);
+  if (!player || player.seasons.length === 0) return 0;
+  return Math.max(...player.seasons.map((s) => s.rating));
+}
+
+/**
+ * Come getSquad(), ma sostituisce `rating` con il massimo storico del giocatore.
+ * Mantiene apps/goals/assists della stagione sorteggiata (contesto reale).
+ * Aggiunge `primeRating` per l'UI (mostrare la stagione effettiva del prime).
+ */
+export function getPrimeSquad(club: string, season: string): SquadPlayer[] {
+  return getSquad(club, season).map((sp) => {
+    const prime = getPrimeRating(sp.id);
+    return {
+      ...sp,
+      rating: prime,
+      primeRating: prime,
+    };
+  });
 }
 
 export function getAvailableSeasons(): string[] {
