@@ -1,46 +1,102 @@
-# ⚽ 38-0 Serie A — FBref Scraper
+# ⚽ 38-0 Serie A — SoFIFA Scraper
 
-## 🚀 Setup (3 opzioni)
+> Il vecchio scraper FBref è stato sostituito. Il rating ora usa l’**overall FIFA/EA FC**
+> direttamente dal dataset Kaggle (nessuna formula, valore diretto EA Sports).
 
-### Opzione 1: Browserless (consigliata ⭐)
+---
+
+## 📦 Fonte dati
+
+**Kaggle — EA Sports FC Complete Player Dataset** di `stefanoleone992`
+
+- [FIFA 15 → FC 24](https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset)
+- [FC 25](https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-25-complete-player-dataset)
+
+Stagioni coperte: **2014-2015 → 2024-2025**
+
+---
+
+## 🚀 Setup
+
+### Step 1 — Scarica i CSV da Kaggle
+
+**Opzione A: Kaggle CLI** (consigliata)
 ```bash
-# Avvia Browserless Docker (1 comando)
-docker run -p 3000:3000 browserless/chrome
+pip install kaggle
+# Configura le credenziali: https://www.kaggle.com/docs/api
+kaggle datasets download -d stefanoleone992/ea-sports-fc-24-complete-player-dataset
+unzip ea-sports-fc-24-complete-player-dataset.zip -d data/sofifa_raw/
 
-# Test connessione
-python test_browserless.py
-
-# Scrape completo
-python scrape_serie_a_v5.py --browserless
-
-# Solo alcune stagioni
-python scrape_serie_a_v5.py --browserless --seasons 2023-2024 2024-2025
+# FC 25 (stagione 2024-2025)
+kaggle datasets download -d stefanoleone992/ea-sports-fc-25-complete-player-dataset
+unzip ea-sports-fc-25-complete-player-dataset.zip -d data/sofifa_raw/
 ```
 
-Oppure con Browserless Cloud (6h/mese gratuito):
+**Opzione B: Download manuale**
+1. Vai su https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset
+2. Clicca **Download** → scarica lo zip
+3. Estrai i CSV in `data/sofifa_raw/`
+
+I file devono chiamarsi: `players_15.csv`, `players_16.csv`, ..., `players_25.csv`
+
+### Step 2 — Esegui lo script
+
 ```bash
-# Registrati su https://www.browserless.io/ → copia il token
-python scrape_serie_a_v5.py --browserless --browserless-token TUO_TOKEN
+python scripts/scrape_sofifa.py
 ```
 
-### Opzione 2: SeleniumBase
-```bash
-pip install seleniumbase
-python scrape_serie_a_v5.py --seleniumbase
+Output generato:
+- `data/players.json`
+- `data/clubs.json`
+
+---
+
+## 📅 Mappa versioni FIFA → stagione
+
+| File CSV | Stagione reale |
+|----------|---------------|
+| `players_15.csv` | 2014-2015 |
+| `players_16.csv` | 2015-2016 |
+| `players_17.csv` | 2016-2017 |
+| `players_18.csv` | 2017-2018 |
+| `players_19.csv` | 2018-2019 |
+| `players_20.csv` | 2019-2020 |
+| `players_21.csv` | 2020-2021 |
+| `players_22.csv` | 2021-2022 |
+| `players_23.csv` | 2022-2023 |
+| `players_24.csv` | 2023-2024 |
+| `players_25.csv` | 2024-2025 |
+
+---
+
+## 📄 Struttura output
+
+```json
+// players.json
+[
+  {
+    "id": "p00042",
+    "name": "Domenico Berardi",
+    "position": "RW",
+    "position_category": "ATT",
+    "nationality": "Italy",
+    "seasons": [
+      { "club": "Sassuolo", "season": "2016-2017", "rating": 79.0 },
+      { "club": "Sassuolo", "season": "2020-2021", "rating": 81.0 }
+    ]
+  }
+]
+
+// clubs.json
+[ { "id": "sassuolo", "name": "Sassuolo" } ]
 ```
 
-### Opzione 3: Requests (no Cloudflare bypass)
-```bash
-python scrape_serie_a_v5.py  # funziona solo se non sei bloccato
-```
+---
 
-## 📐 Formule Rating
+## ⚠️ Note
 
-| Pos | Formula |
-|-----|---------|
-| ATT | (gol×3 + assist×1.5 + apps×0.5) / 1.05 × 100 + min_bonus |
-| MID | (gol×2 + assist×2 + apps×0.5 + key_passes×1) / 1.455 × 100 + min_bonus |
-| DEF | (apps×1 + tackles×0.5 + clean_sheets×1.5 - errors×2) / 0.875 × 100 + min_bonus |
-| GK  | (clean_sheets×2 + save_pct×0.3 - goals_against×0.3) / 0.435 × 100 + min_bonus |
-
-Rating: 1-99 | min_bonus = min(minutes/3420, 1.0) × 10
+- **`apps`, `goals`, `assists` rimossi**: il dataset Kaggle non contiene statistiche
+  reali di partita, solo i valori FIFA.
+- Solo giocatori con **almeno una stagione in Serie A** vengono inclusi.
+- La **posizione** viene presa dall’ultima versione FIFA disponibile per quel giocatore.
+- Il **rating** è l’`overall` di EA Sports, range tipico 46–99.
