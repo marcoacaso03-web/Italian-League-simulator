@@ -8,7 +8,7 @@ interface Props {
   player: DraftedPlayer;
   showRatings: SetupConfig['showRatings'];
   difficulty: SetupConfig['difficulty'];
-  onPick: (player: DraftedPlayer) => void;
+  onPick: (_player: DraftedPlayer) => void;
   /** Hint slot target (es. 'CB') */
   targetSlotLabel?: string;
   disabled?: boolean;

@@ -7,7 +7,7 @@ const DIFFICULTIES = [
   { id: 'hard', label: 'Difficile', sub: 'No reroll · rating nascosti', color: 'red' },
 ];
 
-interface Props { value: string; onChange: (d: string) => void; }
+interface Props { value: string; onChange: (_d: string) => void; }
 
 export default function DifficultySelector({ value, onChange }: Props) {
   return (

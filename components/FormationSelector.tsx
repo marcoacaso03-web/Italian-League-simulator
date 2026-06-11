@@ -3,7 +3,7 @@ import React from 'react';
 
 const FORMATIONS = ['4-3-3', '4-4-2', '4-2-3-1', '4-5-1', '3-4-3', '3-5-2', '5-4-1'] as const;
 
-interface Props { value: string; onChange: (f: string) => void; }
+interface Props { value: string; onChange: (_f: string) => void; }
 
 function MiniPitch({ formation }: { formation: string }) {
   const positions: Record<string, { x: number; y: number }[]> = {

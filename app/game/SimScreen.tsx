@@ -8,7 +8,7 @@ import {
 
 interface Props {
   slots: DraftSlot[];
-  onComplete: (result: SeasonResult, overall: TeamOverall) => void;
+  onComplete: (_result: SeasonResult, _overall: TeamOverall) => void;
 }
 
 const TICK_MS = 900;

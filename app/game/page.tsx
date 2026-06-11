@@ -68,7 +68,7 @@ function SectionLabel({ label }: { label: string }) {
 }
 
 function EraSlider({ fromYear, toYear, onFromChange, onToChange }: {
-  fromYear: number; toYear: number; onFromChange: (v: number) => void; onToChange: (v: number) => void;
+  fromYear: number; toYear: number; onFromChange: (_v: number) => void; onToChange: (_v: number) => void;
 }) {
   const fromPct    = ((fromYear - MIN_YEAR) / (TOTAL_SEASONS - 1)) * 100;
   const toPct      = ((toYear   - MIN_YEAR) / (TOTAL_SEASONS - 1)) * 100;
@@ -102,7 +102,7 @@ function EraSlider({ fromYear, toYear, onFromChange, onToChange }: {
   );
 }
 
-function SetupScreen({ onStart }: { onStart: (cfg: SetupConfig) => void }) {
+function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
   const [difficulty,   setDifficulty]   = useState<Difficulty>('normal');
   const [showRatings,  setShowRatings]  = useState<ShowRatings>('on');
   const [draftMode,    setDraftMode]    = useState<DraftMode>('squad_first');
@@ -211,7 +211,7 @@ export default function GamePage() {
     return <DraftScreen config={config} onBack={() => setPhase('setup')} onComplete={handleDraftComplete} />;
 
   if (phase === 'preview' && finalSlots)
-    return <SquadPreviewScreen slots={finalSlots} config={config} onSimulate={() => setPhase('sim')} onRestart={handleRestart} />;
+    return <SquadPreviewScreen slots={finalSlots} onSimulate={() => setPhase('sim')} onRestart={handleRestart} />;
 
   if (phase === 'sim' && finalSlots)
     return <SimScreen slots={finalSlots} onComplete={handleSimComplete} />;

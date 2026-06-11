@@ -10,7 +10,7 @@ interface Props {
   difficulty: SetupConfig['difficulty'];
   draftMode: SetupConfig['draftMode'];
   activeSlotId: string | null;
-  onSlotClick?: (slotId: string) => void;
+  onSlotClick?: (_slotId: string) => void;
 }
 
 export default function PitchView({
