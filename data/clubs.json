@@ -1,71 +1,111 @@
 [
   {
-    "id": "ancona",
-    "name": "Ancona"
+    "id": "ac-milan",
+    "name": "AC Milan"
   },
   {
-    "id": "ascoli",
-    "name": "Ascoli"
+    "id": "américa-mineiro",
+    "name": "América Mineiro"
   },
   {
     "id": "atalanta",
     "name": "Atalanta"
   },
   {
-    "id": "bari",
-    "name": "Bari"
+    "id": "athletico-paranaense",
+    "name": "Athletico Paranaense"
   },
   {
-    "id": "benevento",
-    "name": "Benevento"
+    "id": "atlético-go",
+    "name": "Atlético GO"
+  },
+  {
+    "id": "atlético-mineiro",
+    "name": "Atlético Mineiro"
+  },
+  {
+    "id": "avaí-fc",
+    "name": "Avaí FC"
+  },
+  {
+    "id": "bahia",
+    "name": "Bahia"
+  },
+  {
+    "id": "barcelona-de-guayaquil",
+    "name": "Barcelona de Guayaquil"
   },
   {
     "id": "bologna",
     "name": "Bologna"
   },
   {
-    "id": "brescia",
-    "name": "Brescia"
+    "id": "botafogo",
+    "name": "Botafogo"
+  },
+  {
+    "id": "bragantino",
+    "name": "Bragantino"
   },
   {
     "id": "cagliari",
     "name": "Cagliari"
   },
   {
-    "id": "carpi",
-    "name": "Carpi"
+    "id": "ceará",
+    "name": "Ceará"
   },
   {
-    "id": "catania",
-    "name": "Catania"
+    "id": "centro-sportivo-alagoano",
+    "name": "Centro Sportivo Alagoano"
   },
   {
-    "id": "cesena",
-    "name": "Cesena"
-  },
-  {
-    "id": "chievo",
-    "name": "Chievo"
+    "id": "chapecoense",
+    "name": "Chapecoense"
   },
   {
     "id": "como",
     "name": "Como"
   },
   {
-    "id": "cremonese",
-    "name": "Cremonese"
+    "id": "corinthians",
+    "name": "Corinthians"
   },
   {
-    "id": "crotone",
-    "name": "Crotone"
+    "id": "coritiba",
+    "name": "Coritiba"
+  },
+  {
+    "id": "cruzeiro",
+    "name": "Cruzeiro"
+  },
+  {
+    "id": "cuiabá",
+    "name": "Cuiabá"
   },
   {
     "id": "empoli",
     "name": "Empoli"
   },
   {
+    "id": "figueirense",
+    "name": "Figueirense"
+  },
+  {
     "id": "fiorentina",
     "name": "Fiorentina"
+  },
+  {
+    "id": "flamengo",
+    "name": "Flamengo"
+  },
+  {
+    "id": "fluminense",
+    "name": "Fluminense"
+  },
+  {
+    "id": "fortaleza",
+    "name": "Fortaleza"
   },
   {
     "id": "frosinone",
@@ -76,16 +116,44 @@
     "name": "Genoa"
   },
   {
+    "id": "goiás",
+    "name": "Goiás"
+  },
+  {
+    "id": "grêmio",
+    "name": "Grêmio"
+  },
+  {
     "id": "hellas-verona",
     "name": "Hellas Verona"
+  },
+  {
+    "id": "hellas-verona-fc",
+    "name": "Hellas Verona FC"
+  },
+  {
+    "id": "independiente-del-valle",
+    "name": "Independiente del Valle"
   },
   {
     "id": "inter",
     "name": "Inter"
   },
   {
+    "id": "internacional",
+    "name": "Internacional"
+  },
+  {
+    "id": "juventude",
+    "name": "Juventude"
+  },
+  {
     "id": "juventus",
     "name": "Juventus"
+  },
+  {
+    "id": "ldu-quito",
+    "name": "LDU Quito"
   },
   {
     "id": "lazio",
@@ -96,107 +164,87 @@
     "name": "Lecce"
   },
   {
-    "id": "livorno",
-    "name": "Livorno"
-  },
-  {
-    "id": "messina",
-    "name": "Messina"
-  },
-  {
     "id": "milan",
     "name": "Milan"
-  },
-  {
-    "id": "modena",
-    "name": "Modena"
   },
   {
     "id": "monza",
     "name": "Monza"
   },
   {
+    "id": "mushuc-runa",
+    "name": "Mushuc Runa"
+  },
+  {
     "id": "napoli",
     "name": "Napoli"
   },
   {
-    "id": "novara",
-    "name": "Novara"
+    "id": "palmeiras",
+    "name": "Palmeiras"
   },
   {
-    "id": "palermo",
-    "name": "Palermo"
+    "id": "paraná",
+    "name": "Paraná"
   },
   {
     "id": "parma",
     "name": "Parma"
   },
   {
-    "id": "perugia",
-    "name": "Perugia"
-  },
-  {
-    "id": "pescara",
-    "name": "Pescara"
-  },
-  {
-    "id": "piacenza",
-    "name": "Piacenza"
-  },
-  {
-    "id": "pisa",
-    "name": "Pisa"
-  },
-  {
-    "id": "reggina",
-    "name": "Reggina"
+    "id": "ponte-preta",
+    "name": "Ponte Preta"
   },
   {
     "id": "roma",
     "name": "Roma"
   },
   {
-    "id": "spal",
-    "name": "SPAL"
-  },
-  {
     "id": "salernitana",
     "name": "Salernitana"
   },
   {
-    "id": "sampdoria",
-    "name": "Sampdoria"
+    "id": "santa-cruz",
+    "name": "Santa Cruz"
+  },
+  {
+    "id": "santos",
+    "name": "Santos"
   },
   {
     "id": "sassuolo",
     "name": "Sassuolo"
   },
   {
-    "id": "siena",
-    "name": "Siena"
+    "id": "sport-club-do-recife",
+    "name": "Sport Club do Recife"
   },
   {
-    "id": "spezia",
-    "name": "Spezia"
+    "id": "são-paulo",
+    "name": "São Paulo"
   },
   {
     "id": "torino",
     "name": "Torino"
   },
   {
-    "id": "treviso",
-    "name": "Treviso"
-  },
-  {
     "id": "udinese",
     "name": "Udinese"
+  },
+  {
+    "id": "universidad-católica-del-ecuador",
+    "name": "Universidad Católica del Ecuador"
+  },
+  {
+    "id": "vasco-da-gama",
+    "name": "Vasco da Gama"
   },
   {
     "id": "venezia",
     "name": "Venezia"
   },
   {
-    "id": "vicenza",
-    "name": "Vicenza"
+    "id": "vitória",
+    "name": "Vitória"
   }
 ]
