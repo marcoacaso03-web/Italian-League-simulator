@@ -19,7 +19,7 @@ export interface PlayerSeason {
 export interface Player {
   id: string;
   name: string;
-  position: string; // specifico: GK, CB, LB, RB, LWB, RWB, CDM, CM, CAM, LM, RM, LW, RW, ST, CF
+  position: string; // specifico: GK, CB, LB, RB, LWB, RWB, CDM, CM, CAM, LM, RM, LW, RW, ST, CF — può contenere più valori es. "RW, ST"
   position_category: string; // GK, DEF, MID, ATT — calcolato in loadPlayers()
   seasons: PlayerSeason[];
 }
@@ -50,10 +50,15 @@ interface RawPlayer {
   seasons: (PlayerSeason & { specific_position?: string })[];
 }
 
+/**
+ * Determina la categoria della posizione principale.
+ * Supporta stringhe multi-posizione tipo "RW, ST": usa la prima posizione valida.
+ */
 export function toCategory(pos: string): string {
-  if (pos === 'GK') return 'GK';
-  if (['CB', 'RB', 'LB', 'WB', 'LWB', 'RWB'].includes(pos)) return 'DEF';
-  if (['CDM', 'CM', 'CAM', 'LM', 'RM'].includes(pos)) return 'MID';
+  const first = pos.split(',')[0].trim();
+  if (first === 'GK') return 'GK';
+  if (['CB', 'RB', 'LB', 'WB', 'LWB', 'RWB'].includes(first)) return 'DEF';
+  if (['CDM', 'CM', 'CAM', 'LM', 'RM'].includes(first)) return 'MID';
   return 'ATT';
 }
 
