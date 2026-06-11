@@ -4,16 +4,32 @@
     "name": "AC Milan"
   },
   {
+    "id": "américa-futebol-clube",
+    "name": "América Futebol Clube"
+  },
+  {
     "id": "américa-mineiro",
     "name": "América Mineiro"
+  },
+  {
+    "id": "associação-chapecoense-de-futebol",
+    "name": "Associação Chapecoense de Futebol"
   },
   {
     "id": "atalanta",
     "name": "Atalanta"
   },
   {
+    "id": "athletico-pr",
+    "name": "Athletico PR"
+  },
+  {
     "id": "athletico-paranaense",
     "name": "Athletico Paranaense"
+  },
+  {
+    "id": "atlético-clube-goianiense",
+    "name": "Atlético Clube Goianiense"
   },
   {
     "id": "atlético-go",
@@ -22,6 +38,10 @@
   {
     "id": "atlético-mineiro",
     "name": "Atlético Mineiro"
+  },
+  {
+    "id": "avaí",
+    "name": "Avaí"
   },
   {
     "id": "avaí-fc",
@@ -36,6 +56,14 @@
     "name": "Barcelona de Guayaquil"
   },
   {
+    "id": "bari",
+    "name": "Bari"
+  },
+  {
+    "id": "benevento",
+    "name": "Benevento"
+  },
+  {
     "id": "bologna",
     "name": "Bologna"
   },
@@ -48,20 +76,64 @@
     "name": "Bragantino"
   },
   {
+    "id": "brescia",
+    "name": "Brescia"
+  },
+  {
+    "id": "csa",
+    "name": "CSA"
+  },
+  {
     "id": "cagliari",
     "name": "Cagliari"
+  },
+  {
+    "id": "carpi",
+    "name": "Carpi"
+  },
+  {
+    "id": "catania",
+    "name": "Catania"
   },
   {
     "id": "ceará",
     "name": "Ceará"
   },
   {
+    "id": "ceará-sporting-club",
+    "name": "Ceará Sporting Club"
+  },
+  {
     "id": "centro-sportivo-alagoano",
     "name": "Centro Sportivo Alagoano"
   },
   {
+    "id": "cesena",
+    "name": "Cesena"
+  },
+  {
     "id": "chapecoense",
     "name": "Chapecoense"
+  },
+  {
+    "id": "chievo",
+    "name": "Chievo"
+  },
+  {
+    "id": "chievo-verona",
+    "name": "Chievo Verona"
+  },
+  {
+    "id": "club-athletico-paranaense",
+    "name": "Club Athletico Paranaense"
+  },
+  {
+    "id": "club-de-regatas-vasco-da-gama",
+    "name": "Club de Regatas Vasco da Gama"
+  },
+  {
+    "id": "clube-atlético-mineiro",
+    "name": "Clube Atlético Mineiro"
   },
   {
     "id": "como",
@@ -74,6 +146,14 @@
   {
     "id": "coritiba",
     "name": "Coritiba"
+  },
+  {
+    "id": "cremonese",
+    "name": "Cremonese"
+  },
+  {
+    "id": "crotone",
+    "name": "Crotone"
   },
   {
     "id": "cruzeiro",
@@ -164,6 +244,10 @@
     "name": "Lecce"
   },
   {
+    "id": "livorno",
+    "name": "Livorno"
+  },
+  {
     "id": "milan",
     "name": "Milan"
   },
@@ -180,6 +264,14 @@
     "name": "Napoli"
   },
   {
+    "id": "novara",
+    "name": "Novara"
+  },
+  {
+    "id": "palermo",
+    "name": "Palermo"
+  },
+  {
     "id": "palmeiras",
     "name": "Palmeiras"
   },
@@ -192,16 +284,36 @@
     "name": "Parma"
   },
   {
+    "id": "pescara",
+    "name": "Pescara"
+  },
+  {
     "id": "ponte-preta",
     "name": "Ponte Preta"
+  },
+  {
+    "id": "rb-bragantino",
+    "name": "RB Bragantino"
+  },
+  {
+    "id": "reggina",
+    "name": "Reggina"
   },
   {
     "id": "roma",
     "name": "Roma"
   },
   {
+    "id": "spal",
+    "name": "SPAL"
+  },
+  {
     "id": "salernitana",
     "name": "Salernitana"
+  },
+  {
+    "id": "sampdoria",
+    "name": "Sampdoria"
   },
   {
     "id": "santa-cruz",
@@ -216,8 +328,20 @@
     "name": "Sassuolo"
   },
   {
+    "id": "spezia",
+    "name": "Spezia"
+  },
+  {
+    "id": "sport-club-corinthians-paulista",
+    "name": "Sport Club Corinthians Paulista"
+  },
+  {
     "id": "sport-club-do-recife",
     "name": "Sport Club do Recife"
+  },
+  {
+    "id": "sport-recife",
+    "name": "Sport Recife"
   },
   {
     "id": "são-paulo",
@@ -228,8 +352,28 @@
     "name": "Torino"
   },
   {
+    "id": "torino-fc",
+    "name": "Torino F.C."
+  },
+  {
+    "id": "uc-sampdoria",
+    "name": "U.C. Sampdoria"
+  },
+  {
+    "id": "us-sassuolo-calcio",
+    "name": "U.S. Sassuolo Calcio"
+  },
+  {
+    "id": "us-salernitana-1919",
+    "name": "US Salernitana 1919"
+  },
+  {
     "id": "udinese",
     "name": "Udinese"
+  },
+  {
+    "id": "udinese-calcio",
+    "name": "Udinese Calcio"
   },
   {
     "id": "universidad-católica-del-ecuador",
@@ -242,6 +386,14 @@
   {
     "id": "venezia",
     "name": "Venezia"
+  },
+  {
+    "id": "venezia-fc",
+    "name": "Venezia FC"
+  },
+  {
+    "id": "vicenza",
+    "name": "Vicenza"
   },
   {
     "id": "vitória",

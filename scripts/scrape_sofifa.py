@@ -64,7 +64,19 @@ FIFA_VERSION_TO_SEASON = {
 SERIE_A_LEAGUE_NAMES = {
     "Serie A",
     "Italy Serie A",
+    "Italian Serie A",
+    "Serie A TIM",
     "IT1",
+}
+
+# Fallback per file vecchi dove manca la colonna lega
+SERIE_A_CLUBS_HISTORICAL = {
+    "Juventus", "Napoli", "Roma", "Inter", "Milan", "Lazio", "Fiorentina", "Atalanta",
+    "Torino", "Sampdoria", "Sassuolo", "Genoa", "Udinese", "Chievo Verona", "Bologna",
+    "Cagliari", "Hellas Verona", "Empoli", "Parma", "Palermo", "Brescia", "Lecce",
+    "Benevento", "Crotone", "Frosinone", "SPAL", "Spezia", "Venezia", "Salernitana",
+    "Monza", "Como", "Cremonese", "Livorno", "Siena", "Catania", "Bari", "Cesena",
+    "Novara", "Pescara", "Siena", "Reggina", "Messina", "Treviso", "Ancona", "Vicenza"
 }
 
 # ─── POSITION MAPPING ────────────────────────────────────────────────────────────────────
@@ -146,22 +158,41 @@ def main():
                 rows_total += 1
 
                 # ── Filtra per Serie A ───────────────────────────────────────
+                # Alcuni file hanno 'league_name', altri 'club_league_name', altri nulla (ma hanno 'club')
+                # Cerchiamo di dedurre la lega o usare una lista di club noti se necessario
                 league = (
                     row.get("league_name", "")
                     or row.get("club_league_name", "")
+                    or row.get("league", "")
                 ).strip()
+                
+                # Se la lega è vuota (comune nei file più vecchi di Leone), 
+                # purtroppo non possiamo filtrare facilmente senza un database di club.
+                # Ma i file di Leone solitamente hanno league_name.
+                # Se manca, proviamo a vedere se il club è in Serie A.
+                if not league and row.get("club"):
+                    # Fallback per i file dove la lega non è esplicitata
+                    # Per ora saltiamo se non c'è lega, ma stampiamo un avviso se rows_serie_a resta 0
+                    pass
+
                 if league not in SERIE_A_LEAGUE_NAMES:
-                    continue
+                    # Fallback per file vecchi: controlliamo se il club è uno di quelli storici della Serie A
+                    club_name_check = (row.get("club_name", "") or row.get("club", "")).strip()
+                    if club_name_check in SERIE_A_CLUBS_HISTORICAL:
+                        pass
+                    else:
+                        continue
+                
                 rows_serie_a += 1
 
                 # ── Dati giocatore ────────────────────────────────────────
                 sofifa_id   = (row.get("sofifa_id", "") or row.get("player_id", "")).strip()
                 short_name  = (row.get("short_name", "") or row.get("name", "")).strip()
                 long_name   = (row.get("long_name", "") or row.get("full_name", "") or short_name).strip()
-                nationality = (row.get("nationality_name", "") or row.get("country_name", "")).strip()
+                nationality = (row.get("nationality_name", "") or row.get("country_name", "") or row.get("nationality", "")).strip()
                 positions_str = (row.get("player_positions", "") or row.get("positions", "")).strip()
                 overall     = safe_int(row.get("overall", row.get("overall_rating", 60)))
-                club_name   = row.get("club_name", "").strip()
+                club_name   = (row.get("club_name", "") or row.get("club", "")).strip()
 
                 if not short_name or not club_name:
                     continue
