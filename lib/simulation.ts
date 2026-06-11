@@ -45,21 +45,25 @@ export interface TeamOverall {
 
 export function calcTeamOverall(slots: DraftSlot[]): TeamOverall {
   const byCategory: Record<string, number[]> = { ATT: [], MID: [], DEF: [], GK: [] };
+  const allRatings: number[] = [];
+
   for (const s of slots) {
     if (!s.player) continue;
+    allRatings.push(s.player.rating);
     const cat = s.player.position_category;
     if (cat in byCategory) byCategory[cat].push(s.player.rating);
   }
+
   const avg = (arr: number[]) =>
-    arr.length === 0 ? 70 : arr.reduce((a, b) => a + b, 0) / arr.length;
+    arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
+
+  const overall  = Math.round(avg(allRatings));
   const attack   = Math.round(avg(byCategory.ATT));
   const midfield = Math.round(avg(byCategory.MID));
   const defence  = Math.round(avg(byCategory.DEF));
   const gk       = Math.round(avg(byCategory.GK));
-  const overall  = Math.round(
-    (attack * 1.2 + midfield * 1.0 + defence * 1.0 + gk * 0.9) / 4.1
-  );
-  return { overall: Math.min(99, Math.max(60, overall)), attack, midfield, defence, gk };
+
+  return { overall, attack, midfield, defence, gk };
 }
 
 // ─── Pre-season odds ──────────────────────────────────────────────────────────

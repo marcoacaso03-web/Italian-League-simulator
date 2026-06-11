@@ -10,9 +10,9 @@ export interface PlayerSeason {
   club: string;
   season: string;
   rating: number;
-  apps: number;
-  goals: number;
-  assists: number;
+  apps?: number;
+  goals?: number;
+  assists?: number;
 }
 
 // position_category viene derivato runtime da position (non è nel JSON)
@@ -99,9 +99,9 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
         name: p.name,
         position: p.position,
         position_category: p.position_category,
-        apps: ps.apps,
-        goals: ps.goals,
-        assists: ps.assists,
+        apps: ps.apps ?? 0,
+        goals: ps.goals ?? 0,
+        assists: ps.assists ?? 0,
         rating: ps.rating,
       };
     })

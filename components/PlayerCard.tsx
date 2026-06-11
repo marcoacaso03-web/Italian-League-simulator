@@ -60,9 +60,6 @@ export default function PlayerCard({
           {' · '}{player.club}{' '}
           <span className="text-slate-500">{player.season}</span>
         </p>
-        <p className="text-xs text-slate-500 mt-0.5">
-          {player.apps} pres · {player.goals} gol · {player.assists} ast
-        </p>
         {/* Badge prime mode */}
         {player.primeRating !== undefined && !hidden && (
           <p className="text-[10px] text-violet-400 mt-0.5 font-semibold">

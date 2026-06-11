@@ -4,56 +4,8 @@
     "name": "AC Milan"
   },
   {
-    "id": "américa-futebol-clube",
-    "name": "América Futebol Clube"
-  },
-  {
-    "id": "américa-mineiro",
-    "name": "América Mineiro"
-  },
-  {
-    "id": "associação-chapecoense-de-futebol",
-    "name": "Associação Chapecoense de Futebol"
-  },
-  {
     "id": "atalanta",
     "name": "Atalanta"
-  },
-  {
-    "id": "athletico-pr",
-    "name": "Athletico PR"
-  },
-  {
-    "id": "athletico-paranaense",
-    "name": "Athletico Paranaense"
-  },
-  {
-    "id": "atlético-clube-goianiense",
-    "name": "Atlético Clube Goianiense"
-  },
-  {
-    "id": "atlético-go",
-    "name": "Atlético GO"
-  },
-  {
-    "id": "atlético-mineiro",
-    "name": "Atlético Mineiro"
-  },
-  {
-    "id": "avaí",
-    "name": "Avaí"
-  },
-  {
-    "id": "avaí-fc",
-    "name": "Avaí FC"
-  },
-  {
-    "id": "bahia",
-    "name": "Bahia"
-  },
-  {
-    "id": "barcelona-de-guayaquil",
-    "name": "Barcelona de Guayaquil"
   },
   {
     "id": "bari",
@@ -68,20 +20,8 @@
     "name": "Bologna"
   },
   {
-    "id": "botafogo",
-    "name": "Botafogo"
-  },
-  {
-    "id": "bragantino",
-    "name": "Bragantino"
-  },
-  {
     "id": "brescia",
     "name": "Brescia"
-  },
-  {
-    "id": "csa",
-    "name": "CSA"
   },
   {
     "id": "cagliari",
@@ -96,24 +36,8 @@
     "name": "Catania"
   },
   {
-    "id": "ceará",
-    "name": "Ceará"
-  },
-  {
-    "id": "ceará-sporting-club",
-    "name": "Ceará Sporting Club"
-  },
-  {
-    "id": "centro-sportivo-alagoano",
-    "name": "Centro Sportivo Alagoano"
-  },
-  {
     "id": "cesena",
     "name": "Cesena"
-  },
-  {
-    "id": "chapecoense",
-    "name": "Chapecoense"
   },
   {
     "id": "chievo",
@@ -124,28 +48,8 @@
     "name": "Chievo Verona"
   },
   {
-    "id": "club-athletico-paranaense",
-    "name": "Club Athletico Paranaense"
-  },
-  {
-    "id": "club-de-regatas-vasco-da-gama",
-    "name": "Club de Regatas Vasco da Gama"
-  },
-  {
-    "id": "clube-atlético-mineiro",
-    "name": "Clube Atlético Mineiro"
-  },
-  {
     "id": "como",
     "name": "Como"
-  },
-  {
-    "id": "corinthians",
-    "name": "Corinthians"
-  },
-  {
-    "id": "coritiba",
-    "name": "Coritiba"
   },
   {
     "id": "cremonese",
@@ -156,36 +60,12 @@
     "name": "Crotone"
   },
   {
-    "id": "cruzeiro",
-    "name": "Cruzeiro"
-  },
-  {
-    "id": "cuiabá",
-    "name": "Cuiabá"
-  },
-  {
     "id": "empoli",
     "name": "Empoli"
   },
   {
-    "id": "figueirense",
-    "name": "Figueirense"
-  },
-  {
     "id": "fiorentina",
     "name": "Fiorentina"
-  },
-  {
-    "id": "flamengo",
-    "name": "Flamengo"
-  },
-  {
-    "id": "fluminense",
-    "name": "Fluminense"
-  },
-  {
-    "id": "fortaleza",
-    "name": "Fortaleza"
   },
   {
     "id": "frosinone",
@@ -196,14 +76,6 @@
     "name": "Genoa"
   },
   {
-    "id": "goiás",
-    "name": "Goiás"
-  },
-  {
-    "id": "grêmio",
-    "name": "Grêmio"
-  },
-  {
     "id": "hellas-verona",
     "name": "Hellas Verona"
   },
@@ -212,28 +84,12 @@
     "name": "Hellas Verona FC"
   },
   {
-    "id": "independiente-del-valle",
-    "name": "Independiente del Valle"
-  },
-  {
     "id": "inter",
     "name": "Inter"
   },
   {
-    "id": "internacional",
-    "name": "Internacional"
-  },
-  {
-    "id": "juventude",
-    "name": "Juventude"
-  },
-  {
     "id": "juventus",
     "name": "Juventus"
-  },
-  {
-    "id": "ldu-quito",
-    "name": "LDU Quito"
   },
   {
     "id": "lazio",
@@ -256,10 +112,6 @@
     "name": "Monza"
   },
   {
-    "id": "mushuc-runa",
-    "name": "Mushuc Runa"
-  },
-  {
     "id": "napoli",
     "name": "Napoli"
   },
@@ -272,28 +124,12 @@
     "name": "Palermo"
   },
   {
-    "id": "palmeiras",
-    "name": "Palmeiras"
-  },
-  {
-    "id": "paraná",
-    "name": "Paraná"
-  },
-  {
     "id": "parma",
     "name": "Parma"
   },
   {
     "id": "pescara",
     "name": "Pescara"
-  },
-  {
-    "id": "ponte-preta",
-    "name": "Ponte Preta"
-  },
-  {
-    "id": "rb-bragantino",
-    "name": "RB Bragantino"
   },
   {
     "id": "reggina",
@@ -316,36 +152,12 @@
     "name": "Sampdoria"
   },
   {
-    "id": "santa-cruz",
-    "name": "Santa Cruz"
-  },
-  {
-    "id": "santos",
-    "name": "Santos"
-  },
-  {
     "id": "sassuolo",
     "name": "Sassuolo"
   },
   {
     "id": "spezia",
     "name": "Spezia"
-  },
-  {
-    "id": "sport-club-corinthians-paulista",
-    "name": "Sport Club Corinthians Paulista"
-  },
-  {
-    "id": "sport-club-do-recife",
-    "name": "Sport Club do Recife"
-  },
-  {
-    "id": "sport-recife",
-    "name": "Sport Recife"
-  },
-  {
-    "id": "são-paulo",
-    "name": "São Paulo"
   },
   {
     "id": "torino",
@@ -376,14 +188,6 @@
     "name": "Udinese Calcio"
   },
   {
-    "id": "universidad-católica-del-ecuador",
-    "name": "Universidad Católica del Ecuador"
-  },
-  {
-    "id": "vasco-da-gama",
-    "name": "Vasco da Gama"
-  },
-  {
     "id": "venezia",
     "name": "Venezia"
   },
@@ -394,9 +198,5 @@
   {
     "id": "vicenza",
     "name": "Vicenza"
-  },
-  {
-    "id": "vitória",
-    "name": "Vitória"
   }
 ]

@@ -44,7 +44,7 @@ function StatBar({ label, icon, value, barColor }: StatBarProps) {
         <span className="text-sm font-bold text-white">{value}</span>
       </div>
       <div className="h-2 rounded-full bg-white/8">
-        <div className="h-2 rounded-full" style={{ width: `${((value - 60) / 39) * 100}%`, backgroundColor: barColor }} />
+        <div className="h-2 rounded-full" style={{ width: `${Math.min(100, (value / 99) * 100)}%`, backgroundColor: barColor }} />
       </div>
     </div>
   );

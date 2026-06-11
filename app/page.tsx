@@ -24,8 +24,8 @@ const CHALLENGES = [
 
 const FAQS = [
   { q: "Cos'è Italian League Simulator?", a: "Un gioco di draft calcistico ispirato a 38-0.app. Scegli la formazione, drafta giocatori con una slot machine e simula una stagione di Serie A." },
-  { q: 'Quali dati usa il gioco?', a: 'I dati provengono da FBref e coprono le stagioni della Serie A dal 1992/93, con migliaia di giocatori e stagioni.' },
-  { q: 'Come vengono calcolati i rating?', a: 'I rating sono normalizzati su scala 60-99 in base a statistiche reali (gol, assist, presenze) con formule specifiche per ruolo.' },
+  { q: 'Quali dati usa il gioco?', a: 'I dati provengono dal dataset EA Sports FC (FIFA/FC) e coprono le stagioni Serie A dal 2014/15, con migliaia di giocatori e stagioni.' },
+  { q: 'Come vengono calcolati i rating?', a: 'Ogni giocatore usa l\'overall EA Sports della stagione indicata in players.json, senza formule aggiuntive. L\'overall di squadra è la media dei rating draftati.' },
   { q: 'Posso giocare più volte?', a: 'Certo! Ogni partita è diversa grazie alla slot machine. Prova diverse formazioni, difficoltà e sfide.' },
   { q: 'È gratis?', a: 'Sì, completamente gratuito. Nessun account necessario.' },
   { q: 'Quali formazioni sono disponibili?', a: '7 formazioni: 4-3-3, 4-4-2, 4-2-3-1, 4-5-1, 3-4-3, 3-5-2, 5-4-1.' },

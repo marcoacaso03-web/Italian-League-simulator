@@ -34,9 +34,7 @@ NOTE:
 
 import csv
 import json
-import os
 import sys
-from collections import defaultdict
 from pathlib import Path
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────────────────────
@@ -60,24 +58,34 @@ FIFA_VERSION_TO_SEASON = {
     "25": "2024-2025",
 }
 
-# Nomi lega usati da SoFIFA/Kaggle per la Serie A
-SERIE_A_LEAGUE_NAMES = {
-    "Serie A",
+# Leghe esplicitamente italiane (Serie A TIM)
+ITALIAN_SERIE_A_LEAGUES = {
     "Italy Serie A",
     "Italian Serie A",
     "Serie A TIM",
     "IT1",
 }
 
-# Fallback per file vecchi dove manca la colonna lega
-SERIE_A_CLUBS_HISTORICAL = {
-    "Juventus", "Napoli", "Roma", "Inter", "Milan", "Lazio", "Fiorentina", "Atalanta",
-    "Torino", "Sampdoria", "Sassuolo", "Genoa", "Udinese", "Chievo Verona", "Bologna",
-    "Cagliari", "Hellas Verona", "Empoli", "Parma", "Palermo", "Brescia", "Lecce",
-    "Benevento", "Crotone", "Frosinone", "SPAL", "Spezia", "Venezia", "Salernitana",
+# "Serie A" da sola è ambigua (es. Brasile/Ecuador): accettata solo con club italiano
+AMBIGUOUS_SERIE_A_LEAGUES = {"Serie A"}
+
+# Club della Serie A italiana (nomi canonici + varianti FIFA)
+ITALIAN_SERIE_A_CLUBS = {
+    "Juventus", "Napoli", "Roma", "Inter", "Milan", "AC Milan", "Lazio", "Fiorentina",
+    "Atalanta", "Torino", "Torino F.C.", "Sampdoria", "U.C. Sampdoria", "Sassuolo",
+    "U.S. Sassuolo Calcio", "Genoa", "Udinese", "Udinese Calcio", "Chievo Verona",
+    "Chievo", "Bologna", "Cagliari", "Hellas Verona", "Hellas Verona FC", "Empoli",
+    "Parma", "Palermo", "Brescia", "Lecce", "Benevento", "Crotone", "Frosinone",
+    "SPAL", "Spezia", "Venezia", "Venezia FC", "Salernitana", "US Salernitana 1919",
     "Monza", "Como", "Cremonese", "Livorno", "Siena", "Catania", "Bari", "Cesena",
-    "Novara", "Pescara", "Siena", "Reggina", "Messina", "Treviso", "Ancona", "Vicenza"
+    "Novara", "Pescara", "Reggina", "Messina", "Treviso", "Ancona", "Vicenza", "Carpi",
 }
+
+NON_ITALIAN_LEAGUE_KEYWORDS = (
+    "brazil", "brasileiro", "brazilian", "campeonato",
+    "ecuador", "argentina", "colombia", "chile", "peru", "uruguay", "paraguay",
+    "mexico", "mls", "portugal", "spain", "france", "germany", "england",
+)
 
 # ─── POSITION MAPPING ────────────────────────────────────────────────────────────────────
 
@@ -107,6 +115,96 @@ def get_primary_position(positions_str: str) -> tuple[str, str]:
 
 def normalize_club_id(name: str) -> str:
     return name.lower().replace(" ", "-").replace("'", "").replace(".", "")
+
+
+ITALIAN_SERIE_A_CLUB_IDS = {normalize_club_id(name) for name in ITALIAN_SERIE_A_CLUBS}
+
+
+def is_italian_serie_a_club(club_name: str) -> bool:
+    name = club_name.strip()
+    if not name:
+        return False
+    if name in ITALIAN_SERIE_A_CLUBS:
+        return True
+    return normalize_club_id(name) in ITALIAN_SERIE_A_CLUB_IDS
+
+
+def is_italian_serie_a_row(league: str, club_name: str) -> bool:
+    league = league.strip()
+    club_name = club_name.strip()
+    league_lower = league.lower()
+
+    if league_lower and any(kw in league_lower for kw in NON_ITALIAN_LEAGUE_KEYWORDS):
+        return False
+
+    if league in ITALIAN_SERIE_A_LEAGUES:
+        return is_italian_serie_a_club(club_name)
+
+    if league in AMBIGUOUS_SERIE_A_LEAGUES:
+        return is_italian_serie_a_club(club_name)
+
+    if not league:
+        return is_italian_serie_a_club(club_name)
+
+    return False
+
+
+def filter_italian_serie_a_data(players_list: list) -> tuple[list, list]:
+    """Tieni solo stagioni e club della Serie A italiana."""
+    all_clubs: dict[str, dict] = {}
+    filtered_players = []
+    pid = 1
+
+    for p in sorted(players_list, key=lambda x: x["name"]):
+        seasons = [
+            s for s in p["seasons"]
+            if is_italian_serie_a_club(s["club"])
+        ]
+        if not seasons:
+            continue
+
+        seasons_sorted = sorted(seasons, key=lambda s: s["season"])
+        for s in seasons_sorted:
+            club_id = normalize_club_id(s["club"])
+            if club_id not in all_clubs:
+                all_clubs[club_id] = {"id": club_id, "name": s["club"]}
+
+        filtered_players.append({
+            "id": f"p{pid:05d}",
+            "name": p["name"],
+            "position": p["position"],
+            "position_category": p["position_category"],
+            "nationality": p.get("nationality", ""),
+            "seasons": seasons_sorted,
+        })
+        pid += 1
+
+    clubs_list = sorted(all_clubs.values(), key=lambda c: c["name"])
+    return filtered_players, clubs_list
+
+
+def clean_data_files() -> None:
+    players_path = OUT_DIR / "players.json"
+    clubs_path = OUT_DIR / "clubs.json"
+
+    with open(players_path, encoding="utf-8") as f:
+        players_list = json.load(f)
+
+    before_players = len(players_list)
+    before_seasons = sum(len(p["seasons"]) for p in players_list)
+    before_clubs = len(json.load(open(clubs_path, encoding="utf-8")))
+
+    players_list, clubs_list = filter_italian_serie_a_data(players_list)
+
+    with open(players_path, "w", encoding="utf-8") as f:
+        json.dump(players_list, f, ensure_ascii=False, indent=2)
+    with open(clubs_path, "w", encoding="utf-8") as f:
+        json.dump(clubs_list, f, ensure_ascii=False, indent=2)
+
+    after_seasons = sum(len(p["seasons"]) for p in players_list)
+    print(f"players: {before_players} -> {len(players_list)}")
+    print(f"seasons: {before_seasons} -> {after_seasons}")
+    print(f"clubs:   {before_clubs} -> {len(clubs_list)}")
 
 
 def safe_int(val, default: int = 0) -> int:
@@ -165,24 +263,11 @@ def main():
                     or row.get("club_league_name", "")
                     or row.get("league", "")
                 ).strip()
-                
-                # Se la lega è vuota (comune nei file più vecchi di Leone), 
-                # purtroppo non possiamo filtrare facilmente senza un database di club.
-                # Ma i file di Leone solitamente hanno league_name.
-                # Se manca, proviamo a vedere se il club è in Serie A.
-                if not league and row.get("club"):
-                    # Fallback per i file dove la lega non è esplicitata
-                    # Per ora saltiamo se non c'è lega, ma stampiamo un avviso se rows_serie_a resta 0
-                    pass
+                club_name_check = (row.get("club_name", "") or row.get("club", "")).strip()
 
-                if league not in SERIE_A_LEAGUE_NAMES:
-                    # Fallback per file vecchi: controlliamo se il club è uno di quelli storici della Serie A
-                    club_name_check = (row.get("club_name", "") or row.get("club", "")).strip()
-                    if club_name_check in SERIE_A_CLUBS_HISTORICAL:
-                        pass
-                    else:
-                        continue
-                
+                if not is_italian_serie_a_row(league, club_name_check):
+                    continue
+
                 rows_serie_a += 1
 
                 # ── Dati giocatore ────────────────────────────────────────
@@ -200,6 +285,9 @@ def main():
                 position, category = get_primary_position(positions_str)
 
                 # ── Club ───────────────────────────────────────────────────
+                if not is_italian_serie_a_club(club_name):
+                    continue
+
                 club_id = normalize_club_id(club_name)
                 if club_id not in all_clubs:
                     all_clubs[club_id] = {"id": club_id, "name": club_name}
@@ -243,7 +331,12 @@ def main():
     players_list = []
     pid = 1
     for p in sorted(players_by_id.values(), key=lambda x: x["name"]):
-        seasons_sorted = sorted(p["seasons"], key=lambda s: s["season"])
+        seasons_sorted = sorted(
+            [s for s in p["seasons"] if is_italian_serie_a_club(s["club"])],
+            key=lambda s: s["season"],
+        )
+        if not seasons_sorted:
+            continue
         players_list.append({
             "id":                f"p{pid:05d}",
             "name":              p["name"],
@@ -254,7 +347,14 @@ def main():
         })
         pid += 1
 
-    clubs_list = sorted(all_clubs.values(), key=lambda c: c["name"])
+    all_clubs = {}
+    for p in players_list:
+        for s in p["seasons"]:
+            club_id = normalize_club_id(s["club"])
+            if club_id not in all_clubs:
+                all_clubs[club_id] = {"id": club_id, "name": s["club"]}
+
+    players_list, clubs_list = filter_italian_serie_a_data(players_list)
 
     # ── Salva ───────────────────────────────────────────────────────────────────────────
     players_path = OUT_DIR / "players.json"
@@ -280,4 +380,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "--clean":
+        clean_data_files()
+    else:
+        main()
