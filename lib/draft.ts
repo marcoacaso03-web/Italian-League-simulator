@@ -39,19 +39,9 @@ export const REROLLS_BY_DIFFICULTY: Record<SetupConfig['difficulty'], number> = 
   easy: 3, normal: 1, hard: 0,
 };
 
-const WINGER_PAIRS: ReadonlyArray<[string, string]> = [['LM', 'RM'], ['LW', 'RW']];
-
 /** Parsa una stringa di posizioni tipo "RW, ST" in un array ["RW", "ST"] */
 function parsePositions(position: string): string[] {
   return position.split(',').map((p) => p.trim()).filter(Boolean);
-}
-
-function mirrorPosition(pos: string): string | null {
-  for (const [a, b] of WINGER_PAIRS) {
-    if (pos === a) return b;
-    if (pos === b) return a;
-  }
-  return null;
 }
 
 export function buildSlots(formation: string): DraftSlot[] {
@@ -80,31 +70,9 @@ export function findCompatibleSlots(slots: DraftSlot[], player: DraftedPlayer): 
   // Supporta posizioni multiple: "RW, ST" → ["RW", "ST"]
   const positions = parsePositions(player.position);
 
-  const direct = empty.filter((s) =>
+  return empty.filter((s) =>
     positions.some((pos) => s.formationSlot.acceptedPositions.includes(pos))
   );
-
-  // Mirror: solo se almeno una delle posizioni ha un mirror e direct non è vuoto
-  const mirrorPositions = positions
-    .map(mirrorPosition)
-    .filter((m): m is string => m !== null);
-
-  let mirrorSlots: DraftSlot[] = [];
-  if (mirrorPositions.length > 0 && direct.length > 0) {
-    mirrorSlots = empty.filter((s) =>
-      mirrorPositions.some((m) => s.formationSlot.acceptedPositions.includes(m))
-    );
-  }
-
-  const seen = new Set<string>();
-  const result: DraftSlot[] = [];
-  for (const s of [...direct, ...mirrorSlots]) {
-    if (!seen.has(s.formationSlot.id)) {
-      seen.add(s.formationSlot.id);
-      result.push(s);
-    }
-  }
-  return result;
 }
 
 export function findBestSlot(slots: DraftSlot[], player: DraftedPlayer): DraftSlot | null {
