@@ -41,6 +41,11 @@ export const REROLLS_BY_DIFFICULTY: Record<SetupConfig['difficulty'], number> = 
 
 const WINGER_PAIRS: ReadonlyArray<[string, string]> = [['LM', 'RM'], ['LW', 'RW']];
 
+/** Parsa una stringa di posizioni tipo "RW, ST" in un array ["RW", "ST"] */
+function parsePositions(position: string): string[] {
+  return position.split(',').map((p) => p.trim()).filter(Boolean);
+}
+
 function mirrorPosition(pos: string): string | null {
   for (const [a, b] of WINGER_PAIRS) {
     if (pos === a) return b;
@@ -72,12 +77,25 @@ function pickRandom<T>(arr: T[]): T {
 
 export function findCompatibleSlots(slots: DraftSlot[], player: DraftedPlayer): DraftSlot[] {
   const empty = slots.filter((s) => s.player === null);
-  const direct = empty.filter((s) => s.formationSlot.acceptedPositions.includes(player.position));
-  const mirror = mirrorPosition(player.position);
+  // Supporta posizioni multiple: "RW, ST" → ["RW", "ST"]
+  const positions = parsePositions(player.position);
+
+  const direct = empty.filter((s) =>
+    positions.some((pos) => s.formationSlot.acceptedPositions.includes(pos))
+  );
+
+  // Mirror: solo se almeno una delle posizioni ha un mirror e direct non è vuoto
+  const mirrorPositions = positions
+    .map(mirrorPosition)
+    .filter((m): m is string => m !== null);
+
   let mirrorSlots: DraftSlot[] = [];
-  if (mirror !== null && direct.length > 0) {
-    mirrorSlots = empty.filter((s) => s.formationSlot.acceptedPositions.includes(mirror));
+  if (mirrorPositions.length > 0 && direct.length > 0) {
+    mirrorSlots = empty.filter((s) =>
+      mirrorPositions.some((m) => s.formationSlot.acceptedPositions.includes(m))
+    );
   }
+
   const seen = new Set<string>();
   const result: DraftSlot[] = [];
   for (const s of [...direct, ...mirrorSlots]) {
@@ -118,7 +136,11 @@ export function spin(
     ? getPrimeSquad(entry.club, entry.season)
     : getSquad(entry.club, entry.season);
   const draftedPlayers: DraftedPlayer[] = rawSquad
-    .filter((p) => positionFilter.length === 0 ? true : positionFilter.includes(p.position))
+    .filter((p) => {
+      if (positionFilter.length === 0) return true;
+      // Supporta posizioni multiple nel filtro
+      return parsePositions(p.position).some((pos) => positionFilter.includes(pos));
+    })
     .map((p) => ({
       ...p,
       position_category: toCategory(p.position),
