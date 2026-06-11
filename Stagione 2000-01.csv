@@ -1,0 +1,622 @@
+﻿Squadra,Giocatore,Ruolo,Valutazione
+AC Milan,Sebastiano Rossi,POR,81
+AC Milan,Thomas Helveg,DC,78
+AC Milan,Paolo Maldini,DC,78
+AC Milan,Demetrio Albertini,CC,78
+AC Milan,Alessandro Costacurta,DC,78
+AC Milan,Andrij Ševčenko,ATT,78
+AC Milan,Gennaro Gattuso,CC,78
+AC Milan,Gianni Comandini,ATT,77
+AC Milan,Zvonimir Boban,CC,76
+AC Milan,José Mari,ATT,76
+AC Milan,Christian Abbiati,POR,74
+AC Milan,Júlio César,DC,77
+AC Milan,K'akhaber K'aladze,DC,76
+AC Milan,Diego De Ascentis,CC,76
+AC Milan,Fernando Redondo,CC,77
+AC Milan,Dražen Brnčić,CC,77
+AC Milan,Leonardo,CC,78
+AC Milan,José Chamot,DC,78
+AC Milan,Oliver Bierhoff,ATT,78
+AC Milan,Federico Giunti,CC,76
+AC Milan,Valerio Fiori,POR,72
+AC Milan,Massimo Ambrosini,CC,77
+AC Milan,Andrés Guglielminpietro,CC,77
+AC Milan,Roque Júnior,DC,76
+AC Milan,Luigi Sala,DC,77
+AC Milan,Serginho,CC,78
+AC Milan,Fabricio Coloccini,DC,78
+AC Milan,Marco Donadel,CC,77
+AC Milan,Dida,POR,74
+AC Milan,Mohammed Aliyu Datti,ATT,76
+AC Milan,Ibrahim Ba,CC,77
+AC Milan,Luca Saudati,ATT,78
+AC Milan,Pablo García,CC,78
+AC Milan,Francesco Coco,DC,78
+AC Milan,Daniele Daino,DC,76
+AS Roma,Francesco Antonioli,POR,78
+AS Roma,Ivan Pelizzoli,POR,66
+AS Roma,Christian Panucci,TD,77
+AS Roma,Aldair,TD,78
+AS Roma,Walter Samuel,DC,83
+AS Roma,Jonathan Zebina,DC,71
+AS Roma,Aldair,DC,78
+AS Roma,Cafu,TS,87
+AS Roma,Jonathan Zebina,ASA,70
+AS Roma,Emerson,CDC,80
+AS Roma,Damiano Tommasi,CDC,78
+AS Roma,Marcos Assunção,CC,72
+AS Roma,Hidetoshi Nakata,CC,80
+AS Roma,Francesco Totti,COC,89
+AS Roma,Hidetoshi Nakata,COC,80
+AS Roma,Vincenzo Montella,AS,78
+AS Roma,Marco Delvecchio,AD,72
+AS Roma,Gabriel Batistuta,ATT,88
+AS Roma,Vincenzo Montella,ATT,78
+AS Roma,Marco Delvecchio,ATT,73
+Atalanta,Alberto Fontana,POR,82
+Atalanta,Fabio Rustico,DC,76
+Atalanta,Domenico Morfeo,CC,76
+Atalanta,Massimo Paganin,DC,77
+Atalanta,Ljubisa Dundjerski,CC,75
+Atalanta,Fabio Gallo,CC,77
+Atalanta,Marco Nappi,ATT,76
+Atalanta,Luciano Zauri,CC,77
+Atalanta,Fausto Rossini,ATT,75
+Atalanta,Nicola Ventola,ATT,76
+Atalanta,Maurizio Ganz,ATT,76
+Atalanta,Davide Pinato,POR,71
+Atalanta,Stefano Lorenzi,DC,76
+Atalanta,José Espinal,ATT,75
+Atalanta,Damiano Zenoni,DC,75
+Atalanta,Massimo Carrera,DC,77
+Atalanta,Alex Pinardi,CC,77
+Atalanta,Ivan Pelizzoli,POR,73
+Atalanta,Mauro Minelli,DC,77
+Atalanta,Sebastiano Siviglia,DC,75
+Atalanta,Cristian Zenoni,DC,75
+Atalanta,Cristiano Doni,CC,75
+Atalanta,Daniele Berretta,CC,76
+Atalanta,Massimo Donati,CC,75
+Atalanta,Gianpaolo Bellini,DC,77
+Atalanta,Sergio Carnesalini,DC,75
+Atalanta,Rolando Bianchi,ATT,76
+Atalanta,Roberto Previtali,CC,75
+Atalanta,Adrian Madaschi,DC,77
+Atalanta,Alessandro Pontarollo,CC,76
+Atalanta,Biagio Pagano,CC,75
+Atalanta,Cesare Natali,DC,75
+Atalanta,Cristian Raimondi,DC,77
+Atalanta,Danilo Zini,DC,77
+Atalanta,Francesco Ardu,DC,76
+Atalanta,Giacomo Banchelli,ATT,77
+Atalanta,Massimo Vismara,DC,77
+Atalanta,Matteo Gritti,POR,72
+Atalanta,Matteo Minelli,DC,77
+Atalanta,Nicholas Caglioni,POR,73
+Atalanta,Piá,ATT,76
+Atalanta,Pierre Giorgio Regonesi,DC,77
+Atalanta,Vinicio Espinal,CC,76
+Bari,Francesco Mancini,POR,76
+Bari,Luigi Garzya,DC,72
+Bari,Alessandro Del Grosso,DC,70
+Bari,Gaetano De Rosa,DC,72
+Bari,Michael Madsen,CC,72
+Bari,Lorenzo Sibilano,DC,70
+Bari,Attilio Gregori,POR,66
+Bari,Daniel Andersson,CC,72
+Bari,Yksel Osmanovski,ATT,71
+Bari,Michele Marcolini,CC,70
+Bari,Phil Masinga,ATT,71
+Bari,Antonio Narciso,POR,66
+Bari,Duccio Innocenti,DC,71
+Bari,Pascual De Gregorio,ATT,72
+Bari,Antonio Bellavista,CC,70
+Bari,Antonio La Fortezza,CC,72
+Bari,Simone Perrotta,CC,72
+Bari,Antonio Cassano,ATT,70
+Bari,Rodolfo Giorgetti,CC,71
+Bari,Jaime Valdés,CC,72
+Bari,Gabriele Davanzante,CC,72
+Bari,Diego Markic,CC,72
+Bari,Jaime González,ATT,71
+Bari,Gionatha Spinesi,ATT,71
+Bari,Mattia Collauto,CC,70
+Bari,Hugo Enyinnaya,ATT,70
+Bari,Luigi Anaclerio,ATT,70
+Bari,Rachid Neqrouz,DC,72
+Bari,Nicola Fumai,DC,72
+Bari,Óscar Ayala,DC,72
+Bari,Jean-François Gillet,POR,66
+Bari,Hany Said,CC,70
+Bari,Giuseppe Mazzarelli,DC,71
+Bari,Vitangelo Spadavecchia,POR,66
+Bari,Giuseppe Ingrosso,DC,70
+Bari,Michele Anaclerio,DC,71
+Bari,Salvatore Novembrino,ATT,72
+Bari,Pasquale Berardi,CC,71
+Bari,Paolo Poggi,ATT,72
+Bari,Generoso Rossi,POR,67
+Bari,Sebastian Calleja,CC,72
+Bologna,Gianluca Pagliuca,POR,81
+Bologna,Giovanni Bia,DC,74
+Bologna,Pierre Womé,DC,75
+Bologna,Giovanni Piacentini,CC,74
+Bologna,Marcello Castellini,DC,76
+Bologna,Emanuele Brioschi,DC,75
+Bologna,Carlo Nervo,CC,74
+Bologna,Francisco Lima,CC,76
+Bologna,Igor' Kolyvanov,ATT,74
+Bologna,Giuseppe Signori,ATT,74
+Bologna,Roberto Goretti,CC,76
+Bologna,Claiton,DC,74
+Bologna,Marco Roccati,POR,71
+Bologna,Ferdinando Coppola,POR,70
+Bologna,Julio Cruz,ATT,74
+Bologna,Renato Olive,CC,76
+Bologna,Enzo Maresca,CC,75
+Bologna,Max Tonetto,DC,74
+Bologna,Alessandro Gamberini,DC,76
+Bologna,Alessandro Dal Canto,DC,74
+Bologna,Francesco Quintavalla,DC,75
+Bologna,Giacomo Cipriani,ATT,75
+Bologna,Giulio Falcone,DC,76
+Bologna,Tomas Locatelli,CC,74
+Bologna,Jonathan Binotto,CC,76
+Bologna,Andrea Ferrari,POR,71
+Bologna,Massimo Tarantino,DC,74
+Bologna,Luís Oliveira,ATT,76
+Bologna,Niccolò Galli †,DC,76
+Bologna,Luigi Della Rocca,ATT,74
+Bologna,Pasquale Padalino,DC,76
+Brescia,Luca Castellazzi,POR,70
+Brescia,Augusto Inácio,POR,61
+Brescia,Mauro Bressan,TD,67
+Brescia,Matteo Brighi,TD,65
+Brescia,Dario Simic,DC,69
+Brescia,Luca Castellini,DC,63
+Brescia,Francesco Coco,DC,67
+Brescia,Francesco Coco,TS,67
+Brescia,Andrea Caracciolo,ASA,62
+Brescia,Demetrio Albertini,CDC,78
+Brescia,Matteo Brighi,CDC,65
+Brescia,Mauro Bressan,CC,67
+Brescia,Demetrio Albertini,CC,78
+Brescia,Roberto Baggio,COC,82
+Brescia,Mauro Bressan,COC,67
+Brescia,Mauro Bressan,AD,67
+Brescia,Andrea Caracciolo,AS,62
+Brescia,Roberto Baggio,ATT,82
+Brescia,Andrea Caracciolo,ATT,62
+Brescia,Zé Maria,ATT,60
+Fiorentina,Francesco Toldo,POR,80
+Fiorentina,Tomáš Řepka,DC,79
+Fiorentina,Moreno Torricelli,DC,74
+Fiorentina,Daniele Adani,DC,77
+Fiorentina,Saliou Lassissi,DC,70
+Fiorentina,Aldo Firicano,DC,61
+Fiorentina,Angelo Di Livio,CC,79
+Fiorentina,Predrag Mijatović,ATT,69
+Fiorentina,Leandro,ATT,76
+Fiorentina,Rui Costa,CC,82
+Fiorentina,Fabio Rossitto,CC,75
+Fiorentina,Gianmatteo Mareggini,POR,60
+Fiorentina,Paolo Vanoli,DC,77
+Fiorentina,Amaral,CC,70
+Fiorentina,Domenico Morfeo,CC,63
+Fiorentina,Sandro Cois,CC,69
+Fiorentina,Marco Rossi,CC,76
+Fiorentina,Enrico Chiesa,ATT,87
+Fiorentina,Nuno Gomes,ATT,82
+Fiorentina,Mattia Passarini,POR,72
+Fiorentina,Alessandro Pierini,DC,79
+Fiorentina,Christian Amoroso,CC,79
+Fiorentina,Giovanni Bartolucci,DC,62
+Fiorentina,Andrea Tarozzi,DC,62
+Fiorentina,Roberto Massaro,ATT,63
+Fiorentina,Mauro Bressan,CC,77
+Fiorentina,Riccardo Taddei,ATT,61
+Fiorentina,Marco Mugnaini,DC,75
+Fiorentina,Giuseppe Taglialatela,POR,60
+Fiorentina,Cleiton,CC,74
+Fiorentina,Emiliano Moretti,DC,69
+Fiorentina,Giacomo Bonora,DC,62
+Fiorentina,Giōrgos Vakouftsīs,ATT,63
+Fiorentina,Niccolò Guzzo,DC,63
+Fiorentina,Francesco Sorbino,CC,61
+Fiorentina,Danilo Stefani,CC,75
+Fiorentina,Sead Zilić,ATT,76
+Fiorentina,Simone Bartoloni,DC,74
+Fiorentina,Daniele Ficagna,DC,63
+Fiorentina,Angelo Palombo,CC,62
+Hellas Verona,Domenico Doardo,POR,79
+Hellas Verona,Fabrizio Ferron,POR,70
+Hellas Verona,Alberto Pomini,POR,70
+Hellas Verona,Jess Vanstrattan,POR,68
+Hellas Verona,Gianluca Pegolo,POR,69
+Hellas Verona,Davide Zomer,POR,70
+Hellas Verona,Luigi Apolloni,DC,74
+Hellas Verona,Dario Biasi,DC,72
+Hellas Verona,Mario Cvitanović,DC,72
+Hellas Verona,Marco Franceschetti,DC,74
+Hellas Verona,Natale Gonnella,DC,72
+Hellas Verona,Maurizio Lanzaro,DC,72
+Hellas Verona,Martin Laursen,DC,73
+Hellas Verona,Massimo Oddo,DC,74
+Hellas Verona,Anthony Šerić,DC,73
+Hellas Verona,Carlo Teodorani,DC,74
+Hellas Verona,Stefano Todeschini,DC,72
+Hellas Verona,Mauro Camoranesi,CC,74
+Hellas Verona,Marco Cassetti,CC,74
+Hellas Verona,Giuseppe Colucci,CC,72
+Hellas Verona,Leonardo Colucci,CC,74
+Hellas Verona,Andrea Cossu,CC,73
+Hellas Verona,Claudio Ferrarese,CC,74
+Hellas Verona,Giancarlo Filippini,CC,72
+Hellas Verona,Vincenzo Italiano,CC,73
+Hellas Verona,Alessandro Mazzola,CC,72
+Hellas Verona,Martino Melis,CC,73
+Hellas Verona,Marco Piovanelli,CC,72
+Hellas Verona,Andrea Pisanu,CC,73
+Hellas Verona,Emiliano Salvetti,CC,74
+Hellas Verona,Elvis Abbruscato,ATT,74
+Hellas Verona,Adaílton,ATT,72
+Hellas Verona,Emiliano Bonazzoli,ATT,73
+Hellas Verona,Michele Cossato,ATT,74
+Hellas Verona,Alberto Gilardino,ATT,73
+Hellas Verona,Adrian Mutu,ATT,74
+Hellas Verona,Alessandro Sgrigna,ATT,72
+Hellas Verona,Lampros Vaggelīs,CC,74
+Inter Milan,Sébastien Frey,POR,82
+Inter Milan,Iván Córdoba,DC,77
+Inter Milan,Fabio Macellari,DC,78
+Inter Milan,Javier Zanetti,DC,78
+Inter Milan,Laurent Blanc,DC,76
+Inter Milan,Michele Serena,DC,78
+Inter Milan,Robbie Keane,ATT,78
+Inter Milan,Antonio Pacheco,ATT,76
+Inter Milan,Vladimir Jugović,CC,77
+Inter Milan,Ronaldo,ATT,78
+Inter Milan,Clarence Seedorf,CC,78
+Inter Milan,Andrea Pirlo,CC,77
+Inter Milan,Marco Ferrante,ATT,76
+Inter Milan,Marco Varaldi,POR,72
+Inter Milan,Dario Šimić,DC,76
+Inter Milan,Luigi Di Biagio,CC,78
+Inter Milan,Benoît Cauet,CC,78
+Inter Milan,Riccardo Fissore,DC,76
+Inter Milan,Cyril Domoraud,DC,76
+Inter Milan,Nicola Beati,CC,76
+Inter Milan,Iván Zamorano,ATT,78
+Inter Milan,Stéphane Dalmat,CC,77
+Inter Milan,Anselmo Robbiati,ATT,76
+Inter Milan,Álvaro Recoba,ATT,76
+Inter Milan,Matteo Ferrari,DC,78
+Inter Milan,Marco Ballotta,POR,74
+Inter Milan,Cristian Brocchi,CC,78
+Inter Milan,Sixto Peralta,CC,76
+Inter Milan,Vratislav Greško,DC,76
+Inter Milan,Vampeta,CC,76
+Inter Milan,Corrado Colombo,ATT,76
+Inter Milan,Bruno Cirillo,DC,78
+Inter Milan,Francisco Farinós,CC,76
+Inter Milan,Christian Vieri,ATT,76
+Inter Milan,Carlo Raffaele Trezzi,CC,78
+Inter Milan,Antar Yahia,DC,78
+Inter Milan,Hakan Şükür,ATT,76
+Juventus,Edwin van der Sar,POR,83
+Juventus,Ciro Ferrara,DC,80
+Juventus,Michele Paramatti,DC,80
+Juventus,Paolo Montero,DC,78
+Juventus,Igor Tudor,DC,80
+Juventus,Fabián O'Neill,CC,80
+Juventus,Gianluca Pessotto,DC,80
+Juventus,Antonio Conte,CC,78
+Juventus,Filippo Inzaghi,ATT,79
+Juventus,Alessandro Del Piero,ATT,80
+Juventus,Daniel Fonseca,ATT,80
+Juventus,Michelangelo Rampulla,POR,74
+Juventus,Mark Iuliano,DC,79
+Juventus,Jonathan Bachini[N 2],CC,80
+Juventus,Alessandro Birindelli,DC,80
+Juventus,Marco Zanchi[N 2],DC,79
+Juventus,David Trezeguet,ATT,79
+Juventus,Darko Kovačević,ATT,80
+Juventus,Juan Esnáider[N 2],ATT,79
+Juventus,Alessio Tacchinardi,CC,79
+Juventus,Zinédine Zidane,CC,79
+Juventus,Andreas Isaksson[N 2],POR,75
+Juventus,Gianluca Zambrotta,DC,78
+Juventus,Enzo Maresca[N 3],CC,80
+Juventus,Matteo Brighi,CC,79
+Juventus,Edgar Davids,CC,80
+Juventus,Marco Rigoni[N 2],CC,79
+Juventus,Athirson[N 4],DC,78
+Juventus,Domenico Maietta[N 5],CC,79
+Juventus,Francesco Scardina[N 5],DC,79
+Juventus,Andrea Gasbarroni[N 5],ATT,79
+Juventus,Alessandro Frara[N 5],CC,79
+Juventus,Vincent Péricard[N 5],ATT,79
+Juventus,Fabián Carini,POR,76
+Juventus,Salvatore Papa[N 5],CC,78
+Lecce,Antonio Chimenti,POR,78
+Lecce,Juarez de Souza Teixeira,DC,73
+Lecce,Gianluca Colonnello,DC,74
+Lecce,Luigi Piangerelli,CC,74
+Lecce,Alberto Savino,DC,72
+Lecce,Alberto Malusci,DC,74
+Lecce,Davor Vugrinec,ATT,74
+Lecce,Alessandro Conticchio,CC,72
+Lecce,Cristiano Lucarelli,ATT,72
+Lecce,Maurizio Bedin,CC,72
+Lecce,Gaetano Vasari,CC,73
+Lecce,Aldo Osorio,ATT,73
+Lecce,Emanuele Manitta,POR,69
+Lecce,Alessandro Pellicori,ATT,72
+Lecce,Mirko Vučinić,ATT,73
+Lecce,Diego Mateo,CC,74
+Lecce,Claudio Bonomi,CC,73
+Lecce,Riccardo Fissore,DC,73
+Lecce,Axel Konan,ATT,74
+Lecce,Dario Dainelli,DC,73
+Lecce,Alessandro Zinnari,CC,72
+Lecce,Antonio Leo,ATT,72
+Lecce,Rodolfo Giorgetti,CC,73
+Lecce,Ferdinando De Martino,DC,73
+Lecce,Stéphane Coqu,POR,69
+Lecce,William Viali,DC,73
+Lecce,Max Tonetto,CC,74
+Lecce,Marco Testa,CC,72
+Lecce,Erminio Rullo,DC,74
+Lecce,Giovanni De Toma,DC,72
+Lecce,Matteo Pivotto,DC,73
+Lecce,Davide Olivares,CC,72
+Lecce,Klas Ingesson,CC,72
+Lecce,David Balleri,DC,74
+Lecce,Massimo Lotti,POR,68
+Lecce,Martino Traversa,DC,72
+Lecce,Jorge Casanova,CC,72
+Lecce,Mark Edusei,CC,74
+Lecce,Alessandro Doga,CC,72
+Napoli,Ferdinando Coppola,POR,75
+Napoli,Abdelilah Saber,DC,72
+Napoli,Facundo Hernán Quiroga,DC,72
+Napoli,Dario Baccin,DC,72
+Napoli,Emiliano Bigica,CC,70
+Napoli,Oscar Magoni,CC,70
+Napoli,Salvatore Fresi,DC,71
+Napoli,Francesco Moriero,CC,71
+Napoli,José Luís Vidigal,CC,70
+Napoli,Nicola Amoruso,ATT,71
+Napoli,Claudio Bellucci,ATT,72
+Napoli,Marek Jankulovski,CC,70
+Napoli,Gaetano Avolio,DC,71
+Napoli,Francesco Baldini,DC,70
+Napoli,Luca Mondini,POR,66
+Napoli,Paquito,CC,72
+Napoli,Fabio Pecchia,CC,72
+Napoli,Amauri,ATT,71
+Napoli,Ciro Caruso,DC,71
+Napoli,Matuzalém,CC,70
+Napoli,Emanuele Troise,DC,71
+Napoli,Damir Stojak,ATT,72
+Napoli,Roberto Stellone,ATT,71
+Napoli,Antonio Floro Flores,ATT,70
+Napoli,Giorgio Di Vicino,CC,70
+Napoli,Giacomo Tedesco,CC,70
+Napoli,Rabiu Afolabi,DC,72
+Napoli,David Sesa,ATT,71
+Napoli,Mauricio Pineda,CC,70
+Napoli,Francesco Mancini,POR,67
+Napoli,Steinar Nilsen,DC,71
+Napoli,Claudio Husaín,CC,71
+Napoli,Alberto Fontana,POR,66
+Napoli,Antonio Bocchetti,DC,70
+Napoli,Edmundo,ATT,72
+Parma,Davide Micillo,POR,83
+Parma,Luigi Sartor,DC,78
+Parma,Antonio Benarrivo,DC,78
+Parma,Stephen Appiah,CC,77
+Parma,Néstor Sensini,DC,78
+Parma,Dino Baggio,CC,77
+Parma,Diego Fuser,CC,77
+Parma,Sabri Lamouchi,CC,78
+Parma,Savo Milošević,ATT,79
+Parma,Márcio Amoroso,ATT,78
+Parma,Sérgio Conceição,CC,79
+Parma,Giampiero Maini,CC,79
+Parma,Alain Boghossian,CC,77
+Parma,Junior,CC,77
+Parma,Fabio Cannavaro,DC,79
+Parma,Johan Micoud,CC,79
+Parma,Stefano Torrisi,DC,79
+Parma,Marco Di Vaio,ATT,78
+Parma,Lilian Thuram,DC,79
+Parma,Emiliano Bonazzoli,ATT,79
+Parma,Matías Almeyda,CC,78
+Parma,Johnnier Montaño,CC,77
+Parma,Paolo Cannavaro,DC,79
+Parma,Jorge Bolaño,CC,79
+Parma,Simone Basso,CC,77
+Parma,Alessio D'Imporzano,CC,77
+Parma,Carlalberto Ludi,DC,79
+Parma,Gianluca Falsini,DC,78
+Parma,Manuel Saccani,CC,79
+Parma,Francesco Cardillo,CC,78
+Parma,Alain Roger Bangoura,DC,78
+Parma,Patrick Mboma,ATT,78
+Parma,Gianluigi Buffon,POR,74
+Parma,Matteo Guardalben,POR,74
+Perugia,Michele Tardioli,POR,80
+Perugia,Hilário,DC,75
+Perugia,Mauro Milanese,DC,75
+Perugia,Giovanni Tedesco,DC,75
+Perugia,Claudio Rivalta,DC,75
+Perugia,Sean Sogliano,DC,75
+Perugia,Manuele Blasi,CC,74
+Perugia,Ahn Jung-hwan,ATT,74
+Perugia,Ma Mingyu,CC,74
+Perugia,Héctor Tapia,ATT,74
+Perugia,Pablo Guiñazú,CC,75
+Perugia,Giovanni Proietti,POR,69
+Perugia,Zé Maria,DC,75
+Perugia,Emiliano Testini,CC,75
+Perugia,Fabio Gatti,CC,74
+Perugia,Zīsīs Vryzas,ATT,74
+Perugia,Salvatore Monaco,DC,75
+Perugia,Davide Baiocco,CC,75
+Perugia,Anselmo Robbiati,ATT,75
+Perugia,Tomaso Tatti,ATT,75
+Perugia,Fabio Liverani,CC,75
+Perugia,Marco Di Loreto,DC,73
+Perugia,Marco Materazzi,DC,75
+Perugia,Gianluca Petrachi,CC,75
+Perugia,Mirko Pieri,DC,73
+Perugia,Claudio Paris,CC,74
+Perugia,Cristian Bucchi,ATT,74
+Perugia,Roberto Goretti,CC,75
+Perugia,Emiliano Tarana,ATT,75
+Perugia,Andrea Mazzantini,POR,71
+Perugia,Stefano Lombardi,DC,74
+Perugia,Luca Saudati,ATT,75
+Perugia,Dani,ATT,75
+Reggina,Massimo Taibi,POR,76
+Reggina,Martin Jiránek,DC,66
+Reggina,Luca Mezzano,DC,75
+Reggina,Marco Caneira,DC,72
+Reggina,Andrea Zanchetta,CC,83
+Reggina,Giovanni Morabito,DC,74
+Reggina,Gustavo Reggi,ATT,60
+Reggina,José Mamede,CC,75
+Reggina,Erjon Bogdani,ATT,76
+Reggina,Francesco Cozza,CC,84
+Reggina,Massimo Marazzina,ATT,77
+Reggina,Jorge Vargas,CC,74
+Reggina,Wladimiro Sbaglia,CC,58
+Reggina,Ivan Franceschini,DC,59
+Reggina,Alessandro Zoppetti,DC,59
+Reggina,Paulo Sérgio da Costa,CC,74
+Reggina,Salvatore Vicari,CC,74
+Reggina,Joseph Dayo Oshadogan,DC,73
+Reggina,Ezio Brevi,CC,74
+Reggina,Lorenzo Stovini,DC,74
+Reggina,Emanuele Belardi,POR,58
+Reggina,Andrea Bernini,CC,77
+Reggina,Davide Possanzini,ATT,75
+Reggina,Ricardo Verón,CC,75
+Reggina,Pietro Arabia,CC,60
+Reggina,Gianluca Macrì,ATT,73
+Reggina,Antonio Castelli,POR,56
+Reggina,Mozart,CC,67
+Reggina,Maurizio Nassi,ATT,60
+Reggina,Davide Dionigi,ATT,79
+Reggina,Serge Dié,CC,73
+SS Lazio,Luca Marchegiani,POR,84
+SS Lazio,Paolo Negro,DC,78
+SS Lazio,Dino Baggio,CC,78
+SS Lazio,Néstor Sensini,DC,78
+SS Lazio,Karel Poborský,CC,77
+SS Lazio,Claudio López,ATT,79
+SS Lazio,Roberto Baronio,CC,78
+SS Lazio,Marcelo Salas,ATT,79
+SS Lazio,Hernán Crespo,ATT,77
+SS Lazio,Siniša Mihajlović,DC,78
+SS Lazio,Alessandro Nesta,DC,79
+SS Lazio,Diego Simeone,CC,77
+SS Lazio,Giuseppe Pancaro,DC,78
+SS Lazio,Emanuele Pesaresi,DC,79
+SS Lazio,Guerino Gottardi,DC,77
+SS Lazio,Pavel Nedvěd,CC,78
+SS Lazio,Giuseppe Favalli,DC,79
+SS Lazio,Dejan Stanković,CC,78
+SS Lazio,Simone Inzaghi,ATT,78
+SS Lazio,Paolo Orlandoni,POR,74
+SS Lazio,Juan Sebastián Verón,CC,78
+SS Lazio,Fernando Couto,DC,78
+SS Lazio,Attilio Lombardo,CC,78
+SS Lazio,Maurizio Domizzi,DC,77
+SS Lazio,Andrea Luciani,CC,79
+SS Lazio,Daniele Ruggiu,ATT,77
+SS Lazio,Fabrizio Ravanelli,ATT,78
+SS Lazio,Francesco Colonnese,DC,78
+SS Lazio,Emanuele Berrettoni,ATT,79
+SS Lazio,Lucas Castromán,CC,78
+SS Lazio,Angelo Peruzzi,POR,74
+Udinese,Luigi Turci,POR,79
+Udinese,Morgan De Sanctis,POR,71
+Udinese,Anthony Basso,POR,71
+Udinese,Adriano Bonaiuti,POR,71
+Udinese,Olivier Renard,POR,70
+Udinese,Valerio Bertotto,DC,73
+Udinese,Mohammed Gargo,DC,75
+Udinese,Régis Genaux,DC,75
+Udinese,Thomas Manfredini,DC,74
+Udinese,Vittorio Micolucci,DC,74
+Udinese,Andrea Sottil,DC,73
+Udinese,Marco Zamboni,DC,73
+Udinese,Cristiano Del Grosso,DC,73
+Udinese,Alberto,CC,73
+Udinese,Morten Bisgaard,CC,74
+Udinese,Cristian Díaz,CC,74
+Udinese,Stefano Fiore,CC,75
+Udinese,Allan Gaarde,CC,74
+Udinese,Giuliano Giannichedda,CC,74
+Udinese,Luis Helguera,CC,73
+Udinese,Martin Jørgensen,CC,74
+Udinese,Simone Mazzei,CC,74
+Udinese,Raffaele Merzek,CC,74
+Udinese,Fábio César Montezine,CC,75
+Udinese,Renzo Nonis,CC,73
+Udinese,Giampiero Pinzi,CC,74
+Udinese,Henry van der Vegt,CC,73
+Udinese,Johan Walem,CC,74
+Udinese,Mauricio Pineda,CC,74
+Udinese,Alejandro Da Silva,ATT,75
+Udinese,Julio Gutiérrez,ATT,74
+Udinese,Vincenzo Iaquinta,ATT,75
+Udinese,Massimo Margiotta,ATT,74
+Udinese,Roberto Muzzi,ATT,75
+Udinese,Zlatan Muslimović,ATT,74
+Udinese,Roberto Sosa,ATT,75
+Udinese,Warley,ATT,74
+Udinese,Maurizio Bedin,CC,74
+Udinese,Mauro Esposito,ATT,74
+Vicenza,Giorgio Sterchele,POR,78
+Vicenza,Mohamed Kallon,ATT,73
+Vicenza,Alessandro Dal Canto,DC,71
+Vicenza,Fabio Firmani,CC,72
+Vicenza,Giacomo Dicara,DC,72
+Vicenza,Giuseppe Cardone,DC,71
+Vicenza,Marco Schenardi,CC,71
+Vicenza,Vincenzo Sommese,CC,71
+Vicenza,Antonino Bernardini,CC,71
+Vicenza,Carmine Esposito,ATT,72
+Vicenza,Fabio Viviani,CC,71
+Vicenza,Massimo Beghetto,DC,71
+Vicenza,Gianluca Comotto,DC,71
+Vicenza,Cristian Adami,DC,72
+Vicenza,Raffaele Longo,CC,72
+Vicenza,Maurizio Rossi,CC,71
+Vicenza,Jeda,ATT,71
+Vicenza,Marco Aurelio,DC,73
+Vicenza,Ottavio Palladini,CC,73
+Vicenza,Paolo Zanetti,CC,72
+Vicenza,Stjepan Tomas,DC,72
+Vicenza,Lamberto Zauli,CC,71
+Vicenza,Saul Santarelli,POR,69
+Vicenza,Stefano Fattori,DC,73
+Vicenza,Dražen Brnčić,CC,73
+Vicenza,Marco Zanchi,DC,71
+Vicenza,Federico Crovari,CC,71
+Vicenza,Ousmane Dabo,CC,71
+Vicenza,Davide Mezzanotti,DC,71
+Vicenza,Juri Tamburini,DC,73
+Vicenza,Walter Zunino,DC,71
+Vicenza,Luca Toni,ATT,72
+Vicenza,Goran Tomić,ATT,72
+Vicenza,Pasquale Luiso,ATT,71
+Vicenza,Enrico Milan,POR,67
+Vicenza,Manuel Benetti,DC,73
+Vicenza,Christian Maggio,DC,72
+Vicenza,André Leone,DC,71
+Vicenza,Vasco Faísca,DC,73
