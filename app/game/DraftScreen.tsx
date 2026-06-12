@@ -316,7 +316,7 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
-interface Props { config: SetupConfig; onBack: () => void; onComplete: (_slots: DraftSlot[]) => void; }
+interface Props { config: SetupConfig; onBack?: () => void; onComplete: (_slots: DraftSlot[]) => void; }
 
 export default function DraftScreen({ config, onBack, onComplete }: Props) {
   const { state, reveal, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel } = useDraft(config);
