@@ -3,13 +3,12 @@
  * Fonte dei dati del gioco.
  *
  * Strategia:
- *  - In ambiente server (Next.js SSR / Route Handler): legge i CSV dalla root
- *    tramite lib/csvLoader.ts e costruisce players/clubs in memoria.
- *  - In ambiente client: si affida ai dati già serializzati (passati come props
- *    da un Server Component) oppure li ottiene via /api/data.
+ *  - app/game/layout.tsx (Server Component) chiama await initData() che
+ *    fa fetch su /api/data/route.ts (Node.js only, usa fs + csvLoader).
+ *  - I client components chiamano loadPlayers()/loadClubs() in modo sincrono
+ *    perché i dati sono già in cache quando il loro render avviene.
  *
- * L'API pubblica (loadClubs, loadPlayers, getSquad, …) rimane invariata
- * per non rompere nessun componente esistente.
+ * L'API pubblica (loadClubs, loadPlayers, getSquad, …) è invariata.
  */
 
 // ─── Tipi pubblici ────────────────────────────────────────────────────────────
@@ -54,16 +53,11 @@ export interface SquadPlayer {
   assists: number;
   rating: number;
   primeRating?: number;
-  /** Ruolo originale dal CSV (es. "DC", "CC", "POR") */
   ruolo?: string;
 }
 
 // ─── Utility di posizione ─────────────────────────────────────────────────────
 
-/**
- * Determina la categoria dalla posizione FIFA.
- * Supporta stringhe multi-posizione tipo "RW, ST": usa la prima posizione valida.
- */
 export function toCategory(pos: string): string {
   const first = pos.split(',')[0].trim();
   if (first === 'GK') return 'GK';
@@ -72,37 +66,45 @@ export function toCategory(pos: string): string {
   return 'ATT';
 }
 
-// ─── Caricamento dati ─────────────────────────────────────────────────────────
+// ─── Cache in-memory ──────────────────────────────────────────────────────────
 
-// Lazy-loaded singleton — caricato una volta sola per processo Next.js
 let _players: Player[] | null = null;
 let _clubs:   Club[]   | null = null;
 
-function ensureLoaded(): void {
-  if (_players !== null) return;
-
+/**
+ * Chiama initData() una sola volta in un Server Component (es. app/game/layout.tsx)
+ * PRIMA che qualsiasi client component venga renderizzato.
+ *
+ * In SSR il fetch su /api/data è una chiamata interna Next.js (stesso processo),
+ * non una vera richiesta di rete — viene automaticamente deduplicata e
+ * messa in cache da Next.js con { cache: 'force-cache' }.
+ */
+export async function initData(): Promise<void> {
+  if (_players !== null) return; // già caricato
   try {
-    // Importazione dinamica per evitare che webpack bundli `fs` lato client
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { loadCsvDataset } = require('./csvLoader') as typeof import('./csvLoader');
-    const dataset = loadCsvDataset();
+    // In ambiente server Next.js, le URL relative non funzionano;
+    // usiamo NEXT_PUBLIC_BASE_URL o il base URL canonico di Vercel.
+    const base =
+      process.env.NEXT_PUBLIC_BASE_URL ??
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    const res = await fetch(`${base}/api/data`, { cache: 'force-cache' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const dataset = (await res.json()) as { players: Player[]; clubs: Club[] };
     _players = dataset.players;
     _clubs   = dataset.clubs;
   } catch (err) {
-    console.error('[data.ts] Impossibile caricare i CSV:', err);
+    console.error('[data.ts] initData fallito:', err);
     _players = [];
     _clubs   = [];
   }
 }
 
 export function loadClubs(): Club[] {
-  ensureLoaded();
-  return _clubs!;
+  return _clubs ?? [];
 }
 
 export function loadPlayers(): Player[] {
-  ensureLoaded();
-  return _players!;
+  return _players ?? [];
 }
 
 // ─── Query functions ──────────────────────────────────────────────────────────
@@ -135,8 +137,8 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
         name:              p.name,
         position:          p.position,
         position_category: p.position_category,
-        apps:              ps.apps   ?? 0,
-        goals:             ps.goals  ?? 0,
+        apps:              ps.apps    ?? 0,
+        goals:             ps.goals   ?? 0,
         assists:           ps.assists ?? 0,
         rating:            ps.rating,
       };

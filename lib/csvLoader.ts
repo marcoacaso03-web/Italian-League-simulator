@@ -1,7 +1,12 @@
 /**
- * csvLoader.ts
- * Carica tutti i CSV presenti nella root del progetto e li converte
+ * csvLoader.ts  — SERVER ONLY
+ *
+ * Carica tutti i CSV dalla root del progetto e li converte
  * nei tipi Player[] e Club[] usati dall'app.
+ *
+ * ATTENZIONE: questo modulo usa 'fs' e deve girare SOLO in contesto Node.js
+ * (Route Handler, Server Component, generateStaticParams, ecc.).
+ * Non importarlo mai direttamente da un Client Component.
  *
  * Mapping filename → AnnoStagione:
  *   "Stagione 1996-97.csv" → "1996/97"
@@ -15,11 +20,12 @@
  *   ATT/AT → ST/ATT, AD/ADA → RW/ATT, AS/ASA → LW/ATT, CF → CF/ATT
  */
 
+import 'server-only';
 import fs from 'fs';
 import path from 'path';
 import type { Player, Club, PlayerSeason } from './data';
 
-// ─── Ruolo italiano → { position: string, category: string } ─────────────────
+// ─── Ruolo italiano → { position, category } ──────────────────────────────────
 const RUOLO_MAP: Record<string, { position: string; category: string }> = {
   POR:  { position: 'GK',  category: 'GK'  },
   DC:   { position: 'CB',  category: 'DEF' },
@@ -53,21 +59,14 @@ function ruoloToPositionCategory(ruolo: string): { position: string; category: s
 
 // ─── Filename → AnnoStagione ──────────────────────────────────────────────────
 
-/**
- * Costruisce la mappa di tutti i CSV presenti nella root del progetto.
- * Restituisce un oggetto { filename: annoStagione } per ogni CSV riconosciuto.
- */
 export function buildCsvSeasonMap(): Record<string, string> {
   const map: Record<string, string> = {};
 
-  // Stagione YYYY-YY.csv  → "YYYY/YY"
   const stagReMatch = /^Stagione (\d{4})-(\d{2})\.csv$/;
-  // FIFA NN.csv          → "20NN-1/NN"
   const fifaMatch   = /^FIFA (\d{2})\.csv$/;
-  // FC NN.csv            → "20NN-1/NN"
   const fcMatch     = /^FC (\d{2})\.csv$/;
 
-  const rootDir = path.join(process.cwd());
+  const rootDir = process.cwd();
   let files: string[] = [];
   try {
     files = fs.readdirSync(rootDir).filter((f) => f.endsWith('.csv'));
@@ -78,15 +77,12 @@ export function buildCsvSeasonMap(): Record<string, string> {
   for (const f of files) {
     let m;
     if ((m = f.match(stagReMatch))) {
-      // Es: "Stagione 1996-97.csv" → "1996/97"
       map[f] = `${m[1]}/${m[2]}`;
     } else if ((m = f.match(fifaMatch))) {
-      // Es: "FIFA 05.csv" (FIFA 05 copre 2004/05)
       const nn = m[1];
       const year = 2000 + parseInt(nn, 10);
       map[f] = `${year - 1}/${nn}`;
     } else if ((m = f.match(fcMatch))) {
-      // Es: "FC 24.csv" (FC 24 copre 2023/24)
       const nn = m[1];
       const year = 2000 + parseInt(nn, 10);
       map[f] = `${year - 1}/${nn}`;
@@ -103,7 +99,7 @@ interface CsvRow {
   Giocatore: string;
   Ruolo: string;
   Valutazione: string;
-  AnnoStagione?: string; // colonna opzionale (non sempre presente nei CSV)
+  AnnoStagione?: string;
 }
 
 function parseSimpleCsv(content: string): CsvRow[] {
@@ -126,23 +122,19 @@ function parseSimpleCsv(content: string): CsvRow[] {
   return rows;
 }
 
-// ─── Caricamento principale ───────────────────────────────────────────────────
+// ─── Export types ─────────────────────────────────────────────────────────────
 
 export interface CsvDataset {
   players: Player[];
   clubs: Club[];
 }
 
-/**
- * Legge tutti i CSV dalla root del progetto e costruisce players[] + clubs[].
- * Questa funzione va chiamata SOLO in contesto server (Next.js Server Component
- * o Route Handler), mai lato client.
- */
+// ─── Caricamento principale ───────────────────────────────────────────────────
+
 export function loadCsvDataset(): CsvDataset {
   const seasonMap = buildCsvSeasonMap();
   const rootDir = process.cwd();
 
-  // playerMap: id ("Giocatore|Ruolo") → Player in costruzione
   const playerMap = new Map<string, Player>();
   const clubSet   = new Set<string>();
 
@@ -152,7 +144,7 @@ export function loadCsvDataset(): CsvDataset {
     try {
       content = fs.readFileSync(filePath, 'utf-8');
     } catch {
-      continue; // file non leggibile, salta
+      continue;
     }
 
     const rows = parseSimpleCsv(content);
@@ -164,7 +156,6 @@ export function loadCsvDataset(): CsvDataset {
 
       clubSet.add(row.Squadra);
 
-      // ID univoco: nome + ruolo normalizzato (gestisce omonimi con ruoli diversi)
       const playerId = `${row.Giocatore}__${position}`;
 
       const season: PlayerSeason = {
@@ -175,7 +166,6 @@ export function loadCsvDataset(): CsvDataset {
 
       if (playerMap.has(playerId)) {
         const existing = playerMap.get(playerId)!;
-        // Aggiungi stagione solo se non già presente
         const already = existing.seasons.some(
           (s) => s.club === season.club && s.season === season.season
         );
