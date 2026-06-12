@@ -28,12 +28,14 @@ export interface SetupConfig {
   formation: string;
 }
 
-const MIN_YEAR = 1992;
-const MAX_YEAR = 2026;
+// ─── Costanti era ─────────────────────────────────────────────────────────────
+// MIN_YEAR aggiornato a 1996 per coprire la stagione 1996/97 (primo CSV disponibile)
+const MIN_YEAR = 1996;
+const MAX_YEAR = 2025;
 const TOTAL_SEASONS = MAX_YEAR - MIN_YEAR + 1;
 
 const ERA_PRESETS: { id: EraPreset; label: string; sub?: string; from: number }[] = [
-  { id: 'all',    label: 'All-time', from: 1992 },
+  { id: 'all',    label: 'All-time', from: MIN_YEAR },
   { id: '2000s',  label: '2000s+',   from: 2000 },
   { id: '2010s',  label: '2010s+',   from: 2010 },
   { id: 'modern', label: 'Modern', sub: '(2016+)', from: 2016 },
@@ -196,32 +198,40 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
 export default function GamePage() {
   const [phase,      setPhase]      = useState<GamePhase>('setup');
   const [config,     setConfig]     = useState<SetupConfig | null>(null);
-  const [finalSlots, setFinalSlots] = useState<DraftSlot[] | null>(null);
-  const [simResult,  setSimResult]  = useState<SeasonResult | null>(null);
-  const [simOverall, setSimOverall] = useState<TeamOverall | null>(null);
+  const [draftSlots, setDraftSlots] = useState<DraftSlot[]>([]);
+  const [results,    setResults]    = useState<SeasonResult[] | null>(null);
+  const [teamOverall, setTeamOverall] = useState<TeamOverall | null>(null);
 
-  const handleStart         = useCallback((cfg: SetupConfig)                       => { setConfig(cfg); setPhase('draft'); }, []);
-  const handleDraftComplete = useCallback((slots: DraftSlot[])                     => { setFinalSlots(slots); setPhase('preview'); }, []);
-  const handleSimComplete   = useCallback((result: SeasonResult, ov: TeamOverall)  => { setSimResult(result); setSimOverall(ov); setPhase('results'); }, []);
-  const handleRestart       = useCallback(()                                        => { setPhase('setup'); setFinalSlots(null); setSimResult(null); setSimOverall(null); }, []);
+  const handleStart = useCallback((cfg: SetupConfig) => {
+    setConfig(cfg);
+    setPhase('draft');
+  }, []);
 
-  if (phase === 'setup' || !config) return <SetupScreen onStart={handleStart} />;
+  const handleDraftComplete = useCallback((slots: DraftSlot[]) => {
+    setDraftSlots(slots);
+    setPhase('preview');
+  }, []);
 
-  if (phase === 'draft')
-    return <DraftScreen config={config} onBack={() => setPhase('setup')} onComplete={handleDraftComplete} />;
+  const handleSimStart = useCallback(() => setPhase('sim'), []);
 
-  if (phase === 'preview' && finalSlots)
-    return <SquadPreviewScreen slots={finalSlots} onSimulate={() => setPhase('sim')} onRestart={handleRestart} />;
+  const handleSimComplete = useCallback((res: SeasonResult[], overall: TeamOverall) => {
+    setResults(res);
+    setTeamOverall(overall);
+    setPhase('results');
+  }, []);
 
-  if (phase === 'sim' && finalSlots)
-    return <SimScreen slots={finalSlots} onComplete={handleSimComplete} />;
+  const handleRestart = useCallback(() => {
+    setPhase('setup');
+    setConfig(null);
+    setDraftSlots([]);
+    setResults(null);
+    setTeamOverall(null);
+  }, []);
 
-  if (phase === 'results' && simResult && simOverall && finalSlots)
-    return <ResultsScreen result={simResult} overall={simOverall} slots={finalSlots} onRestart={handleRestart} />;
-
-  return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
-      <button onClick={handleRestart} className="text-slate-400 hover:text-white">↺ Ricomincia</button>
-    </div>
-  );
+  if (phase === 'setup' || config === null) return <SetupScreen onStart={handleStart} />;
+  if (phase === 'draft')   return <DraftScreen   config={config} onComplete={handleDraftComplete} />;
+  if (phase === 'preview') return <SquadPreviewScreen slots={draftSlots} config={config} onSim={handleSimStart} onBack={() => setPhase('draft')} />;
+  if (phase === 'sim')     return <SimScreen     slots={draftSlots} config={config} onComplete={handleSimComplete} />;
+  if (phase === 'results' && results && teamOverall) return <ResultsScreen results={results} overall={teamOverall} config={config} onRestart={handleRestart} />;
+  return <SetupScreen onStart={handleStart} />;
 }

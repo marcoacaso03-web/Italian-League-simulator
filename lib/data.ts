@@ -1,5 +1,18 @@
-import clubsData from '../data/clubs.json';
-import playersData from '../data/players.json';
+/**
+ * data.ts
+ * Fonte dei dati del gioco.
+ *
+ * Strategia:
+ *  - In ambiente server (Next.js SSR / Route Handler): legge i CSV dalla root
+ *    tramite lib/csvLoader.ts e costruisce players/clubs in memoria.
+ *  - In ambiente client: si affida ai dati già serializzati (passati come props
+ *    da un Server Component) oppure li ottiene via /api/data.
+ *
+ * L'API pubblica (loadClubs, loadPlayers, getSquad, …) rimane invariata
+ * per non rompere nessun componente esistente.
+ */
+
+// ─── Tipi pubblici ────────────────────────────────────────────────────────────
 
 export interface Club {
   id: string;
@@ -15,12 +28,13 @@ export interface PlayerSeason {
   assists?: number;
 }
 
-// position_category viene derivato runtime da position (non è nel JSON)
 export interface Player {
   id: string;
   name: string;
-  position: string; // specifico: GK, CB, LB, RB, LWB, RWB, CDM, CM, CAM, LM, RM, LW, RW, ST, CF — può contenere più valori es. "RW, ST"
-  position_category: string; // GK, DEF, MID, ATT — calcolato in loadPlayers()
+  /** Posizione FIFA specifica: GK, CB, LB, RB, CM, CDM, CAM, LM, RM, LW, RW, ST, CF */
+  position: string;
+  /** Categoria aggregata: GK | DEF | MID | ATT */
+  position_category: string;
   seasons: PlayerSeason[];
 }
 
@@ -40,18 +54,14 @@ export interface SquadPlayer {
   assists: number;
   rating: number;
   primeRating?: number;
+  /** Ruolo originale dal CSV (es. "DC", "CC", "POR") */
+  ruolo?: string;
 }
 
-// Tipo che rispecchia il JSON grezzo (senza position_category)
-interface RawPlayer {
-  id: string;
-  name: string;
-  position: string;
-  seasons: (PlayerSeason & { specific_position?: string })[];
-}
+// ─── Utility di posizione ─────────────────────────────────────────────────────
 
 /**
- * Determina la categoria della posizione principale.
+ * Determina la categoria dalla posizione FIFA.
  * Supporta stringhe multi-posizione tipo "RW, ST": usa la prima posizione valida.
  */
 export function toCategory(pos: string): string {
@@ -62,18 +72,43 @@ export function toCategory(pos: string): string {
   return 'ATT';
 }
 
-const clubs: Club[] = clubsData as Club[];
+// ─── Caricamento dati ─────────────────────────────────────────────────────────
 
-// Deriva position_category a runtime dal campo position
-const players: Player[] = (playersData as RawPlayer[]).map((p) => ({
-  ...p,
-  position_category: toCategory(p.position),
-}));
+// Lazy-loaded singleton — caricato una volta sola per processo Next.js
+let _players: Player[] | null = null;
+let _clubs:   Club[]   | null = null;
 
-export function loadClubs(): Club[] { return clubs; }
-export function loadPlayers(): Player[] { return players; }
+function ensureLoaded(): void {
+  if (_players !== null) return;
+
+  try {
+    // Importazione dinamica per evitare che webpack bundli `fs` lato client
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { loadCsvDataset } = require('./csvLoader') as typeof import('./csvLoader');
+    const dataset = loadCsvDataset();
+    _players = dataset.players;
+    _clubs   = dataset.clubs;
+  } catch (err) {
+    console.error('[data.ts] Impossibile caricare i CSV:', err);
+    _players = [];
+    _clubs   = [];
+  }
+}
+
+export function loadClubs(): Club[] {
+  ensureLoaded();
+  return _clubs!;
+}
+
+export function loadPlayers(): Player[] {
+  ensureLoaded();
+  return _players!;
+}
+
+// ─── Query functions ──────────────────────────────────────────────────────────
 
 export function getClubSeasonPool(): ClubSeasonEntry[] {
+  const players = loadPlayers();
   const map = new Map<string, number>();
   players.forEach((p) => {
     p.seasons.forEach((s) => {
@@ -90,26 +125,27 @@ export function getClubSeasonPool(): ClubSeasonEntry[] {
 }
 
 export function getSquad(club: string, season: string): SquadPlayer[] {
+  const players = loadPlayers();
   return players
     .filter((p) => p.seasons.some((s) => s.club === club && s.season === season))
     .map((p) => {
       const ps = p.seasons.find((s) => s.club === club && s.season === season)!;
       return {
-        id: p.id,
-        name: p.name,
-        position: p.position,
+        id:                p.id,
+        name:              p.name,
+        position:          p.position,
         position_category: p.position_category,
-        apps: ps.apps ?? 0,
-        goals: ps.goals ?? 0,
-        assists: ps.assists ?? 0,
-        rating: ps.rating,
+        apps:              ps.apps   ?? 0,
+        goals:             ps.goals  ?? 0,
+        assists:           ps.assists ?? 0,
+        rating:            ps.rating,
       };
     })
     .sort((a, b) => b.rating - a.rating);
 }
 
 export function getPrimeRating(playerId: string): number {
-  const player = players.find((p) => p.id === playerId);
+  const player = loadPlayers().find((p) => p.id === playerId);
   if (!player || player.seasons.length === 0) return 0;
   return Math.max(...player.seasons.map((s) => s.rating));
 }
@@ -123,9 +159,11 @@ export function getPrimeSquad(club: string, season: string): SquadPlayer[] {
 
 export function getAvailableSeasons(): string[] {
   const set = new Set<string>();
-  players.forEach((p) => p.seasons.forEach((s) => set.add(s.season)));
+  loadPlayers().forEach((p) => p.seasons.forEach((s) => set.add(s.season)));
   return Array.from(set).sort();
 }
+
+// ─── Helper UI ────────────────────────────────────────────────────────────────
 
 export function ratingColor(rating: number): string {
   if (rating >= 85) return 'text-emerald-400';

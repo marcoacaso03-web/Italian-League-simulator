@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 const STATS = [
   { value: '20', label: 'Club Serie A' },
-  { value: '4.000+', label: 'Stagioni Giocatori' },
-  { value: '1992–2026', label: 'Stagioni coperte' },
+  { value: '5.000+', label: 'Stagioni Giocatori' },
+  { value: '1996–2026', label: 'Stagioni coperte' },
 ];
 
 const STEPS = [
@@ -24,11 +24,11 @@ const CHALLENGES = [
 
 const FAQS = [
   { q: "Cos'è Italian League Simulator?", a: "Un gioco di draft calcistico ispirato a 38-0.app. Scegli la formazione, drafta giocatori con una slot machine e simula una stagione di Serie A." },
-  { q: 'Quali dati usa il gioco?', a: 'I dati provengono dal dataset EA Sports FC (FIFA/FC) e coprono le stagioni Serie A dal 2014/15, con migliaia di giocatori e stagioni.' },
-  { q: 'Come vengono calcolati i rating?', a: 'Ogni giocatore usa l\'overall EA Sports della stagione indicata in players.json, senza formule aggiuntive. L\'overall di squadra è la media dei rating draftati.' },
+  { q: 'Quali dati usa il gioco?', a: 'I dati provengono dai CSV ufficiali del progetto (EA Sports FIFA/FC) e coprono le stagioni Serie A dal 1996/97 al 2025/26, con oltre 5.000 schede giocatore.' },
+  { q: 'Come vengono calcolati i rating?', a: "Ogni giocatore usa la Valutazione presente nel CSV della stagione corrispondente (campo 'Valutazione'). L'overall di squadra è la media dei rating draftati." },
   { q: 'Posso giocare più volte?', a: 'Certo! Ogni partita è diversa grazie alla slot machine. Prova diverse formazioni, difficoltà e sfide.' },
   { q: 'È gratis?', a: 'Sì, completamente gratuito. Nessun account necessario.' },
-  { q: 'Quali formazioni sono disponibili?', a: '7 formazioni: 4-3-3, 4-4-2, 4-2-3-1, 4-5-1, 3-4-3, 3-5-2, 5-4-1.' },
+  { q: 'Quali formazioni sono disponibili?', a: '5 formazioni: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 5-3-2.' },
 ];
 
 export default function Home() {
