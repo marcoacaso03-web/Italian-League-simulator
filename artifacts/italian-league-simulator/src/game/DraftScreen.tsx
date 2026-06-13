@@ -85,7 +85,7 @@ function Pitch({ formation, slots }: PitchProps) {
   const slotMap = new Map(slots.map((s) => [s.formationSlot.id, s]));
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: '7/10', maxHeight: '54vw', maxWidth: '100%' }}>
+    <div className="relative w-full" style={{ aspectRatio: '100/143' }}>
       <svg viewBox="0 0 100 143" className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         {Array.from({ length: 8 }).map((_, i) => (
           <rect key={i} x="0" y={i * 18} width="100" height="18" fill={i % 2 === 0 ? '#1a4a1a' : '#1e5520'} />
@@ -115,7 +115,7 @@ function Pitch({ formation, slots }: PitchProps) {
             className="absolute flex flex-col items-center"
             style={{
               left:      `${fs.x}%`,
-              top:       `${(fs.y / 143) * 100}%`,
+              top:       `${fs.y}%`,
               transform: 'translate(-50%, -50%)',
               zIndex:    10,
               gap:       2,
