@@ -214,10 +214,10 @@ export default function GamePage() {
 
   const handleSimStart = useCallback(() => setPhase('sim'), []);
 
-  const handleSimComplete = useCallback((res: SeasonResult[], overall: TeamOverall) => {
-    setResults(res);
-    setTeamOverall(overall);
-    setPhase('results');
+  const handleSimComplete = useCallback((res: SeasonResult, overall: TeamOverall) => {
+  setResults([res]);
+  setTeamOverall(overall);
+  setPhase('results');
   }, []);
 
   const handleRestart = useCallback(() => {
