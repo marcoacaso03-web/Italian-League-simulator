@@ -71,15 +71,14 @@ function buildCsvSeasonMap(rootDir: string): Record<string, string> {
   for (const f of files) {
     let m;
     if ((m = f.match(stagReMatch))) {
-      map[f] = `${m[1]}/${m[2]}`;
+      const startYear = parseInt(m[1], 10);
+      map[f] = `${startYear}-${startYear + 1}`;
     } else if ((m = f.match(fifaMatch))) {
-      const nn = m[1];
-      const year = 2000 + parseInt(nn, 10);
-      map[f] = `${year - 1}/${nn}`;
+      const year = 2000 + parseInt(m[1], 10);
+      map[f] = `${year - 1}-${year}`;
     } else if ((m = f.match(fcMatch))) {
-      const nn = m[1];
-      const year = 2000 + parseInt(nn, 10);
-      map[f] = `${year - 1}/${nn}`;
+      const year = 2000 + parseInt(m[1], 10);
+      map[f] = `${year - 1}-${year}`;
     }
   }
   return map;
@@ -110,7 +109,7 @@ function parseSimpleCsv(content: string): CsvRow[] {
   return rows;
 }
 
-let cachedData: { players: Player[]; clubs: Club[] } | null = null;
+let cachedData: { players: Player[]; clubs: Club[]; clubsBySeason: Record<string, string[]> } | null = null;
 
 function findWorkspaceRoot(): string {
   let dir = path.dirname(fileURLToPath(import.meta.url));
@@ -121,7 +120,17 @@ function findWorkspaceRoot(): string {
   return process.cwd();
 }
 
-function loadDataset(): { players: Player[]; clubs: Club[] } {
+function loadClubsBySeason(rootDir: string): Record<string, string[]> {
+  const filePath = path.join(rootDir, "clubs-by-season.json");
+  try {
+    const raw = fs.readFileSync(filePath, "utf-8");
+    return JSON.parse(raw) as Record<string, string[]>;
+  } catch {
+    return {};
+  }
+}
+
+function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Record<string, string[]> } {
   if (cachedData) return cachedData;
 
   const rootDir = findWorkspaceRoot();
@@ -163,7 +172,8 @@ function loadDataset(): { players: Player[]; clubs: Club[] } {
 
   const players: Player[] = Array.from(playerMap.values());
   const clubs: Club[] = Array.from(clubSet).sort().map((name) => ({ id: name, name }));
-  cachedData = { players, clubs };
+  const clubsBySeason = loadClubsBySeason(rootDir);
+  cachedData = { players, clubs, clubsBySeason };
   return cachedData;
 }
 

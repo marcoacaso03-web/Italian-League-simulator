@@ -48,6 +48,7 @@ export function toCategory(pos: string): string {
 
 let _players: Player[] | null = null;
 let _clubs:   Club[]   | null = null;
+let _clubsBySeason: Record<string, string[]> = {};
 let _initPromise: Promise<void> | null = null;
 
 export async function initData(): Promise<void> {
@@ -57,9 +58,14 @@ export async function initData(): Promise<void> {
     try {
       const res = await fetch('/api/data');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const dataset = (await res.json()) as { players: Player[]; clubs: Club[] };
-      _players = dataset.players;
-      _clubs   = dataset.clubs;
+      const dataset = (await res.json()) as {
+        players: Player[];
+        clubs: Club[];
+        clubsBySeason: Record<string, string[]>;
+      };
+      _players        = dataset.players;
+      _clubs          = dataset.clubs;
+      _clubsBySeason  = dataset.clubsBySeason ?? {};
     } catch (err) {
       console.error('[data.ts] initData failed:', err);
       _players = [];
@@ -67,6 +73,15 @@ export async function initData(): Promise<void> {
     }
   })();
   return _initPromise;
+}
+
+export function loadClubsBySeason(): Record<string, string[]> {
+  return _clubsBySeason;
+}
+
+/** Restituisce i club in Serie A per una stagione specifica */
+export function getClubsForSeason(season: string): string[] {
+  return _clubsBySeason[season] ?? [];
 }
 
 export function loadClubs(): Club[] {
