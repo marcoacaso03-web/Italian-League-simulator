@@ -51,7 +51,9 @@ export function buildSlots(formation: string): DraftSlot[] {
 }
 
 export function seasonYear(season: string): number {
-  return parseInt(season.split('/')[0], 10);
+  // Supporta sia "1996/97" che "1996-1997"
+  const separator = season.includes('/') ? '/' : '-';
+  return parseInt(season.split(separator)[0], 10);
 }
 
 function filteredPool(config: SetupConfig) {
