@@ -73,11 +73,6 @@ function slotBadge(fs: { id: string; acceptedPositions: string[] }): string {
   return (fs.acceptedPositions[0] ?? fs.id).toUpperCase();
 }
 
-function playerInitials(name: string): string {
-  const parts = name.trim().split(' ');
-  const last = parts[parts.length - 1];
-  return last.slice(0, 2).toUpperCase();
-}
 
 interface PitchProps { formation: string; slots: DraftSlot[]; }
 function Pitch({ formation, slots }: PitchProps) {
@@ -104,10 +99,9 @@ function Pitch({ formation, slots }: PitchProps) {
         const ds = slotMap.get(fs.id);
         const player = ds?.player ?? null;
         const color  = catColor(fs.category);
-        const badge  = slotBadge(fs);
+        const badge    = slotBadge(fs);
         const posLabel = slotPositionLabel(fs.id);
         const surname  = player ? player.name.trim().split(' ').pop() ?? '' : '';
-        const initials = player ? playerInitials(player.name) : '';
 
         return (
           <div
@@ -138,8 +132,8 @@ function Pitch({ formation, slots }: PitchProps) {
               boxShadow: player ? `0 0 8px ${color}55` : 'none',
             }}>
               {player && (
-                <span style={{ fontSize: 10, fontWeight: 900, color: '#fff', letterSpacing: -0.5 }}>
-                  {initials}
+                <span style={{ fontSize: 9, fontWeight: 900, color: '#fff', letterSpacing: -0.5 }}>
+                  {player.rating}
                 </span>
               )}
             </div>
