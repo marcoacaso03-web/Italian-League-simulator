@@ -211,9 +211,9 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
   const color = catColor(player.position_category);
   return (
     <button onClick={onClick} disabled={disabled}
-      className={['flex items-center gap-3 w-full px-4 py-3 rounded-2xl transition-all text-left',
+      className={['relative flex items-center gap-3 w-full px-4 py-3 rounded-2xl transition-all text-left',
         selected ? 'bg-emerald-500/10 border border-emerald-500/50'
-          : disabled ? 'opacity-30 cursor-not-allowed bg-white/[0.03] border border-white/5'
+          : disabled ? 'opacity-50 cursor-not-allowed grayscale bg-white/[0.06] border border-white/10'
           : 'bg-white/[0.06] border border-white/10 active:scale-[0.98] hover:bg-white/10',
       ].join(' ')}>
       <div style={{ backgroundColor: color + '28', border: `2px solid ${color}55` }}
