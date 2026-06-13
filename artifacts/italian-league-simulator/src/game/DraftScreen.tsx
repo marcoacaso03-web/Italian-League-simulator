@@ -224,7 +224,14 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
       ].join(' ')}>
       <div style={{ backgroundColor: color + '28', border: `2px solid ${color}55` }}
         className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center">
-        <span style={{ color }} className="text-xl font-black">?</span>
+        {showRating ? (
+          <span style={{ color: player.rating >= 85 ? '#4ade80' : player.rating >= 72 ? '#fbbf24' : '#f87171' }}
+            className="text-lg font-black leading-none">
+            {player.rating}
+          </span>
+        ) : (
+          <span style={{ color }} className="text-xl font-black">?</span>
+        )}
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-white truncate">{player.name}</p>
@@ -237,12 +244,6 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
             {lbl}
           </span>
         ))}
-        {showRating && (
-          <span style={{ color: player.rating >= 85 ? '#4ade80' : player.rating >= 72 ? '#fbbf24' : '#f87171' }}
-            className="text-base font-black w-8 text-right">
-            {player.rating}
-          </span>
-        )}
       </div>
     </button>
   );
