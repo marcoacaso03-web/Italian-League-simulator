@@ -147,11 +147,22 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
       continue;
     }
     const rows = parseSimpleCsv(content);
+
+    // Dedup within this CSV: keep only the first occurrence of (giocatore, club)
+    // In FIFA/FC the primary position is always listed first
+    const seenInFile = new Set<string>();
+
     for (const row of rows) {
+      const fileKey = `${row.Giocatore}|${row.Squadra}`;
+      if (seenInFile.has(fileKey)) continue;
+      seenInFile.add(fileKey);
+
       const { position, category } = ruoloToPositionCategory(row.Ruolo);
       const rating = parseInt(row.Valutazione, 10);
       if (isNaN(rating)) continue;
       clubSet.add(row.Squadra);
+
+      // Player identity: name + primary position (stable across seasons)
       const playerId = `${row.Giocatore}__${position}`;
       const season: PlayerSeason = { club: row.Squadra, season: annoStagione, rating };
       if (playerMap.has(playerId)) {
