@@ -16,6 +16,8 @@ interface Player {
   name: string;
   position: string;
   position_category: string;
+  all_positions: string[];
+  all_categories: string[];
   seasons: PlayerSeason[];
 }
 
@@ -29,9 +31,9 @@ const RUOLO_MAP: Record<string, { position: string; category: string }> = {
   DC:   { position: "CB",  category: "DEF" },
   SW:   { position: "CB",  category: "DEF" },
   TD:   { position: "RB",  category: "DEF" },
-  ED:   { position: "RB",  category: "DEF" },
   TS:   { position: "LB",  category: "DEF" },
-  ES:   { position: "LB",  category: "DEF" },
+  ED:   { position: "RM",  category: "MID" },  // Esterno Destro = ala/tornante, non terzino
+  ES:   { position: "LM",  category: "MID" },  // Esterno Sinistro = ala/tornante, non terzino
   CC:   { position: "CM",  category: "MID" },
   CDC:  { position: "CDM", category: "MID" },
   LCDM: { position: "CDM", category: "MID" },
@@ -148,32 +150,49 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
     }
     const rows = parseSimpleCsv(content);
 
-    // Dedup only exact duplicates: same player + club + role in the same CSV
-    const seenInFile = new Set<string>();
+    // Group by (giocatore, club) within this CSV.
+    // First row = posizione primaria; righe successive = posizioni alternative.
+    // Righe identiche (stesso ruolo) vengono ignorate.
+    const fileGroups = new Map<string, {
+      name: string; club: string;
+      primaryPos: string; primaryCat: string; rating: number;
+      allPos: string[]; allCat: string[];
+    }>();
 
     for (const row of rows) {
-      const fileKey = `${row.Giocatore}|${row.Squadra}|${row.Ruolo}`;
-      if (seenInFile.has(fileKey)) continue;
-      seenInFile.add(fileKey);
-
       const { position, category } = ruoloToPositionCategory(row.Ruolo);
       const rating = parseInt(row.Valutazione, 10);
       if (isNaN(rating)) continue;
-      clubSet.add(row.Squadra);
 
-      // Player identity: name + primary position (stable across seasons)
-      const playerId = `${row.Giocatore}__${position}`;
-      const season: PlayerSeason = { club: row.Squadra, season: annoStagione, rating };
+      const fileKey = `${row.Giocatore}|${row.Squadra}`;
+      if (!fileGroups.has(fileKey)) {
+        fileGroups.set(fileKey, {
+          name: row.Giocatore, club: row.Squadra,
+          primaryPos: position, primaryCat: category, rating,
+          allPos: [position], allCat: [category],
+        });
+      } else {
+        const g = fileGroups.get(fileKey)!;
+        if (!g.allPos.includes(position)) { g.allPos.push(position); }
+        if (!g.allCat.includes(category)) { g.allCat.push(category); }
+      }
+    }
+
+    for (const g of fileGroups.values()) {
+      clubSet.add(g.club);
+      const playerId = `${g.name}__${g.primaryPos}`;
+      const season: PlayerSeason = { club: g.club, season: annoStagione, rating: g.rating };
       if (playerMap.has(playerId)) {
         const existing = playerMap.get(playerId)!;
         const already = existing.seasons.some((s) => s.club === season.club && s.season === season.season);
         if (!already) existing.seasons.push(season);
+        for (const pos of g.allPos) { if (!existing.all_positions.includes(pos)) existing.all_positions.push(pos); }
+        for (const cat of g.allCat) { if (!existing.all_categories.includes(cat)) existing.all_categories.push(cat); }
       } else {
         playerMap.set(playerId, {
-          id: playerId,
-          name: row.Giocatore,
-          position,
-          position_category: category,
+          id: playerId, name: g.name,
+          position: g.primaryPos, position_category: g.primaryCat,
+          all_positions: [...g.allPos], all_categories: [...g.allCat],
           seasons: [season],
         });
       }

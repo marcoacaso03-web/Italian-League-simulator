@@ -17,6 +17,8 @@ export interface Player {
   name: string;
   position: string;
   position_category: string;
+  all_positions: string[];
+  all_categories: string[];
   seasons: PlayerSeason[];
 }
 
@@ -31,6 +33,8 @@ export interface SquadPlayer {
   name: string;
   position: string;
   position_category: string;
+  all_positions: string[];
+  all_categories: string[];
   apps: number;
   goals: number;
   assists: number;
@@ -120,6 +124,8 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
         name:              p.name,
         position:          p.position,
         position_category: p.position_category,
+        all_positions:     p.all_positions,
+        all_categories:    p.all_categories,
         apps:              ps.apps    ?? 0,
         goals:             ps.goals   ?? 0,
         assists:           ps.assists ?? 0,

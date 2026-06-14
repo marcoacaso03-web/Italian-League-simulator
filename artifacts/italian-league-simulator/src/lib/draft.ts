@@ -7,6 +7,8 @@ export interface DraftedPlayer {
   name: string;
   position: string;
   position_category: string;
+  all_positions: string[];
+  all_categories: string[];
   club: string;
   season: string;
   apps: number;
@@ -67,7 +69,8 @@ function pickRandom<T>(arr: T[]): T {
 
 export function findCompatibleSlots(slots: DraftSlot[], player: DraftedPlayer): DraftSlot[] {
   const empty = slots.filter((s) => s.player === null);
-  const positions = parsePositions(player.position);
+  // Usa tutte le posizioni del giocatore (primaria + alternative)
+  const positions = player.all_positions?.length ? player.all_positions : parsePositions(player.position);
   return empty.filter((s) =>
     positions.some((pos) => s.formationSlot.acceptedPositions.includes(pos))
   );
@@ -104,7 +107,8 @@ export function spin(
   const draftedPlayers: DraftedPlayer[] = rawSquad
     .filter((p) => {
       if (positionFilter.length === 0) return true;
-      return parsePositions(p.position).some((pos) => positionFilter.includes(pos));
+      const allPos = p.all_positions?.length ? p.all_positions : parsePositions(p.position);
+      return allPos.some((pos) => positionFilter.includes(pos));
     })
     .map((p) => ({
       ...p,
