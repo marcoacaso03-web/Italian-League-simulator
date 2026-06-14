@@ -1,7 +1,8 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Sebastiano Rossi,POR,80
 AC Milan,Winston Bogarde,DC,75
 AC Milan,Paolo Maldini,DC,75
+AC Milan,Paolo Maldini,TS,75
 AC Milan,Demetrio Albertini,CC,75
 AC Milan,Alessandro Costacurta,DC,76
 AC Milan,Edgar Davids,CC,76
@@ -30,10 +31,12 @@ AC Milan,Maurizio Ganz,ATT,75
 AC Milan,Samir Beloufa,DC,75
 AC Milan,Filippo Maniero,ATT,76
 AS Roma,Michael Konsel,POR,83
-AS Roma,Cafu,DC,77
+AS Roma,Cafu,TD,77
+AS Roma,Cafu,ED,77
 AS Roma,Filippo Dal Moro,DC,77
 AS Roma,Luigi Di Biagio,CC,79
-AS Roma,Vincent Candela,DC,79
+AS Roma,Vincent Candela,ASA,79
+AS Roma,Vincent Candela,ES,79
 AS Roma,Aldair,DC,77
 AS Roma,Paulo Sérgio,ATT,77
 AS Roma,Cristiano Scapolo,CC,79
@@ -160,7 +163,8 @@ Brescia,Nicola Pavarini,POR,67
 Brescia,Ioan Sabău,CC,73
 Brescia,Girolamo Bizzarri,ATT,72
 Brescia,Salvadore Bacci,CC,73
-Brescia,Aimo Diana,DC,72
+Brescia,Aimo Diana,ED,72
+Brescia,Aimo Diana,COC,72
 Brescia,Emanuele Filippini,CC,72
 Brescia,Antonio Filippini,CC,73
 Brescia,Stefano Tagliani,CC,73
@@ -193,6 +197,7 @@ Empoli,Fábio Eduardo Cribari,DC,72
 Empoli,Emanuele Masini,DC,72
 Empoli,Marco Pecorari,DC,72
 Empoli,Max Tonetto,DC,72
+Empoli,Max Tonetto,TS,72
 Empoli,Vittorio Pusceddu,DC,74
 Empoli,Massimiliano Cappellini,ATT,74
 Empoli,Luca Bonfanti,CC,73
@@ -295,7 +300,7 @@ Juventus,Morgan De Sanctis,POR,74
 Juventus,Daniel Fonseca,ATT,80
 Juventus,Alessio Tacchinardi,CC,80
 Juventus,Zinédine Zidane,CC,78
-Juventus,Gianluca Pessotto,DC,79
+Juventus,Gianluca Pessotto,TS,79
 Juventus,Marco Zamboni,DC,80
 Juventus,Raffaele Ametrano,CC,80
 Juventus,César Pellegrín,DC,79
@@ -369,6 +374,7 @@ Napoli,Guglielmo Stendardo,DC,70
 Napoli,Mirko Taccola,DC,70
 Parma,Gianluigi Buffon,POR,81
 Parma,Zé Maria,DC,78
+Parma,Zé Maria,TD,78
 Parma,Antonio Benarrivo,DC,76
 Parma,Stefano Fiore,CC,77
 Parma,Daniel Bravo,CC,76
@@ -465,7 +471,7 @@ SS Lazio,Luca Marchegiani,POR,80
 SS Lazio,Paolo Negro,DC,76
 SS Lazio,Giovanni Lopez,DC,75
 SS Lazio,Dario Marcolin,CC,75
-SS Lazio,Giuseppe Favalli,DC,76
+SS Lazio,Giuseppe Favalli,TS,76
 SS Lazio,José Chamot,DC,76
 SS Lazio,Roberto Rambaudi,ATT,76
 SS Lazio,Renato Buso,ATT,77
@@ -476,6 +482,7 @@ SS Lazio,Fernando Orsi,POR,73
 SS Lazio,Alessandro Nesta,DC,77
 SS Lazio,Diego Fuser,CC,75
 SS Lazio,Giuseppe Pancaro,DC,76
+SS Lazio,Giuseppe Pancaro,TD,76
 SS Lazio,Paul Okon,CC,77
 SS Lazio,Guerino Gottardi,DC,77
 SS Lazio,Pavel Nedvěd,CC,76

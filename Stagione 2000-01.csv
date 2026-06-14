@@ -1,7 +1,8 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Sebastiano Rossi,POR,81
 AC Milan,Thomas Helveg,DC,78
 AC Milan,Paolo Maldini,DC,78
+AC Milan,Paolo Maldini,TS,78
 AC Milan,Demetrio Albertini,CC,78
 AC Milan,Alessandro Costacurta,DC,78
 AC Milan,Andrij Ševčenko,ATT,78
@@ -40,6 +41,7 @@ AS Roma,Christian Panucci,TD,77
 AS Roma,Aldair,TD,78
 AS Roma,Walter Samuel,DC,83
 AS Roma,Jonathan Zebina,DC,71
+AS Roma,Jonathan Zebina,TD,71
 AS Roma,Aldair,DC,78
 AS Roma,Cafu,TS,87
 AS Roma,Jonathan Zebina,ASA,70
@@ -69,12 +71,14 @@ Atalanta,Davide Pinato,POR,71
 Atalanta,Stefano Lorenzi,DC,76
 Atalanta,José Espinal,ATT,75
 Atalanta,Damiano Zenoni,DC,75
+Atalanta,Damiano Zenoni,TD,75
 Atalanta,Massimo Carrera,DC,77
 Atalanta,Alex Pinardi,CC,77
 Atalanta,Ivan Pelizzoli,POR,73
 Atalanta,Mauro Minelli,DC,77
 Atalanta,Sebastiano Siviglia,DC,75
 Atalanta,Cristian Zenoni,DC,75
+Atalanta,Cristian Zenoni,TD,75
 Atalanta,Cristiano Doni,CC,75
 Atalanta,Daniele Berretta,CC,76
 Atalanta,Massimo Donati,CC,75
@@ -156,6 +160,7 @@ Bologna,Julio Cruz,ATT,74
 Bologna,Renato Olive,CC,76
 Bologna,Enzo Maresca,CC,75
 Bologna,Max Tonetto,DC,74
+Bologna,Max Tonetto,TS,74
 Bologna,Alessandro Gamberini,DC,76
 Bologna,Alessandro Dal Canto,DC,74
 Bologna,Francesco Quintavalla,DC,75
@@ -174,6 +179,7 @@ Brescia,Augusto Inácio,POR,61
 Brescia,Mauro Bressan,TD,67
 Brescia,Matteo Brighi,TD,65
 Brescia,Dario Simic,DC,69
+Brescia,Dario Simic,TD,69
 Brescia,Luca Castellini,DC,63
 Brescia,Francesco Coco,DC,67
 Brescia,Francesco Coco,TS,67
@@ -242,7 +248,7 @@ Hellas Verona,Marco Franceschetti,DC,74
 Hellas Verona,Natale Gonnella,DC,72
 Hellas Verona,Maurizio Lanzaro,DC,72
 Hellas Verona,Martin Laursen,DC,73
-Hellas Verona,Massimo Oddo,DC,74
+Hellas Verona,Massimo Oddo,TD,74
 Hellas Verona,Anthony Šerić,DC,73
 Hellas Verona,Carlo Teodorani,DC,74
 Hellas Verona,Stefano Todeschini,DC,72
@@ -311,7 +317,7 @@ Juventus,Michele Paramatti,DC,80
 Juventus,Paolo Montero,DC,78
 Juventus,Igor Tudor,DC,80
 Juventus,Fabián O'Neill,CC,80
-Juventus,Gianluca Pessotto,DC,80
+Juventus,Gianluca Pessotto,TS,80
 Juventus,Antonio Conte,CC,78
 Juventus,Filippo Inzaghi,ATT,79
 Juventus,Alessandro Del Piero,ATT,80
@@ -327,7 +333,7 @@ Juventus,Juan Esnáider[N 2],ATT,79
 Juventus,Alessio Tacchinardi,CC,79
 Juventus,Zinédine Zidane,CC,79
 Juventus,Andreas Isaksson[N 2],POR,75
-Juventus,Gianluca Zambrotta,DC,78
+Juventus,Gianluca Zambrotta,TS,78
 Juventus,Enzo Maresca[N 3],CC,80
 Juventus,Matteo Brighi,CC,79
 Juventus,Edgar Davids,CC,80
@@ -442,6 +448,7 @@ Parma,Simone Basso,CC,77
 Parma,Alessio D'Imporzano,CC,77
 Parma,Carlalberto Ludi,DC,79
 Parma,Gianluca Falsini,DC,78
+Parma,Gianluca Falsini,TS,78
 Parma,Manuel Saccani,CC,79
 Parma,Francesco Cardillo,CC,78
 Parma,Alain Roger Bangoura,DC,78
@@ -461,6 +468,7 @@ Perugia,Héctor Tapia,ATT,74
 Perugia,Pablo Guiñazú,CC,75
 Perugia,Giovanni Proietti,POR,69
 Perugia,Zé Maria,DC,75
+Perugia,Zé Maria,TD,75
 Perugia,Emiliano Testini,CC,75
 Perugia,Fabio Gatti,CC,74
 Perugia,Zīsīs Vryzas,ATT,74
@@ -525,10 +533,11 @@ SS Lazio,Siniša Mihajlović,DC,78
 SS Lazio,Alessandro Nesta,DC,79
 SS Lazio,Diego Simeone,CC,77
 SS Lazio,Giuseppe Pancaro,DC,78
+SS Lazio,Giuseppe Pancaro,TD,78
 SS Lazio,Emanuele Pesaresi,DC,79
 SS Lazio,Guerino Gottardi,DC,77
 SS Lazio,Pavel Nedvěd,CC,78
-SS Lazio,Giuseppe Favalli,DC,79
+SS Lazio,Giuseppe Favalli,TS,79
 SS Lazio,Dejan Stanković,CC,78
 SS Lazio,Simone Inzaghi,ATT,78
 SS Lazio,Paolo Orlandoni,POR,74
@@ -549,6 +558,7 @@ Udinese,Anthony Basso,POR,71
 Udinese,Adriano Bonaiuti,POR,71
 Udinese,Olivier Renard,POR,70
 Udinese,Valerio Bertotto,DC,73
+Udinese,Valerio Bertotto,TD,73
 Udinese,Mohammed Gargo,DC,75
 Udinese,Régis Genaux,DC,75
 Udinese,Thomas Manfredini,DC,74
@@ -595,6 +605,7 @@ Vicenza,Carmine Esposito,ATT,72
 Vicenza,Fabio Viviani,CC,71
 Vicenza,Massimo Beghetto,DC,71
 Vicenza,Gianluca Comotto,DC,71
+Vicenza,Gianluca Comotto,TD,71
 Vicenza,Cristian Adami,DC,72
 Vicenza,Raffaele Longo,CC,72
 Vicenza,Maurizio Rossi,CC,71

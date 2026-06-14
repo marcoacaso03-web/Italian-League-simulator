@@ -1,7 +1,8 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Sebastiano Rossi,POR,78
-AC Milan,Christian Panucci,DC,74
+AC Milan,Christian Panucci,TD,74
 AC Milan,Paolo Maldini,DC,74
+AC Milan,Paolo Maldini,TS,74
 AC Milan,Demetrio Albertini,CC,75
 AC Milan,Filippo Galli,DC,73
 AC Milan,Franco Baresi,DC,75
@@ -64,7 +65,8 @@ AS Roma,Fabrizio Romondini,CC,73
 AS Roma,Daniele Conti,CC,75
 AS Roma,Andrea Conti,ATT,73
 AS Roma,Omari Tetradze,DC,73
-AS Roma,Vincent Candela,DC,73
+AS Roma,Vincent Candela,ASA,73
+AS Roma,Vincent Candela,ES,73
 Atalanta,Davide Micillo,POR,81
 Atalanta,José Oscar Herrera,CC,74
 Atalanta,Valter Bonacina,CC,76
@@ -119,6 +121,7 @@ Bologna,Igor Protti,ATT,74
 Bologna,Roberto Mancini,ATT,80
 Cagliari,Marco Pascolo,POR,78
 Cagliari,Giuseppe Pancaro,DC,72
+Cagliari,Giuseppe Pancaro,TD,72
 Cagliari,Stefano Bettarini,DC,71
 Cagliari,Matteo Villa,DC,73
 Cagliari,Ramon Vega,DC,71
@@ -249,7 +252,7 @@ Juventus,Vladimir Jugović,CC,78
 Juventus,Attilio Lombardo,CC,78
 Juventus,Alessio Tacchinardi,CC,78
 Juventus,Zinédine Zidane,CC,78
-Juventus,Gianluca Pessotto,DC,78
+Juventus,Gianluca Pessotto,TS,78
 Juventus,Raffaele Ametrano,DC,79
 Juventus,Ivano Trotta,CC,78
 Juventus,Nicola Cingolani,CC,80
@@ -304,6 +307,7 @@ Parma,Alessandro Melli,ATT,78
 Parma,Enrico Chiesa,ATT,79
 Parma,Lilian Thuram,DC,80
 Parma,Zé Maria,DC,80
+Parma,Zé Maria,TD,80
 Parma,Alessandro Nista,POR,74
 Parma,Luca Pinton,DC,79
 Parma,Simone Barone,CC,80
@@ -439,7 +443,7 @@ SS Lazio,Luca Marchegiani,POR,83
 SS Lazio,Paolo Negro,DC,79
 SS Lazio,Mark Fish,DC,78
 SS Lazio,Dario Marcolin,CC,77
-SS Lazio,Giuseppe Favalli,DC,77
+SS Lazio,Giuseppe Favalli,TS,77
 SS Lazio,José Chamot,DC,78
 SS Lazio,Roberto Rambaudi,ATT,79
 SS Lazio,Renato Buso,ATT,79
@@ -471,6 +475,7 @@ Udinese,Giovanni Stroppa,CC,78
 Udinese,Paolo Poggi,ATT,77
 Udinese,Massimiliano Caniato,POR,73
 Udinese,Valerio Bertotto,DC,78
+Udinese,Valerio Bertotto,TD,78
 Udinese,Stefano Desideri,CC,78
 Udinese,Luca Compagnon,DC,78
 Udinese,Giuliano Giannichedda,CC,78

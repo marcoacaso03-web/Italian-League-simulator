@@ -1,7 +1,8 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Sebastiano Rossi,POR,84
 AC Milan,Thomas Helveg,DC,78
 AC Milan,Paolo Maldini,DC,77
+AC Milan,Paolo Maldini,TS,77
 AC Milan,Demetrio Albertini,CC,77
 AC Milan,Alessandro Costacurta,DC,77
 AC Milan,Andrij Ševčenko,ATT,78
@@ -15,6 +16,7 @@ AC Milan,Taribo West,DC,79
 AC Milan,Roberto Ayala,DC,78
 AC Milan,Diego De Ascentis,CC,77
 AC Milan,Max Tonetto,DC,79
+AC Milan,Max Tonetto,TS,79
 AC Milan,Leonardo,CC,79
 AC Milan,Pierluigi Orlandini,CC,78
 AC Milan,José Chamot,DC,77
@@ -34,7 +36,8 @@ AC Milan,Mohammed Aliyu Datti,ATT,78
 AC Milan,Valerio Fiori,POR,73
 AC Milan,José Mari,ATT,79
 AS Roma,Michael Konsel,POR,81
-AS Roma,Cafu,DC,76
+AS Roma,Cafu,TD,76
+AS Roma,Cafu,ED,76
 AS Roma,Antônio Carlos Zago,DC,76
 AS Roma,Cristiano Zanetti,CC,78
 AS Roma,Marcos Assunção,CC,76
@@ -67,7 +70,8 @@ AS Roma,Maurizio Lanzaro,DC,76
 AS Roma,Marco Quadrini,DC,77
 AS Roma,Fabio Petruzzi,DC,78
 AS Roma,Luca Ferri,DC,77
-AS Roma,Vincent Candela,DC,78
+AS Roma,Vincent Candela,ASA,78
+AS Roma,Vincent Candela,ES,78
 AS Roma,Neşat Gülünoğlu,ATT,77
 AS Roma,Andrea Campagnolo,POR,73
 AS Roma,Marco Amelia,POR,74
@@ -134,6 +138,7 @@ Bologna,John Mensah,DC,74
 Bologna,Giacomo Cipriani,ATT,74
 Bologna,Roberto Goretti,CC,74
 Bologna,Max Tonetto,DC,73
+Bologna,Max Tonetto,TS,73
 Bologna,Giovanni Piacentini,CC,73
 Bologna,Kennet Andersson,ATT,75
 Bologna,Marco Foschini,CC,75
@@ -154,6 +159,7 @@ Cagliari,Maurizio Franzone,POR,68
 Cagliari,Fabio Macellari,DC,70
 Cagliari,Daniele Berretta,CC,72
 Cagliari,Jonathan Zebina,DC,70
+Cagliari,Jonathan Zebina,TD,70
 Cagliari,Nelson Abeijón,CC,72
 Cagliari,Raffaele Ametrano,CC,71
 Cagliari,Giovanni Sulcis,CC,70
@@ -210,8 +216,10 @@ Hellas Verona,Graziano Battistini,POR,81
 Hellas Verona,Sébastien Frey,POR,71
 Hellas Verona,Gianluca Pegolo,POR,72
 Hellas Verona,Luigi Apolloni,DC,76
-Hellas Verona,Aimo Diana,DC,75
+Hellas Verona,Aimo Diana,ED,75
+Hellas Verona,Aimo Diana,COC,75
 Hellas Verona,Gianluca Falsini,DC,75
+Hellas Verona,Gianluca Falsini,TS,75
 Hellas Verona,Giancarlo Filippini,DC,75
 Hellas Verona,Marco Franceschetti,DC,75
 Hellas Verona,Natale Gonnella,DC,75
@@ -240,7 +248,7 @@ Hellas Verona,Fabrizio Cammarata,ATT,76
 Hellas Verona,Michele Cossato,ATT,75
 Hellas Verona,Robert Špehar,ATT,74
 Inter Milan,Angelo Peruzzi,POR,84
-Inter Milan,Christian Panucci,DC,79
+Inter Milan,Christian Panucci,TD,79
 Inter Milan,Francesco Colonnese,DC,78
 Inter Milan,Javier Zanetti,TD,77
 Inter Milan,Javier Zanetti,ED,77
@@ -284,7 +292,7 @@ Juventus,Zoran Mirković,DC,80
 Juventus,Paolo Montero,DC,79
 Juventus,Sunday Oliseh,CC,78
 Juventus,Thierry Henry,ATT,80
-Juventus,Gianluca Pessotto,DC,78
+Juventus,Gianluca Pessotto,TS,78
 Juventus,Antonio Conte,CC,80
 Juventus,Filippo Inzaghi,ATT,80
 Juventus,Alessandro Del Piero,ATT,78
@@ -532,6 +540,7 @@ Torino,Ilija Ivić,ATT,71
 Torino,Alessandro Nista,POR,69
 Torino,Andrea Silenzi,ATT,67
 Torino,Gianluca Comotto,DC,73
+Torino,Gianluca Comotto,TD,73
 Torino,Pinga,ATT,72
 Torino,Luca Bucci,POR,76
 Torino,Mirko Cudini,DC,67
@@ -550,6 +559,7 @@ Udinese,Luigi Turci,POR,81
 Udinese,Morgan De Sanctis,POR,72
 Udinese,Olivier Renard,POR,72
 Udinese,Valerio Bertotto,DC,75
+Udinese,Valerio Bertotto,TD,75
 Udinese,Abdoulaye Camara,DC,76
 Udinese,Mohammed Gargo,DC,76
 Udinese,Gilberto D'Ignazio Pulpito,DC,77

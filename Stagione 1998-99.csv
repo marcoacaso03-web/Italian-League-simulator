@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Dida,POR,82
 AC Milan,Sebastiano Rossi,POR,78
 AC Milan,Cafu,TD,88
@@ -6,6 +6,7 @@ AC Milan,Christian Panucci,TD,78
 AC Milan,Alessandro Nesta,DC,88
 AC Milan,Costacurta,DC,82
 AC Milan,Dario Simic,DC,72
+AC Milan,Dario Simic,TD,72
 AC Milan,Paolo Maldini,TS,90
 AC Milan,Dario Simic,ASA,72
 AC Milan,Demetrio Albertini,CDC,84
@@ -20,10 +21,12 @@ AC Milan,George Weah,ATT,88
 AC Milan,Oliver Bierhoff,ATT,82
 AC Milan,Maurizio Ganz,ATT,74
 AS Roma,Michael Konsel,POR,83
-AS Roma,Cafu,DC,78
+AS Roma,Cafu,TD,78
+AS Roma,Cafu,ED,78
 AS Roma,Antônio Carlos Zago,DC,78
 AS Roma,Luigi Di Biagio,CC,77
-AS Roma,Vincent Candela,DC,76
+AS Roma,Vincent Candela,ASA,76
+AS Roma,Vincent Candela,ES,76
 AS Roma,Aldair,DC,78
 AS Roma,Paulo Sérgio,ATT,76
 AS Roma,Dmitri Alenichev,CC,76
@@ -120,6 +123,7 @@ Cagliari,Maurizio Franzone,POR,70
 Cagliari,Fabio Macellari,DC,73
 Cagliari,Daniele Berretta,CC,74
 Cagliari,Jonathan Zebina,DC,72
+Cagliari,Jonathan Zebina,TD,72
 Cagliari,Andrea Pisanu,ATT,73
 Cagliari,Vincenzo Esposito,DC,73
 Cagliari,David Nyathi,DC,72
@@ -149,6 +153,7 @@ Empoli,Vincenzo Palumbo,ATT,72
 Empoli,Giacomo Mazzi,POR,68
 Empoli,Pierpaolo Bisoli,CC,71
 Empoli,Max Tonetto,DC,70
+Empoli,Max Tonetto,TS,70
 Empoli,Michele Fusi,CC,70
 Empoli,Gianluca Porro,CC,70
 Empoli,Stefano Simoncelli,DC,70
@@ -236,7 +241,8 @@ Inter Milan,Cristiano Zanetti,DC,77
 Inter Milan,Mikaël Silvestre,DC,75
 Inter Milan,Mauro Milanese,DC,75
 Inter Milan,Zoumana Camara,DC,77
-Inter Milan,Ousmane Dabo,DC,77
+Inter Milan,Ousmane Dabo,CDC,77
+Inter Milan,Ousmane Dabo,CC,77
 Inter Milan,Luca Mezzano,DC,76
 Inter Milan,Nwankwo Kanu,ATT,75
 Inter Milan,Raffaele Nuzzo,POR,72
@@ -257,7 +263,7 @@ Juventus,Mark Iuliano,DC,75
 Juventus,Didier Deschamps,CC,77
 Juventus,Alessandro Birindelli,DC,75
 Juventus,Nicola Amoruso,ATT,75
-Juventus,Gianluca Pessotto,DC,75
+Juventus,Gianluca Pessotto,TS,75
 Juventus,Jocelyn Blanchard,CC,76
 Juventus,Igor Tudor,DC,75
 Juventus,Alessio Tacchinardi,CC,77
@@ -277,6 +283,7 @@ Parma,Dino Baggio,TD,76
 Parma,Fabio Cannavaro,DC,88
 Parma,Lilian Thuram,DC,88
 Parma,Daniele Bonera,DC,70
+Parma,Daniele Bonera,TD,70
 Parma,Lilian Thuram,TS,88
 Parma,Massimo Bizzarri,ASA,72
 Parma,Dino Baggio,CDC,80
@@ -292,6 +299,7 @@ Parma,Enrico Chiesa,ATT,78
 Parma,Dino Baggio,ATT,76
 Perugia,Angelo Pagotto,POR,79
 Perugia,Zé Maria,DC,72
+Perugia,Zé Maria,TD,72
 Perugia,Gianluca Colonnello,DC,72
 Perugia,Renato Olive,CC,74
 Perugia,Gabriele Grossi,DC,74
@@ -467,6 +475,7 @@ Udinese,Luigi Turci,POR,83
 Udinese,Harald Wapenaar,POR,73
 Udinese,Alessandro Leopizzi,POR,72
 Udinese,Valerio Bertotto,DC,77
+Udinese,Valerio Bertotto,TD,77
 Udinese,Alessandro Calori,DC,77
 Udinese,Daniele Chiarini,DC,77
 Udinese,Gilberto D'Ignazio Pulpito,DC,77
