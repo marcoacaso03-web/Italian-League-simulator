@@ -119,13 +119,15 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
     .filter((p) => p.seasons.some((s) => s.club === club && s.season === season))
     .map((p) => {
       const ps = p.seasons.find((s) => s.club === club && s.season === season)!;
+      const positions  = ps.positions  ?? (p.position         ? [p.position]         : []);
+      const categories = ps.categories ?? (p.position_category ? [p.position_category] : []);
       return {
         id:                p.id,
         name:              p.name,
-        position:          ps.positions[0] ?? p.position,
-        position_category: ps.categories[0] ?? p.position_category,
-        all_positions:     ps.positions,
-        all_categories:    ps.categories,
+        position:          positions[0]  ?? p.position,
+        position_category: categories[0] ?? p.position_category,
+        all_positions:     positions,
+        all_categories:    categories,
         apps:              ps.apps    ?? 0,
         goals:             ps.goals   ?? 0,
         assists:           ps.assists ?? 0,
