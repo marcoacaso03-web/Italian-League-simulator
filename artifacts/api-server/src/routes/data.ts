@@ -199,11 +199,106 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
     }
   }
 
-  const players: Player[] = Array.from(playerMap.values());
+  const players: Player[] = mergeByNameAndClub(Array.from(playerMap.values()));
   const clubs: Club[] = Array.from(clubSet).sort().map((name) => ({ id: name, name }));
   const clubsBySeason = loadClubsBySeason(rootDir);
   cachedData = { players, clubs, clubsBySeason };
   return cachedData;
+}
+
+/**
+ * Unifica le entry con lo stesso nome solo se condividono almeno un club.
+ * Stesso nome + stesso club = stessa persona (es. Del Piero sempre alla Juve).
+ * Stesso nome ma club diversi e senza club in comune = persone diverse.
+ */
+function mergeByNameAndClub(players: Player[]): Player[] {
+  // Raggruppa per nome
+  const byName = new Map<string, Player[]>();
+  for (const p of players) {
+    const group = byName.get(p.name) ?? [];
+    group.push(p);
+    byName.set(p.name, group);
+  }
+
+  const result: Player[] = [];
+
+  for (const [, group] of byName) {
+    if (group.length === 1) {
+      result.push(group[0]);
+      continue;
+    }
+
+    // Costruisce componenti connesse: due entry sono collegate se condividono almeno un club
+    const n = group.length;
+    const parent = Array.from({ length: n }, (_, i) => i);
+    function find(i: number): number {
+      return parent[i] === i ? i : (parent[i] = find(parent[i]));
+    }
+    function union(a: number, b: number) { parent[find(a)] = find(b); }
+
+    // Indice club → indici entry che hanno quel club
+    const clubToEntries = new Map<string, number[]>();
+    for (let i = 0; i < n; i++) {
+      for (const s of group[i].seasons) {
+        const list = clubToEntries.get(s.club) ?? [];
+        list.push(i);
+        clubToEntries.set(s.club, list);
+      }
+    }
+    for (const indices of clubToEntries.values()) {
+      for (let k = 1; k < indices.length; k++) union(indices[0], indices[k]);
+    }
+
+    // Raggruppa per componente
+    const components = new Map<number, Player[]>();
+    for (let i = 0; i < n; i++) {
+      const root = find(i);
+      const comp = components.get(root) ?? [];
+      comp.push(group[i]);
+      components.set(root, comp);
+    }
+
+    for (const comp of components.values()) {
+      if (comp.length === 1) {
+        result.push(comp[0]);
+        continue;
+      }
+
+      // Posizione dominante = entry con più stagioni
+      const dominant = comp.reduce((best, cur) =>
+        cur.seasons.length > best.seasons.length ? cur : best
+      );
+
+      // Unisci stagioni (dedup per club+season)
+      const allSeasons: PlayerSeason[] = [];
+      const seenKey = new Set<string>();
+      for (const p of comp) {
+        for (const s of p.seasons) {
+          const key = `${s.club}|${s.season}`;
+          if (!seenKey.has(key)) { seenKey.add(key); allSeasons.push(s); }
+        }
+      }
+
+      // Unisci posizioni e categorie
+      const allPos: string[] = [];
+      const allCat: string[] = [];
+      for (const p of comp) {
+        for (const pos of p.all_positions) { if (!allPos.includes(pos)) allPos.push(pos); }
+        for (const cat of p.all_categories) { if (!allCat.includes(cat)) allCat.push(cat); }
+      }
+
+      result.push({
+        id:                `${dominant.name}__${dominant.position}`,
+        name:              dominant.name,
+        position:          dominant.position,
+        position_category: dominant.position_category,
+        all_positions:     allPos,
+        all_categories:    allCat,
+        seasons:           allSeasons,
+      });
+    }
+  }
+  return result;
 }
 
 router.get("/data", (_req, res) => {
