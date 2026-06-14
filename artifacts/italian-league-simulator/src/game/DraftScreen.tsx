@@ -26,6 +26,12 @@ function catLabel(cat: string): string {
     default:    return cat;
   }
 }
+function posCategory(pos: string): string {
+  if (pos === 'GK') return 'GK';
+  if (['CB','RB','LB','WB','LWB','RWB'].includes(pos)) return 'DEF';
+  if (['CDM','CM','CAM','LM','RM'].includes(pos)) return 'MID';
+  return 'ATT';
+}
 
 function slotPositionLabel(id: string): string {
   const labels: Record<string, string> = {
@@ -229,7 +235,22 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-white truncate">{player.name}</p>
-        <p className="text-xs text-slate-500 truncate">{catLabel(player.position_category)}</p>
+        {player.all_positions?.length > 1 ? (
+          <div className="flex items-center gap-1 mt-0.5 flex-wrap">
+            {player.all_positions.map((pos) => {
+              const posColor = catColor(posCategory(pos));
+              return (
+                <span key={pos}
+                  style={{ backgroundColor: posColor + '22', color: posColor, borderColor: posColor + '55' }}
+                  className="text-[9px] font-black px-1.5 py-0.5 rounded border leading-none">
+                  {pos}
+                </span>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="text-xs text-slate-500 truncate">{catLabel(player.position_category)}</p>
+        )}
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">
         {compatibleSlotLabels.map((lbl) => (
