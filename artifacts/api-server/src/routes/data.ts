@@ -9,15 +9,15 @@ interface PlayerSeason {
   club: string;
   season: string;
   rating: number;
+  positions: string[];   // posizioni per questa specifica stagione+club
+  categories: string[];  // categorie per questa specifica stagione+club
 }
 
 interface Player {
   id: string;
   name: string;
-  position: string;
+  position: string;          // posizione primaria di carriera (per display/filtri)
   position_category: string;
-  all_positions: string[];
-  all_categories: string[];
   seasons: PlayerSeason[];
 }
 
@@ -181,18 +181,19 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
     for (const g of fileGroups.values()) {
       clubSet.add(g.club);
       const playerId = `${g.name}__${g.primaryPos}`;
-      const season: PlayerSeason = { club: g.club, season: annoStagione, rating: g.rating };
+      // Le posizioni sono specifiche di questa stagione+club
+      const season: PlayerSeason = {
+        club: g.club, season: annoStagione, rating: g.rating,
+        positions: g.allPos, categories: g.allCat,
+      };
       if (playerMap.has(playerId)) {
         const existing = playerMap.get(playerId)!;
         const already = existing.seasons.some((s) => s.club === season.club && s.season === season.season);
         if (!already) existing.seasons.push(season);
-        for (const pos of g.allPos) { if (!existing.all_positions.includes(pos)) existing.all_positions.push(pos); }
-        for (const cat of g.allCat) { if (!existing.all_categories.includes(cat)) existing.all_categories.push(cat); }
       } else {
         playerMap.set(playerId, {
           id: playerId, name: g.name,
           position: g.primaryPos, position_category: g.primaryCat,
-          all_positions: [...g.allPos], all_categories: [...g.allCat],
           seasons: [season],
         });
       }
@@ -269,7 +270,7 @@ function mergeByNameAndClub(players: Player[]): Player[] {
         cur.seasons.length > best.seasons.length ? cur : best
       );
 
-      // Unisci stagioni (dedup per club+season)
+      // Unisci stagioni (dedup per club+season) — le posizioni restano per stagione
       const allSeasons: PlayerSeason[] = [];
       const seenKey = new Set<string>();
       for (const p of comp) {
@@ -279,21 +280,11 @@ function mergeByNameAndClub(players: Player[]): Player[] {
         }
       }
 
-      // Unisci posizioni e categorie
-      const allPos: string[] = [];
-      const allCat: string[] = [];
-      for (const p of comp) {
-        for (const pos of p.all_positions) { if (!allPos.includes(pos)) allPos.push(pos); }
-        for (const cat of p.all_categories) { if (!allCat.includes(cat)) allCat.push(cat); }
-      }
-
       result.push({
         id:                `${dominant.name}__${dominant.position}`,
         name:              dominant.name,
         position:          dominant.position,
         position_category: dominant.position_category,
-        all_positions:     allPos,
-        all_categories:    allCat,
         seasons:           allSeasons,
       });
     }

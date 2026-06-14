@@ -7,6 +7,8 @@ export interface PlayerSeason {
   club: string;
   season: string;
   rating: number;
+  positions: string[];   // posizioni in questa stagione+club
+  categories: string[];  // categorie in questa stagione+club
   apps?: number;
   goals?: number;
   assists?: number;
@@ -15,10 +17,8 @@ export interface PlayerSeason {
 export interface Player {
   id: string;
   name: string;
-  position: string;
+  position: string;          // posizione primaria di carriera
   position_category: string;
-  all_positions: string[];
-  all_categories: string[];
   seasons: PlayerSeason[];
 }
 
@@ -33,8 +33,8 @@ export interface SquadPlayer {
   name: string;
   position: string;
   position_category: string;
-  all_positions: string[];
-  all_categories: string[];
+  all_positions: string[];   // posizioni per quella specifica stagione
+  all_categories: string[];  // categorie per quella specifica stagione
   apps: number;
   goals: number;
   assists: number;
@@ -122,10 +122,10 @@ export function getSquad(club: string, season: string): SquadPlayer[] {
       return {
         id:                p.id,
         name:              p.name,
-        position:          p.position,
-        position_category: p.position_category,
-        all_positions:     p.all_positions,
-        all_categories:    p.all_categories,
+        position:          ps.positions[0] ?? p.position,
+        position_category: ps.categories[0] ?? p.position_category,
+        all_positions:     ps.positions,
+        all_categories:    ps.categories,
         apps:              ps.apps    ?? 0,
         goals:             ps.goals   ?? 0,
         assists:           ps.assists ?? 0,
