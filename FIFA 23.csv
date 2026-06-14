@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Monza,Stefano Sensi,AD,79
 AC Monza,Michele Di Gregorio,POR,78
 AC Monza,Matteo Pessina,CC,78
@@ -25,7 +25,8 @@ AC Monza,Valentin Antov,DC,67
 AC Monza,Mattia Valoti,CC,71
 AC Monza,Mirko Marić,ATT,69
 AC Monza,Eugenio Lamanna,POR,66
-AC Monza,Samuele Vignato,AT,65
+AC Monza,Samuele Vignato,COC,65
+AC Monza,Samuele Vignato,ATT,65
 AC Monza,Franco Carboni,ASA,64
 AC Monza,Alessandro Sorrentino,POR,63
 AC Monza,Marlon da Silva Barbosa,DC,76
@@ -65,10 +66,12 @@ Atalanta,Matteo Ruggeri,ASA,69
 Atalanta,Francesco Rossi,POR,61
 Atalanta,Simone Muratore,CC,63
 Atalanta,Vorlický,ES,60
-Atalanta,Josip Iličić,AT,81
+Atalanta,Josip Iličić,COC,81
+Atalanta,Josip Iličić,ATT,81
 Atalanta,Ruslan Malinovskyi,AS,80
 Atalanta,Remo Freuler,CC,79
-Atalanta,Alexey Miranchuk,AT,77
+Atalanta,Alexey Miranchuk,COC,77
+Atalanta,Alexey Miranchuk,ATT,77
 Atalanta,Marco Carnesecchi,POR,77
 Atalanta,Federico Mattiello,TS,71
 Atalanta,Nadir Zortea,TD,68
@@ -171,7 +174,8 @@ Empoli,Jean-Daniel Akpa Akpro,CC,75
 Empoli,Petar Stojanović,TD,74
 Empoli,Mattia Destro,ATT,73
 Empoli,Filippo Bandinelli,CC,73
-Empoli,Marko Pjaca,AT,72
+Empoli,Marko Pjaca,COC,72
+Empoli,Marko Pjaca,ATT,72
 Empoli,Emanuel Vignato,COC,72
 Empoli,Martín Satriano,ATT,72
 Empoli,Lorenzo Tonelli,DC,71
@@ -208,7 +212,8 @@ Fiorentina,Luka Jović,ATT,77
 Fiorentina,Jonathan Ikoné,AD,77
 Fiorentina,Christian Kouamé,ATT,77
 Fiorentina,Rolando Mandragora,CC,76
-Fiorentina,Josip Brekalo,AT,76
+Fiorentina,Josip Brekalo,COC,76
+Fiorentina,Josip Brekalo,ATT,76
 Fiorentina,Riccardo Sottil,AS,76
 Fiorentina,Alfred Duncan,CC,75
 Fiorentina,Luca Ranieri,TS,72
@@ -243,10 +248,12 @@ Hellas Verona,Miguel Luís Pinto Veloso,CC,74
 Hellas Verona,Ondrej Duda,CC,74
 Hellas Verona,Paweł Dawidowicz,DC,73
 Hellas Verona,Fabio Depaoli,ADA,73
-Hellas Verona,Cyril Ngonge,AT,73
+Hellas Verona,Cyril Ngonge,COC,73
+Hellas Verona,Cyril Ngonge,ATT,73
 Hellas Verona,Diego Coppola,DC,71
 Hellas Verona,Deyovaisio Zeefuik,ADA,70
-Hellas Verona,Yayah Kallon,AT,70
+Hellas Verona,Yayah Kallon,COC,70
+Hellas Verona,Yayah Kallon,ATT,70
 Hellas Verona,Adolfo Gaich,ATT,68
 Hellas Verona,Filippo Terracciano,ED,68
 Hellas Verona,Simone Perilli,POR,67
@@ -254,7 +261,8 @@ Hellas Verona,Thomas Henry,ATT,74
 Hellas Verona,Ajdin Hrustić,CC,71
 Hellas Verona,Ibrahim Sulemana Kakari,CDC,67
 Hellas Verona,Juan David Cabal,DC,66
-Hellas Verona,Jayden Braaf,AT,66
+Hellas Verona,Jayden Braaf,COC,66
+Hellas Verona,Jayden Braaf,ATT,66
 Hellas Verona,Alessandro Berardi,POR,62
 Hellas Verona,Antonín Barák,AD,79
 Hellas Verona,Giovanni Simeone,ATT,78
@@ -264,7 +272,8 @@ Hellas Verona,Panagiotis Retsos,DC,72
 Hellas Verona,Martin Hongla,CC,71
 Hellas Verona,Bruno Amione,DC,70
 Hellas Verona,Roberto Piccoli,ATT,69
-Hellas Verona,Mateusz Praszelik,AT,67
+Hellas Verona,Mateusz Praszelik,COC,67
+Hellas Verona,Mateusz Praszelik,ATT,67
 Hellas Verona,Alessandro Cortinovis,COC,66
 Hellas Verona,Ľubomír Tupta,ATT,63
 Inter,Nicolò Barella,CC,85
@@ -285,7 +294,8 @@ Inter,Samir Handanovič,POR,82
 Inter,Henrikh Mkhitaryan,COC,81
 Inter,Robin Gosens,ASA,80
 Inter,Danilo D'Ambrosio,DC,77
-Inter,Joaquín Correa,AT,77
+Inter,Joaquín Correa,COC,77
+Inter,Joaquín Correa,ATT,77
 Inter,Roberto Gagliardini,CDC,74
 Inter,Kristjan Asllani,CC,74
 Inter,Alex Cordaz,POR,71
@@ -296,7 +306,8 @@ Inter,Alessandro Fontanarosa,DC,67
 Inter,Mattia Zanotti,ADA,66
 Inter,Andrea Pinamonti,ATT,74
 Inter,Lucien Agoumé,CDC,72
-Inter,Eddie Salcedo,AT,68
+Inter,Eddie Salcedo,COC,68
+Inter,Eddie Salcedo,ATT,68
 Juventus,Wojciech Szczęsny,POR,86
 Juventus,Ángel Di María,ATT,84
 Juventus,Filip Kostić,ES,84
@@ -332,7 +343,8 @@ Juventus,Arthur Henrique Ramos Oliveira Melo,CC,78
 Juventus,Weston McKennie,CC,77
 Juventus,Nicolò Rovella,CC,77
 Juventus,Luca Pellegrini,TS,75
-Juventus,Marko Pjaca,AT,72
+Juventus,Marko Pjaca,COC,72
+Juventus,Marko Pjaca,ATT,72
 Juventus,Marley Aké,AS,69
 Juventus,Félix Alexandre A. Sanches Correia,ED,69
 Juventus,Paolo Gozzi,TS,64
@@ -460,7 +472,8 @@ Napoli,Matteo Politano,AD,81
 Napoli,Tanguy Ndombele,CC,79
 Napoli,Mathías Olivera,TS,79
 Napoli,Eljif Elmas,COC,79
-Napoli,Giacomo Raspadori,AT,79
+Napoli,Giacomo Raspadori,COC,79
+Napoli,Giacomo Raspadori,ATT,79
 Napoli,Giovanni Simeone,ATT,78
 Napoli,Juan Guilherme Nunes Jesus,DC,76
 Napoli,Pierluigi Gollini,POR,76
@@ -489,7 +502,8 @@ Roma FC,Rui Pedro dos Santos Patrício,POR,80
 Roma FC,Georginio Wijnaldum,CC,80
 Roma FC,Nemanja Matić,CC,80
 Roma FC,Bryan Cristante,CC,80
-Roma FC,Nicolò Zaniolo,AT,80
+Roma FC,Nicolò Zaniolo,COC,80
+Roma FC,Nicolò Zaniolo,ATT,80
 Roma FC,Andrea Belotti,ATT,79
 Roma FC,Rick Karsdorp,ED,79
 Roma FC,Stephan El Shaarawy,ES,78
@@ -617,7 +631,8 @@ Sassuolo,Gian Marco Ferrari,DC,72
 Sassuolo,Ruan Tressoldi Netto,DC,68
 Sassuolo,Nedim Bajrami,COC,75
 Sassuolo,Martin Erlić,DC,74
-Sassuolo,Grégoire Defrel,AT,73
+Sassuolo,Grégoire Defrel,COC,73
+Sassuolo,Grégoire Defrel,ATT,73
 Sassuolo,Kristian Thorstvedt,CC,73
 Sassuolo,Pedro Mba Obiang Avomo,CDC,72
 Sassuolo,Abdou Harroui,CDC,72
@@ -696,9 +711,11 @@ Torino,Perr Schuurs,DC,76
 Torino,Valentino Lazaro,ADA,74
 Torino,Karol Linetty,CC,74
 Torino,Andreaw Gravillon,DC,74
-Torino,Nemanja Radonjić,AT,74
+Torino,Nemanja Radonjić,COC,74
+Torino,Nemanja Radonjić,ATT,74
 Torino,Ola Aina,ASA,73
-Torino,Yann Karamoh,AT,73
+Torino,Yann Karamoh,COC,73
+Torino,Yann Karamoh,ATT,73
 Torino,Etrit Berisha,POR,71
 Torino,Pietro Pellegri,ATT,68
 Torino,Luca Gemello,POR,64
@@ -745,7 +762,8 @@ Udinese,Festy Ebosele,ED,68
 Udinese,Pafundi,COC,67
 Udinese,Leonardo Daniel Ulineia Buta,ASA,60
 Udinese,James Abankwah,DC,59
-Udinese,Gerard Deulofeu Lázaro,AT,81
+Udinese,Gerard Deulofeu Lázaro,COC,81
+Udinese,Gerard Deulofeu Lázaro,ATT,81
 Udinese,Vivaldo Semedo,ATT,61
 Udinese,Axel Guessand,DC,59
 Udinese,Edoardo Piana,POR,53
@@ -754,5 +772,6 @@ Udinese,Bram Nuytinck,DC,72
 Udinese,Mato Jajalo,CDC,71
 Udinese,Filip Benković,DC,71
 Udinese,Brandon Soppy,ED,71
-Udinese,Felipe dos Reis Vizeu do Carmo,AT,69
+Udinese,Felipe dos Reis Vizeu do Carmo,COC,69
+Udinese,Felipe dos Reis Vizeu do Carmo,ATT,69
 Udinese,Martin Niøten Palumbo,CC,60

@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Andriy Shevchenko,ATT,93
 AC Milan,Paolo Maldini,DC,91
 AC Milan,Dida,POR,91
@@ -6,7 +6,8 @@ AC Milan,Alessandro Nesta,DC,90
 AC Milan,Filippo Inzaghi,ATT,90
 AC Milan,Clarence Seedorf,ES,90
 AC Milan,Jaap Stam,DC,90
-AC Milan,Kaká,AT,90
+AC Milan,Kaká,COC,90
+AC Milan,Kaká,ATT,90
 AC Milan,Christian Vieri,ATT,89
 AC Milan,Manuel Cesar Rui Costa,COC,89
 AC Milan,Gennaro Ivan Gattuso,CC,87
@@ -22,11 +23,13 @@ AC Milan,Serginho,ES,72
 AC Milan,Valerio Fiori,POR,71
 AC Milan,Zeljko Kalac,POR,71
 AC Milan,Dimitrios Eleftheropoulos,POR,65
-AS Roma,Francesco Totti,AT,89
+AS Roma,Francesco Totti,COC,89
+AS Roma,Francesco Totti,ATT,89
 AS Roma,Antonio Cassano,ATT,89
 AS Roma,Shabani Nonda,ATT,87
 AS Roma,Philippe Mexès,DC,84
-AS Roma,Vincenzo Montella,AT,83
+AS Roma,Vincenzo Montella,COC,83
+AS Roma,Vincenzo Montella,ATT,83
 AS Roma,Mancini,COC,81
 AS Roma,Simone Perrotta,CDC,81
 AS Roma,Cristian Chivu,DC,81
@@ -40,12 +43,15 @@ AS Roma,Rodrigo Taddei,COC,73
 AS Roma,Damiano Tommasi,CDC,72
 AS Roma,Leandro Damian Cufré,TS,69
 AS Roma,Cesare Bovo,DC,67
-AS Roma,Daniele Corvia,AT,67
+AS Roma,Daniele Corvia,COC,67
+AS Roma,Daniele Corvia,ATT,67
 AS Roma,Giuseppe Scurto,DC,67
 AS Roma,Carlo Zotti,POR,66
-AS Roma,Gianluca Galasso,AT,64
+AS Roma,Gianluca Galasso,COC,64
+AS Roma,Gianluca Galasso,ATT,64
 AS Roma,Alberto Aquilani,CC,58
-Ascoli,Marco Ferrante,AT,73
+Ascoli,Marco Ferrante,COC,73
+Ascoli,Marco Ferrante,ATT,73
 Ascoli,Federico Giampaolo,ES,63
 Ascoli,Ferdinando Coppola,POR,60
 Ascoli,Francesco Carbone,TD,59
@@ -101,7 +107,8 @@ Chievo Verona,Sergio Marcon,POR,69
 Chievo Verona,Andrea Zanchetta,CC,65
 Chievo Verona,Andrea Mantovani,TS,64
 Chievo Verona,Salvatore Bruno,ATT,64
-Chievo Verona,Simone Tiribocchi,AT,62
+Chievo Verona,Simone Tiribocchi,COC,62
+Chievo Verona,Simone Tiribocchi,ATT,62
 Chievo Verona,Giovanni Marchese,TS,62
 Chievo Verona,Luciano,ES,62
 Chievo Verona,Sergio Pellissier,ATT,62
@@ -125,7 +132,8 @@ Empoli,Sergio Almirón,RCDM,65
 Empoli,Antonio Buscè,TD,65
 Empoli,Fabrizio Ficini,CC,64
 Empoli,Richard Vanigli,DC,64
-Empoli,Matteo Serafini,AT,64
+Empoli,Matteo Serafini,COC,64
+Empoli,Matteo Serafini,ATT,64
 Empoli,Mirco Gasparetto,ATT,61
 Empoli,Paolo Zanetti,LCDM,56
 Empoli,Davide Matteini,ATT,56
@@ -164,7 +172,8 @@ Inter Milan,Adriano,ATT,94
 Inter Milan,Francesco Toldo,POR,90
 Inter Milan,Figo,RWM,89
 Inter Milan,Walter Adrián Samuel,DC,87
-Inter Milan,Alvaro Recoba,AT,86
+Inter Milan,Alvaro Recoba,COC,86
+Inter Milan,Alvaro Recoba,ATT,86
 Inter Milan,Javier Zanetti,TS,85
 Inter Milan,Obafemi Martins,ATT,85
 Inter Milan,Esteban Matías Cambiasso,CC,85
@@ -189,7 +198,8 @@ Juventus,Gianluca Zambrotta,TS,91
 Juventus,Zlatan Ibrahimovic,ATT,91
 Juventus,Lilian Thuram,DC,90
 Juventus,Pavel Nedved,ES,90
-Juventus,Alessandro Del Piero,AT,89
+Juventus,Alessandro Del Piero,COC,89
+Juventus,Alessandro Del Piero,ATT,89
 Juventus,Fabio Cannavaro,DC,89
 Juventus,Patrick Vieira,CC,89
 Juventus,Petrovici Teodor,ATT,89
@@ -209,7 +219,8 @@ Juventus,Alessandro Birindelli,TD,73
 Lazio,Angelo Peruzzi,POR,85
 Lazio,Aparecido R. César,ES,85
 Lazio,Massimo Oddo,TD,84
-Lazio,Simone Inzaghi,AT,84
+Lazio,Simone Inzaghi,COC,84
+Lazio,Simone Inzaghi,ATT,84
 Lazio,Fabio Liverani,CC,81
 Lazio,Paolo Di Canio,COC,81
 Lazio,Tommaso Rocchi,AD,76
@@ -217,7 +228,8 @@ Lazio,Igli Tare,ATT,74
 Lazio,Matteo Sereni,POR,74
 Lazio,Sanchez Emilson Cribari,DC,74
 Lazio,Luciano Zauri,TS,73
-Lazio,Roberto Muzzi,AT,72
+Lazio,Roberto Muzzi,COC,72
+Lazio,Roberto Muzzi,ATT,72
 Lazio,Roberto Baronio,CC,72
 Lazio,Guglielmo Stendardo,DC,71
 Lazio,Valon Behrami,ED,70
@@ -274,7 +286,8 @@ Livorno,Paulinho,ATT,59
 Livorno,Luis Fernando Centi,CC,57
 Livorno,Stefano Morrone,CC,53
 Livorno,Marc Pfertzel,ED,53
-Livorno,Giuseppe Colucci,AT,42
+Livorno,Giuseppe Colucci,COC,42
+Livorno,Giuseppe Colucci,ATT,42
 Messina,Massimo Gazzoli,POR,80
 Messina,Riccardo Zampagna,ATT,72
 Messina,Rafael,TD,72
@@ -315,7 +328,8 @@ Palermo,Matteo Guardalben,POR,61
 Palermo,Andrea Gasbarroni,COC,59
 Palermo,Massimo Bonanni,COC,59
 Palermo,Paul Costantin Codrea,COC,57
-Palermo,Franco Brienza,AT,55
+Palermo,Franco Brienza,COC,55
+Palermo,Franco Brienza,ATT,55
 Palermo,Simone Pepe,ATT,53
 Palermo,Pietro Accardi,TS,53
 Palermo,Michele Ferri,TS,53
@@ -410,7 +424,8 @@ Siena,Roberto D'Aversa,CC,66
 Siena,Andrea Ardito,CDC,61
 Siena,Matteo Paro,ES,59
 Siena,Daniele Gastaldello,TD,50
-Siena,Rey Volpato,AT,50
+Siena,Rey Volpato,COC,50
+Siena,Rey Volpato,ATT,50
 Siena,Erjon Bogdani,ATT,48
 Treviso,Samir Handanovic,POR,76
 Treviso,Marco Zaninelli,DC,71
@@ -418,7 +433,8 @@ Treviso,Filippini E.,ED,69
 Treviso,Paolo Herman Dellafiore,DC,68
 Treviso,Federico Piovaccari,ATT,68
 Treviso,Anderson,COC,66
-Treviso,Eros Bagnara,AT,65
+Treviso,Eros Bagnara,COC,65
+Treviso,Eros Bagnara,ATT,65
 Treviso,Raffaele De Martino,CC,65
 Treviso,Daniele Quadrini,ED,63
 Treviso,Alessio Sestu,ES,62

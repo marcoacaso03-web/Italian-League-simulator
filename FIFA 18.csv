@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 Atalanta,Alejandro Gómez,AS,84
 Atalanta,Josip Iličić,AD,81
 Atalanta,Andrea Masiello,DC,79
@@ -264,7 +264,8 @@ Fiorentina,Steve Leo Beleck,ATT,63
 Fiorentina,Ianis Hagi,AD,63
 Fiorentina,Petko Hristov,DC,61
 Fiorentina,Gabriele Gori,ATT,61
-Fiorentina,Simone Lo Faso,AT,60
+Fiorentina,Simone Lo Faso,COC,60
+Fiorentina,Simone Lo Faso,ATT,60
 Fiorentina,Luca Ranieri,TS,59
 Fiorentina,Marco Meli,AD,58
 Fiorentina,Abdou Diakhate,CC,56
@@ -317,7 +318,8 @@ Hellas Verona,Alessio Cerci,ATT,75
 Hellas Verona,Jagoš Vuković,DC,75
 Hellas Verona,Thomas Heurtaux,DC,73
 Hellas Verona,Ryder Matos,AD,73
-Hellas Verona,Daniel Bessa,AT,73
+Hellas Verona,Daniel Bessa,COC,73
+Hellas Verona,Daniel Bessa,ATT,73
 Hellas Verona,Marcel Büchel,CC,72
 Hellas Verona,Bruno Petković,ATT,72
 Hellas Verona,Daniele Verde,AS,72
@@ -423,7 +425,8 @@ Lazio,Sergej Milinković-Savić,CC,83
 Lazio,Lucas Pezzini Leiva,CDC,82
 Lazio,Luís Carlos Almeida da Cunha,AS,81
 Lazio,Marco Parolo,CDC,81
-Lazio,Luis Alberto Romero Alconchel,AT,81
+Lazio,Luis Alberto Romero Alconchel,COC,81
+Lazio,Luis Alberto Romero Alconchel,ATT,81
 Lazio,Felipe Anderson Pereira Gomes,AD,81
 Lazio,Keita Baldé,ED,81
 Lazio,Ştefan Radu,DC,80
@@ -578,7 +581,8 @@ Sampdoria,Filip Đuričić,COC,74
 Sampdoria,Ivan Strinić,TS,74
 Sampdoria,José Rodolfo Pires Ribeiro,ES,73
 Sampdoria,Bartosz Bereszyński,TD,73
-Sampdoria,Gianluca Caprari,AT,73
+Sampdoria,Gianluca Caprari,COC,73
+Sampdoria,Gianluca Caprari,ATT,73
 Sampdoria,Vid Belec,POR,72
 Sampdoria,Vasco Regini,TS,72
 Sampdoria,Jacopo Sala,TD,72
@@ -720,9 +724,11 @@ Udinese,Seko Fofana,CC,75
 Udinese,Maximiliano López,ATT,74
 Udinese,Jens Stryger Larsen,DC,74
 Udinese,Molla Wagué,DC,74
-Udinese,Rodrigo Javier De Paul,AT,74
+Udinese,Rodrigo Javier De Paul,COC,74
+Udinese,Rodrigo Javier De Paul,ATT,74
 Udinese,Bram Nuytinck,DC,73
-Udinese,Ryder Matos,AT,73
+Udinese,Ryder Matos,COC,73
+Udinese,Ryder Matos,ATT,73
 Udinese,Samir Caetano de Souza Santos,DC,73
 Udinese,Ali Adnan,ES,73
 Udinese,Emil Hallfreðsson,CC,72

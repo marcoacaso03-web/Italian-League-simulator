@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 Atalanta,Alejandro Gómez,COC,86
 Atalanta,Josip Iličić,ATT,84
 Atalanta,Duván Zapata,ATT,83
@@ -146,7 +146,8 @@ Cagliari,Daniele Ragatzu,ATT,63
 Cagliari,Luca Gagliano,ATT,58
 Fiorentina,Franck Ribéry,ES,82
 Fiorentina,Germán Pezzella,DC,79
-Fiorentina,Kevin-Prince Boateng,AT,78
+Fiorentina,Kevin-Prince Boateng,COC,78
+Fiorentina,Kevin-Prince Boateng,ATT,78
 Fiorentina,Federico Chiesa,ATT,78
 Fiorentina,Martín Cáceres,DC,77
 Fiorentina,Milan Badelj,CDC,77
@@ -189,7 +190,8 @@ Fiorentina,Michele Cerofolini,POR,60
 Fiorentina,Marco Meli,AD,58
 Genoa,Mattia Perin,POR,82
 Genoa,Domenico Criscito,ES,78
-Genoa,Iago Falqué Silva,AT,78
+Genoa,Iago Falqué Silva,COC,78
+Genoa,Iago Falqué Silva,ATT,78
 Genoa,Adama Soumaoro,DC,77
 Genoa,Andrea Masiello,DC,76
 Genoa,Lasse Schøne,CDC,76
@@ -264,7 +266,8 @@ Hellas Verona,Alessandro Crescenzi,TD,68
 Hellas Verona,Paweł Dawidowicz,DC,68
 Hellas Verona,Boris Radunović,POR,68
 Hellas Verona,Karamoko Cissé,ATT,67
-Hellas Verona,Eddie Salcedo,AT,67
+Hellas Verona,Eddie Salcedo,COC,67
+Hellas Verona,Eddie Salcedo,ATT,67
 Hellas Verona,Andrea Danzi,CC,67
 Hellas Verona,Federico Dimarco,TS,66
 Hellas Verona,Alan Pereira Empereur,DC,66
@@ -355,7 +358,8 @@ Lazio,Ştefan Radu,DC,80
 Lazio,Marco Parolo,CDC,80
 Lazio,Senad Lulić,ES,79
 Lazio,Jonathan Rodríguez Menéndez,ES,79
-Lazio,Felipe Caicedo,AT,78
+Lazio,Felipe Caicedo,COC,78
+Lazio,Felipe Caicedo,ATT,78
 Lazio,Bartolomeu Quissanga,DC,78
 Lazio,Luiz Felipe Ramos Marchi,DC,78
 Lazio,Martín Cáceres,DC,77
@@ -374,7 +378,8 @@ Lazio,Ivan Vargić,POR,69
 Lazio,Joseph Minala,CC,69
 Lazio,Nicolò Armini,DC,66
 Lazio,Jorge Filipe Soares Silva,DC,65
-Lazio,André Anderson Pomilio Lima,AT,64
+Lazio,André Anderson Pomilio Lima,COC,64
+Lazio,André Anderson Pomilio Lima,ATT,64
 Lazio,Guido Guerrieri,POR,62
 Lazio,Bobby Adekanye,AD,62
 Lecce,Riccardo Saponara,COC,76
@@ -406,7 +411,8 @@ Lecce,Biagio Meccariello,DC,68
 Lecce,Francesco Cosenza,DC,65
 Lecce,Thom Haye,CC,65
 Lecce,Andrea Tabanelli,CC,65
-Lecce,Simone Lo Faso,AT,65
+Lecce,Simone Lo Faso,COC,65
+Lecce,Simone Lo Faso,ATT,65
 Lecce,Alessandro Deiola,CC,64
 Lecce,Pedro Miguel Costa Ferreira,COC,63
 Lecce,Andrea Saraniti,ATT,62
@@ -415,7 +421,8 @@ Lecce,Marco Bleve,POR,60
 Lecce,Brayan Vera,DC,59
 Lecce,Davide Riccardi,DC,58
 Lecce,Radoslav Tsonev,CC,57
-Lecce,Edgaras Dubickas,AT,52
+Lecce,Edgaras Dubickas,COC,52
+Lecce,Edgaras Dubickas,ATT,52
 Lecce,Gianmarco Chironi,POR,49
 Milan,Zlatan Ibrahimović,ATT,85
 Milan,Gianluigi Donnarumma,POR,85
@@ -453,7 +460,8 @@ Milan,Przemysław Bargiel,COC,60
 Milan,Daniel Maldini,COC,60
 Milan,Alexandro Cavagnera,CDC,58
 Napoli,Kalidou Koulibaly,DC,88
-Napoli,Dries Mertens,AT,87
+Napoli,Dries Mertens,COC,87
+Napoli,Dries Mertens,ATT,87
 Napoli,Lorenzo Insigne,AS,86
 Napoli,José María Callejón Bueno,AD,84
 Napoli,Kostas Manolas,DC,84
@@ -466,7 +474,8 @@ Napoli,Hirving Lozano,AD,80
 Napoli,David Ospina,POR,79
 Napoli,Faouzi Ghoulam,TS,79
 Napoli,Stanislav Lobotka,CC,79
-Napoli,Simone Verdi,AT,78
+Napoli,Simone Verdi,COC,78
+Napoli,Simone Verdi,ATT,78
 Napoli,Diego Demme,CC,78
 Napoli,Mário Rui Silva Duarte,TS,78
 Napoli,Elseid Hysaj,TD,78
@@ -498,7 +507,8 @@ Parma,Andreas Cornelius,ATT,75
 Parma,Jasmin Kurtić,CC,75
 Parma,Yann Karamoh,ED,75
 Parma,Ionuț Andrei Radu,POR,75
-Parma,Gianluca Caprari,AT,74
+Parma,Gianluca Caprari,COC,74
+Parma,Gianluca Caprari,ATT,74
 Parma,Alberto Grassi,CC,74
 Parma,Hernani Azevedo Júnior,CDC,74
 Parma,Dejan Kulusevski,AD,74
@@ -579,7 +589,8 @@ Sampdoria,Karol Linetty,ES,76
 Sampdoria,Omar Colley,DC,75
 Sampdoria,Maya Yoshida,DC,74
 Sampdoria,Andrea Bertolacci,CC,74
-Sampdoria,Gianluca Caprari,AT,74
+Sampdoria,Gianluca Caprari,COC,74
+Sampdoria,Gianluca Caprari,ATT,74
 Sampdoria,Jakub Jankto,CC,74
 Sampdoria,José Rodolfo Pires Ribeiro,ES,72
 Sampdoria,Nicola Murru,TS,72
@@ -692,7 +703,8 @@ Torino,Nicolas Nkoulou,DC,81
 Torino,Simone Zaza,ATT,80
 Torino,Armando Izzo,DC,80
 Torino,Cristian Ansaldi,ES,79
-Torino,Iago Falqué Silva,AT,78
+Torino,Iago Falqué Silva,COC,78
+Torino,Iago Falqué Silva,ATT,78
 Torino,Simone Verdi,AD,78
 Torino,Daniele Baselli,CC,78
 Torino,Tomás Rincón,CC,77
@@ -757,5 +769,6 @@ Udinese,Petar Mićin,AD,65
 Udinese,Svante Ingelsson,CC,64
 Udinese,Samuele Perisan,POR,63
 Udinese,Francisco Sierralta,TD,62
-Udinese,Emanuele Rovini,AT,60
+Udinese,Emanuele Rovini,COC,60
+Udinese,Emanuele Rovini,ATT,60
 Udinese,Manuel Gasparini,POR,57
