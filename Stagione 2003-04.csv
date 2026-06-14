@@ -57,6 +57,7 @@ Ancona,Fabricio Lenci,ATT,71
 Ancona,Eusebio Di Francesco,CC,72
 Ancona,Roberto Goretti,CC,70
 Ancona,Goran Pandev,ATT,70
+Ancona,Goran Pandev,COC,70
 Ancona,Andrea Sussi,DC,71
 Ancona,William Viali,DC,71
 Ancona,Corrado Grabbi,ATT,71
@@ -93,17 +94,20 @@ AS Roma,Jonathan Zebina,TD,78
 AS Roma,Francisco Govinho Lima,CC,79
 AS Roma,Vincenzo Montella,ATT,80
 AS Roma,Francesco Totti,ATT,78
+AS Roma,Francesco Totti,COC,78
 AS Roma,Emerson,CC,80
 AS Roma,Carlo Zotti,POR,74
 AS Roma,Olivier Dacourt,CC,80
 AS Roma,Damiano Tommasi,CC,79
 AS Roma,Antonio Cassano,ATT,78
+AS Roma,Antonio Cassano,AS,78
 AS Roma,Walter Samuel,DC,78
 AS Roma,Luigi Sartor,DC,80
 AS Roma,Gaetano D'Agostino,CC,80
 AS Roma,Ivan Pelizzoli,POR,74
 AS Roma,John Carew,ATT,78
 AS Roma,Marco Delvecchio,ATT,80
+AS Roma,Marco Delvecchio,AS,80
 AS Roma,Alessio Cerci,CC,79
 AS Roma,Gianluca Galasso,DC,80
 AS Roma,Daniele De Rossi,CC,79
@@ -176,6 +180,8 @@ Brescia,Roberto Cortellini,ATT,74
 Chievo Verona,Luca Marchegiani,POR,81
 Chievo Verona,John Mensah,DC,74
 Chievo Verona,Giuseppe Sculli,ATT,75
+Chievo Verona,Giuseppe Sculli,AS,75
+Chievo Verona,Giuseppe Sculli,ES,75
 Chievo Verona,Stefano Morrone,CC,76
 Chievo Verona,Luciano,CC,74
 Chievo Verona,Maurizio D'Angelo,DC,75
@@ -194,7 +200,8 @@ Chievo Verona,Simone Perrotta,CC,76
 Chievo Verona,Alfredo Cariello,CC,75
 Chievo Verona,Salvatore Lanna,DC,76
 Chievo Verona,Federico Cossato,ATT,76
-Chievo Verona,Matteo Paro,ATT,75
+Chievo Verona,Matteo Paro,ES,75
+Chievo Verona,Matteo Paro,CC,75
 Chievo Verona,César,DC,74
 Chievo Verona,Andrea Zanchetta,CC,75
 Chievo Verona,Fabio Moro,DC,74
@@ -216,6 +223,8 @@ Empoli,Alessandro Agostini,DC,70
 Empoli,Manuel Belleri,DC,71
 Empoli,Ibrahim Abdul Razak,ATT,70
 Empoli,Antonio Di Natale,ATT,70
+Empoli,Antonio Di Natale,AS,70
+Empoli,Antonio Di Natale,ES,70
 Empoli,Francesco Tavano,ATT,72
 Empoli,Mirco Gasparetto,ATT,72
 Empoli,Mario Cassano,POR,66
@@ -229,6 +238,7 @@ Empoli,Andrea Coda,DC,72
 Empoli,Flavio Giampieretti,CC,72
 Empoli,Riccardo Bonetto,DC,71
 Empoli,Tommaso Rocchi,ATT,72
+Empoli,Tommaso Rocchi,AD,72
 Empoli,Daniele Balli,POR,68
 Empoli,Damiano Mitra,CC,71
 Empoli,Stefano Lucchini,DC,72
@@ -313,6 +323,7 @@ Lecce,Valeri Božinov,ATT,74
 Lecce,Sebastjan Cimirotič,ATT,74
 Lecce,Daniele Franceschini,CC,76
 Lecce,Mirko Vučinić,ATT,76
+Lecce,Mirko Vučinić,AS,76
 Lecce,Guillermo Giacomazzi,CC,75
 Lecce,Cesare Bovo,DC,74
 Lecce,Andrea Panico,POR,72
@@ -448,6 +459,7 @@ Perugia,Massimo Margiotta,ATT,71
 Perugia,Fabrizio Ravanelli,ATT,71
 Perugia,Dario Hübner,ATT,73
 Perugia,Franco Brienza,ATT,72
+Perugia,Franco Brienza,COC,72
 Perugia,Zīsīs Vryzas,ATT,71
 Perugia,Emanuele Berrettoni,ATT,72
 Perugia,Marcelo Zalayeta,ATT,73
@@ -475,6 +487,7 @@ Reggina,Graziano Tilaro,POR,68
 Reggina,Ivan Franceschini,DC,73
 Reggina,Martin Lejsal,POR,68
 Reggina,David Di Michele,ATT,74
+Reggina,David Di Michele,AD,74
 Reggina,Andrea Sottil,DC,73
 Reggina,Giacomo Tedesco,CC,73
 Reggina,Giandomenico Mesto,CC,72
@@ -511,6 +524,8 @@ Sampdoria,Biagio Pagano,CC,75
 Sampdoria,Aimo Diana,ED,76
 Sampdoria,Aimo Diana,COC,76
 Sampdoria,Antonio Floro Flores,ATT,77
+Sampdoria,Antonio Floro Flores,AD,77
+Sampdoria,Antonio Floro Flores,AS,77
 Sampdoria,Nenad Sakić,DC,77
 Sampdoria,Francesco Pedone,CC,77
 Sampdoria,Cristiano Doni,CC,75
@@ -591,6 +606,7 @@ Udinese,Morgan De Sanctis,POR,81
 Udinese,Per Krøldrup,DC,77
 Udinese,Thomas Manfredini,DC,76
 Udinese,Asamoah Gyan,ATT,76
+Udinese,Asamoah Gyan,AD,76
 Udinese,Valerio Bertotto,DC,76
 Udinese,Valerio Bertotto,TD,76
 Udinese,Mohammed Gargo,DC,77
@@ -617,4 +633,5 @@ Udinese,Fabio Rossitto,CC,77
 Udinese,Sulley Muntari,CC,77
 Udinese,Adriano Bonaiuti,POR,71
 Udinese,Vincenzo Iaquinta,ATT,77
+Udinese,Vincenzo Iaquinta,AS,77
 Udinese,Olivier Renard,POR,72

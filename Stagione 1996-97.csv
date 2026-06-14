@@ -51,6 +51,7 @@ AS Roma,Daniele Berretta,CC,75
 AS Roma,Luigi Di Biagio,CC,75
 AS Roma,Martin Dahlin,ATT,75
 AS Roma,Francesco Totti,ATT,74
+AS Roma,Francesco Totti,COC,74
 AS Roma,Damiano Tommasi,CC,73
 AS Roma,Massimiliano Cappioli,CC,75
 AS Roma,Gabriele Grossi,DC,73
@@ -58,12 +59,14 @@ AS Roma,Antonino Bernardini,CC,74
 AS Roma,Giampaolo Di Magno,POR,69
 AS Roma,Lampros Choutos,ATT,74
 AS Roma,Marco Delvecchio,ATT,74
+AS Roma,Marco Delvecchio,AS,74
 AS Roma,Lorenzo Stovini,DC,74
 AS Roma,Gianluca Berti,POR,69
 AS Roma,Matteo Pivotto,DC,74
 AS Roma,Fabrizio Romondini,CC,73
 AS Roma,Daniele Conti,CC,75
-AS Roma,Andrea Conti,ATT,73
+AS Roma,Andrea Conti,TD,73
+AS Roma,Andrea Conti,ED,73
 AS Roma,Omari Tetradze,DC,73
 AS Roma,Vincent Candela,ASA,73
 AS Roma,Vincent Candela,ES,73
@@ -93,7 +96,7 @@ Atalanta,Fausto Rossini,ATT,76
 Atalanta,Gianluigi Lentini,ATT,76
 Atalanta,Mario Morfeo,CC,75
 Atalanta,Massimo Mutarelli,CC,74
-Atalanta,Alessandro Marcandalli,ATT,76
+Atalanta,Alessandro Marcandalli,DC,76
 Atalanta,Angelo Carbone,CC,76
 Atalanta,Arnaldo Bonfanti,DC,74
 Atalanta,Pierre Giorgio Regonesi,DC,75
@@ -118,6 +121,7 @@ Bologna,Igor Protti,AD,74
 Bologna,Marco De Marchi,AS,66
 Bologna,Marcello Moderato,ATT,72
 Bologna,Igor Protti,ATT,74
+Bologna,Igor Protti,COC,74
 Bologna,Roberto Mancini,ATT,80
 Cagliari,Marco Pascolo,POR,78
 Cagliari,Giuseppe Pancaro,DC,72
@@ -295,6 +299,7 @@ Parma,Néstor Sensini,DC,80
 Parma,Dino Baggio,CC,79
 Parma,Massimo Crippa,CC,80
 Parma,Gianfranco Zola,ATT,78
+Parma,Gianfranco Zola,COC,78
 Parma,Hernán Crespo,ATT,80
 Parma,Gianluigi Buffon,POR,76
 Parma,Amaral,CC,79
@@ -331,7 +336,7 @@ Perugia,Marco Storari,POR,67
 Perugia,Salvatore Matrecano,DC,72
 Perugia,Gennaro Gattuso,CC,71
 Perugia,Marco Negri,ATT,73
-Perugia,Carmine Gautieri,ATT,71
+Perugia,Carmine Gautieri,COC,71
 Perugia,Massimiliano Allegri,CC,73
 Perugia,Pasquale Domenico Rocco,CC,73
 Perugia,Roberto Goretti,CC,71
@@ -449,6 +454,7 @@ SS Lazio,Roberto Rambaudi,ATT,79
 SS Lazio,Renato Buso,ATT,79
 SS Lazio,Pierluigi Casiraghi,ATT,77
 SS Lazio,Igor Protti,ATT,78
+SS Lazio,Igor Protti,COC,78
 SS Lazio,Giuseppe Signori,ATT,79
 SS Lazio,Fernando Orsi,POR,75
 SS Lazio,Alessandro Nesta,DC,79

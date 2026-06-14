@@ -47,10 +47,11 @@ AS Roma,Dmitrij Aleničev,CC,76
 AS Roma,Hidetoshi Nakata,CC,78
 AS Roma,Vincenzo Montella,ATT,76
 AS Roma,Francesco Totti,ATT,77
+AS Roma,Francesco Totti,COC,77
 AS Roma,Eusebio Di Francesco,CC,76
 AS Roma,Cristiano Lupatelli,POR,72
 AS Roma,Manuele Blasi,CC,76
-AS Roma,Carmine Gautieri,ATT,76
+AS Roma,Carmine Gautieri,COC,76
 AS Roma,Giuseppe Colucci,CC,78
 AS Roma,Ivan Tomić,CC,78
 AS Roma,Damiano Tommasi,CC,78
@@ -62,6 +63,7 @@ AS Roma,Gaetano D'Agostino,CC,76
 AS Roma,Francesco Antonioli,POR,74
 AS Roma,Alessandro Rinaldi,DC,77
 AS Roma,Marco Delvecchio,ATT,78
+AS Roma,Marco Delvecchio,AS,78
 AS Roma,Lampros Choutos,ATT,78
 AS Roma,Joseph Dayo Oshadogan,DC,76
 AS Roma,Ednilson,CC,77
@@ -95,6 +97,7 @@ Bari,Antonio Bellavista,CC,73
 Bari,Antonio La Fortezza,CC,74
 Bari,Simone Perrotta,CC,73
 Bari,Antonio Cassano,ATT,72
+Bari,Antonio Cassano,AS,72
 Bari,Raphael Chukwu,ATT,73
 Bari,Hany Said,CC,73
 Bari,Jaime Valdés,CC,74
@@ -172,7 +175,11 @@ Cagliari,Davide Carrus,CC,70
 Cagliari,David Suazo,ATT,71
 Cagliari,Luís Oliveira,ATT,71
 Cagliari,Domenico Morfeo,ATT,70
+Cagliari,Domenico Morfeo,COC,70
 Cagliari,Andrea Pisanu,ATT,71
+Cagliari,Andrea Pisanu,AD,71
+Cagliari,Andrea Pisanu,ED,71
+Cagliari,Andrea Pisanu,AS,71
 Cagliari,Stefano Bianconi,DC,72
 Cagliari,Giovanni Soro,CC,71
 Cagliari,Andrea Capone,CC,70
@@ -212,6 +219,7 @@ Fiorentina,Simone Pelanti,CC,76
 Fiorentina,Federico Ligori,ATT,77
 Fiorentina,Stefano Bettarini,DC,75
 Fiorentina,Domenico Morfeo,ATT,75
+Fiorentina,Domenico Morfeo,COC,75
 Hellas Verona,Graziano Battistini,POR,81
 Hellas Verona,Sébastien Frey,POR,71
 Hellas Verona,Gianluca Pegolo,POR,72
@@ -391,6 +399,8 @@ Parma,Simone Basso,ATT,76
 Parma,Hernán Crespo,ATT,76
 Parma,Gianluca De Angelis,ATT,77
 Parma,Marco Di Vaio,ATT,78
+Parma,Marco Di Vaio,AS,78
+Parma,Marco Di Vaio,ES,78
 Perugia,Andrea Mazzantini,POR,81
 Perugia,Daniele Daino,DC,74
 Perugia,Mauro Milanese,DC,74
@@ -554,6 +564,8 @@ Torino,Lorenzo Minotti,DC,58
 Torino,Luigi Panarelli,DC,60
 Torino,Andrea Citterio,DC,72
 Torino,Fabio Quagliarella,ATT,58
+Torino,Fabio Quagliarella,AD,58
+Torino,Fabio Quagliarella,ED,58
 Torino,Emanuele Calaiò,ATT,67
 Udinese,Luigi Turci,POR,81
 Udinese,Morgan De Sanctis,POR,72
@@ -588,6 +600,7 @@ Udinese,Mauricio Pineda,CC,76
 Udinese,David Pizarro,CC,77
 Udinese,Henry van der Vegt,CC,75
 Udinese,Mauro Esposito,ATT,76
+Udinese,Mauro Esposito,AD,76
 Udinese,Massimo Margiotta,ATT,76
 Udinese,Zlatan Muslimović,ATT,76
 Udinese,Roberto Muzzi,ATT,75

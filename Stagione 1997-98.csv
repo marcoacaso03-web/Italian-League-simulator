@@ -42,6 +42,7 @@ AS Roma,Paulo Sérgio,ATT,77
 AS Roma,Cristiano Scapolo,CC,79
 AS Roma,Abel Balbo,ATT,79
 AS Roma,Francesco Totti,ATT,77
+AS Roma,Francesco Totti,COC,77
 AS Roma,Eusebio Di Francesco,CC,79
 AS Roma,Antonio Chimenti,POR,75
 AS Roma,Vágner,CC,79
@@ -54,6 +55,7 @@ AS Roma,Carmine Gautieri,CC,79
 AS Roma,Omari Tetradze,DC,79
 AS Roma,César Gómez,DC,77
 AS Roma,Marco Delvecchio,ATT,78
+AS Roma,Marco Delvecchio,AS,78
 AS Roma,Fabio Petruzzi,DC,78
 AS Roma,Antônio Carlos Zago,DC,78
 Atalanta,Alberto Fontana,POR,77
@@ -236,6 +238,7 @@ Fiorentina,Andrej Kančel'skis,CC,78
 Fiorentina,Francesco Flachi,ATT,77
 Fiorentina,Davide Dionigi,ATT,78
 Fiorentina,Domenico Morfeo,ATT,76
+Fiorentina,Domenico Morfeo,COC,76
 Fiorentina,Mirko Benin,CC,76
 Fiorentina,Valerio Fiori,POR,72
 Fiorentina,Anselmo Robbiati,CC,76
@@ -350,6 +353,7 @@ Napoli,Francesco Turrini,CC,70
 Napoli,Raffaele Longo,CC,70
 Napoli,Claudio Bellucci,ATT,72
 Napoli,Igor Protti,ATT,71
+Napoli,Igor Protti,COC,71
 Napoli,José Luis Calderón,ATT,72
 Napoli,Raffaele Di Fusco,POR,68
 Napoli,Luigi Panarelli,DC,72

@@ -29,6 +29,7 @@ AS Roma,Diego Fuser,CC,76
 AS Roma,Francisco Govinho Lima,CC,75
 AS Roma,Vincenzo Montella,ATT,75
 AS Roma,Francesco Totti,ATT,77
+AS Roma,Francesco Totti,COC,77
 AS Roma,Emerson,CC,77
 AS Roma,Carlo Zotti,POR,72
 AS Roma,Leandro Damián Cufré,DC,77
@@ -36,12 +37,14 @@ AS Roma,Olivier Dacourt,CC,75
 AS Roma,Saliou Lassissi,DC,76
 AS Roma,Damiano Tommasi,CC,76
 AS Roma,Antonio Cassano,ATT,77
+AS Roma,Antonio Cassano,AS,77
 AS Roma,Walter Samuel,DC,76
 AS Roma,Davide Bombardini,CC,75
 AS Roma,Alberto Aquilani,CC,77
 AS Roma,Ivan Pelizzoli,POR,71
 AS Roma,Christian Panucci,TD,76
 AS Roma,Marco Delvecchio,ATT,77
+AS Roma,Marco Delvecchio,AS,77
 AS Roma,Gianni Guigou,CC,76
 AS Roma,Damiano Ferronetti,DC,75
 AS Roma,Daniele De Rossi,CC,76
@@ -140,6 +143,7 @@ Brescia,Igli Tare,ATT,75
 Brescia,Matteo Sereni,POR,71
 Brescia,Alejandro Correa,CC,74
 Brescia,Simone Del Nero,ATT,75
+Brescia,Simone Del Nero,AD,75
 Brescia,Mario Salgado,ATT,75
 Brescia,Marco Pisano,DC,75
 Brescia,Massimiliano Caputo,ATT,74
@@ -214,6 +218,8 @@ Empoli,Giacomo Mazzi,POR,70
 Empoli,Manuel Belleri,DC,73
 Empoli,Francesco Pratali,DC,74
 Empoli,Antonio Di Natale,ATT,74
+Empoli,Antonio Di Natale,AS,74
+Empoli,Antonio Di Natale,ES,74
 Empoli,Francesco Tavano,ATT,72
 Empoli,Luca Saudati,ATT,74
 Empoli,David Bret,POR,70
@@ -226,6 +232,7 @@ Empoli,Flavio Giampieretti,CC,74
 Empoli,Roberto Mirri,DC,73
 Empoli,Marco Borriello,ATT,73
 Empoli,Tommaso Rocchi,ATT,73
+Empoli,Tommaso Rocchi,AD,73
 Empoli,Ighli Vannucchi,CC,74
 Empoli,Antonio Buscè,CC,73
 Empoli,Stefano Lucchini,DC,74
@@ -291,6 +298,8 @@ Juventus,Alessandro Birindelli,DC,79
 Juventus,Mauro Camoranesi,CC,80
 Juventus,David Trezeguet,ATT,78
 Juventus,Marco Di Vaio,ATT,78
+Juventus,Marco Di Vaio,AS,78
+Juventus,Marco Di Vaio,ES,78
 Juventus,Gianluca Zambrotta,TS,79
 Juventus,Davide Baiocco,CC,80
 Juventus,Lilian Thuram,DC,78
@@ -304,6 +313,8 @@ Juventus,Frantz Bertin,CC,79
 Juventus,Mattia Cassani,DC,80
 Juventus,Matteo Paro,CC,78
 Modena,Giuseppe Sculli,ATT,73
+Modena,Giuseppe Sculli,AS,73
+Modena,Giuseppe Sculli,ES,73
 Modena,Jacopo Balestri,DC,73
 Modena,Paolo Ponzo,CC,74
 Modena,Mauro Mayer,DC,75
@@ -353,6 +364,8 @@ Parma,Emanuele Filippini,CC,78
 Parma,Alberto Gilardino,ATT,77
 Parma,Roberto Massaro,ATT,77
 Parma,Marco Di Vaio,ATT,78
+Parma,Marco Di Vaio,AS,78
+Parma,Marco Di Vaio,ES,78
 Parma,Adrian Mutu,ATT,76
 Parma,Matteo Ferrari,DC,78
 Parma,Cláudio Taffarel,POR,73
@@ -374,6 +387,8 @@ Perugia,Michele Tardioli,POR,71
 Perugia,Manuele Blasi,CC,76
 Perugia,Nicola Amoruso,ATT,76
 Perugia,Fabrizio Miccoli,ATT,75
+Perugia,Fabrizio Miccoli,AS,75
+Perugia,Fabrizio Miccoli,ES,75
 Perugia,Fabio Grosso,TS,75
 Perugia,Fabio Fiorentini,POR,70
 Perugia,Roberto Baronio,CC,74
@@ -451,6 +466,7 @@ Reggina,Ivan Franceschini,DC,72
 Reggina,Stefano Torrisi,DC,74
 Reggina,Martin Lejsal,POR,68
 Reggina,David Di Michele,ATT,72
+Reggina,David Di Michele,AD,72
 Reggina,José Mamede,CC,73
 Reggina,Luca Castellazzi,POR,69
 Reggina,Giandomenico Mesto,CC,74
@@ -577,6 +593,7 @@ Udinese,Fabio Rossitto,CC,76
 Udinese,Sulley Muntari,CC,76
 Udinese,Adriano Bonaiuti,POR,74
 Udinese,Vincenzo Iaquinta,ATT,77
+Udinese,Vincenzo Iaquinta,AS,77
 Udinese,Patrick Beneforti,CC,76
 Udinese,Mauricio Pineda,CC,78
 Udinese,Thomas Thorninger,ATT,78

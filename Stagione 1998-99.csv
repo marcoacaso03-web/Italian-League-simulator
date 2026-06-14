@@ -32,6 +32,7 @@ AS Roma,Paulo Sérgio,ATT,76
 AS Roma,Dmitri Alenichev,CC,76
 AS Roma,Gustavo Javier Bartelt,ATT,78
 AS Roma,Francesco Totti,ATT,78
+AS Roma,Francesco Totti,COC,78
 AS Roma,Eusebio Di Francesco,CC,76
 AS Roma,Antonio Chimenti,POR,72
 AS Roma,Fabio Petruzzi,DC,77
@@ -46,6 +47,7 @@ AS Roma,Omari Tetradze,DC,78
 AS Roma,Andrea Campagnolo,POR,72
 AS Roma,Daniele Conti,CC,76
 AS Roma,Marco Delvecchio,ATT,76
+AS Roma,Marco Delvecchio,AS,76
 AS Roma,Daniele Bordacconi,CC,77
 AS Roma,Fábio Júnior,ATT,78
 AS Roma,Maurizio Lanzaro,DC,77
@@ -125,6 +127,9 @@ Cagliari,Daniele Berretta,CC,74
 Cagliari,Jonathan Zebina,DC,72
 Cagliari,Jonathan Zebina,TD,72
 Cagliari,Andrea Pisanu,ATT,73
+Cagliari,Andrea Pisanu,AD,73
+Cagliari,Andrea Pisanu,ED,73
+Cagliari,Andrea Pisanu,AS,73
 Cagliari,Vincenzo Esposito,DC,73
 Cagliari,David Nyathi,DC,72
 Cagliari,Mohammed Kallon,ATT,72
@@ -234,7 +239,8 @@ Inter Milan,Iván Zamorano,ATT,77
 Inter Milan,Paulo Sousa,CC,76
 Inter Milan,Álvaro Recoba,ATT,77
 Inter Milan,Gilberto Melo,DC,75
-Inter Milan,Andrea Pirlo,ATT,77
+Inter Milan,Andrea Pirlo,CDC,77
+Inter Milan,Andrea Pirlo,CC,77
 Inter Milan,Sébastien Frey,POR,73
 Inter Milan,Dario Šimić,DC,76
 Inter Milan,Cristiano Zanetti,DC,77
@@ -296,7 +302,7 @@ Parma,Enrico Chiesa,AD,78
 Parma,Sébastien Frey,AS,72
 Parma,Hernán Crespo,ATT,86
 Parma,Enrico Chiesa,ATT,78
-Parma,Dino Baggio,ATT,76
+Parma,Dino Baggio,DC,76
 Perugia,Angelo Pagotto,POR,79
 Perugia,Zé Maria,DC,72
 Perugia,Zé Maria,TD,72
@@ -395,6 +401,8 @@ Salernitana,Renato Greco,ATT,72
 Salernitana,Antonino Bernardini,CC,72
 Salernitana,Giacomo Tedesco,CC,73
 Salernitana,Marco Di Vaio,ATT,72
+Salernitana,Marco Di Vaio,AS,72
+Salernitana,Marco Di Vaio,ES,72
 Salernitana,Andrea Ivan,POR,67
 Salernitana,Aleksandar Kristić,DC,72
 Salernitana,Emilio Belmonte,ATT,72
@@ -405,6 +413,7 @@ Salernitana,Francesco Galeoto,DC,71
 Salernitana,Francesco De Francesco,ATT,71
 Salernitana,Ciro De Cesare,ATT,73
 Salernitana,David Di Michele,ATT,71
+Salernitana,David Di Michele,AD,71
 Salernitana,Crescenzo De Vito,POR,67
 Salernitana,Ighli Vannucchi,CC,73
 Salernitana,Dragan Vukoja,ATT,73

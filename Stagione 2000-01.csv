@@ -56,6 +56,7 @@ AS Roma,Marco Delvecchio,AD,72
 AS Roma,Gabriel Batistuta,ATT,88
 AS Roma,Vincenzo Montella,ATT,78
 AS Roma,Marco Delvecchio,ATT,73
+AS Roma,Marco Delvecchio,AS,73
 Atalanta,Alberto Fontana,POR,82
 Atalanta,Fabio Rustico,DC,76
 Atalanta,Domenico Morfeo,CC,76
@@ -119,6 +120,7 @@ Bari,Antonio Bellavista,CC,70
 Bari,Antonio La Fortezza,CC,72
 Bari,Simone Perrotta,CC,72
 Bari,Antonio Cassano,ATT,70
+Bari,Antonio Cassano,AS,70
 Bari,Rodolfo Giorgetti,CC,71
 Bari,Jaime Valdés,CC,72
 Bari,Gabriele Davanzante,CC,72
@@ -361,6 +363,7 @@ Lecce,Aldo Osorio,ATT,73
 Lecce,Emanuele Manitta,POR,69
 Lecce,Alessandro Pellicori,ATT,72
 Lecce,Mirko Vučinić,ATT,73
+Lecce,Mirko Vučinić,AS,73
 Lecce,Diego Mateo,CC,74
 Lecce,Claudio Bonomi,CC,73
 Lecce,Riccardo Fissore,DC,73
@@ -409,6 +412,8 @@ Napoli,Emanuele Troise,DC,71
 Napoli,Damir Stojak,ATT,72
 Napoli,Roberto Stellone,ATT,71
 Napoli,Antonio Floro Flores,ATT,70
+Napoli,Antonio Floro Flores,AD,70
+Napoli,Antonio Floro Flores,AS,70
 Napoli,Giorgio Di Vicino,CC,70
 Napoli,Giacomo Tedesco,CC,70
 Napoli,Rabiu Afolabi,DC,72
@@ -438,6 +443,8 @@ Parma,Fabio Cannavaro,DC,79
 Parma,Johan Micoud,CC,79
 Parma,Stefano Torrisi,DC,79
 Parma,Marco Di Vaio,ATT,78
+Parma,Marco Di Vaio,AS,78
+Parma,Marco Di Vaio,ES,78
 Parma,Lilian Thuram,DC,79
 Parma,Emiliano Bonazzoli,ATT,79
 Parma,Matías Almeyda,CC,78
@@ -585,6 +592,7 @@ Udinese,Mauricio Pineda,CC,74
 Udinese,Alejandro Da Silva,ATT,75
 Udinese,Julio Gutiérrez,ATT,74
 Udinese,Vincenzo Iaquinta,ATT,75
+Udinese,Vincenzo Iaquinta,AS,75
 Udinese,Massimo Margiotta,ATT,74
 Udinese,Roberto Muzzi,ATT,75
 Udinese,Zlatan Muslimović,ATT,74
@@ -592,6 +600,7 @@ Udinese,Roberto Sosa,ATT,75
 Udinese,Warley,ATT,74
 Udinese,Maurizio Bedin,CC,74
 Udinese,Mauro Esposito,ATT,74
+Udinese,Mauro Esposito,AD,74
 Vicenza,Giorgio Sterchele,POR,78
 Vicenza,Mohamed Kallon,ATT,73
 Vicenza,Alessandro Dal Canto,DC,71
