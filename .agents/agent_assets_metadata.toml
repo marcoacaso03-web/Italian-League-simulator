@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "8lnb55VhnWY6wxMr5jFSl"
+uri = "file://dataset-duplicati.txt"
+type = "text"
+title = "Report duplicati dataset"

@@ -148,12 +148,11 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
     }
     const rows = parseSimpleCsv(content);
 
-    // Dedup within this CSV: keep only the first occurrence of (giocatore, club)
-    // In FIFA/FC the primary position is always listed first
+    // Dedup only exact duplicates: same player + club + role in the same CSV
     const seenInFile = new Set<string>();
 
     for (const row of rows) {
-      const fileKey = `${row.Giocatore}|${row.Squadra}`;
+      const fileKey = `${row.Giocatore}|${row.Squadra}|${row.Ruolo}`;
       if (seenInFile.has(fileKey)) continue;
       seenInFile.add(fileKey);
 

@@ -1,0 +1,94 @@
+# Giocatori con ruoli multipli nella stessa stagione
+# Formato: FILE | Club | Giocatore | Ruoli trovati
+
+## FIFA 16.csv
+  Frosinone                 | Lys Gomis                           | POR, POR
+
+## Stagione 1996-97.csv
+  Bologna                   | Ciro Ferrara                        | TD, ASA
+  Bologna                   | Massimo Paganin                     | TD, DC
+  Bologna                   | Alberigo Evani                      | DC, TS, CDC
+  Bologna                   | Roberto Mancini                     | CDC, CC, COC, ATT
+  Bologna                   | Igor Protti                         | CC, COC, AD, ATT
+  Fiorentina                | Angelo Di Livio                     | TD, ASA, CC
+  Fiorentina                | Lorenzo Amoruso                     | TD, DC
+  Fiorentina                | Amedeo Carboni                      | DC, TS
+  Fiorentina                | Lubomir Moravcik                    | CDC, CC
+  Fiorentina                | Gabriel Batistuta                   | COC, ATT
+  Fiorentina                | Rui Costa                           | COC, COC
+  Fiorentina                | Stefan Schwoch                      | AS, ATT
+  Vicenza                   | Marco Rossi                         | TD, ASA
+  Vicenza                   | Eugenio Corini                      | TD, CDC, CC, COC
+  Vicenza                   | Massimo Briaschi                    | DC, TS
+  Vicenza                   | Stefano Bettarini                   | CDC, CC
+  Vicenza                   | Roberto Baggio                      | COC, AD, ATT
+  Vicenza                   | Pedro Petrone                       | AS, ATT
+
+## Stagione 1997-98.csv
+  Udinese                   | Oliver Bierhoff                     | TD, AS, ATT
+  Udinese                   | Gianluigi Lentini                   | TD, TS
+  Udinese                   | Thomas Helveg                       | DC, ASA
+  Udinese                   | Attilio Lombardo                    | CDC, CC
+  Udinese                   | Gianluca Zambrotta                  | CC, AD
+  Udinese                   | Marcio Amoroso                      | COC, COC, ATT
+
+## Stagione 1998-99.csv
+  AC Milan                  | Dario Simic                         | DC, ASA
+  AC Milan                  | George Weah                         | COC, AD, ATT
+  Parma                     | Massimo Bizzarri                    | TD, ASA
+  Parma                     | Dino Baggio                         | TD, CDC, CC, ATT
+  Parma                     | Lilian Thuram                       | DC, TS
+  Parma                     | Hernán Crespo                       | COC, ATT
+  Parma                     | Enrico Chiesa                       | COC, AD, ATT
+  SS Lazio                  | Alessandro Nesta                    | TD, DC
+  SS Lazio                  | Sinisa Mihajlovic                   | DC, TS
+  SS Lazio                  | Matías Almeyda                      | DC, ASA, CDC
+  SS Lazio                  | Dejan Stanković                     | CDC, CC
+  SS Lazio                  | Juan Sebastián Verón                | CC, COC
+  SS Lazio                  | Pavel Nedvěd                        | COC, AD
+
+## Stagione 1999-00.csv
+  SS Lazio                  | Matías Almeyda                      | TD, DC, CDC
+  SS Lazio                  | Sinisa Mihajlovic                   | DC, TS
+  SS Lazio                  | Sérgio Conceiçao                    | ASA, CC
+  SS Lazio                  | Juan Sebastián Verón                | CC, COC
+  SS Lazio                  | Pavel Nedvěd                        | COC, AD
+  SS Lazio                  | Marcelo Salas                       | AS, ATT
+
+## Stagione 2000-01.csv
+  AS Roma                   | Aldair                              | TD, DC
+  AS Roma                   | Jonathan Zebina                     | DC, ASA
+  AS Roma                   | Hidetoshi Nakata                    | CC, COC
+  AS Roma                   | Vincenzo Montella                   | AS, ATT
+  AS Roma                   | Marco Delvecchio                    | AD, ATT
+  Brescia                   | Mauro Bressan                       | TD, CC, COC, AD
+  Brescia                   | Matteo Brighi                       | TD, CDC
+  Brescia                   | Francesco Coco                      | DC, TS
+  Brescia                   | Andrea Caracciolo                   | ASA, AS, ATT
+  Brescia                   | Demetrio Albertini                  | CDC, CC
+  Brescia                   | Roberto Baggio                      | COC, ATT
+
+## Stagione 2001-02.csv
+  Parma                     | Daniele Bonera                      | TD, DC
+  Parma                     | Lilian Thuram                       | DC, TS
+  Parma                     | Hidetoshi Nakata                    | CC, COC
+  Parma                     | Enrico Chiesa                       | COC, AD, ATT
+  Parma                     | Adriano                             | AS, ATT
+
+## Stagione 2002-03.csv
+  AC Milan                  | Kakha Kaladze                       | DC, ASA
+  Chievo Verona             | Aimo Diana                          | TD, ASA
+  Chievo Verona             | Simone Perrotta                     | TD, CDC, CC, COC
+  Chievo Verona             | Simone Bentivoglio                  | DC, TS
+  Chievo Verona             | Eugenio Corini                      | CDC, CC
+  Chievo Verona             | Massimo Marazzina                   | COC, AD, ATT
+  Chievo Verona             | Sergio Pellissier                   | AS, ATT
+
+## Stagione 2003-04.csv
+  Bologna                   | Massimo Bernardi                    | TD, ASA
+  Bologna                   | Cristian Zanetti                    | DC, CDC
+  Bologna                   | Giuseppe Pancaro                    | DC, TS
+  Bologna                   | Sergio Volpi                        | CDC, CC
+  Bologna                   | Julio Cruz                          | COC, AD, ATT
+  Juventus                  | Mauro Camoranesi                    | CC, COC
+  Juventus                  | Alessandro Del Piero                | COC, AS, ATT
