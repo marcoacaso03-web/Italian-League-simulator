@@ -1,0 +1,476 @@
+Squadra,Giocatore,Ruolo,Valutazione
+AC Milan,Andriy Shevchenko,ATT,93
+AC Milan,Paolo Maldini,DC,91
+AC Milan,Dida,POR,91
+AC Milan,Alessandro Nesta,DC,90
+AC Milan,Filippo Inzaghi,ATT,90
+AC Milan,Clarence Seedorf,ES,90
+AC Milan,Jaap Stam,DC,90
+AC Milan,Kaká,COC,90
+AC Milan,Kaká,ATT,90
+AC Milan,Christian Vieri,ATT,89
+AC Milan,Manuel Cesar Rui Costa,COC,89
+AC Milan,Gennaro Ivan Gattuso,CC,87
+AC Milan,Cafu,ED,87
+AC Milan,Alberto Gilardino,ATT,87
+AC Milan,Andrea Pirlo,CC,86
+AC Milan,Marek Jankulovski,ES,84
+AC Milan,Massimo Ambrosini,CDC,82
+AC Milan,Kakhaber Kaladze,TS,81
+AC Milan,Alessandro Costacurta,DC,80
+AC Milan,Dario Simic,TD,77
+AC Milan,Serginho,ES,72
+AC Milan,Valerio Fiori,POR,71
+AC Milan,Zeljko Kalac,POR,71
+AC Milan,Dimitrios Eleftheropoulos,POR,65
+AS Roma,Francesco Totti,COC,89
+AS Roma,Francesco Totti,ATT,89
+AS Roma,Antonio Cassano,ATT,89
+AS Roma,Shabani Nonda,ATT,87
+AS Roma,Philippe Mexès,DC,84
+AS Roma,Vincenzo Montella,COC,83
+AS Roma,Vincenzo Montella,ATT,83
+AS Roma,Mancini,COC,81
+AS Roma,Simone Perrotta,CDC,81
+AS Roma,Cristian Chivu,DC,81
+AS Roma,Samuel Osei Kuffour,DC,80
+AS Roma,Olivier Dacourt,LCDM,79
+AS Roma,Christian Panucci,TD,78
+AS Roma,Daniele De Rossi,RCDM,78
+AS Roma,Gianluca Curci,POR,75
+AS Roma,Matteo Ferrari,DC,74
+AS Roma,Rodrigo Taddei,COC,73
+AS Roma,Damiano Tommasi,CDC,72
+AS Roma,Leandro Damian Cufré,TS,69
+AS Roma,Cesare Bovo,DC,67
+AS Roma,Daniele Corvia,COC,67
+AS Roma,Daniele Corvia,ATT,67
+AS Roma,Giuseppe Scurto,DC,67
+AS Roma,Carlo Zotti,POR,66
+AS Roma,Gianluca Galasso,COC,64
+AS Roma,Gianluca Galasso,ATT,64
+AS Roma,Alberto Aquilani,CC,58
+Ascoli,Marco Ferrante,COC,73
+Ascoli,Marco Ferrante,ATT,73
+Ascoli,Federico Giampaolo,ES,63
+Ascoli,Ferdinando Coppola,POR,60
+Ascoli,Francesco Carbone,TD,59
+Ascoli,Nicolas Andres Cordova,CC,57
+Ascoli,Mirko Cudini,TS,56
+Ascoli,Riccardo Corallo,CC,56
+Ascoli,Francesco Modesto,ASA,55
+Ascoli,Luigi Martinelli,DC,54
+Ascoli,Michele Fini,RWM,54
+Ascoli,Filippo Antonelli Agomeri,ES,53
+Ascoli,Domenico Cristiano,DC,52
+Ascoli,Valerio Carboni,CC,51
+Ascoli,Andrea Ciotti,DC,51
+Ascoli,Daniele Coccia,DC,50
+Ascoli,Toledo,ED,48
+Ascoli,Alfredo Cariello,TD,47
+Ascoli,Marco Ascenzi,ATT,47
+Ascoli,Maurizio Lauro,CC,47
+Ascoli,Enrico Guarna,POR,45
+Ascoli,Andrea Ghidini,TS,44
+Ascoli,Giuseppe Caraviello,ASA,43
+Ascoli,Mattia Biso,CC,42
+Cagliari,David Velasquez Suazo,ATT,78
+Cagliari,Mauro Esposito,AD,71
+Cagliari,Antonio Langella,ATT,69
+Cagliari,Alessandro Budel,CC,64
+Cagliari,Massimo Gobbi,CC,63
+Cagliari,Andrea Peana,TS,63
+Cagliari,Andrea Campagnolo,POR,62
+Cagliari,Simone Farci,CC,62
+Cagliari,Diego Luis López,TD,61
+Cagliari,Nelson Abeijon,CC,61
+Cagliari,Alessandro Agostini,TS,60
+Cagliari,Francesco Bega,DC,60
+Cagliari,Daniele Conti,ES,60
+Cagliari,Claudio Pani,CC,59
+Cagliari,Andrea Capone,COC,58
+Cagliari,Andrea Cossu,ATT,56
+Cagliari,Francesco Pisano,DC,56
+Cagliari,Alessandro Conticchio,ED,54
+Cagliari,Michele Canini,TS,54
+Cagliari,Edgar Anthony Alvarez Reyes,ED,53
+Cagliari,Riccardo Gavioli,ES,50
+Cagliari,Simone Aresti,POR,49
+Cagliari,Davide Ugo Capello,POR,46
+Chievo Verona,Matteo Brighi,CC,78
+Chievo Verona,Lorenzo D'Anna,DC,73
+Chievo Verona,Federico Cossato,ATT,72
+Chievo Verona,Carvalho Amauri,ATT,72
+Chievo Verona,Alberto Fontana,POR,71
+Chievo Verona,Davide Mandelli,DC,70
+Chievo Verona,Sergio Marcon,POR,69
+Chievo Verona,Andrea Zanchetta,CC,65
+Chievo Verona,Andrea Mantovani,TS,64
+Chievo Verona,Salvatore Bruno,ATT,64
+Chievo Verona,Simone Tiribocchi,COC,62
+Chievo Verona,Simone Tiribocchi,ATT,62
+Chievo Verona,Giovanni Marchese,TS,62
+Chievo Verona,Luciano,ES,62
+Chievo Verona,Sergio Pellissier,ATT,62
+Chievo Verona,John Mensah,TD,60
+Chievo Verona,Fabio Moro,TD,58
+Chievo Verona,Franco Semioli,ED,57
+Chievo Verona,Salvatore Lanna,TS,56
+Chievo Verona,Paolo Codognola,POR,54
+Chievo Verona,Marco Malagó,DC,52
+Chievo Verona,Lorenzo Squizzi,POR,51
+Chievo Verona,Paolo Sammarco,CC,49
+Chievo Verona,Daniele Franceschini,ED,41
+Empoli,Gianluca Berti,POR,74
+Empoli,Francesco Pratali,DC,73
+Empoli,Nicola Ascoli,CC,72
+Empoli,Francesco Tavano,ATT,69
+Empoli,Nicola Pozzi,ATT,68
+Empoli,Stefano Lucchini,DC,66
+Empoli,Ighli Vannucchi,COC,65
+Empoli,Sergio Almirón,RCDM,65
+Empoli,Antonio Buscè,TD,65
+Empoli,Fabrizio Ficini,CC,64
+Empoli,Richard Vanigli,DC,64
+Empoli,Matteo Serafini,COC,64
+Empoli,Matteo Serafini,ATT,64
+Empoli,Mirco Gasparetto,ATT,61
+Empoli,Paolo Zanetti,LCDM,56
+Empoli,Davide Matteini,ATT,56
+Empoli,Daniele Balli,POR,55
+Empoli,Francesco Lodi,COC,53
+Empoli,Riccardo Bonetto,TS,53
+Empoli,Massimiliano Cappellini,ATT,53
+Empoli,Damiano Mitra,CC,49
+Empoli,Davide Moro,CC,45
+Empoli,Andrea Coda,DC,44
+Empoli,Christian Paoletti,POR,44
+Fiorentina,Tomas Ujfalusi,DC,86
+Fiorentina,Sebastien Frey,POR,83
+Fiorentina,Martin Jørgensen,ES,81
+Fiorentina,Valeri Bojinov,ATT,81
+Fiorentina,Luca Toni,ATT,80
+Fiorentina,Christian Riganò,ATT,78
+Fiorentina,William Viali,DC,76
+Fiorentina,Stefano Fiore,ED,76
+Fiorentina,Christian Cejas,POR,75
+Fiorentina,Christian Brocchi,CC,74
+Fiorentina,Dario Dainelli,DC,73
+Fiorentina,Enrico Fantini,ATT,73
+Fiorentina,Giampaolo Pazzini,ATT,73
+Fiorentina,Giuseppe Pancaro,TD,72
+Fiorentina,Gianni Bismark Guigou,ED,71
+Fiorentina,Christian Maggio,TD,69
+Fiorentina,Marco Donadel,CC,67
+Fiorentina,Alessandro Gamberini,DC,66
+Fiorentina,Michele Bacis,DC,64
+Fiorentina,Guilherme Do Prado,CC,63
+Fiorentina,Luis Bujia Helguera,CDC,61
+Fiorentina,Manuel Pasqual,TS,61
+Fiorentina,Daniele De Vezze,CC,50
+Inter Milan,Adriano,ATT,94
+Inter Milan,Francesco Toldo,POR,90
+Inter Milan,Figo,RWM,89
+Inter Milan,Walter Adrián Samuel,DC,87
+Inter Milan,Alvaro Recoba,COC,86
+Inter Milan,Alvaro Recoba,ATT,86
+Inter Milan,Javier Zanetti,TS,85
+Inter Milan,Obafemi Martins,ATT,85
+Inter Milan,Esteban Matías Cambiasso,CC,85
+Inter Milan,Santiago Hernán Solari,ES,84
+Inter Milan,Júlio César,POR,81
+Inter Milan,Valerio Bernado,DC,79
+Inter Milan,Iván Córdoba,DC,79
+Inter Milan,David Cortes Pizarro,CC,78
+Inter Milan,Dejan Stankovic,ED,77
+Inter Milan,Juan Sebastián Verón,CDC,77
+Inter Milan,Sinisa Mihajlovic,DC,75
+Inter Milan,Julio Ricardo Cruz,ATT,75
+Inter Milan,Héctor Fabián Carini,POR,73
+Inter Milan,Cristiano Zanetti,CC,72
+Inter Milan,Giuseppe Favalli,DC,71
+Inter Milan,Zé Maria,TD,71
+Inter Milan,Nicolás Andrés Burdisso,DC,68
+Inter Milan,Womé,ASA,67
+Juventus,Gianluigi Buffon,POR,95
+Juventus,David Trezeguet,ATT,92
+Juventus,Gianluca Zambrotta,TS,91
+Juventus,Zlatan Ibrahimovic,ATT,91
+Juventus,Lilian Thuram,DC,90
+Juventus,Pavel Nedved,ES,90
+Juventus,Alessandro Del Piero,COC,89
+Juventus,Alessandro Del Piero,ATT,89
+Juventus,Fabio Cannavaro,DC,89
+Juventus,Patrick Vieira,CC,89
+Juventus,Petrovici Teodor,ATT,89
+Juventus,Fabrizio Miccoli,ATT,88
+Juventus,Mauro Camoranesi,ED,84
+Juventus,Christian Abbiati,POR,83
+Juventus,Emerson,CC,82
+Juventus,Robert Kovac,DC,80
+Juventus,Marcelo Zalayeta,ATT,79
+Juventus,Manuele Blasi,CC,78
+Juventus,Giorgio Chiellini,ASA,76
+Juventus,Gianluca Pessotto,TS,75
+Juventus,Ruben Olivera,LWM,75
+Juventus,Jonathan Zebina,TD,74
+Juventus,Giuliano Giannichedda,CDC,74
+Juventus,Alessandro Birindelli,TD,73
+Lazio,Angelo Peruzzi,POR,85
+Lazio,Aparecido R. César,ES,85
+Lazio,Massimo Oddo,TD,84
+Lazio,Simone Inzaghi,COC,84
+Lazio,Simone Inzaghi,ATT,84
+Lazio,Fabio Liverani,CC,81
+Lazio,Paolo Di Canio,COC,81
+Lazio,Tommaso Rocchi,AD,76
+Lazio,Igli Tare,ATT,74
+Lazio,Matteo Sereni,POR,74
+Lazio,Sanchez Emilson Cribari,DC,74
+Lazio,Luciano Zauri,TS,73
+Lazio,Roberto Muzzi,COC,72
+Lazio,Roberto Muzzi,ATT,72
+Lazio,Roberto Baronio,CC,72
+Lazio,Guglielmo Stendardo,DC,71
+Lazio,Valon Behrami,ED,70
+Lazio,Goran Pandev,LWM,69
+Lazio,Brian Robert,RWM,68
+Lazio,Manuel Belleri,TD,62
+Lazio,Simone Sannibale,DC,62
+Lazio,Felice Piccolo,DC,61
+Lazio,Fabio Firmani,CDC,60
+Lazio,Roberto Delgado,AD,60
+Lazio,Gaby Mudingayi,CC,57
+Lecce,Axel Cedric Konan,ATT,79
+Lecce,Vincenzo Sicignano,POR,77
+Lecce,Mirko Vucinic,ATT,75
+Lecce,Guillermo Giacomazzi,CC,73
+Lecce,Marco Cassetti,TD,72
+Lecce,Jaime Andres Valdes Zapata,COC,72
+Lecce,Mariano de Alme Angelo,TD,70
+Lecce,Lorenzo Stovini,DC,69
+Lecce,Alfonso Camorani,CC,68
+Lecce,Souleymane Diamoutene,DC,67
+Lecce,Alex Pinardi,COC,63
+Lecce,Eremenko,ATT,62
+Lecce,Cristian Daniel Ledesma,CC,60
+Lecce,Andrea Esposito,CC,58
+Lecce,Giuseppe Abruzzese,DC,57
+Lecce,Drissa Diarra,CC,57
+Lecce,Francesco Benussi,POR,56
+Lecce,Marco Pecorari,SW,55
+Lecce,Babù,COC,54
+Lecce,Graziano Pellé,ATT,54
+Lecce,Erminio Rullo,TS,50
+Lecce,Marco Testa,CC,48
+Lecce,Antonio Rosati,POR,45
+Livorno,David Balleri,SW,77
+Livorno,Alessandro Grandoni,DC,76
+Livorno,Alessandro Lucarelli,DC,76
+Livorno,Matteo Melara,DC,74
+Livorno,Fabio Galante,DC,73
+Livorno,Marco Amelia,POR,73
+Livorno,Paolo Ginestra,POR,71
+Livorno,Vargas,DC,69
+Livorno,Cristiano Lucarelli,ATT,68
+Livorno,Gennaro Ruotolo,ED,68
+Livorno,Raffaele Palladino,ATT,67
+Livorno,Claudio Grauso,CC,66
+Livorno,Andrea Giallombardo,TS,66
+Livorno,Mario Lička,CC,66
+Livorno,Francesco Fanucci,DC,64
+Livorno,Emmanuel Osei,DC,64
+Livorno,Dario Passoni,CDC,60
+Livorno,Zé Rodolpho,ES,59
+Livorno,Paulinho,ATT,59
+Livorno,Luis Fernando Centi,CC,57
+Livorno,Stefano Morrone,CC,53
+Livorno,Marc Pfertzel,ED,53
+Livorno,Giuseppe Colucci,COC,42
+Livorno,Giuseppe Colucci,ATT,42
+Messina,Massimo Gazzoli,POR,80
+Messina,Riccardo Zampagna,ATT,72
+Messina,Rafael,TD,72
+Messina,Rahman Rezaei,DC,72
+Messina,Giuseppe Sculli,ATT,71
+Messina,Geatano D'Agostino,CC,67
+Messina,Massimo Donati,CC,65
+Messina,Marco Storari,POR,65
+Messina,Filippo Cristante,DC,64
+Messina,Atsushi Yanagisawa,ATT,63
+Messina,Vasco Morelli,COC,61
+Messina,Nicola Amoruso,ATT,60
+Messina,Alessandro Cucciari,ED,60
+Messina,Claudio De Sousa,ATT,60
+Messina,Zoro,DC,59
+Messina,Giuseppe Russo,COC,59
+Messina,Ivica Iliev,ATT,59
+Messina,Marco Zanchi,TS,58
+Messina,Salvatore Accursi,DC,58
+Messina,Domenico Giampá,ES,53
+Messina,Carmine Coppola,ED,53
+Messina,Salvatore Aronica,TS,48
+Messina,José Aleixo F. Mamede,CC,45
+Palermo,Eugenio Corini,RCDM,77
+Palermo,Andrea Barzagli,DC,76
+Palermo,Simone Barone,LCDM,73
+Palermo,Giuseppe Biava,DC,72
+Palermo,Stephen Ayodele Makinwa,ATT,71
+Palermo,Mario Alberto Santana,COC,70
+Palermo,Mariano González,ED,70
+Palermo,Nicola Santoni,POR,69
+Palermo,Andrea Caracciolo,ATT,67
+Palermo,Fabio Grosso,TS,65
+Palermo,Christian Terlizzi,CC,64
+Palermo,Cristian Zaccardo,TD,63
+Palermo,Paolo Comi,POR,63
+Palermo,Matteo Guardalben,POR,61
+Palermo,Andrea Gasbarroni,COC,59
+Palermo,Massimo Bonanni,COC,59
+Palermo,Paul Costantin Codrea,COC,57
+Palermo,Franco Brienza,COC,55
+Palermo,Franco Brienza,ATT,55
+Palermo,Simone Pepe,ATT,53
+Palermo,Pietro Accardi,TS,53
+Palermo,Michele Ferri,TS,53
+Palermo,Massimo Mutarelli,ES,52
+Palermo,Kewullay Conteh,DC,50
+Parma,Daniele Bonera,TD,81
+Parma,Bernardo Corradi,ATT,80
+Parma,Fábio Simplício,CC,76
+Parma,Domenico Morfeo,COC,74
+Parma,Mark Bresciano,ES,73
+Parma,Luca Bucci,POR,72
+Parma,Giovanni Pasquale,TS,70
+Parma,Vince Grella,CC,70
+Parma,Marco Marchionni,ED,69
+Parma,Cristiano Lupatelli,POR,69
+Parma,Paolo Cannavaro,DC,68
+Parma,Jorge Bolano,ES,67
+Parma,Giuseppe Cardone,DC,66
+Parma,Gaetano Grieco,ATT,64
+Parma,Sebastiano Siviglia,DC,63
+Parma,Giordano Vanin,POR,62
+Parma,Andrea Pisanu,ATT,60
+Parma,Alfonso De Lucia,POR,60
+Parma,Zlatko Dedic,AD,59
+Parma,Fabio Vignaroli,ATT,57
+Parma,Matteo Contini,TS,55
+Parma,Damiano Ferronetti,TS,55
+Reggina Calcio,Ivan Pelizzoli,POR,79
+Reggina Calcio,Davide Dionigi,ATT,76
+Reggina Calcio,Gaetano De Rosa,DC,73
+Reggina Calcio,Giandomenico Mesto,RWM,72
+Reggina Calcio,Carlos Humberto Paredes,RCDM,70
+Reggina Calcio,Mozart,COC,67
+Reggina Calcio,Ivan Franceschini,DC,63
+Reggina Calcio,Juri Cannarsa,DC,63
+Reggina Calcio,Ilyas Zeytulaev,ES,63
+Reggina Calcio,Luca Vigiani,ES,62
+Reggina Calcio,Alessandro Zoppetti,TD,61
+Reggina Calcio,Rolando Bianchi,ATT,60
+Reggina Calcio,Antonio Giosa,DC,60
+Reggina Calcio,Luca Rigoni,CC,59
+Reggina Calcio,Davide Biondini,CDC,58
+Reggina Calcio,Salvatore Vicari,CC,57
+Reggina Calcio,Iacopo Balestri,LWM,57
+Reggina Calcio,Nicola Pavarini,POR,56
+Reggina Calcio,Giacomo Tedesco,LCDM,52
+Reggina Calcio,Simone Cavalli,ATT,52
+Reggina Calcio,Massimo Ganci,ATT,51
+Reggina Calcio,Gaetano Ungaro,DC,51
+Reggina Calcio,Francesco Cosenza,DC,43
+Sampdoria,Lamberto Zauli,COC,77
+Sampdoria,Fabio Bazzani,ATT,77
+Sampdoria,Francesco Flachi,ATT,77
+Sampdoria,Emiliano Bonazzoli,ATT,76
+Sampdoria,Luigi Sala,DC,75
+Sampdoria,Vitali Kutuzov,ATT,75
+Sampdoria,Cristiano Doni,CC,72
+Sampdoria,Simone Pavan,DC,72
+Sampdoria,Max Tonetto,ES,71
+Sampdoria,Sergio Volpi,CC,70
+Sampdoria,Angelo Palombo,CC,69
+Sampdoria,Marcello Castellini,DC,68
+Sampdoria,Cristiano Zenoni,TD,68
+Sampdoria,Marco Pisano,TS,67
+Sampdoria,Francesco Antonioli,POR,67
+Sampdoria,Ivan Artipoli,DC,67
+Sampdoria,Giulio Falcone,DC,66
+Sampdoria,Aimo Diana,ED,66
+Sampdoria,Luca Castellazzi,POR,66
+Sampdoria,Samuele Dalla Bona,COC,66
+Sampdoria,Marco Zamboni,DC,65
+Sampdoria,Marco Borriello,ATT,65
+Sampdoria,Mark Edusei,CC,62
+Siena,Nicola Legrottaglie,DC,81
+Siena,Francesco Cozza,AD,79
+Siena,Roberto Nanni,ATT,78
+Siena,Alberto,ED,77
+Siena,Gennaro Esposito,CC,74
+Siena,Enrico Chiesa,ATT,73
+Siena,Paolo Negro,DC,72
+Siena,Francesco Colonnese,DC,71
+Siena,Daniele Portanova,DC,70
+Siena,Marco Fortin,POR,70
+Siena,Paolo Foglio,DC,69
+Siena,Tomas Locatelli,ES,67
+Siena,Simone Vergassola,CC,67
+Siena,Antonio Mirante,POR,67
+Siena,Gianluca Falsini,ES,66
+Siena,Michele Mignani,DC,66
+Siena,Adriano Zancopé,POR,66
+Siena,Roberto D'Aversa,CC,66
+Siena,Andrea Ardito,CDC,61
+Siena,Matteo Paro,ES,59
+Siena,Daniele Gastaldello,TD,50
+Siena,Rey Volpato,COC,50
+Siena,Rey Volpato,ATT,50
+Siena,Erjon Bogdani,ATT,48
+Treviso,Samir Handanovic,POR,76
+Treviso,Marco Zaninelli,DC,71
+Treviso,Filippini E.,ED,69
+Treviso,Paolo Herman Dellafiore,DC,68
+Treviso,Federico Piovaccari,ATT,68
+Treviso,Anderson,COC,66
+Treviso,Eros Bagnara,COC,65
+Treviso,Eros Bagnara,ATT,65
+Treviso,Raffaele De Martino,CC,65
+Treviso,Daniele Quadrini,ED,63
+Treviso,Alessio Sestu,ES,62
+Treviso,Fabio Gallo,CC,61
+Treviso,Francesco Parravicini,DC,60
+Treviso,Filippini A.,CC,58
+Treviso,Roberto Chiappara,ED,57
+Treviso,Jehad Muntasser,COC,56
+Treviso,Francesco Galeoto,TD,55
+Treviso,Marco Mallus,TD,55
+Treviso,Marcello Cottafava,DC,54
+Treviso,Luigi Beghetto,ATT,52
+Treviso,Fabio Di Venanzio,TS,51
+Treviso,Ferreira Reginaldo,ATT,50
+Treviso,Davide Zomer,POR,47
+Treviso,Stefano Dall'Acqua,ATT,46
+Udinese,Morgan De Sanctis,POR,82
+Udinese,Nestor Roberto Sensini,DC,81
+Udinese,Antonio Di Natale,ATT,76
+Udinese,Vincent Candela,ES,75
+Udinese,David Di Michele,AD,74
+Udinese,José Luis Vidigal,CC,73
+Udinese,Al Saadi Gheddafi,COC,72
+Udinese,Vincenzo Iaquinta,ATT,70
+Udinese,Texeira de Souza Juarez,DC,69
+Udinese,Dino Fava,ATT,67
+Udinese,Damiano Zenoni,ED,66
+Udinese,Fausto Rossini,ATT,66
+Udinese,Carlo Sciarrone,POR,65
+Udinese,Giampiero Pinzi,CC,64
+Udinese,Paulo Vitor Barreto,ATT,64
+Udinese,Felipe,DC,63
+Udinese,Christian Obodo,CC,63
+Udinese,Marco Motta,ED,62
+Udinese,Valerio Bertotto,DC,61
+Udinese,Sulley Ali Muntari,ED,61
+Udinese,Stefano Mauri,ED,59
+Udinese,Cesare Natali,DC,57
+Udinese,Mirko Pieri,CDC,54

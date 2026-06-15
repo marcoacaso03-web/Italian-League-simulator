@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Italian League Simulator"
+version = "1.0.0"
+id = "artifacts/italian-league-simulator"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21388
+
+[services.development]
+run = "pnpm --filter @workspace/italian-league-simulator run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/italian-league-simulator", "run", "build" ]
+publicDir = "artifacts/italian-league-simulator/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21388"
+BASE_PATH = "/"
