@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 Atalanta,Alejandro Gómez,COC,84
 Atalanta,Josip Iličić,ATT,83
 Atalanta,Duván Zapata,ATT,82
@@ -95,7 +95,8 @@ Cagliari,Charalampos Lykogiannis,TS,66
 Cagliari,Alessandro Deiola,CC,65
 Cagliari,Kiril Despodov,AD,63
 Cagliari,Francesco Verde,ATT,62
-Cagliari,Riccardo Doratiotto,AT,60
+Cagliari,Riccardo Doratiotto,COC,60
+Cagliari,Riccardo Doratiotto,ATT,60
 Cagliari,Luca Gagliano,ATT,58
 Cagliari,Maxime Leverbe,DC,55
 Chievo Verona,Stefano Sorrentino,POR,80
@@ -252,7 +253,8 @@ Frosinone,Rai Vloet,COC,66
 Frosinone,Joaquín Ardaiz,ATT,66
 Frosinone,Luca Matarese,AS,62
 Frosinone,Emmanuel Besea,CC,60
-Frosinone,Andrea Errico,AT,57
+Frosinone,Andrea Errico,COC,57
+Frosinone,Andrea Errico,ATT,57
 Genoa,Domenico Criscito,ES,80
 Genoa,Krzysztof Piątek,ATT,79
 Genoa,Rômulo Souza Orestes Caldeira,ED,78
@@ -354,13 +356,16 @@ Lazio,Sergej Milinković-Savić,CC,85
 Lazio,Lucas Pezzini Leiva,CDC,84
 Lazio,Francesco Acerbi,DC,84
 Lazio,Marco Parolo,CDC,82
-Lazio,Luis Alberto Romero Alconchel,AT,82
+Lazio,Luis Alberto Romero Alconchel,COC,82
+Lazio,Luis Alberto Romero Alconchel,ATT,82
 Lazio,Thomas Strakosha,POR,82
 Lazio,Ştefan Radu,DC,80
-Lazio,Joaquín Correa,AT,80
+Lazio,Joaquín Correa,COC,80
+Lazio,Joaquín Correa,ATT,80
 Lazio,Senad Lulić,ES,79
 Lazio,Milan Badelj,CDC,79
-Lazio,Felipe Caicedo,AT,78
+Lazio,Felipe Caicedo,COC,78
+Lazio,Felipe Caicedo,ATT,78
 Lazio,Martín Cáceres,DC,78
 Lazio,Rômulo Souza Orestes Caldeira,ED,78
 Lazio,Bartolomeu Quissanga,DC,78
@@ -417,7 +422,8 @@ Milan,José Mauri,CC,72
 Milan,Antonio Donnarumma,POR,66
 Milan,Alessandro Plizzari,POR,66
 Napoli,Kalidou Koulibaly,DC,88
-Napoli,Dries Mertens,AT,87
+Napoli,Dries Mertens,COC,87
+Napoli,Dries Mertens,ATT,87
 Napoli,Lorenzo Insigne,ATT,87
 Napoli,Raúl Albiol Tortajada,DC,84
 Napoli,Marek Hamšík,CC,84
@@ -529,7 +535,8 @@ Sampdoria,Jakub Jankto,CC,76
 Sampdoria,Emil Audero,POR,76
 Sampdoria,Rafael Cabral Barbosa,POR,74
 Sampdoria,Bartosz Bereszyński,TD,74
-Sampdoria,Gianluca Caprari,AT,74
+Sampdoria,Gianluca Caprari,COC,74
+Sampdoria,Gianluca Caprari,ATT,74
 Sampdoria,Nicola Murru,TS,74
 Sampdoria,Edgar Barreto,CC,73
 Sampdoria,Marco Sau,ATT,72
@@ -550,7 +557,8 @@ Sampdoria,Maxime Leverbe,DC,55
 Sampdoria,Titas Krapikas,POR,54
 Sampdoria,Leonardo Benedetti,CC,52
 Sassuolo,Andrea Consigli,POR,82
-Sassuolo,Kevin-Prince Boateng,AT,80
+Sassuolo,Kevin-Prince Boateng,COC,80
+Sassuolo,Kevin-Prince Boateng,ATT,80
 Sassuolo,Domenico Berardi,AD,78
 Sassuolo,Federico Di Francesco,AS,76
 Sassuolo,Manuel Locatelli,CDC,76

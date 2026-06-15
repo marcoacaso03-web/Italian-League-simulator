@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Monza,Michele Di Gregorio,POR,79
 AC Monza,Matteo Pessina,COC,78
 AC Monza,Andrea Colpani,ED,78
@@ -11,14 +11,16 @@ AC Monza,Jean-Daniel Akpa Akpro,CDC,73
 AC Monza,Milan Đurić,ATT,71
 AC Monza,Andrea Carboni,TS,70
 AC Monza,Danilo D'Ambrosio,DC,76
-AC Monza,Gianluca Caprari,AT,76
+AC Monza,Gianluca Caprari,COC,76
+AC Monza,Gianluca Caprari,ATT,76
 AC Monza,Luca Caldirola,DC,74
 AC Monza,Giorgos Kyriakopoulos,ASA,73
 AC Monza,Lorenzo Colombo,ATT,73
 AC Monza,José Machín,CC,72
 AC Monza,Alessio Zerbin,AS,71
 AC Monza,Daniel Maldini,COC,70
-AC Monza,Samuele Vignato,AT,65
+AC Monza,Samuele Vignato,COC,65
+AC Monza,Samuele Vignato,ATT,65
 AC Monza,Valentín Carboni,COC,64
 AC Monza,Warren Bondo,CC,63
 AC Monza,Alessandro Sorrentino,POR,63
@@ -43,7 +45,8 @@ Atalanta,Ademola Lookman,ATT,81
 Atalanta,Mario Pašalić,COC,80
 Atalanta,Rafael Tolói,DC,79
 Atalanta,Juan Musso,POR,79
-Atalanta,Alexey Miranchuk,AT,78
+Atalanta,Alexey Miranchuk,COC,78
+Atalanta,Alexey Miranchuk,ATT,78
 Atalanta,Hans Hateboer,ADA,77
 Atalanta,Isak Hien,DC,77
 Atalanta,José Luis Palomino,DC,74
@@ -93,12 +96,15 @@ Cagliari,Gabriele Zappa,TD,70
 Cagliari,Alessandro Deiola,CDC,69
 Cagliari,Andrea Petagna,ATT,74
 Cagliari,Nicolas Viola,COC,73
-Cagliari,Zito Luvumbo,AT,73
+Cagliari,Zito Luvumbo,COC,73
+Cagliari,Zito Luvumbo,ATT,73
 Cagliari,Matteo Prati,CDC,73
 Cagliari,Marco Mancosu,COC,72
-Cagliari,Eldor Shomurodov,AT,72
+Cagliari,Eldor Shomurodov,COC,72
+Cagliari,Eldor Shomurodov,ATT,72
 Cagliari,Mateusz Wieteska,DC,71
-Cagliari,Gaetano Oristanio,AT,71
+Cagliari,Gaetano Oristanio,COC,71
+Cagliari,Gaetano Oristanio,ATT,71
 Cagliari,Leonardo Pavoletti,ATT,70
 Cagliari,Paulo Azzi,TS,70
 Cagliari,Boris Radunović,POR,70
@@ -294,7 +300,8 @@ Juventus,Fabio Miretti,CC,75
 Juventus,Timothy Weah,ED,74
 Juventus,Samuel Iling-Junior,ES,73
 Juventus,Carlo Pinsoglio,POR,72
-Juventus,Kenan Yıldız,AT,66
+Juventus,Kenan Yıldız,COC,66
+Juventus,Kenan Yıldız,ATT,66
 Juventus,Leonardo Cerri,ATT,62
 Juventus,Tiago Djaló,DC,76
 Juventus,Carlos Alcaraz,ATT,73
@@ -325,7 +332,8 @@ Lazio,Diego González,AS,68
 Lazio,Mario Gila,DC,66
 Lazio,Christos Mandas,POR,66
 Lazio,Cristiano Lombardi,AD,68
-Lazio,André Anderson,AT,64
+Lazio,André Anderson,COC,64
+Lazio,André Anderson,ATT,64
 Lazio,Luca Napolitano,COC,61
 Lazio,Saná Fernandes,AS,61
 Lazio,Fabio Andrea Ruggeri,DC,58
@@ -399,7 +407,8 @@ Napoli,Amir Rrahmani,DC,80
 Napoli,Mathías Olivera,TS,77
 Napoli,Juan Jesus,DC,74
 Napoli,Mário Rui,TS,81
-Napoli,Giacomo Raspadori,AT,78
+Napoli,Giacomo Raspadori,COC,78
+Napoli,Giacomo Raspadori,ATT,78
 Napoli,Giovanni Simeone,ATT,77
 Napoli,Pierluigi Gollini,POR,76
 Napoli,Hamed Traorè,ES,76
@@ -460,7 +469,8 @@ Salernitana,Shon Weissman,ATT,75
 Salernitana,Jérôme Boateng,DC,74
 Salernitana,Giulio Maggiore,CC,74
 Salernitana,Benoît Costil,POR,72
-Salernitana,Grigoris Kastanos,AT,72
+Salernitana,Grigoris Kastanos,COC,72
+Salernitana,Grigoris Kastanos,ATT,72
 Salernitana,Junior Sambia,ADA,71
 Salernitana,Vincenzo Fiorillo,POR,68
 Salernitana,Mateusz Łęgowski,CDC,68
@@ -527,7 +537,8 @@ Torino,Gvidas Gineitis,CC,62
 Torino,Uroš Kabić,COC,64
 Torino,Côme Bianay Balcot,TD,61
 Torino,Pietro Passador,POR,56
-Udinese,Roberto Pereyra,AT,78
+Udinese,Roberto Pereyra,COC,78
+Udinese,Roberto Pereyra,ATT,78
 Udinese,Walace,CDC,75
 Udinese,Nehuén Pérez,DC,75
 Udinese,Jaka Bijol,DC,75
@@ -540,7 +551,8 @@ Udinese,Maduka Okoye,POR,71
 Udinese,Thomas Thiesson Kristensen,DC,70
 Udinese,Marco Silvestri,POR,78
 Udinese,Sandi Lovrič,CC,75
-Udinese,Florian Thauvin,AT,74
+Udinese,Florian Thauvin,COC,74
+Udinese,Florian Thauvin,ATT,74
 Udinese,Brenner,ATT,73
 Udinese,Isaac Success,ATT,72
 Udinese,Christian Kabasele,DC,71
@@ -550,7 +562,8 @@ Udinese,Jordan Zemura,ASA,70
 Udinese,Festy Ebosele,ADA,70
 Udinese,Daniele Padelli,POR,69
 Udinese,João Ferreira,ADA,68
-Udinese,Deulofeu,AT,79
+Udinese,Deulofeu,COC,79
+Udinese,Deulofeu,ATT,79
 Udinese,Lautaro Giannetti,DC,74
 Udinese,Zarraga,CC,73
 Udinese,James Abankwah,DC,58

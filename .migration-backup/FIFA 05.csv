@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Alessandro Nesta,DC,94
 AC Milan,Jaap Stam,DC,93
 AC Milan,Andriy Shevchenko,ATT,93
@@ -25,7 +25,8 @@ AC Milan,Christian Brocchi,ED,72
 AC Milan,Serginho,ES,72
 AC Milan,Valerio Fiori,POR,68
 AS Roma,Francesco Totti,COC,94
-AS Roma,Vincenzo Montella,AT,86
+AS Roma,Vincenzo Montella,COC,86
+AS Roma,Vincenzo Montella,ATT,86
 AS Roma,Antonio Cassano,ATT,86
 AS Roma,Traianos Dellas,DC,84
 AS Roma,Philippe Mexès,DC,82
@@ -44,7 +45,8 @@ AS Roma,Christian Panucci,TD,72
 AS Roma,Geatano D'Agostino,LCAM,66
 AS Roma,Carlo Zotti,POR,65
 AS Roma,Luigi Sartor,DC,61
-AS Roma,Daniele Corvia,AT,61
+AS Roma,Daniele Corvia,COC,61
+AS Roma,Daniele Corvia,ATT,61
 AS Roma,Leandro Damian Cufré,SW,58
 AS Roma,Alberto Aquilani,CC,56
 AS Roma,Maurizio Lanzaro,DC,52
@@ -155,7 +157,8 @@ Chievo Verona,Federico Cossato,ATT,73
 Chievo Verona,Carvalho Amauri,ATT,73
 Chievo Verona,Andrea Zanchetta,CC,72
 Chievo Verona,Roberto Baronio,CC,71
-Chievo Verona,Simone Tiribocchi,AT,70
+Chievo Verona,Simone Tiribocchi,COC,70
+Chievo Verona,Simone Tiribocchi,ATT,70
 Chievo Verona,Sergio Marcon,POR,70
 Chievo Verona,Davide Mandelli,DC,69
 Chievo Verona,César,DC,66
@@ -229,7 +232,8 @@ Inter Milan,Christian Vieri,ATT,91
 Inter Milan,J. Zanetti,ED,90
 Inter Milan,Giorgos Karagounis,CC,90
 Inter Milan,Edgar Davids,CC,88
-Inter Milan,Alvaro Recoba,AT,84
+Inter Milan,Alvaro Recoba,COC,84
+Inter Milan,Alvaro Recoba,ATT,84
 Inter Milan,Juan Sebastián Verón,CC,83
 Inter Milan,Emre,ES,82
 Inter Milan,Iván Córdoba,DC,82
@@ -249,7 +253,8 @@ Inter Milan,Lambros Choutos,ATT,72
 Inter Milan,Francesco Coco,ASA,70
 Inter Milan,C. Zanetti,CC,70
 Juventus,Gianluigi Buffon,POR,97
-Juventus,Alessandro Del Piero,AT,92
+Juventus,Alessandro Del Piero,COC,92
+Juventus,Alessandro Del Piero,ATT,92
 Juventus,Lilian Thuram,DC,92
 Juventus,David Trezeguet,ATT,92
 Juventus,Gianluca Zambrotta,TS,91
@@ -277,10 +282,13 @@ Lazio,Angelo Peruzzi,POR,85
 Lazio,Couto,DC,84
 Lazio,Massimo Oddo,TD,84
 Lazio,Aparecido R. César,LCAM,83
-Lazio,Simone Inzaghi,AT,82
-Lazio,Paolo Di Canio,AT,80
+Lazio,Simone Inzaghi,COC,82
+Lazio,Simone Inzaghi,ATT,82
+Lazio,Paolo Di Canio,COC,80
+Lazio,Paolo Di Canio,ATT,80
 Lazio,Fabio Liverani,LCDM,79
-Lazio,Roberto Muzzi,AT,76
+Lazio,Roberto Muzzi,COC,76
+Lazio,Roberto Muzzi,ATT,76
 Lazio,Matteo Sereni,POR,76
 Lazio,Ousmane Dabo,CDC,74
 Lazio,Giuliano Giannichedda,RCDM,72
@@ -325,7 +333,8 @@ Livorno,Corrado Colombo,ATT,69
 Livorno,José Luis Vidigal,CC,69
 Livorno,David Balleri,SW,69
 Livorno,Gennaro Ruotolo,ED,68
-Livorno,Cristiano Lucarelli,AT,66
+Livorno,Cristiano Lucarelli,COC,66
+Livorno,Cristiano Lucarelli,ATT,66
 Livorno,Vargas,DC,66
 Livorno,Matteo Melara,DC,64
 Livorno,Emmanuel Osei,DC,64
@@ -390,7 +399,8 @@ Palermo,Cristian Raimondi,COC,56
 Palermo,Franco Brienza,ED,55
 Palermo,Andrea Gasbarroni,LCAM,54
 Palermo,Pietro Accardi,TS,53
-Palermo,Lamberto Zauli,AT,52
+Palermo,Lamberto Zauli,COC,52
+Palermo,Lamberto Zauli,ATT,52
 Palermo,Massimo Mutarelli,ES,52
 Palermo,Kewullay Conteh,DC,51
 Palermo,Stefano Morrone,ES,50
@@ -398,7 +408,8 @@ Parma,Alberto Gilardino,ATT,85
 Parma,Sebastien Frey,POR,83
 Parma,Daniele Bonera,TD,80
 Parma,Fábio Simplício,CC,76
-Parma,Domenico Morfeo,AT,74
+Parma,Domenico Morfeo,COC,74
+Parma,Domenico Morfeo,ATT,74
 Parma,Marco Marchionni,AD,73
 Parma,Gianluca Berti,POR,73
 Parma,Mark Bresciano,ED,73
@@ -410,7 +421,8 @@ Parma,Giuseppe Cardone,DC,66
 Parma,Mario Rebecchi,LWM,66
 Parma,Gaetano Grieco,ATT,65
 Parma,Alessandro Potenza,DC,65
-Parma,Tonino Sorrentino,AT,64
+Parma,Tonino Sorrentino,COC,64
+Parma,Tonino Sorrentino,ATT,64
 Parma,Daniele Degano,ATT,62
 Parma,Alessandro Rosina,ED,60
 Parma,Alfonso De Lucia,POR,60
@@ -470,7 +482,8 @@ Siena,Simone Bonomi,TS,53
 Udinese,Morgan De Sanctis,POR,82
 Udinese,Nestor Roberto Sensini,DC,81
 Udinese,David Cortes Pizarro,COC,75
-Udinese,David Di Michele,AT,74
+Udinese,David Di Michele,COC,74
+Udinese,David Di Michele,ATT,74
 Udinese,Vincenzo Grella,RCDM,71
 Udinese,Jorge Samuel Caballero,DC,71
 Udinese,Kroldrup,DC,69

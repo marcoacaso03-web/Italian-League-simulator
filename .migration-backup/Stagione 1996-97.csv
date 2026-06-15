@@ -1,7 +1,8 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Sebastiano Rossi,POR,78
-AC Milan,Christian Panucci,DC,74
+AC Milan,Christian Panucci,TD,74
 AC Milan,Paolo Maldini,DC,74
+AC Milan,Paolo Maldini,TS,74
 AC Milan,Demetrio Albertini,CC,75
 AC Milan,Filippo Galli,DC,73
 AC Milan,Franco Baresi,DC,75
@@ -50,6 +51,7 @@ AS Roma,Daniele Berretta,CC,75
 AS Roma,Luigi Di Biagio,CC,75
 AS Roma,Martin Dahlin,ATT,75
 AS Roma,Francesco Totti,ATT,74
+AS Roma,Francesco Totti,COC,74
 AS Roma,Damiano Tommasi,CC,73
 AS Roma,Massimiliano Cappioli,CC,75
 AS Roma,Gabriele Grossi,DC,73
@@ -57,14 +59,17 @@ AS Roma,Antonino Bernardini,CC,74
 AS Roma,Giampaolo Di Magno,POR,69
 AS Roma,Lampros Choutos,ATT,74
 AS Roma,Marco Delvecchio,ATT,74
+AS Roma,Marco Delvecchio,AS,74
 AS Roma,Lorenzo Stovini,DC,74
 AS Roma,Gianluca Berti,POR,69
 AS Roma,Matteo Pivotto,DC,74
 AS Roma,Fabrizio Romondini,CC,73
 AS Roma,Daniele Conti,CC,75
-AS Roma,Andrea Conti,ATT,73
+AS Roma,Andrea Conti,TD,73
+AS Roma,Andrea Conti,ED,73
 AS Roma,Omari Tetradze,DC,73
-AS Roma,Vincent Candela,DC,73
+AS Roma,Vincent Candela,ASA,73
+AS Roma,Vincent Candela,ES,73
 Atalanta,Davide Micillo,POR,81
 Atalanta,José Oscar Herrera,CC,74
 Atalanta,Valter Bonacina,CC,76
@@ -91,7 +96,7 @@ Atalanta,Fausto Rossini,ATT,76
 Atalanta,Gianluigi Lentini,ATT,76
 Atalanta,Mario Morfeo,CC,75
 Atalanta,Massimo Mutarelli,CC,74
-Atalanta,Alessandro Marcandalli,ATT,76
+Atalanta,Alessandro Marcandalli,DC,76
 Atalanta,Angelo Carbone,CC,76
 Atalanta,Arnaldo Bonfanti,DC,74
 Atalanta,Pierre Giorgio Regonesi,DC,75
@@ -116,9 +121,11 @@ Bologna,Igor Protti,AD,74
 Bologna,Marco De Marchi,AS,66
 Bologna,Marcello Moderato,ATT,72
 Bologna,Igor Protti,ATT,74
+Bologna,Igor Protti,COC,74
 Bologna,Roberto Mancini,ATT,80
 Cagliari,Marco Pascolo,POR,78
 Cagliari,Giuseppe Pancaro,DC,72
+Cagliari,Giuseppe Pancaro,TD,72
 Cagliari,Stefano Bettarini,DC,71
 Cagliari,Matteo Villa,DC,73
 Cagliari,Ramon Vega,DC,71
@@ -201,7 +208,8 @@ Hellas Verona,Nicola Dalla Chiara,DC,59
 Inter Milan,Gianluca Pagliuca,POR,82
 Inter Milan,Giuseppe Bergomi,DC,77
 Inter Milan,Alessandro Pistone,DC,78
-Inter Milan,Javier Zanetti,DC,78
+Inter Milan,Javier Zanetti,TD,78
+Inter Milan,Javier Zanetti,ED,78
 Inter Milan,Fabio Galante,DC,78
 Inter Milan,Youri Djorkaeff,CC,78
 Inter Milan,Salvatore Fresi,DC,77
@@ -248,7 +256,7 @@ Juventus,Vladimir Jugović,CC,78
 Juventus,Attilio Lombardo,CC,78
 Juventus,Alessio Tacchinardi,CC,78
 Juventus,Zinédine Zidane,CC,78
-Juventus,Gianluca Pessotto,DC,78
+Juventus,Gianluca Pessotto,TS,78
 Juventus,Raffaele Ametrano,DC,79
 Juventus,Ivano Trotta,CC,78
 Juventus,Nicola Cingolani,CC,80
@@ -291,6 +299,7 @@ Parma,Néstor Sensini,DC,80
 Parma,Dino Baggio,CC,79
 Parma,Massimo Crippa,CC,80
 Parma,Gianfranco Zola,ATT,78
+Parma,Gianfranco Zola,COC,78
 Parma,Hernán Crespo,ATT,80
 Parma,Gianluigi Buffon,POR,76
 Parma,Amaral,CC,79
@@ -303,6 +312,7 @@ Parma,Alessandro Melli,ATT,78
 Parma,Enrico Chiesa,ATT,79
 Parma,Lilian Thuram,DC,80
 Parma,Zé Maria,DC,80
+Parma,Zé Maria,TD,80
 Parma,Alessandro Nista,POR,74
 Parma,Luca Pinton,DC,79
 Parma,Simone Barone,CC,80
@@ -326,7 +336,7 @@ Perugia,Marco Storari,POR,67
 Perugia,Salvatore Matrecano,DC,72
 Perugia,Gennaro Gattuso,CC,71
 Perugia,Marco Negri,ATT,73
-Perugia,Carmine Gautieri,ATT,71
+Perugia,Carmine Gautieri,COC,71
 Perugia,Massimiliano Allegri,CC,73
 Perugia,Pasquale Domenico Rocco,CC,73
 Perugia,Roberto Goretti,CC,71
@@ -438,12 +448,13 @@ SS Lazio,Luca Marchegiani,POR,83
 SS Lazio,Paolo Negro,DC,79
 SS Lazio,Mark Fish,DC,78
 SS Lazio,Dario Marcolin,CC,77
-SS Lazio,Giuseppe Favalli,DC,77
+SS Lazio,Giuseppe Favalli,TS,77
 SS Lazio,José Chamot,DC,78
 SS Lazio,Roberto Rambaudi,ATT,79
 SS Lazio,Renato Buso,ATT,79
 SS Lazio,Pierluigi Casiraghi,ATT,77
 SS Lazio,Igor Protti,ATT,78
+SS Lazio,Igor Protti,COC,78
 SS Lazio,Giuseppe Signori,ATT,79
 SS Lazio,Fernando Orsi,POR,75
 SS Lazio,Alessandro Nesta,DC,79
@@ -470,6 +481,7 @@ Udinese,Giovanni Stroppa,CC,78
 Udinese,Paolo Poggi,ATT,77
 Udinese,Massimiliano Caniato,POR,73
 Udinese,Valerio Bertotto,DC,78
+Udinese,Valerio Bertotto,TD,78
 Udinese,Stefano Desideri,CC,78
 Udinese,Luca Compagnon,DC,78
 Udinese,Giuliano Giannichedda,CC,78

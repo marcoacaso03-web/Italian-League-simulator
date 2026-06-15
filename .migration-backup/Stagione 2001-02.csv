@@ -1,7 +1,8 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Sebastiano Rossi,POR,83
 AC Milan,Thomas Helveg,DC,78
 AC Milan,Paolo Maldini,DC,78
+AC Milan,Paolo Maldini,TS,78
 AC Milan,Demetrio Albertini,CC,79
 AC Milan,Alessandro Costacurta,DC,78
 AC Milan,Andrij Ševčenko,ATT,79
@@ -33,7 +34,8 @@ AC Milan,Marco Simone,ATT,77
 AC Milan,Francesco Coco,DC,77
 AC Milan,Catilina Aubameyang,CC,78
 AS Roma,Francesco Antonioli,POR,85
-AS Roma,Cafu,DC,78
+AS Roma,Cafu,TD,78
+AS Roma,Cafu,ED,78
 AS Roma,Antônio Carlos Zago,DC,78
 AS Roma,Leandro Damián Cufré,DC,80
 AS Roma,Francisco Govinho Lima,CC,80
@@ -44,24 +46,28 @@ AS Roma,Vincenzo Montella,ATT,80
 AS Roma,Francesco Totti,CC,78
 AS Roma,Emerson,CC,79
 AS Roma,Daniele Martinetti,ATT,79
-AS Roma,Christian Panucci,DC,78
+AS Roma,Christian Panucci,TD,78
 AS Roma,Jonathan Zebina,DC,79
+AS Roma,Jonathan Zebina,TD,79
 AS Roma,Abel Balbo,ATT,78
 AS Roma,Damiano Tommasi,CC,80
 AS Roma,Antonio Cassano,ATT,79
+AS Roma,Antonio Cassano,AS,79
 AS Roma,Walter Samuel,DC,78
 AS Roma,Gabriel Batistuta,ATT,78
 AS Roma,Saliou Lassissi,DC,80
 AS Roma,Sebastián Cejas,POR,75
 AS Roma,Ivan Tomić,CC,79
 AS Roma,Marco Delvecchio,ATT,78
+AS Roma,Marco Delvecchio,AS,78
 AS Roma,Gianni Guigou,CC,80
 AS Roma,Daniele De Rossi,CC,79
 AS Roma,Gustavo Bartelt,CC,80
 AS Roma,Sebastiano Siviglia,DC,78
 AS Roma,Cesare Bovo,DC,78
 AS Roma,Simone Pepe,CC,80
-AS Roma,Vincent Candela,DC,79
+AS Roma,Vincent Candela,ASA,79
+AS Roma,Vincent Candela,ES,79
 AS Roma,Carlo Zotti,POR,75
 AS Roma,Marco Paoloni,POR,74
 AS Roma,Ivan Pelizzoli,POR,76
@@ -82,6 +88,7 @@ Atalanta,Luca Cavalli,CC,75
 Atalanta,Vinicio Espinal,CC,76
 Atalanta,Pierluigi Orlandini,CC,76
 Atalanta,Damiano Zenoni,DC,76
+Atalanta,Damiano Zenoni,TD,76
 Atalanta,Massimo Carrera,DC,74
 Atalanta,Corrado Colombo,ATT,74
 Atalanta,Alex Calderoni,POR,71
@@ -94,6 +101,7 @@ Atalanta,Yuri Breviario,CC,75
 Atalanta,Paolo Foglio,DC,76
 Atalanta,Cesare Natali,DC,74
 Atalanta,Gianluca Falsini,DC,74
+Atalanta,Gianluca Falsini,TS,74
 Atalanta,Rolando Bianchi,ATT,75
 Bologna,Gianluca Pagliuca,POR,80
 Bologna,Cristian Zaccardo,DC,75
@@ -127,8 +135,10 @@ Bologna,Luigi Della Rocca,ATT,75
 Bologna,Vlado Šmit,DC,75
 Bologna,Marco Negri,ATT,76
 Brescia,Luca Castellazzi,POR,78
-Brescia,Aimo Diana,DC,72
+Brescia,Aimo Diana,ED,72
+Brescia,Aimo Diana,COC,72
 Brescia,Daniele Bonera,DC,74
+Brescia,Daniele Bonera,TD,74
 Brescia,Fabio Petruzzi,DC,74
 Brescia,Alessandro Calori,DC,74
 Brescia,Marek Koźmiński,DC,72
@@ -240,7 +250,7 @@ Fiorentina,Lorenzo Crocetti,ATT,59
 Fiorentina,Tomáš Řepka,DC,57
 Fiorentina,Leandro Amaral,ATT,73
 Hellas Verona,Fabrizio Ferron,POR,78
-Hellas Verona,Massimo Oddo,DC,71
+Hellas Verona,Massimo Oddo,TD,71
 Hellas Verona,Carlo Teodorani,DC,73
 Hellas Verona,Alessandro Mazzola,CC,71
 Hellas Verona,Natale Gonnella,DC,73
@@ -274,7 +284,8 @@ Hellas Verona,Dario Dainelli,DC,72
 Inter Milan,Francesco Toldo,POR,82
 Inter Milan,Iván Córdoba,DC,78
 Inter Milan,Mohammed Kallon,ATT,78
-Inter Milan,Javier Zanetti,DC,79
+Inter Milan,Javier Zanetti,TD,79
+Inter Milan,Javier Zanetti,ED,79
 Inter Milan,Pasquale Padalino,DC,77
 Inter Milan,Cristiano Zanetti,CC,79
 Inter Milan,Sérgio Conceição,CC,78
@@ -309,7 +320,7 @@ Juventus,Michele Paramatti,DC,78
 Juventus,Paolo Montero,DC,78
 Juventus,Igor Tudor,DC,79
 Juventus,Fabián O'Neill,CC,78
-Juventus,Gianluca Pessotto,DC,78
+Juventus,Gianluca Pessotto,TS,78
 Juventus,Antonio Conte,CC,80
 Juventus,Marcelo Salas,ATT,78
 Juventus,Alessandro Del Piero,ATT,79
@@ -321,7 +332,7 @@ Juventus,Alessandro Birindelli,DC,78
 Juventus,Enzo Maresca,CC,80
 Juventus,David Trezeguet,ATT,79
 Juventus,Athirson,DC,79
-Juventus,Gianluca Zambrotta,DC,78
+Juventus,Gianluca Zambrotta,TS,78
 Juventus,Alessio Tacchinardi,CC,78
 Juventus,Lilian Thuram,DC,78
 Juventus,Fabián Carini,POR,74
@@ -344,6 +355,7 @@ Lecce,Alberto Malusci,DC,71
 Lecce,Davor Vugrinec,ATT,72
 Lecce,Alessandro Conticchio,CC,71
 Lecce,Mirko Vučinić,ATT,73
+Lecce,Mirko Vučinić,AS,73
 Lecce,Gheorghe Popescu,DC,72
 Lecce,Valeri Božinov,ATT,72
 Lecce,Aldo Osorio,ATT,71
@@ -379,6 +391,7 @@ Parma,Daniele Bonera,TD,67
 Parma,Fabio Cannavaro,DC,84
 Parma,Lilian Thuram,DC,82
 Parma,Daniele Bonera,DC,69
+Parma,Daniele Bonera,TD,69
 Parma,Lilian Thuram,TS,80
 Parma,Massimo Bizzarri,ASA,65
 Parma,Dino Baggio,CDC,76
@@ -392,16 +405,19 @@ Parma,Adriano,AS,78
 Parma,Adriano,ATT,78
 Parma,Enrico Chiesa,ATT,73
 Parma,Marco Marchionni,ATT,65
+Parma,Marco Marchionni,AD,65
+Parma,Marco Marchionni,ED,65
 Perugia,Óscar Córdoba,POR,82
 Perugia,Andrea Mazzantini,POR,72
 Perugia,Michele Tardioli,POR,71
 Perugia,Giovanni Proietti,POR,72
 Perugia,Nicolás Cinalli,POR,73
 Perugia,Zé Maria,DC,77
+Perugia,Zé Maria,TD,77
 Perugia,Marco Di Loreto,DC,76
 Perugia,Mauro Milanese,DC,77
 Perugia,Rahman Rezaei,DC,76
-Perugia,Fabio Grosso,DC,75
+Perugia,Fabio Grosso,TS,75
 Perugia,Sean Sogliano,DC,76
 Perugia,Traïanos Dellas,DC,76
 Perugia,José da Silva Meira Samuel,DC,75
@@ -485,10 +501,11 @@ SS Lazio,Siniša Mihajlović,DC,78
 SS Lazio,Alessandro Nesta,DC,78
 SS Lazio,Diego Simeone,CC,76
 SS Lazio,Giuseppe Pancaro,DC,76
+SS Lazio,Giuseppe Pancaro,TD,76
 SS Lazio,Giuliano Giannichedda,CC,76
 SS Lazio,Guerino Gottardi,DC,78
 SS Lazio,Paolo Negro,DC,77
-SS Lazio,Giuseppe Favalli,DC,77
+SS Lazio,Giuseppe Favalli,TS,77
 SS Lazio,Stefano Fiore,CC,76
 SS Lazio,Simone Inzaghi,ATT,78
 SS Lazio,Emanuele Concetti,POR,73
@@ -504,6 +521,7 @@ SS Lazio,Angelo Peruzzi,POR,74
 Torino,Luca Bucci,POR,78
 Torino,Luigi Garzya,DC,75
 Torino,Gianluca Comotto,DC,75
+Torino,Gianluca Comotto,TD,75
 Torino,Giorgio Venturin,CC,74
 Torino,Daniele Delli Carri,DC,74
 Torino,Giovanni Lopez,DC,74
@@ -519,6 +537,8 @@ Torino,Simone Vergassola,CC,74
 Torino,Stefano Sorrentino,POR,71
 Torino,Riccardo Fissore,DC,74
 Torino,Fabio Quagliarella,ATT,75
+Torino,Fabio Quagliarella,AD,75
+Torino,Fabio Quagliarella,ED,75
 Torino,Franco Semioli,CC,74
 Torino,Paolo Rossi,ATT,75
 Torino,Fabio Galante,DC,73
@@ -544,6 +564,7 @@ Torino,Krunoslav Jurčić,CC,75
 Udinese,Luigi Turci,POR,78
 Udinese,Morgan De Sanctis,POR,68
 Udinese,Valerio Bertotto,DC,73
+Udinese,Valerio Bertotto,TD,73
 Udinese,Samuel Caballero,DC,74
 Udinese,José Devaca,DC,72
 Udinese,Mohammed Gargo,DC,72
@@ -568,7 +589,9 @@ Udinese,Mauricio Pineda,CC,73
 Udinese,Giampiero Pinzi,CC,72
 Udinese,David Pizarro,CC,72
 Udinese,David Di Michele,ATT,74
+Udinese,David Di Michele,AD,74
 Udinese,Vincenzo Iaquinta,ATT,72
+Udinese,Vincenzo Iaquinta,AS,72
 Udinese,Roberto Muzzi,ATT,74
 Udinese,Siyabonga Nomvethe,ATT,72
 Udinese,Carlos Pavón,ATT,73

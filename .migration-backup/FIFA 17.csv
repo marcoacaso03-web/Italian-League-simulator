@@ -1,4 +1,4 @@
-﻿Squadra,Giocatore,Ruolo,Valutazione
+Squadra,Giocatore,Ruolo,Valutazione
 Atalanta,Alejandro Gómez,ATT,82
 Atalanta,Marco Sportiello,POR,79
 Atalanta,Etrit Berisha,POR,78
@@ -92,7 +92,8 @@ Cagliari,Artur Ioniţă,CC,75
 Cagliari,Simone Padoin,CC,74
 Cagliari,Marco Sau,ATT,74
 Cagliari,Gabriel Vasconcellos F.,POR,74
-Cagliari,Diego Farías da Silva,AT,73
+Cagliari,Diego Farías da Silva,COC,73
+Cagliari,Diego Farías da Silva,ATT,73
 Cagliari,João Pedro G. Santos Galvão,COC,73
 Cagliari,Federico Melchiorri,ATT,73
 Cagliari,Davide Di Gennaro,CC,72
@@ -146,7 +147,8 @@ Chievo Verona,Andrea Seculin,POR,70
 Chievo Verona,Vittorio Parigini,ATT,68
 Chievo Verona,Samuel Bastien,COC,67
 Chievo Verona,Gennaro Sardo,TD,66
-Chievo Verona,Victor Da Silva,AT,65
+Chievo Verona,Victor Da Silva,COC,65
+Chievo Verona,Victor Da Silva,ATT,65
 Chievo Verona,Lamin Jallow,AD,63
 Chievo Verona,Michele Troiani,TS,63
 Chievo Verona,Filippo Damian,CC,61
@@ -230,7 +232,8 @@ Fiorentina,Gonzalo Rodríguez,DC,82
 Fiorentina,Davide Astori,DC,81
 Fiorentina,Nikola Kalinić,ATT,81
 Fiorentina,Federico Bernardeschi,AS,81
-Fiorentina,Josip Iličić,AT,80
+Fiorentina,Josip Iličić,COC,80
+Fiorentina,Josip Iličić,ATT,80
 Fiorentina,Giuseppe Rossi,ATT,79
 Fiorentina,Marcos Alonso Mendoza,ES,79
 Fiorentina,Riccardo Saponara,COC,79
@@ -523,13 +526,15 @@ Palermo,Josip Posavec,POR,66
 Palermo,Stefan Silva,ATT,65
 Palermo,Roland Sallai,COC,64
 Palermo,Norbert Balogh,ATT,63
-Palermo,Matheus Cassini,AT,61
+Palermo,Matheus Cassini,COC,61
+Palermo,Matheus Cassini,ATT,61
 Palermo,Giuseppe Pezzella,TS,61
 Palermo,Gennaro Ruggiero,CC,60
 Palermo,Davide Monteleone,DC,59
 Palermo,Andrea Fulignati,POR,58
 Palermo,Accursio Bentivegna,ED,58
-Palermo,Simone Lo Faso,AT,55
+Palermo,Simone Lo Faso,COC,55
+Palermo,Simone Lo Faso,ATT,55
 Palermo,Simone Giuliano,TS,54
 Palermo,Andrea Punzi,DC,54
 Palermo,Leonardo Marson,POR,53
@@ -561,7 +566,8 @@ Pescara,Alessandro Crescenzi,TS,68
 Pescara,Michele Fornasier,DC,68
 Pescara,Simone Aresti,POR,67
 Pescara,Robert Murić,AD,67
-Pescara,Alexandru Ionuţ Mitriţă,AT,67
+Pescara,Alexandru Ionuţ Mitriţă,COC,67
+Pescara,Alexandru Ionuţ Mitriţă,ATT,67
 Pescara,Rey Manaj,ATT,67
 Pescara,Grigoris Kastanos,COC,66
 Pescara,Stefano Pettinari,ATT,64
@@ -573,7 +579,8 @@ Pescara,Davide Vitturini,TD,61
 Pescara,Ransford Selasi,CC,59
 Pescara,Hrvoje Miličević,CDC,58
 Pescara,Ferdinando Del Sole,CC,57
-Pescara,Axel Müller,AT,57
+Pescara,Axel Müller,COC,57
+Pescara,Axel Müller,ATT,57
 Pescara,Marco Acatullo,AD,57
 Pescara,Andrea Mancini,AS,56
 Pescara,Simone Monni,ATT,55
@@ -591,8 +598,10 @@ Roma,Alessandro Florenzi,TD,82
 Roma,Mohamed Salah,AD,82
 Roma,Federico Fazio,DC,81
 Roma,Wojciech Szczęsny,POR,81
-Roma,Francesco Totti,AT,80
-Roma,Diego Perotti,AT,80
+Roma,Francesco Totti,COC,80
+Roma,Francesco Totti,ATT,80
+Roma,Diego Perotti,COC,80
+Roma,Diego Perotti,ATT,80
 Roma,Stephan El Shaarawy,AS,80
 Roma,Antonio Rüdiger,DC,80
 Roma,Alisson Ramses Becker,POR,80
@@ -623,7 +632,8 @@ Sampdoria,Emiliano Viviano,POR,82
 Sampdoria,Fabio Quagliarella,ATT,78
 Sampdoria,Luis Muriel,ATT,77
 Sampdoria,Bruno Miguel Borges Fernandes,COC,77
-Sampdoria,Antonio Cassano,AT,76
+Sampdoria,Antonio Cassano,COC,76
+Sampdoria,Antonio Cassano,ATT,76
 Sampdoria,Luca Cigarini,CC,76
 Sampdoria,Dennis Praet,CC,76
 Sampdoria,Ricardo Álvarez,COC,76
