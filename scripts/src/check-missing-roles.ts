@@ -21,9 +21,23 @@ const RUOLO_MAP: Record<string, string> = {
   COC:  'CAM', LCAM: 'CAM', RCAM: 'CAM',
   ATT:  'ST',  AT:   'ST',
   CF:   'CF',
-  AD:   'RW',  ADA:  'RW',
-  AS:   'LW',  ASA:  'LW',
+  AD:   'RW',
+  AS:   'LW',
 };
+
+// ADA = Ala Destra Adattato  → RB + RM
+// ASA = Ala Sinistra Adattato → LB + LM
+const MULTI_RUOLO: Record<string, string[]> = {
+  ADA: ['RB', 'RM'],
+  ASA: ['LB', 'LM'],
+};
+
+function ruoloToPositions(ruolo: string): string[] {
+  const key = ruolo.trim().toUpperCase();
+  if (MULTI_RUOLO[key]) return MULTI_RUOLO[key];
+  const p = RUOLO_MAP[key];
+  return p ? [p] : [];
+}
 
 // Posizioni effettivamente richieste dalle formazioni del gioco
 const GAME_POSITIONS = ['GK', 'RB', 'CB', 'LB', 'CM', 'RM', 'LM', 'CDM', 'CAM', 'RW', 'LW', 'ST'] as const;
@@ -78,11 +92,13 @@ for (const file of csvFiles) {
   const season = seasonLabel(file);
   const raw    = fs.readFileSync(path.join(root, file), 'utf-8');
   for (const { squadra, ruolo } of parseCsv(raw)) {
-    const pos = RUOLO_MAP[ruolo.trim().toUpperCase()] as Pos | undefined;
-    if (!pos || !(GAME_POSITIONS as readonly string[]).includes(pos)) continue;
+    const positions = ruoloToPositions(ruolo);
     const key = `${squadra}|||${season}`;
-    if (!teamSeasonPos.has(key)) teamSeasonPos.set(key, new Set());
-    teamSeasonPos.get(key)!.add(pos);
+    for (const pos of positions) {
+      if (!(GAME_POSITIONS as readonly string[]).includes(pos)) continue;
+      if (!teamSeasonPos.has(key)) teamSeasonPos.set(key, new Set());
+      teamSeasonPos.get(key)!.add(pos as Pos);
+    }
   }
 }
 

@@ -6,12 +6,12 @@
  DETTAGLIO PER STAGIONE — combo squadra+stagione incomplete
 ═════════════════════════════════════════════════════════════════
 Posizioni monitorate: GK, RB, CB, LB, CM, RM, LM, CDM, CAM, RW, LW, ST
-Totale combo incomplete: 382
+Totale combo incomplete: 381
 
 
 ── 2004-2005 ─────────────────────────────────────────
   AC Milan                         mancanti: RW, LW
-  AS Roma                          mancanti: RM, LM, RW
+  AS Roma                          mancanti: RM, RW
   Atalanta BC                      mancanti: RM, LM, RW
   Bologna                          mancanti: LB, CDM, CAM, LW
   Brescia                          mancanti: RB, LB, CDM, LW
@@ -19,8 +19,9 @@ Totale combo incomplete: 382
   Chievo Verona                    mancanti: CDM, RW, LW
   Doria                            mancanti: CDM, CAM, RW, LW
   Firenze                          mancanti: LM, RW, LW
-  Inter Milan                      mancanti: RW
+  Inter Milan                      mancanti: RW, LW
   Juventus                         mancanti: CDM, RW, LW
+  Lazio                            mancanti: LW
   Lecce                            mancanti: LM, CDM, RW, LW
   Livorno                          mancanti: LB, CDM, RW, LW
   Messina                          mancanti: CAM, RW, LW
@@ -33,13 +34,13 @@ Totale combo incomplete: 382
 ── 2005-2006 ─────────────────────────────────────────
   AC Milan                         mancanti: RW, LW
   AS Roma                          mancanti: RM, LM, RW, LW
-  Ascoli                           mancanti: CDM, RW
+  Ascoli                           mancanti: CDM, RW, LW
   Cagliari                         mancanti: CDM, LW
   Chievo Verona                    mancanti: CDM, RW, LW
   Empoli                           mancanti: RM, LM, RW, LW
   Fiorentina                       mancanti: CAM, RW, LW
-  Inter Milan                      mancanti: RW
-  Juventus                         mancanti: RW
+  Inter Milan                      mancanti: RW, LW
+  Juventus                         mancanti: RW, LW
   Lazio                            mancanti: LW
   Lecce                            mancanti: RM, LM, CDM, RW, LW
   Livorno                          mancanti: RB, RW, LW
@@ -54,18 +55,19 @@ Totale combo incomplete: 382
 
 ── 2006-2007 ─────────────────────────────────────────
   AC Milan                         mancanti: RW, LW
-  AS Roma                          mancanti: RM, LM
+  AS Roma                          mancanti: RW, LW
   Ascoli                           mancanti: CAM
   Atalanta BC                      mancanti: CDM, RW, LW
-  Cagliari                         mancanti: RW
-  Catania                          mancanti: RM, CDM, RW
+  Cagliari                         mancanti: RW, LW
+  Catania                          mancanti: RM, CDM, RW, LW
   Chievo Verona                    mancanti: CDM, RW, LW
-  Empoli                           mancanti: RM, LM, RW
+  Empoli                           mancanti: RM, RW, LW
   Fiorentina                       mancanti: CDM, LW
+  Inter Milan                      mancanti: RW, LW
   Lazio                            mancanti: LW
-  Livorno                          mancanti: RB, LW
+  Livorno                          mancanti: RW, LW
   Messina                          mancanti: CDM, LW
-  Palermo                          mancanti: RM, LW
+  Palermo                          mancanti: RW, LW
   Parma                            mancanti: RM, LW
   Reggina Calcio                   mancanti: CM, RW, LW
   Sampdoria                        mancanti: CDM, RW, LW
@@ -75,20 +77,20 @@ Totale combo incomplete: 382
 
 ── 2007-2008 ─────────────────────────────────────────
   AC Milan                         mancanti: RW, LW
-  AS Roma                          mancanti: LM
+  AS Roma                          mancanti: LW
   Atalanta BC                      mancanti: RM, CDM, LW
   Cagliari                         mancanti: RW, LW
   Catania                          mancanti: RW, LW
   Empoli                           mancanti: LM, RW, LW
   Fiorentina                       mancanti: CDM, RW, LW
-  Genoa                            mancanti: CDM, LW
-  Inter Milan                      mancanti: CM, RM, RW
-  Juventus                         mancanti: CDM, LW
+  Genoa                            mancanti: CDM, RW, LW
+  Inter Milan                      mancanti: CM, RM, RW, LW
+  Juventus                         mancanti: CDM, RW, LW
   Lazio                            mancanti: LM, LW
   Livorno                          mancanti: CDM, RW, LW
   Napoli                           mancanti: RB, RW, LW
-  Palermo                          mancanti: CDM, LW
-  Parma                            mancanti: LW
+  Palermo                          mancanti: CDM, RW, LW
+  Parma                            mancanti: RW, LW
   Reggina Calcio                   mancanti: RM, CDM, RW, LW
   Sampdoria                        mancanti: CAM, RW, LW
   Siena                            mancanti: LM, CDM, LW
@@ -96,44 +98,48 @@ Totale combo incomplete: 382
   Udinese                          mancanti: CDM, LW
 
 ── 2008-2009 ─────────────────────────────────────────
-  AC Milan                         mancanti: RM, LM
-  AS Roma                          mancanti: RM, LM
+  AC Milan                         mancanti: RM
+  AS Roma                          mancanti: LW
   Atalanta                         mancanti: RM, RW, LW
-  Bologna                          mancanti: LM, LW
+  Bologna                          mancanti: LM, RW, LW
   Cagliari                         mancanti: RW
+  Catania                          mancanti: LW
   Chievo Verona                    mancanti: CDM, LW
-  F. Genova                        mancanti: RB, CDM, LW
-  Fiorentina                       mancanti: RW
+  F. Genova                        mancanti: CDM, LW
+  Fiorentina                       mancanti: RW, LW
   Inter Milan                      mancanti: RW, LW
   Juventus                         mancanti: RW
   Lazio                            mancanti: LB, LW
+  Lecce                            mancanti: RW
   Napoli                           mancanti: LW
-  Palermo                          mancanti: CAM
+  Palermo                          mancanti: CAM, RW, LW
   Reggina                          mancanti: CDM, LW
   Sampdoria                        mancanti: RB, LB, RW, LW
-  Siena                            mancanti: RM
+  Siena                            mancanti: RW, LW
   Torino                           mancanti: LM, LW
-  Udinese                          mancanti: CDM
+  Udinese                          mancanti: CDM, LW
 
 ── 2009-2010 ─────────────────────────────────────────
-  Atalanta                         mancanti: LW
+  Atalanta                         mancanti: RW, LW
   Bari                             mancanti: CDM, RW, LW
-  Bologna                          mancanti: LW
+  Bologna                          mancanti: RW, LW
   Cagliari                         mancanti: LM, RW, LW
   Catania                          mancanti: RM, LW
   Chievo Verona                    mancanti: RM, LM, RW, LW
-  Fiorentina                       mancanti: LW
+  Fiorentina                       mancanti: RW, LW
   Genoa                            mancanti: RB, CDM, RW
-  Inter                            mancanti: LW
-  Juventus                         mancanti: RW
-  Livorno                          mancanti: CDM, RW
-  Milan                            mancanti: LM, CDM
-  Napoli                           mancanti: LB, RM, LM, CDM
+  Inter                            mancanti: RW, LW
+  Juventus                         mancanti: RW, LW
+  Lazio                            mancanti: LW
+  Livorno                          mancanti: CDM, RW, LW
+  Milan                            mancanti: CDM, RW, LW
+  Napoli                           mancanti: CDM, RW, LW
   Palermo                          mancanti: RM, LM, RW
   Parma                            mancanti: LW
-  Roma                             mancanti: RM
+  Roma                             mancanti: LW
   Sampdoria                        mancanti: RW, LW
-  Siena                            mancanti: RM, LM
+  Siena                            mancanti: LW
+  Udinese                          mancanti: LW
 
 ── 2010-2011 ─────────────────────────────────────────
   Brescia                          mancanti: RM, LM, CDM, RW
@@ -142,28 +148,24 @@ Totale combo incomplete: 382
   Cesena                           mancanti: RM
   Chievo Verona                    mancanti: RM, LM, LW
   Fiorentina                       mancanti: LM, LW
-  Genoa                            mancanti: RB, LB, CDM
-  Inter                            mancanti: RM, LM
-  Lazio                            mancanti: RB, LB
-  Lecce                            mancanti: LM, CAM
-  Milan                            mancanti: LM
-  Napoli                           mancanti: RB, LB, CAM
+  Genoa                            mancanti: LB, CDM
+  Inter                            mancanti: LM
+  Lecce                            mancanti: CAM
+  Napoli                           mancanti: CAM
   Palermo                          mancanti: RM, LM, RW, LW
   Parma                            mancanti: RM
-  Roma                             mancanti: RM
   Sampdoria                        mancanti: CDM, RW
-  Udinese                          mancanti: LB, CDM
+  Udinese                          mancanti: CDM
 
 ── 2011-2012 ─────────────────────────────────────────
   Atalanta                         mancanti: CDM, RW, LW
   Bologna                          mancanti: LM, CDM
   Cagliari                         mancanti: RM, LM, RW, LW
-  Catania                          mancanti: RM
   Cesena                           mancanti: CDM
   Chievo Verona                    mancanti: LM, RW, LW
-  Fiorentina                       mancanti: LM
+  Fiorentina                       mancanti: LW
   Inter                            mancanti: RW, LW
-  Lazio                            mancanti: RM, LM
+  Lazio                            mancanti: LM
   Lecce                            mancanti: RB, RW
   Milan                            mancanti: RM, LM, RW, LW
   Napoli                           mancanti: RB, LB
@@ -203,7 +205,7 @@ Totale combo incomplete: 382
   Inter                            mancanti: RW, LW
   Juventus                         mancanti: RW, LW
   Lazio                            mancanti: RM
-  Livorno                          mancanti: RB, CDM
+  Livorno                          mancanti: CDM, RW, LW
   Napoli                           mancanti: RM, LM, LW
   Parma                            mancanti: LM, CDM
   Sampdoria                        mancanti: LM, RW, LW
@@ -244,7 +246,6 @@ Totale combo incomplete: 382
   Roma                             mancanti: RM, LM
   Sampdoria                        mancanti: CDM
   Sassuolo                         mancanti: RM, LM
-  Torino                           mancanti: RB
   Udinese                          mancanti: RB, RW, LW
 
 ── 2016-2017 ─────────────────────────────────────────
@@ -259,7 +260,6 @@ Totale combo incomplete: 382
   Milan                            mancanti: RM, LM, CAM
   Napoli                           mancanti: RM, LM
   Palermo                          mancanti: CDM
-  Pescara                          mancanti: LM
   Sampdoria                        mancanti: LM, CDM, RW, LW
   Sassuolo                         mancanti: RM, LM
   Torino                           mancanti: RM, LM, CAM
@@ -279,7 +279,7 @@ Totale combo incomplete: 382
   Lazio                            mancanti: LB
   Milan                            mancanti: LM, CAM
   Napoli                           mancanti: RM, LM, CDM
-  Roma                             mancanti: RM, LM
+  Roma                             mancanti: RM
   Sampdoria                        mancanti: RW, LW
   Sassuolo                         mancanti: CAM
   Spal                             mancanti: RB, CAM, RW, LW
@@ -302,6 +302,7 @@ Totale combo incomplete: 382
   Parma                            mancanti: RM, CAM
   Sampdoria                        mancanti: RW
   Sassuolo                         mancanti: RM
+  Spal                             mancanti: LW
   Torino                           mancanti: RB, LB
   Udinese                          mancanti: LW
 
@@ -312,6 +313,7 @@ Totale combo incomplete: 382
   Cagliari                         mancanti: CDM
   Genoa                            mancanti: RW, LW
   Hellas Verona                    mancanti: CDM
+  Inter                            mancanti: RW
   Juventus                         mancanti: RM, CDM, RW
   Lecce                            mancanti: RM, LM, CDM, RW, LW
   Napoli                           mancanti: CDM
@@ -329,7 +331,7 @@ Totale combo incomplete: 382
   Cagliari                         mancanti: CDM
   Crotone                          mancanti: LB, LW
   Genoa                            mancanti: RW
-  Inter                            mancanti: RB, LW
+  Inter                            mancanti: LW
   Lazio                            mancanti: RB
   Milan                            mancanti: RW, LW
   Napoli                           mancanti: LM
@@ -337,12 +339,11 @@ Totale combo incomplete: 382
   Torino                           mancanti: RW
 
 ── 2021-2022 ─────────────────────────────────────────
-  Atalanta                         mancanti: RB, LB, CDM
+  Atalanta                         mancanti: CDM
   Cagliari                         mancanti: CAM
-  Empoli                           mancanti: RM, LM, RW
+  Empoli                           mancanti: RM, RW, LW
   Fiorentina                       mancanti: RM, LM
-  Hellas Verona                    mancanti: RB, LB
-  Inter                            mancanti: RB, LB
+  Inter                            mancanti: RW, LW
   Juventus                         mancanti: RM, LW
   Lazio                            mancanti: RM
   Napoli                           mancanti: RM, LM
@@ -350,47 +351,45 @@ Totale combo incomplete: 382
   Salernitana                      mancanti: RM, CDM, CAM
   Sampdoria                        mancanti: RW, LW
   Spezia                           mancanti: RM, LM
-  Torino                           mancanti: RB, LB, CDM
-  Udinese                          mancanti: RB, LB
+  Torino                           mancanti: RB, CDM
+  Udinese                          mancanti: LW
 
 ── 2022-2023 ─────────────────────────────────────────
-  AC Monza                         mancanti: LB
   Atalanta                         mancanti: CDM
-  Bologna                          mancanti: LW
+  Bologna                          mancanti: RW, LW
   Cremonese                        mancanti: RW
   Empoli                           mancanti: RM, LM, RW
   Fiorentina                       mancanti: RM, LM, CDM
-  Hellas Verona                    mancanti: RB, LB
-  Inter                            mancanti: RB, LB
+  Inter                            mancanti: RW, LW
   Juventus                         mancanti: RW
   Lazio                            mancanti: RM, CAM
   Lecce                            mancanti: LM
   Milan                            mancanti: RM, LM
   Napoli                           mancanti: LM
   Roma FC                          mancanti: RB
-  Salernitana                      mancanti: RB, LB, CDM
-  Sampdoria                        mancanti: LW
+  Salernitana                      mancanti: CDM
+  Sampdoria                        mancanti: RW, LW
   Sassuolo                         mancanti: RM
   Spezia                           mancanti: LW
-  Torino                           mancanti: RB, LB
-  Udinese                          mancanti: RB, LB, RW
+  Udinese                          mancanti: RB, RW, LW
 
 ── 2023-2024 ─────────────────────────────────────────
-  Atalanta                         mancanti: RB, LB, CDM
+  AC Monza                         mancanti: RW
+  Atalanta                         mancanti: CDM, RW, LW
   Bologna                          mancanti: RW, LW
   Cagliari                         mancanti: CM, RW, LW
   Empoli                           mancanti: CDM
-  Genoa                            mancanti: RB, LB, CAM
+  Genoa                            mancanti: CAM, RW, LW
   Hellas Verona                    mancanti: RW, LW
-  Inter                            mancanti: LB, CAM
-  Juventus                         mancanti: LB
+  Inter                            mancanti: CAM, RW, LW
+  Juventus                         mancanti: RW, LW
   Lazio                            mancanti: RM, LM, CDM
   Lecce                            mancanti: RM, LM
   Milan                            mancanti: LW
-  Roma                             mancanti: RB
+  Roma                             mancanti: RW, LW
   Sassuolo                         mancanti: LM
   Torino                           mancanti: LB, CDM, RW, LW
-  Udinese                          mancanti: RB, LB
+  Udinese                          mancanti: RW, LW
 
 ── 2024-2025 ─────────────────────────────────────────
   Atalanta                         mancanti: RW, LW
@@ -444,58 +443,58 @@ SQUADRA                          | STAGIONI KO | POSIZIONI MAI PRESENTI
 
 Cagliari
   Stagioni con almeno una posizione mancante: 20
-  ⚠️  Posizioni a volte assenti:              RM(9/20), CDM(8/20), LW(9/20), RW(11/20), LM(7/20), CAM(2/20), CM(1/20)
+  ⚠️  Posizioni a volte assenti:              RM(9/20), CDM(8/20), LW(10/20), RW(11/20), LM(7/20), CAM(2/20), CM(1/20)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2011-2012, 2012-2013, 2013-2014, 2014-2015, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2023-2024, 2024-2025, 2025-2026
 
 Lazio
+  Stagioni con almeno una posizione mancante: 20
+  ⚠️  Posizioni a volte assenti:              LW(8/20), LM(7/20), LB(2/20), RM(7/20), RW(2/20), RB(1/20), CAM(1/20), CDM(1/20)
+  Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2011-2012, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2020-2021, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
+
+Udinese
   Stagioni con almeno una posizione mancante: 19
-  ⚠️  Posizioni a volte assenti:              LW(6/19), LM(7/19), LB(3/19), RB(2/19), RM(8/19), RW(2/19), CAM(1/19), CDM(1/19)
-  Stagioni KO: 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2010-2011, 2011-2012, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2020-2021, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
+  ⚠️  Posizioni a volte assenti:              RB(7/19), LB(4/19), RW(9/19), LW(17/19), RM(1/19), LM(4/19), CDM(4/19), CAM(1/19)
+  Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2018-2019, 2019-2020, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
 Juventus
   Stagioni con almeno una posizione mancante: 18
-  ⚠️  Posizioni a volte assenti:              CDM(5/18), RW(13/18), LW(4/18), RB(2/18), CAM(2/18), LM(1/18), RM(2/18), LB(1/18)
+  ⚠️  Posizioni a volte assenti:              CDM(5/18), RW(15/18), LW(7/18), RB(2/18), CAM(2/18), LM(1/18), RM(2/18)
   Stagioni KO: 2004-2005, 2005-2006, 2007-2008, 2008-2009, 2009-2010, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
 Napoli
   Stagioni con almeno una posizione mancante: 18
-  ⚠️  Posizioni a volte assenti:              RB(3/18), RW(2/18), LW(5/18), LB(4/18), RM(7/18), LM(10/18), CDM(6/18), CAM(2/18)
+  ⚠️  Posizioni a volte assenti:              RB(2/18), RW(3/18), LW(6/18), CDM(6/18), CAM(2/18), LB(2/18), RM(6/18), LM(9/18)
   Stagioni KO: 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2011-2012, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2022-2023, 2024-2025, 2025-2026
-
-Udinese
-  Stagioni con almeno una posizione mancante: 18
-  ⚠️  Posizioni a volte assenti:              RB(9/18), LB(8/18), RW(8/18), LW(12/18), RM(1/18), LM(4/18), CDM(4/18), CAM(1/18)
-  Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2010-2011, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2018-2019, 2019-2020, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
 Sampdoria
   Stagioni con almeno una posizione mancante: 17
-  ⚠️  Posizioni a volte assenti:              CDM(6/17), RW(14/17), LW(10/17), CAM(1/17), RB(1/17), LB(1/17), RM(1/17), LM(3/17)
+  ⚠️  Posizioni a volte assenti:              CDM(6/17), RW(15/17), LW(10/17), CAM(1/17), RB(1/17), LB(1/17), RM(1/17), LM(3/17)
   Stagioni KO: 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2022-2023
-
-Torino
-  Stagioni con almeno una posizione mancante: 17
-  ⚠️  Posizioni a volte assenti:              RW(8/17), LW(5/17), LM(2/17), RM(3/17), LB(5/17), RB(5/17), CAM(2/17), CDM(3/17)
-  Stagioni KO: 2006-2007, 2007-2008, 2008-2009, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
 Bologna
   Stagioni con almeno una posizione mancante: 16
-  ⚠️  Posizioni a volte assenti:              LB(1/16), CDM(2/16), CAM(2/16), LW(8/16), LM(8/16), RW(4/16), RM(5/16)
+  ⚠️  Posizioni a volte assenti:              LB(1/16), CDM(2/16), CAM(2/16), LW(8/16), LM(8/16), RW(7/16), RM(5/16)
   Stagioni KO: 2004-2005, 2008-2009, 2009-2010, 2011-2012, 2012-2013, 2013-2014, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
 Fiorentina
   Stagioni con almeno una posizione mancante: 16
-  ⚠️  Posizioni a volte assenti:              CAM(1/16), RW(5/16), LW(6/16), CDM(3/16), LM(6/16), RB(1/16), RM(6/16), LB(1/16)
+  ⚠️  Posizioni a volte assenti:              CAM(1/16), RW(6/16), LW(8/16), CDM(3/16), LM(5/16), RB(1/16), RM(6/16), LB(1/16)
   Stagioni KO: 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2011-2012, 2012-2013, 2013-2014, 2015-2016, 2017-2018, 2018-2019, 2021-2022, 2022-2023, 2024-2025, 2025-2026
+
+Inter
+  Stagioni con almeno una posizione mancante: 16
+  ⚠️  Posizioni a volte assenti:              RW(10/16), LW(13/16), LM(2/16), RM(2/16), CAM(2/16)
+  Stagioni KO: 2009-2010, 2010-2011, 2011-2012, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
 Atalanta
   Stagioni con almeno una posizione mancante: 15
-  ⚠️  Posizioni a volte assenti:              RM(1/15), RW(8/15), LW(10/15), CDM(9/15), CAM(2/15), RB(3/15), LB(2/15)
+  ⚠️  Posizioni a volte assenti:              RM(1/15), RW(10/15), LW(11/15), CDM(9/15), CAM(2/15), RB(1/15)
   Stagioni KO: 2008-2009, 2009-2010, 2011-2012, 2012-2013, 2013-2014, 2014-2015, 2015-2016, 2017-2018, 2018-2019, 2019-2020, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
-Inter
+Torino
   Stagioni con almeno una posizione mancante: 15
-  ⚠️  Posizioni a volte assenti:              LW(10/15), RM(3/15), LM(2/15), RW(5/15), RB(3/15), LB(3/15), CAM(2/15)
-  Stagioni KO: 2009-2010, 2010-2011, 2011-2012, 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2020-2021, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
+  ⚠️  Posizioni a volte assenti:              RW(8/15), LW(5/15), LM(2/15), RM(3/15), LB(3/15), CAM(2/15), RB(3/15), CDM(3/15)
+  Stagioni KO: 2006-2007, 2007-2008, 2008-2009, 2012-2013, 2013-2014, 2014-2015, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2020-2021, 2021-2022, 2023-2024, 2024-2025, 2025-2026
 
 Chievo Verona
   Stagioni con almeno una posizione mancante: 14
@@ -504,80 +503,81 @@ Chievo Verona
 
 Empoli
   Stagioni con almeno una posizione mancante: 11
-  ⚠️  Posizioni a volte assenti:              RM(7/11), LM(8/11), RW(10/11), LW(7/11), CDM(3/11), LB(1/11)
+  ⚠️  Posizioni a volte assenti:              RM(7/11), LM(6/11), RW(10/11), LW(9/11), CDM(3/11), LB(1/11)
   Stagioni KO: 2005-2006, 2006-2007, 2007-2008, 2014-2015, 2015-2016, 2016-2017, 2018-2019, 2021-2022, 2022-2023, 2023-2024, 2024-2025
 
 Parma
   Stagioni con almeno una posizione mancante: 11
-  ⚠️  Posizioni a volte assenti:              CDM(3/11), LW(6/11), RM(3/11), RB(1/11), RW(3/11), LM(1/11), CAM(1/11)
+  ⚠️  Posizioni a volte assenti:              CDM(3/11), LW(6/11), RM(3/11), RW(4/11), RB(1/11), LM(1/11), CAM(1/11)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2009-2010, 2010-2011, 2012-2013, 2013-2014, 2018-2019, 2024-2025, 2025-2026
-
-Roma
-  Stagioni con almeno una posizione mancante: 11
-  ⚠️  Posizioni a volte assenti:              RM(6/11), LM(4/11), CAM(2/11), RW(3/11), LW(2/11), RB(1/11), CDM(1/11)
-  Stagioni KO: 2009-2010, 2010-2011, 2011-2012, 2012-2013, 2014-2015, 2015-2016, 2017-2018, 2019-2020, 2023-2024, 2024-2025, 2025-2026
 
 Genoa
   Stagioni con almeno una posizione mancante: 10
-  ⚠️  Posizioni a volte assenti:              CDM(4/10), LW(4/10), RB(3/10), RW(5/10), LB(2/10), CAM(2/10), RM(1/10)
+  ⚠️  Posizioni a volte assenti:              CDM(4/10), RW(7/10), LW(5/10), RB(1/10), LB(1/10), CAM(2/10), RM(1/10)
   Stagioni KO: 2007-2008, 2009-2010, 2010-2011, 2013-2014, 2018-2019, 2019-2020, 2020-2021, 2023-2024, 2024-2025, 2025-2026
 
-Hellas Verona
+Lecce
   Stagioni con almeno una posizione mancante: 10
-  ⚠️  Posizioni a volte assenti:              LM(3/10), CDM(2/10), RM(3/10), RB(2/10), LB(2/10), RW(3/10), LW(3/10)
-  Stagioni KO: 2013-2014, 2014-2015, 2015-2016, 2017-2018, 2019-2020, 2021-2022, 2022-2023, 2023-2024, 2024-2025, 2025-2026
+  ⚠️  Posizioni a volte assenti:              LM(5/10), CDM(3/10), RW(7/10), LW(4/10), RM(3/10), CAM(1/10), RB(1/10)
+  Stagioni KO: 2004-2005, 2005-2006, 2008-2009, 2010-2011, 2011-2012, 2019-2020, 2022-2023, 2023-2024, 2024-2025, 2025-2026
 
-Milan
+Roma
   Stagioni con almeno una posizione mancante: 10
-  ⚠️  Posizioni a volte assenti:              LM(6/10), CDM(1/10), RM(4/10), RW(2/10), LW(3/10), CAM(3/10)
-  Stagioni KO: 2009-2010, 2010-2011, 2011-2012, 2012-2013, 2016-2017, 2017-2018, 2018-2019, 2020-2021, 2022-2023, 2023-2024
+  ⚠️  Posizioni a volte assenti:              LW(4/10), RM(4/10), LM(3/10), CAM(2/10), RW(4/10), CDM(1/10)
+  Stagioni KO: 2009-2010, 2011-2012, 2012-2013, 2014-2015, 2015-2016, 2017-2018, 2019-2020, 2023-2024, 2024-2025, 2025-2026
 
 Sassuolo
   Stagioni con almeno una posizione mancante: 10
   ⚠️  Posizioni a volte assenti:              RM(7/10), LM(5/10), CDM(1/10), CAM(1/10), LW(1/10)
   Stagioni KO: 2013-2014, 2014-2015, 2015-2016, 2016-2017, 2017-2018, 2018-2019, 2019-2020, 2022-2023, 2023-2024, 2025-2026
 
-Lecce
+Milan
   Stagioni con almeno una posizione mancante: 9
-  ⚠️  Posizioni a volte assenti:              LM(6/9), CDM(3/9), RW(6/9), LW(4/9), RM(3/9), CAM(1/9), RB(1/9)
-  Stagioni KO: 2004-2005, 2005-2006, 2010-2011, 2011-2012, 2019-2020, 2022-2023, 2023-2024, 2024-2025, 2025-2026
+  ⚠️  Posizioni a volte assenti:              CDM(1/9), RW(3/9), LW(4/9), RM(4/9), LM(4/9), CAM(3/9)
+  Stagioni KO: 2009-2010, 2011-2012, 2012-2013, 2016-2017, 2017-2018, 2018-2019, 2020-2021, 2022-2023, 2023-2024
 
 Palermo
   Stagioni con almeno una posizione mancante: 9
-  ⚠️  Posizioni a volte assenti:              RW(5/9), LW(5/9), RM(3/9), CDM(2/9), CAM(1/9), LM(3/9)
+  ⚠️  Posizioni a volte assenti:              RW(8/9), LW(6/9), CDM(2/9), CAM(1/9), RM(2/9), LM(3/9)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2011-2012, 2016-2017
+
+Hellas Verona
+  Stagioni con almeno una posizione mancante: 8
+  ⚠️  Posizioni a volte assenti:              LM(3/8), CDM(2/8), RM(3/8), RW(3/8), LW(3/8)
+  Stagioni KO: 2013-2014, 2014-2015, 2015-2016, 2017-2018, 2019-2020, 2023-2024, 2024-2025, 2025-2026
 
 Siena
   Stagioni con almeno una posizione mancante: 8
-  ⚠️  Posizioni a volte assenti:              RW(3/8), LW(6/8), LB(1/8), CDM(2/8), LM(2/8), RM(2/8)
+  ⛔ Posizioni SEMPRE assenti:               LW
+  ⚠️  Posizioni a volte assenti:              RW(4/8), LB(1/8), CDM(2/8), LM(1/8)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2011-2012, 2012-2013
 
 Catania
   Stagioni con almeno una posizione mancante: 7
-  ⚠️  Posizioni a volte assenti:              RM(5/7), CDM(1/7), RW(2/7), LW(3/7), LM(1/7)
-  Stagioni KO: 2006-2007, 2007-2008, 2009-2010, 2010-2011, 2011-2012, 2012-2013, 2013-2014
+  ⚠️  Posizioni a volte assenti:              RM(4/7), CDM(1/7), RW(2/7), LW(5/7), LM(1/7)
+  Stagioni KO: 2006-2007, 2007-2008, 2008-2009, 2009-2010, 2010-2011, 2012-2013, 2013-2014
 
 Livorno
   Stagioni con almeno una posizione mancante: 6
-  ⚠️  Posizioni a volte assenti:              LB(1/6), CDM(4/6), RW(4/6), LW(4/6), RB(3/6)
+  ⛔ Posizioni SEMPRE assenti:               RW, LW
+  ⚠️  Posizioni a volte assenti:              LB(1/6), CDM(4/6), RB(1/6)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2009-2010, 2013-2014
 
 AC Milan
   Stagioni con almeno una posizione mancante: 5
-  ⚠️  Posizioni a volte assenti:              RW(4/5), LW(4/5), RM(1/5), LM(1/5)
+  ⚠️  Posizioni a volte assenti:              RW(4/5), LW(4/5), RM(1/5)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009
 
 AS Roma
   Stagioni con almeno una posizione mancante: 5
-  ⛔ Posizioni SEMPRE assenti:               LM
-  ⚠️  Posizioni a volte assenti:              RM(4/5), RW(2/5), LW(1/5)
+  ⚠️  Posizioni a volte assenti:              RM(2/5), RW(3/5), LM(1/5), LW(4/5)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009
 
 Inter Milan
-  Stagioni con almeno una posizione mancante: 4
-  ⛔ Posizioni SEMPRE assenti:               RW
-  ⚠️  Posizioni a volte assenti:              CM(1/4), RM(1/4), LW(1/4)
-  Stagioni KO: 2004-2005, 2005-2006, 2007-2008, 2008-2009
+  Stagioni con almeno una posizione mancante: 5
+  ⛔ Posizioni SEMPRE assenti:               RW, LW
+  ⚠️  Posizioni a volte assenti:              CM(1/5), RM(1/5)
+  Stagioni KO: 2004-2005, 2005-2006, 2006-2007, 2007-2008, 2008-2009
 
 Reggina Calcio
   Stagioni con almeno una posizione mancante: 4
@@ -611,9 +611,14 @@ Messina
   ⚠️  Posizioni a volte assenti:              CAM(1/3), RW(2/3), CDM(2/3)
   Stagioni KO: 2004-2005, 2005-2006, 2006-2007
 
+Spal
+  Stagioni con almeno una posizione mancante: 3
+  ⚠️  Posizioni a volte assenti:              RB(1/3), CAM(1/3), RW(1/3), LW(2/3), LB(1/3)
+  Stagioni KO: 2017-2018, 2018-2019, 2019-2020
+
 Ascoli
   Stagioni con almeno una posizione mancante: 2
-  ⚠️  Posizioni a volte assenti:              CDM(1/2), RW(1/2), CAM(1/2)
+  ⚠️  Posizioni a volte assenti:              CDM(1/2), RW(1/2), LW(1/2), CAM(1/2)
   Stagioni KO: 2005-2006, 2006-2007
 
 Benevento
@@ -637,12 +642,6 @@ Frosinone
   ⚠️  Posizioni a volte assenti:              CDM(1/2), CAM(1/2), RB(1/2)
   Stagioni KO: 2015-2016, 2018-2019
 
-Pescara
-  Stagioni con almeno una posizione mancante: 2
-  ⛔ Posizioni SEMPRE assenti:               LM
-  ⚠️  Posizioni a volte assenti:              RM(1/2)
-  Stagioni KO: 2012-2013, 2016-2017
-
 Roma FC
   Stagioni con almeno una posizione mancante: 2
   ⚠️  Posizioni a volte assenti:              CAM(1/2), RB(1/2)
@@ -651,13 +650,8 @@ Roma FC
 Salernitana
   Stagioni con almeno una posizione mancante: 2
   ⛔ Posizioni SEMPRE assenti:               CDM
-  ⚠️  Posizioni a volte assenti:              RM(1/2), CAM(1/2), RB(1/2), LB(1/2)
+  ⚠️  Posizioni a volte assenti:              RM(1/2), CAM(1/2)
   Stagioni KO: 2021-2022, 2022-2023
-
-Spal
-  Stagioni con almeno una posizione mancante: 2
-  ⚠️  Posizioni a volte assenti:              RB(1/2), CAM(1/2), RW(1/2), LW(1/2), LB(1/2)
-  Stagioni KO: 2017-2018, 2019-2020
 
 Spezia
   Stagioni con almeno una posizione mancante: 2
@@ -666,8 +660,8 @@ Spezia
 
 AC Monza
   Stagioni con almeno una posizione mancante: 1
-  ⛔ Posizioni SEMPRE assenti:               LB
-  Stagioni KO: 2022-2023
+  ⛔ Posizioni SEMPRE assenti:               RW
+  Stagioni KO: 2023-2024
 
 Bari
   Stagioni con almeno una posizione mancante: 1
@@ -691,7 +685,7 @@ Doria
 
 F. Genova
   Stagioni con almeno una posizione mancante: 1
-  ⛔ Posizioni SEMPRE assenti:               RB, CDM, LW
+  ⛔ Posizioni SEMPRE assenti:               CDM, LW
   Stagioni KO: 2008-2009
 
 Firenze
@@ -713,6 +707,11 @@ Novara
   Stagioni con almeno una posizione mancante: 1
   ⛔ Posizioni SEMPRE assenti:               RM, RW, LW
   Stagioni KO: 2011-2012
+
+Pescara
+  Stagioni con almeno una posizione mancante: 1
+  ⛔ Posizioni SEMPRE assenti:               RM, LM
+  Stagioni KO: 2012-2013
 
 Pisa
   Stagioni con almeno una posizione mancante: 1
