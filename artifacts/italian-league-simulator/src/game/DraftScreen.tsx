@@ -294,10 +294,6 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
 
   if (state.phase === 'complete') { onComplete(state.slots); return null; }
 
-  const doSpin = isSquadFirst
-    ? spinSquadFirst
-    : () => selectSlotAndSpin(remaining[0]?.formationSlot.id ?? '');
-
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-white">
       <div className="px-4 pt-5 pb-3 flex flex-col gap-0.5">
@@ -375,10 +371,46 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
           </div>
         )}
 
-        {state.phase === 'idle' && remaining.length > 0 && (
-          <button onClick={doSpin} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98]">
+        {state.phase === 'idle' && remaining.length > 0 && isSquadFirst && (
+          <button onClick={spinSquadFirst} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98]">
             🎲 Sorteggia
           </button>
+        )}
+
+        {state.phase === 'idle' && remaining.length > 0 && !isSquadFirst && (
+          <div className="space-y-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-1">SCEGLI IL RUOLO DA RIEMPIRE</p>
+              <p className="text-xs text-slate-600">Seleziona uno slot vuoto — verrà sorteggiato un club con giocatori in quella posizione.</p>
+            </div>
+            {(['GK', 'DEF', 'MID', 'ATT'] as const).map((cat) => {
+              const catSlots = remaining.filter((s) => slotCat(s) === cat);
+              if (catSlots.length === 0) return null;
+              return (
+                <div key={cat}>
+                  <p className="text-[10px] font-black uppercase tracking-widest mb-2" style={{ color: catColor(cat) }}>
+                    {catLabel(cat)}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {catSlots.map((s) => (
+                      <button
+                        key={s.formationSlot.id}
+                        onClick={() => selectSlotAndSpin(s.formationSlot.id)}
+                        className="px-4 py-3 rounded-xl text-sm font-black text-white transition-all active:scale-95 hover:brightness-110 flex items-center gap-2"
+                        style={{ backgroundColor: catColor(cat) + '22', border: `1.5px solid ${catColor(cat)}55`, color: catColor(cat) }}
+                      >
+                        <span className="text-xs font-black px-1.5 py-0.5 rounded" style={{ backgroundColor: catColor(cat), color: '#000' }}>
+                          {slotBadge(s.formationSlot)}
+                        </span>
+                        <span className="text-white font-semibold text-xs">{slotFullLabel(s.formationSlot.id)}</span>
+                        <span className="text-slate-500 text-xs">🎲</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
       </div>
     </div>
