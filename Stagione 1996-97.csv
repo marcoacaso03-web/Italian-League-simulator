@@ -3,34 +3,36 @@ AC Milan,Sebastiano Rossi,POR,78
 AC Milan,Christian Panucci,TD,74
 AC Milan,Paolo Maldini,DC,74
 AC Milan,Paolo Maldini,TS,74
-AC Milan,Demetrio Albertini,CC,75
+AC Milan,Demetrio Albertini,CDC,75
 AC Milan,Filippo Galli,DC,73
 AC Milan,Franco Baresi,DC,75
 AC Milan,Marcel Desailly,DC,75
 AC Milan,George Weah,ATT,73
-AC Milan,Dejan Savićević,CC,74
+AC Milan,Dejan Savićević,COC,74
 AC Milan,Alessandro Costacurta,DC,75
 AC Milan,Mario Ielpo,POR,69
-AC Milan,Francesco Coco,DC,74
-AC Milan,Michael Reiziger,DC,74
+AC Milan,Francesco Coco,TS,74
+AC Milan,Michael Reiziger,TD,74
 AC Milan,Massimo Ambrosini,CC,75
-AC Milan,Tomas Locatelli,CC,74
+AC Milan,Tomas Locatelli,COC,74
 AC Milan,Gabriele Aldegani,POR,70
-AC Milan,Roberto Baggio,ATT,75
+AC Milan,Roberto Baggio,COC,75
 AC Milan,Christophe Dugarry,ATT,73
 AC Milan,Zvonimir Boban,CC,75
 AC Milan,Mauro Tassotti,DC,74
 AC Milan,Edgar Davids,CC,74
 AC Milan,Marco Simone,ATT,75
-AC Milan,Stefano Eranio,CC,73
+AC Milan,Stefano Eranio,ED,73
+AC Milan,Stefano Eranio,AD,73
 AC Milan,Angelo Pagotto,POR,70
 AC Milan,Luca Saudati,ATT,74
-AC Milan,Francesco De Francesco,ATT,73
+AC Milan,Francesco De Francesco,COC,73
 AC Milan,Matteo Pelatti,ATT,74
 AC Milan,Pietro Vierchowod,DC,75
 AC Milan,Vincenzo Maiolo,CC,73
 AC Milan,Daniele Daino,DC,73
-AC Milan,Jesper Blomqvist,CC,73
+AC Milan,Jesper Blomqvist,ES,73
+AC Milan,Jesper Blomqvist,AS,73
 AC Milan,Miodrag Vukotić,DC,73
 AC Milan,Alberto Comazzi,DC,74
 AC Milan,Massimo Prete,POR,69
@@ -40,11 +42,12 @@ AS Roma,Marco Lanna,DC,73
 AS Roma,Enrico Annoni,DC,74
 AS Roma,Jonas Thern,CC,75
 AS Roma,Aldair,DC,75
-AS Roma,Francesco Moriero,CC,74
+AS Roma,Francesco Moriero,AD,74
 AS Roma,Francesco Statuto,CC,75
 AS Roma,Abel Balbo,ATT,75
-AS Roma,Daniel Fonseca,ATT,73
-AS Roma,Amedeo Carboni,CC,73
+AS Roma,Daniel Fonseca,AS,73
+AS Roma,Daniel Fonseca,ES,73
+AS Roma,Amedeo Carboni,TS,73
 AS Roma,Giorgio Sterchele,POR,69
 AS Roma,Fabio Petruzzi,DC,75
 AS Roma,Daniele Berretta,CC,75
@@ -54,7 +57,7 @@ AS Roma,Francesco Totti,ATT,74
 AS Roma,Francesco Totti,COC,74
 AS Roma,Damiano Tommasi,CC,73
 AS Roma,Massimiliano Cappioli,CC,75
-AS Roma,Gabriele Grossi,DC,73
+AS Roma,Gabriele Grossi,TS,73
 AS Roma,Antonino Bernardini,CC,74
 AS Roma,Giampaolo Di Magno,POR,69
 AS Roma,Lampros Choutos,ATT,74
@@ -65,17 +68,17 @@ AS Roma,Gianluca Berti,POR,69
 AS Roma,Matteo Pivotto,DC,74
 AS Roma,Fabrizio Romondini,CC,73
 AS Roma,Daniele Conti,CC,75
-AS Roma,Andrea Conti,TD,73
+AS Roma,Andrea Conti,AD,73
 AS Roma,Andrea Conti,ED,73
 AS Roma,Omari Tetradze,DC,73
 AS Roma,Vincent Candela,ASA,73
 AS Roma,Vincent Candela,ES,73
 Atalanta,Davide Micillo,POR,81
-Atalanta,José Oscar Herrera,CC,74
+Atalanta,José Oscar Herrera,TD,74
 Atalanta,Valter Bonacina,CC,76
 Atalanta,Massimo Carrera,DC,76
 Atalanta,Daniele Fortunato,CC,74
-Atalanta,Zoran Mirković,DC,74
+Atalanta,Zoran Mirković,TD,74
 Atalanta,Federico Magallanes,ATT,75
 Atalanta,Joakim Persson,CC,75
 Atalanta,Filippo Inzaghi,ATT,74
@@ -84,23 +87,24 @@ Atalanta,Fabio Gallo,CC,74
 Atalanta,Davide Pinato,POR,70
 Atalanta,Andrea Sottil,DC,76
 Atalanta,Federico Pisani,ATT,75
-Atalanta,Marco Sgrò,CC,74
+Atalanta,Marco Sgrò,ES,74
+Atalanta,Marco Sgrò,AS,74
 Atalanta,Emanuele Tresoldi,DC,76
 Atalanta,Paolo Foglio,DC,74
-Atalanta,Stefano Rossini,DC,74
-Atalanta,Franco Rotella,CC,74
+Atalanta,Stefano Rossini,TS,74
+Atalanta,Franco Rotella,ED,74
 Atalanta,Gianluca Luppi,CC,75
 Atalanta,Andrea Natali,POR,72
-Atalanta,Fabio Rustico,DC,74
+Atalanta,Fabio Rustico,TD,74
 Atalanta,Fausto Rossini,ATT,76
-Atalanta,Gianluigi Lentini,ATT,76
+Atalanta,Gianluigi Lentini,AD,76
 Atalanta,Mario Morfeo,CC,75
 Atalanta,Massimo Mutarelli,CC,74
 Atalanta,Alessandro Marcandalli,DC,76
-Atalanta,Angelo Carbone,CC,76
+Atalanta,Angelo Carbone,ED,76
 Atalanta,Arnaldo Bonfanti,DC,74
-Atalanta,Pierre Giorgio Regonesi,DC,75
-Atalanta,Luciano Zauri,CC,74
+Atalanta,Pierre Giorgio Regonesi,TS,75
+Atalanta,Luciano Zauri,TD,74
 Atalanta,Cesare Natali,DC,74
 Bologna,Gianluca Pagliuca,POR,82
 Bologna,Luca Mondini,POR,64
