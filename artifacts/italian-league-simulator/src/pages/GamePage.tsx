@@ -110,6 +110,11 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
   const [eraTo,        setEraTo]        = useState(MAX_YEAR);
   const [formation,    setFormation]    = useState('4-3-3');
 
+  function handleDifficulty(d: Difficulty) {
+    setDifficulty(d);
+    if (d === 'hard') setShowRatings('off');
+  }
+
   function handleEraPreset(preset: EraPreset) {
     setEraPreset(preset);
     const from = ERA_PRESETS.find((e) => e.id === preset)?.from ?? MIN_YEAR;
@@ -131,15 +136,34 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
               { id: 'normal' as Difficulty, label: 'Normale',   sub: '1 reroll disponibile',        color: 'amber' },
               { id: 'hard'   as Difficulty, label: 'Difficile', sub: 'No reroll · rating nascosti', color: 'red' },
             ] as const).map((d) => (
-              <ToggleCard key={d.id} active={difficulty === d.id} onClick={() => setDifficulty(d.id)} title={d.label} sub={d.sub} accentColor={d.color} />
+              <ToggleCard key={d.id} active={difficulty === d.id} onClick={() => handleDifficulty(d.id)} title={d.label} sub={d.sub} accentColor={d.color} />
             ))}
           </div>
         </section>
-        <section className="glass rounded-2xl p-5">
-          <SectionLabel label="MOSTRA RATING" />
+        <section className={`glass rounded-2xl p-5 transition-opacity duration-200 ${difficulty === 'hard' ? 'opacity-60' : ''}`}>
+          <div className="flex items-center justify-between mb-3">
+            <SectionLabel label="MOSTRA RATING" />
+            {difficulty === 'hard' && (
+              <span className="text-[10px] font-black uppercase tracking-widest text-red-400 border border-red-500/40 rounded-lg px-2 py-0.5 mb-3">
+                🔒 Bloccato in Difficile
+              </span>
+            )}
+          </div>
           <div className="grid grid-cols-2 gap-3">
-            <ToggleCard active={showRatings === 'on'}  onClick={() => setShowRatings('on')}  title="On"  sub="Overall giocatori visibili"          accentColor="violet" />
-            <ToggleCard active={showRatings === 'off'} onClick={() => setShowRatings('off')} title="Off" sub="Blind mode — fidati del tuo istinto" accentColor="violet" />
+            <ToggleCard
+              active={showRatings === 'on'}
+              onClick={() => { if (difficulty !== 'hard') setShowRatings('on'); }}
+              title="On"
+              sub="Overall giocatori visibili"
+              accentColor="violet"
+            />
+            <ToggleCard
+              active={showRatings === 'off'}
+              onClick={() => { if (difficulty !== 'hard') setShowRatings('off'); }}
+              title="Off"
+              sub={difficulty === 'hard' ? 'Forzato dalla difficoltà' : 'Blind mode — fidati del tuo istinto'}
+              accentColor="violet"
+            />
           </div>
         </section>
         <section className="glass rounded-2xl p-5">
