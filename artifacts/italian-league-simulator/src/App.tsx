@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Switch, Route, Router as WouterRouter } from 'wouter';
 import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
+import LeaderboardPage from './pages/LeaderboardPage';
 import { initData } from './lib/data';
 
 function LoadingScreen() {
@@ -18,6 +19,7 @@ function Router() {
     <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/game" component={GamePage} />
+      <Route path="/leaderboard" component={LeaderboardPage} />
       <Route>
         <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
           <p className="text-slate-400">Pagina non trovata</p>
