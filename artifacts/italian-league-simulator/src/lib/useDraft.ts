@@ -4,6 +4,7 @@ import {
   buildSlots, spin, findBestSlot, assignToSlot, initialRerolls, emptySlots,
   type DraftState, type DraftedPlayer, type SpinResult,
 } from './draft';
+import { FORMATION_SLOTS } from './formations';
 
 type Action =
   | { type: 'SPIN';        result: SpinResult }
@@ -43,22 +44,24 @@ export function useDraft(config: SetupConfig) {
 
   const reveal = useCallback(() => dispatch({ type: 'REVEAL' }), []);
 
+  const formationSlots = FORMATION_SLOTS[config.formation] ?? [];
+
   const spinSquadFirst = useCallback(() => {
-    const r = spin(config, usedCombosRef.current, []);
+    const r = spin(config, usedCombosRef.current, [], formationSlots);
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'SPIN', result: r });
-  }, [config]);
+  }, [config, formationSlots]);
 
   const selectSlotAndSpin = useCallback((slotId: string) => {
     dispatch({ type: 'SELECT_SLOT', slotId });
     const slot = state.slots.find((s) => s.formationSlot.id === slotId);
     if (!slot) return;
-    const r = spin(config, usedCombosRef.current, slot.formationSlot.acceptedPositions);
+    const r = spin(config, usedCombosRef.current, slot.formationSlot.acceptedPositions, formationSlots);
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'SPIN', result: r });
-  }, [config, state.slots]);
+  }, [config, state.slots, formationSlots]);
 
   const pick = useCallback((player: DraftedPlayer, slotId?: string) =>
     dispatch({ type: 'PICK', player, slotId }), []);
@@ -68,11 +71,11 @@ export function useDraft(config: SetupConfig) {
     const pf = state.activeSlotId
       ? (state.slots.find((s) => s.formationSlot.id === state.activeSlotId)?.formationSlot.acceptedPositions ?? [])
       : [];
-    const r = spin(config, usedCombosRef.current, pf);
+    const r = spin(config, usedCombosRef.current, pf, formationSlots);
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'REROLL', result: r });
-  }, [config, state.rerollsLeft, state.activeSlotId, state.slots]);
+  }, [config, state.rerollsLeft, state.activeSlotId, state.slots, formationSlots]);
 
   const cancel = useCallback(() => dispatch({ type: 'CANCEL_PICK' }), []);
 

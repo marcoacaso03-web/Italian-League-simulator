@@ -113,6 +113,24 @@ export function getClubSeasonPool(): ClubSeasonEntry[] {
   return result;
 }
 
+/** Mappa "club|||season" → Set<posizioni coperte> (calcolata dai dati già caricati). */
+let _clubSeasonPositions: Map<string, Set<string>> | null = null;
+
+export function getClubSeasonPositions(): Map<string, Set<string>> {
+  if (_clubSeasonPositions) return _clubSeasonPositions;
+  const map = new Map<string, Set<string>>();
+  for (const player of loadPlayers()) {
+    for (const s of player.seasons) {
+      const key = `${s.club}|||${s.season}`;
+      let set = map.get(key);
+      if (!set) { set = new Set(); map.set(key, set); }
+      for (const pos of (s.positions ?? [])) set.add(pos);
+    }
+  }
+  _clubSeasonPositions = map;
+  return map;
+}
+
 export function getSquad(club: string, season: string): SquadPlayer[] {
   const players = loadPlayers();
   return players
