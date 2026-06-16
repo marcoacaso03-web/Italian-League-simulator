@@ -8,6 +8,8 @@ export interface SerieATeam {
   rating: number;
 }
 
+// Squadre Serie A 2025-26 (19 avversarie + team giocatore = 20 totale, 38 giornate)
+// Escluso Sassuolo (promosso dalla B ma non usato nella simulazione)
 export const SERIE_A_2526: SerieATeam[] = [
   { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89 },
   { id: 'nap', name: 'Napoli',      abbr: 'NAP', color: '#2563eb', rating: 87 },
@@ -24,10 +26,10 @@ export const SERIE_A_2526: SerieATeam[] = [
   { id: 'par', name: 'Parma',       abbr: 'PAR', color: '#fbbf24', rating: 70 },
   { id: 'com', name: 'Como',        abbr: 'COM', color: '#155e75', rating: 70 },
   { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69 },
-  { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 68 },
-  { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67 },
-  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66 },
-  { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65 },
+  { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 68 },
+  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 67 },
+  { id: 'pis', name: 'Pisa',        abbr: 'PIS', color: '#1e3a5f', rating: 66 },
+  { id: 'spe', name: 'Spezia',      abbr: 'SPE', color: '#ffffff', rating: 64 },
 ];
 
 export interface TeamOverall {
