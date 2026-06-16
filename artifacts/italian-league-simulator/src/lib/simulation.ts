@@ -27,9 +27,9 @@ export const SERIE_A_2526: SerieATeam[] = [
   { id: 'com', name: 'Como',        abbr: 'COM', color: '#155e75', rating: 70 },
   { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69 },
   { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 68 },
-  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 67 },
+  { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 67 },
   { id: 'pis', name: 'Pisa',        abbr: 'PIS', color: '#1e3a5f', rating: 66 },
-  { id: 'spe', name: 'Spezia',      abbr: 'SPE', color: '#ffffff', rating: 64 },
+  { id: 'cre', name: 'Cremonese',   abbr: 'CRE', color: '#dc2626', rating: 64 },
 ];
 
 export interface TeamOverall {
