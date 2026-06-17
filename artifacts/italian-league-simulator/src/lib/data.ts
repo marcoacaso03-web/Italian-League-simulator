@@ -55,32 +55,49 @@ let _clubs:   Club[]   | null = null;
 let _clubsBySeason: Record<string, string[]> = {};
 let _initPromise: Promise<void> | null = null;
 
+/** Map<"club|||season", Set<position>> — built once, reused by filteredPool. */
+let _clubSeasonPositions: Map<string, Set<string>> | null = null;
+
 export async function initData(): Promise<void> {
   if (_players !== null) return;
   if (_initPromise) return _initPromise;
   _initPromise = (async () => {
-    try {
-      const res = await fetch('/api/data');
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const dataset = (await res.json()) as {
-        players: Player[];
-        clubs: Club[];
-        clubsBySeason: Record<string, string[]>;
-      };
-      _players        = dataset.players;
-      _clubs          = dataset.clubs;
-      _clubsBySeason  = dataset.clubsBySeason ?? {};
-    } catch (err) {
-      console.error('[data.ts] initData failed:', err);
-      _players = [];
-      _clubs   = [];
-    }
+    const [playersRes, clubsRes] = await Promise.all([
+      fetch('/data/players.json'),
+      fetch('/data/clubs.json'),
+    ]);
+    _players = await playersRes.json() as Player[];
+    _clubs   = await clubsRes.json()   as Club[];
+    _clubsBySeason = {};
+    _players.forEach((p) => {
+      p.seasons.forEach((s) => {
+        if (!_clubsBySeason[s.season]) _clubsBySeason[s.season] = [];
+        if (!_clubsBySeason[s.season].includes(s.club)) {
+          _clubsBySeason[s.season].push(s.club);
+        }
+      });
+    });
   })();
   return _initPromise;
 }
 
-export function loadClubsBySeason(): Record<string, string[]> {
-  return _clubsBySeason;
+/**
+ * Restituisce una Map<"club|||season", Set<string>> con tutte le posizioni
+ * coperte da almeno un giocatore per quella combinazione club+stagione.
+ * Il risultato è calcolato una volta sola e poi riutilizzato (lazy singleton).
+ */
+export function getClubSeasonPositions(): Map<string, Set<string>> {
+  if (_clubSeasonPositions) return _clubSeasonPositions;
+  const map = new Map<string, Set<string>>();
+  (_players ?? []).forEach((p) => {
+    p.seasons.forEach((s) => {
+      const key = `${s.club}|||${s.season}`;
+      if (!map.has(key)) map.set(key, new Set<string>());
+      s.positions.forEach((pos) => map.get(key)!.add(pos));
+    });
+  });
+  _clubSeasonPositions = map;
+  return map;
 }
 
 /** Restituisce i club in Serie A per una stagione specifica */

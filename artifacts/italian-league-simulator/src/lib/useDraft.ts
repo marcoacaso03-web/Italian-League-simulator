@@ -4,6 +4,7 @@ import {
   buildSlots, spin, findBestSlot, assignToSlot, initialRerolls, emptySlots,
   type DraftState, type DraftedPlayer, type SpinResult,
 } from './draft';
+import { FORMATION_SLOTS } from './formations';
 
 type Action =
   | { type: 'SPIN';        result: SpinResult }
@@ -44,17 +45,19 @@ export function useDraft(config: SetupConfig) {
   const reveal = useCallback(() => dispatch({ type: 'REVEAL' }), []);
 
   const spinSquadFirst = useCallback(() => {
-    const r = spin(config, usedCombosRef.current, []);
+    const emptyFormationSlots = emptySlots(state.slots).map((s) => s.formationSlot);
+    const r = spin(config, usedCombosRef.current, [], emptyFormationSlots);
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'SPIN', result: r });
-  }, [config]);
+  }, [config, state.slots]);
 
   const selectSlotAndSpin = useCallback((slotId: string) => {
     dispatch({ type: 'SELECT_SLOT', slotId });
     const slot = state.slots.find((s) => s.formationSlot.id === slotId);
     if (!slot) return;
-    const r = spin(config, usedCombosRef.current, slot.formationSlot.acceptedPositions);
+    const emptyFormationSlots = emptySlots(state.slots).map((s) => s.formationSlot);
+    const r = spin(config, usedCombosRef.current, slot.formationSlot.acceptedPositions, emptyFormationSlots);
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'SPIN', result: r });
@@ -68,7 +71,8 @@ export function useDraft(config: SetupConfig) {
     const pf = state.activeSlotId
       ? (state.slots.find((s) => s.formationSlot.id === state.activeSlotId)?.formationSlot.acceptedPositions ?? [])
       : [];
-    const r = spin(config, usedCombosRef.current, pf);
+    const emptyFormationSlots = emptySlots(state.slots).map((s) => s.formationSlot);
+    const r = spin(config, usedCombosRef.current, pf, emptyFormationSlots);
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'REROLL', result: r });

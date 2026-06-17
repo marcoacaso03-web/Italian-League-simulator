@@ -1,5 +1,5 @@
 import type { SetupConfig } from '../pages/GamePage';
-import { getClubSeasonPool, getSquad, getPrimeSquad, toCategory } from './data';
+import { getClubSeasonPool, getSquad, getPrimeSquad, toCategory, getClubSeasonPositions } from './data';
 import { FORMATION_SLOTS, type FormationSlot } from './formations';
 
 export interface DraftedPlayer {
@@ -56,10 +56,23 @@ export function seasonYear(season: string): number {
   return parseInt(season.split(separator)[0], 10);
 }
 
-function filteredPool(config: SetupConfig) {
+/**
+ * Filtra il pool per era e, se vengono passati gli slot liberi della formazione,
+ * esclude le combo club+stagione che non hanno almeno un giocatore per ciascuno
+ * degli slot richiesti (ovvero non potrebbero coprire nemmeno uno slot aperto).
+ */
+function filteredPool(config: SetupConfig, emptyFormationSlots: FormationSlot[] = []) {
+  const positions = getClubSeasonPositions();
   return getClubSeasonPool().filter((e) => {
     const y = seasonYear(e.season);
-    return y >= config.eraFrom && y <= config.eraTo;
+    if (y < config.eraFrom || y > config.eraTo) return false;
+    if (emptyFormationSlots.length === 0) return true;
+    const available = positions.get(`${e.club}|||${e.season}`);
+    if (!available) return false;
+    // Tieni la combo solo se copre almeno uno slot aperto
+    return emptyFormationSlots.some((fs) =>
+      fs.acceptedPositions.some((pos) => available.has(pos))
+    );
   });
 }
 
@@ -111,8 +124,10 @@ export function spin(
   config: SetupConfig,
   usedCombos: Set<string>,
   positionFilter: string[],
+  formationSlots: FormationSlot[] = [],
 ): SpinResult | null {
-  const pool = filteredPool(config).filter((e) => !usedCombos.has(`${e.club}|||${e.season}`));
+  const pool = filteredPool(config, formationSlots)
+    .filter((e) => !usedCombos.has(`${e.club}|||${e.season}`));
   if (pool.length === 0) return null;
   const entry = pickRandom(pool);
   const rawSquad = config.ratingsMode === 'prime'
