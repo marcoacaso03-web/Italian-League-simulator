@@ -370,7 +370,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
                   🔄 Reroll ({state.rerollsLeft}/{maxRerolls})
                 </button>
               )}
-              <button onClick={cancel} className="flex-1 py-3 rounded-xl text-slate-400 text-sm hover:text-white transition-colors">Annulla</button>
+              <button onClick={onBack} className="flex-1 py-3 rounded-xl text-slate-400 text-sm hover:text-white transition-colors">↺ Restart</button>
             </div>
           </div>
         )}
