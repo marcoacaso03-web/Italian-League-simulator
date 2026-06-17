@@ -32,8 +32,8 @@ const RUOLO_MAP: Record<string, { position: string; category: string }> = {
   SW:   { position: "CB",  category: "DEF" },
   TD:   { position: "RB",  category: "DEF" },
   TS:   { position: "LB",  category: "DEF" },
-  ED:   { position: "RM",  category: "MID" },
-  ES:   { position: "LM",  category: "MID" },
+  ED:   { position: "RM",  category: "MID" },  // Esterno Destro = ala/tornante, non terzino
+  ES:   { position: "LM",  category: "MID" },  // Esterno Sinistro = ala/tornante, non terzino
   CC:   { position: "CM",  category: "MID" },
   CDC:  { position: "CDM", category: "MID" },
   LCDM: { position: "CDM", category: "MID" },
@@ -47,31 +47,14 @@ const RUOLO_MAP: Record<string, { position: string; category: string }> = {
   AT:   { position: "ST",  category: "ATT" },
   CF:   { position: "CF",  category: "ATT" },
   AD:   { position: "RW",  category: "ATT" },
+  ADA:  { position: "RW",  category: "ATT" },
   AS:   { position: "LW",  category: "ATT" },
-};
-
-// Ruoli "adattati": coprono più posizioni (primaria + alternativa)
-// ADA = Ala Destra Adattato  → gioca come RB ma può coprire anche RM (ED)
-// ASA = Ala Sinistra Adattato → gioca come LB ma può coprire anche LM (ES)
-const MULTI_RUOLO: Record<string, { positions: string[]; categories: string[] }> = {
-  ADA: { positions: ["RB", "RM"], categories: ["DEF", "MID"] },
-  ASA: { positions: ["LB", "LM"], categories: ["DEF", "MID"] },
+  ASA:  { position: "LW",  category: "ATT" },
 };
 
 function ruoloToPositionCategory(ruolo: string): { position: string; category: string } {
   const key = ruolo.trim().toUpperCase();
-  if (MULTI_RUOLO[key]) {
-    const m = MULTI_RUOLO[key];
-    return { position: m.positions[0], category: m.categories[0] };
-  }
   return RUOLO_MAP[key] ?? { position: "CM", category: "MID" };
-}
-
-function ruoloToAllPositions(ruolo: string): { positions: string[]; categories: string[] } {
-  const key = ruolo.trim().toUpperCase();
-  if (MULTI_RUOLO[key]) return MULTI_RUOLO[key];
-  const single = RUOLO_MAP[key] ?? { position: "CM", category: "MID" };
-  return { positions: [single.position], categories: [single.category] };
 }
 
 function buildCsvSeasonMap(rootDir: string): Record<string, string> {
@@ -177,7 +160,7 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
     }>();
 
     for (const row of rows) {
-      const { positions, categories } = ruoloToAllPositions(row.Ruolo);
+      const { position, category } = ruoloToPositionCategory(row.Ruolo);
       const rating = parseInt(row.Valutazione, 10);
       if (isNaN(rating)) continue;
 
@@ -185,17 +168,13 @@ function loadDataset(): { players: Player[]; clubs: Club[]; clubsBySeason: Recor
       if (!fileGroups.has(fileKey)) {
         fileGroups.set(fileKey, {
           name: row.Giocatore, club: row.Squadra,
-          primaryPos: positions[0], primaryCat: categories[0], rating,
-          allPos: [...positions], allCat: [...categories],
+          primaryPos: position, primaryCat: category, rating,
+          allPos: [position], allCat: [category],
         });
       } else {
         const g = fileGroups.get(fileKey)!;
-        for (const pos of positions) {
-          if (!g.allPos.includes(pos)) g.allPos.push(pos);
-        }
-        for (const cat of categories) {
-          if (!g.allCat.includes(cat)) g.allCat.push(cat);
-        }
+        if (!g.allPos.includes(position)) { g.allPos.push(position); }
+        if (!g.allCat.includes(category)) { g.allCat.push(category); }
       }
     }
 

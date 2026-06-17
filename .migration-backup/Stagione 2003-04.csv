@@ -1,9 +1,7 @@
-Squadra,Giocatore,Ruolo,Valutazione
+﻿Squadra,Giocatore,Ruolo,Valutazione
 AC Milan,Valerio Fiori,POR,83
-AC Milan,Cafu,TD,78
-AC Milan,Cafu,ED,78
+AC Milan,Cafu,DC,78
 AC Milan,Paolo Maldini,DC,80
-AC Milan,Paolo Maldini,TS,80
 AC Milan,K'akhaber K'aladze,DC,80
 AC Milan,Fernando Redondo,CC,78
 AC Milan,Andrij Ševčenko,ATT,80
@@ -24,7 +22,6 @@ AC Milan,Massimo Ambrosini,CC,78
 AC Milan,Martin Laursen,DC,78
 AC Milan,Roque Júnior[N 2],DC,80
 AC Milan,Giuseppe Pancaro,DC,79
-AC Milan,Giuseppe Pancaro,TD,79
 AC Milan,Serginho,CC,80
 AC Milan,Cristian Brocchi,CC,78
 AC Milan,Ignazio Abate[N 3],DC,80
@@ -57,7 +54,6 @@ Ancona,Fabricio Lenci,ATT,71
 Ancona,Eusebio Di Francesco,CC,72
 Ancona,Roberto Goretti,CC,70
 Ancona,Goran Pandev,ATT,70
-Ancona,Goran Pandev,COC,70
 Ancona,Andrea Sussi,DC,71
 Ancona,William Viali,DC,71
 Ancona,Corrado Grabbi,ATT,71
@@ -87,27 +83,23 @@ Ancona,Sean Sogliano,DC,72
 Ancona,Daniele Daino,DC,71
 Ancona,Alessandro Potenza,DC,70
 AS Roma,Cristiano Lupatelli,POR,85
-AS Roma,Christian Panucci,TD,79
+AS Roma,Christian Panucci,DC,79
 AS Roma,Cristian Chivu,DC,79
 AS Roma,Jonathan Zebina,DC,78
-AS Roma,Jonathan Zebina,TD,78
 AS Roma,Francisco Govinho Lima,CC,79
 AS Roma,Vincenzo Montella,ATT,80
 AS Roma,Francesco Totti,ATT,78
-AS Roma,Francesco Totti,COC,78
 AS Roma,Emerson,CC,80
 AS Roma,Carlo Zotti,POR,74
 AS Roma,Olivier Dacourt,CC,80
 AS Roma,Damiano Tommasi,CC,79
 AS Roma,Antonio Cassano,ATT,78
-AS Roma,Antonio Cassano,AS,78
 AS Roma,Walter Samuel,DC,78
 AS Roma,Luigi Sartor,DC,80
 AS Roma,Gaetano D'Agostino,CC,80
 AS Roma,Ivan Pelizzoli,POR,74
 AS Roma,John Carew,ATT,78
 AS Roma,Marco Delvecchio,ATT,80
-AS Roma,Marco Delvecchio,AS,80
 AS Roma,Alessio Cerci,CC,79
 AS Roma,Gianluca Galasso,DC,80
 AS Roma,Daniele De Rossi,CC,79
@@ -115,8 +107,7 @@ AS Roma,Adewale Dauda Wahab,CC,80
 AS Roma,Giuseppe Scurto,DC,78
 AS Roma,Mancini,CC,78
 AS Roma,Traïanos Dellas,DC,78
-AS Roma,Vincent Candela,ASA,80
-AS Roma,Vincent Candela,ES,80
+AS Roma,Vincent Candela,DC,80
 AS Roma,Akande Ajide,CC,78
 AS Roma,Daniele Corvia,ATT,80
 AS Roma,Raffaele De Martino,CC,80
@@ -127,7 +118,6 @@ Bologna,Massimo Bernardi,TD,64
 Bologna,Marco Colombo,TD,62
 Bologna,Cristian Zanetti,DC,67
 Bologna,Giuseppe Pancaro,DC,68
-Bologna,Giuseppe Pancaro,TD,68
 Bologna,Nicola Legrottaglie,DC,72
 Bologna,Giuseppe Pancaro,TS,68
 Bologna,Massimo Bernardi,ASA,64
@@ -180,8 +170,6 @@ Brescia,Roberto Cortellini,ATT,74
 Chievo Verona,Luca Marchegiani,POR,81
 Chievo Verona,John Mensah,DC,74
 Chievo Verona,Giuseppe Sculli,ATT,75
-Chievo Verona,Giuseppe Sculli,AS,75
-Chievo Verona,Giuseppe Sculli,ES,75
 Chievo Verona,Stefano Morrone,CC,76
 Chievo Verona,Luciano,CC,74
 Chievo Verona,Maurizio D'Angelo,DC,75
@@ -200,8 +188,7 @@ Chievo Verona,Simone Perrotta,CC,76
 Chievo Verona,Alfredo Cariello,CC,75
 Chievo Verona,Salvatore Lanna,DC,76
 Chievo Verona,Federico Cossato,ATT,76
-Chievo Verona,Matteo Paro,ES,75
-Chievo Verona,Matteo Paro,CC,75
+Chievo Verona,Matteo Paro,ATT,75
 Chievo Verona,César,DC,74
 Chievo Verona,Andrea Zanchetta,CC,75
 Chievo Verona,Fabio Moro,DC,74
@@ -223,8 +210,6 @@ Empoli,Alessandro Agostini,DC,70
 Empoli,Manuel Belleri,DC,71
 Empoli,Ibrahim Abdul Razak,ATT,70
 Empoli,Antonio Di Natale,ATT,70
-Empoli,Antonio Di Natale,AS,70
-Empoli,Antonio Di Natale,ES,70
 Empoli,Francesco Tavano,ATT,72
 Empoli,Mirco Gasparetto,ATT,72
 Empoli,Mario Cassano,POR,66
@@ -238,7 +223,6 @@ Empoli,Andrea Coda,DC,72
 Empoli,Flavio Giampieretti,CC,72
 Empoli,Riccardo Bonetto,DC,71
 Empoli,Tommaso Rocchi,ATT,72
-Empoli,Tommaso Rocchi,AD,72
 Empoli,Daniele Balli,POR,68
 Empoli,Damiano Mitra,CC,71
 Empoli,Stefano Lucchini,DC,72
@@ -255,8 +239,7 @@ Empoli,Roberto Mirri,DC,70
 Inter Milan,Francesco Toldo,POR,83
 Inter Milan,Iván Córdoba,DC,77
 Inter Milan,Mohammed Kallon,ATT,77
-Inter Milan,Javier Zanetti,TD,79
-Inter Milan,Javier Zanetti,ED,79
+Inter Milan,Javier Zanetti,DC,79
 Inter Milan,Emre Belözoğlu,CC,79
 Inter Milan,Cristiano Zanetti,CC,78
 Inter Milan,Andy van der Meyde,CC,78
@@ -280,7 +263,6 @@ Inter Milan,Marco Materazzi,DC,77
 Inter Milan,Carlos Gamarra,DC,79
 Inter Milan,Matías Almeyda,CC,77
 Inter Milan,Giovanni Pasquale,DC,77
-Inter Milan,Giovanni Pasquale,TS,77
 Inter Milan,Khalilou Fadiga,CC,79
 Inter Milan,Mario Rebecchi,CC,79
 Inter Milan,Obafemi Martins,ATT,78
@@ -323,13 +305,11 @@ Lecce,Valeri Božinov,ATT,74
 Lecce,Sebastjan Cimirotič,ATT,74
 Lecce,Daniele Franceschini,CC,76
 Lecce,Mirko Vučinić,ATT,76
-Lecce,Mirko Vučinić,AS,76
 Lecce,Guillermo Giacomazzi,CC,75
 Lecce,Cesare Bovo,DC,74
 Lecce,Andrea Panico,POR,72
 Lecce,Cristian Silvestri,DC,74
 Lecce,Max Tonetto,DC,75
-Lecce,Max Tonetto,TS,75
 Lecce,Andrea Esposito,DC,76
 Lecce,Marco Testa,CC,76
 Lecce,Wilfried Dalmat,CC,76
@@ -385,7 +365,6 @@ Parma,Sebastiano Girelli,DC,77
 Parma,Antonio Benarrivo,DC,77
 Parma,Anthony Šerić,DC,76
 Parma,Daniele Bonera,DC,77
-Parma,Daniele Bonera,TD,77
 Parma,Giuseppe Cardone,DC,76
 Parma,Hidetoshi Nakata,CC,76
 Parma,Ianis Zicu,ATT,77
@@ -424,15 +403,13 @@ Perugia,Michele Tardioli,POR,67
 Perugia,Stefano Pardini,POR,69
 Perugia,Domenico Di Dio,POR,69
 Perugia,Zé Maria,DC,71
-Perugia,Zé Maria,TD,71
 Perugia,Marco Di Loreto,DC,71
 Perugia,Souleymane Diamoutene,DC,71
 Perugia,Giovanni Ignoffo,DC,73
-Perugia,Fabio Grosso,TS,73
+Perugia,Fabio Grosso,DC,73
 Perugia,Fabiano,DC,72
 Perugia,Salvatore Fresi,DC,72
 Perugia,Ferdinand Coly,DC,71
-Perugia,Ferdinand Coly,TD,71
 Perugia,Kōnstantinos Loumpoutīs,DC,71
 Perugia,Evangelos Nastos,DC,72
 Perugia,Jamal Alioui,DC,71
@@ -459,7 +436,6 @@ Perugia,Massimo Margiotta,ATT,71
 Perugia,Fabrizio Ravanelli,ATT,71
 Perugia,Dario Hübner,ATT,73
 Perugia,Franco Brienza,ATT,72
-Perugia,Franco Brienza,COC,72
 Perugia,Zīsīs Vryzas,ATT,71
 Perugia,Emanuele Berrettoni,ATT,72
 Perugia,Marcelo Zalayeta,ATT,73
@@ -471,11 +447,8 @@ Perugia,Alessandro Iannuzzi,ATT,73
 Perugia,Juan Turchi,ATT,72
 Reggina,Emanuele Belardi,POR,79
 Reggina,Gianluca Comotto,DC,74
-Reggina,Gianluca Comotto,TD,74
 Reggina,Gianluca Falsini,DC,73
-Reggina,Gianluca Falsini,TS,73
-Reggina,Davide Baiocco,CC,73
-Reggina,Davide Baiocco,CDC,73
+Reggina,Davide Baiocco,DC,73
 Reggina,Carlos Humberto Paredes,CC,74
 Reggina,Giovanni Morabito,DC,73
 Reggina,Roberto Stellone,ATT,72
@@ -487,7 +460,6 @@ Reggina,Graziano Tilaro,POR,68
 Reggina,Ivan Franceschini,DC,73
 Reggina,Martin Lejsal,POR,68
 Reggina,David Di Michele,ATT,74
-Reggina,David Di Michele,AD,74
 Reggina,Andrea Sottil,DC,73
 Reggina,Giacomo Tedesco,CC,73
 Reggina,Giandomenico Mesto,CC,72
@@ -521,11 +493,8 @@ Sampdoria,Francesco Antonioli,POR,73
 Sampdoria,Emanuele Bianchi,POR,71
 Sampdoria,Alessandro Grandoni,DC,77
 Sampdoria,Biagio Pagano,CC,75
-Sampdoria,Aimo Diana,ED,76
-Sampdoria,Aimo Diana,COC,76
+Sampdoria,Aimo Diana,DC,76
 Sampdoria,Antonio Floro Flores,ATT,77
-Sampdoria,Antonio Floro Flores,AD,77
-Sampdoria,Antonio Floro Flores,AS,77
 Sampdoria,Nenad Sakić,DC,77
 Sampdoria,Francesco Pedone,CC,77
 Sampdoria,Cristiano Doni,CC,75
@@ -533,10 +502,8 @@ Sampdoria,Thomas Job,CC,77
 Sampdoria,Massimo Donati,CC,75
 Sampdoria,Giampaolo Calzi,CC,77
 Sampdoria,Stefano Sacchetti,DC,76
-Sampdoria,Luca Antonini,COC,77
-Sampdoria,Luca Antonini,ASA,77
+Sampdoria,Luca Antonini,DC,77
 Sampdoria,Cristian Zenoni,DC,75
-Sampdoria,Cristian Zenoni,TD,75
 Sampdoria,Francesco Virdis,ATT,77
 Sampdoria,Fabian Natale Valtolina,CC,76
 Siena,Generoso Rossi,POR,78
@@ -546,7 +513,7 @@ Siena,Michele Mignani,DC,73
 Siena,Bruno Cirillo,DC,73
 Siena,Vincenzo Riccio,CC,73
 Siena,Simone Vergassola,CC,74
-Siena,Stefano Argilli,CC,74
+Siena,Stefano Argilli,DC,74
 Siena,Tore André Flo,ATT,72
 Siena,Enrico Chiesa,ATT,74
 Siena,Nikola Lazetić,CC,72
@@ -579,7 +546,6 @@ SS Lazio,Angelo Peruzzi,POR,81
 SS Lazio,Francesco Colonnese,DC,78
 SS Lazio,Demetrio Albertini,CC,76
 SS Lazio,Luciano Zauri,DC,78
-SS Lazio,Luciano Zauri,TS,78
 SS Lazio,Ousmane Dabo,CC,76
 SS Lazio,Claudio López,ATT,77
 SS Lazio,César,CC,76
@@ -591,10 +557,10 @@ SS Lazio,Fabrizio Casazza,POR,74
 SS Lazio,Giuliano Giannichedda,CC,76
 SS Lazio,Guerino Gottardi,DC,78
 SS Lazio,Roberto Muzzi,ATT,77
-SS Lazio,Giuseppe Favalli,TS,76
+SS Lazio,Giuseppe Favalli,DC,76
 SS Lazio,Fabio Liverani,CC,76
 SS Lazio,Simone Inzaghi,ATT,77
-SS Lazio,Massimo Oddo,TD,78
+SS Lazio,Massimo Oddo,DC,78
 SS Lazio,Paolo Negro,DC,76
 SS Lazio,Fernando Couto,DC,77
 SS Lazio,Jaap Stam,DC,76
@@ -606,12 +572,9 @@ Udinese,Morgan De Sanctis,POR,81
 Udinese,Per Krøldrup,DC,77
 Udinese,Thomas Manfredini,DC,76
 Udinese,Asamoah Gyan,ATT,76
-Udinese,Asamoah Gyan,AD,76
 Udinese,Valerio Bertotto,DC,76
-Udinese,Valerio Bertotto,TD,76
 Udinese,Mohammed Gargo,DC,77
-Udinese,Marek Jankulovski,ES,76
-Udinese,Marek Jankulovski,TS,76
+Udinese,Marek Jankulovski,DC,76
 Udinese,Lucas Castromán,CC,75
 Udinese,David Pizarro,CC,75
 Udinese,Carsten Jancker,ATT,75
@@ -633,5 +596,4 @@ Udinese,Fabio Rossitto,CC,77
 Udinese,Sulley Muntari,CC,77
 Udinese,Adriano Bonaiuti,POR,71
 Udinese,Vincenzo Iaquinta,ATT,77
-Udinese,Vincenzo Iaquinta,AS,77
 Udinese,Olivier Renard,POR,72

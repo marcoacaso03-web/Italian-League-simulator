@@ -1,6 +1,5 @@
-Squadra,Giocatore,Ruolo,Valutazione
-Atalanta,Cristiano Doni,COC,79
-Atalanta,Cristiano Doni,ATT,79
+﻿Squadra,Giocatore,Ruolo,Valutazione
+Atalanta,Cristiano Doni,AT,79
 Atalanta,Tiberio Guarente,CC,78
 Atalanta,Robert Acquafresca,ATT,78
 Atalanta,Edgar Osvaldo Barreto,CC,77
@@ -18,8 +17,7 @@ Atalanta,Ferdinando Coppola,POR,71
 Atalanta,Maximiliano Pellegrino,DC,71
 Atalanta,Costinha,CC,70
 Atalanta,José Leonardo Talamonti,DC,70
-Atalanta,Fabio Ceravolo,COC,68
-Atalanta,Fabio Ceravolo,ATT,68
+Atalanta,Fabio Ceravolo,AT,68
 Atalanta,Federico Peluso,DC,68
 Atalanta,Ivan Radovanovic,CDC,64
 Atalanta,Miguel Arturo Layún,ADA,60
@@ -27,8 +25,7 @@ Atalanta,Christian Tiboni,ATT,58
 Atalanta,Francesco Rossi,POR,57
 Atalanta,Nicola Madonna,CC,52
 Bari,Antonio Langella,ES,75
-Bari,Barreto,COC,75
-Bari,Barreto,ATT,75
+Bari,Barreto,AT,75
 Bari,Sergio Almirón,CC,74
 Bari,Matteo Paro,CC,73
 Bari,Edgar Álvarez,ED,73
@@ -40,10 +37,8 @@ Bari,Alessandro Parisi,TS,70
 Bari,Andrea Ranocchia,DC,70
 Bari,Vitaliy Kutuzov,ATT,69
 Bari,Filippo Antonelli Agomeri,ED,69
-Bari,Riccardo Meggiorini,COC,69
-Bari,Riccardo Meggiorini,ATT,69
-Bari,Giuseppe Greco,COC,68
-Bari,Giuseppe Greco,ATT,68
+Bari,Riccardo Meggiorini,AT,69
+Bari,Giuseppe Greco,AT,68
 Bari,Salvatore Masiello,ES,68
 Bari,Emanuel Rivas,RWM,68
 Bari,Daniele De Vezze,CC,68
@@ -52,8 +47,7 @@ Bari,Massimo Donati,CC,67
 Bari,Pedro Kamata,ES,67
 Bari,Riccardo Allegretti,COC,67
 Bari,Ferdinando Sforzini,ATT,67
-Bari,Rey Volpato,COC,66
-Bari,Rey Volpato,ATT,66
+Bari,Rey Volpato,AT,66
 Bari,Iago,COC,66
 Bari,Cristian Stellini,DC,65
 Bari,Vladimir Koman,COC,64
@@ -75,8 +69,7 @@ Bologna,Giacomo Tedesco,CC,73
 Bologna,Luca Vigiani,ED,72
 Bologna,Andrea Raggi,TD,72
 Bologna,Massimo Marazzina,ATT,71
-Bologna,Adaílton,COC,71
-Bologna,Adaílton,ATT,71
+Bologna,Adaílton,AT,71
 Bologna,Salvatore Lanna,TS,71
 Bologna,Davide Bombardini,ES,71
 Bologna,Emiliano Viviano,POR,71
@@ -94,11 +87,9 @@ Bologna,Federico Casarini,CC,51
 Bologna,Riccardo Pasi,CC,50
 Bologna,Roberto Colombo,POR,43
 Cagliari,Federico Marchetti,POR,82
-Cagliari,Andrea Cossu,COC,78
-Cagliari,Andrea Cossu,ATT,78
+Cagliari,Andrea Cossu,AT,78
 Cagliari,Daniele Conti,CC,78
-Cagliari,Jeda,COC,78
-Cagliari,Jeda,ATT,78
+Cagliari,Jeda,AT,78
 Cagliari,Davide Biondini,CC,77
 Cagliari,Nenê,ATT,77
 Cagliari,Alessandro Matri,ATT,76
@@ -132,8 +123,7 @@ Catania,Mariano Gonzalo Andújar,POR,77
 Catania,Matias Agustin Silvestre,DC,76
 Catania,Takayuki Morimoto,ATT,76
 Catania,Nicolas Federico Spolli,DC,75
-Catania,Jorge Martinez,COC,74
-Catania,Jorge Martinez,ATT,74
+Catania,Jorge Martinez,AT,74
 Catania,Gennaro Delvecchio,CC,74
 Catania,Marco Biagianti,CC,74
 Catania,Błażej Augustyn,DC,74
@@ -155,8 +145,7 @@ Catania,Giovanni Marchese,TS,64
 Catania,Federico Moretti,CC,60
 Chievo Verona,Sergio Pellissier,ATT,77
 Chievo Verona,Mario Yepes,DC,76
-Chievo Verona,Giampiero Pinzi,COC,75
-Chievo Verona,Giampiero Pinzi,ATT,75
+Chievo Verona,Giampiero Pinzi,AT,75
 Chievo Verona,Stefano Sorrentino,POR,75
 Chievo Verona,Michele Marcolini,CC,74
 Chievo Verona,Andrea Mantovani,TS,74
@@ -184,16 +173,14 @@ Chievo Verona,Yonese Hanine,CC,50
 Chievo Verona,Michal Adam Miskiewicz,POR,47
 Fiorentina,Sebastien Frey,POR,86
 Fiorentina,Alberto Gilardino,ATT,84
-Fiorentina,Andrei Murgu,COC,84
-Fiorentina,Andrei Murgu,ATT,84
+Fiorentina,Andrei Murgu,AT,84
 Fiorentina,Alessandro Gamberini,DC,82
 Fiorentina,Riccardo Montolivo,CDC,81
 Fiorentina,Cristiano Zanetti,CDC,80
 Fiorentina,Juan Manuel Vargas,COC,79
 Fiorentina,Marco Marchionni,COC,78
 Fiorentina,Mario Alberto Santana,RWM,78
-Fiorentina,Stevan Jovetić,COC,77
-Fiorentina,Stevan Jovetić,ATT,77
+Fiorentina,Stevan Jovetić,AT,77
 Fiorentina,Per Krøldrup,DC,76
 Fiorentina,Marco Donadel,CDC,76
 Fiorentina,Gianluca Comotto,TD,76
@@ -210,8 +197,7 @@ Fiorentina,Papa Waigo N'Diaye,RWM,69
 Fiorentina,Domenico Marchetti,DC,56
 Fiorentina,Alex,DC,54
 Fiorentina,Francesco Di Tacchio,CC,52
-Genoa,Sergio Floccari,COC,81
-Genoa,Sergio Floccari,ATT,81
+Genoa,Sergio Floccari,AT,81
 Genoa,Hernán Jorge Crespo,ATT,80
 Genoa,Rodrigo Palacio,RWM,80
 Genoa,Marco Amelia,POR,79
@@ -238,8 +224,7 @@ Genoa,Nenad Tomovic,DC,65
 Genoa,Silvano Raggio Garibaldi,CC,61
 Genoa,Ivan Fatic,TS,61
 Genoa,Marcel Roman,CC,60
-Genoa,Wilker,COC,56
-Genoa,Wilker,ATT,56
+Genoa,Wilker,AT,56
 Genoa,Eugenio Lamanna,POR,50
 Inter,Júlio César,POR,89
 Inter,Samuel Eto'o,ATT,86
@@ -271,8 +256,7 @@ Inter,Paolo Orlandoni,POR,63
 Inter,Vid Belec,POR,62
 Juventus,Gianluigi Buffon,POR,88
 Juventus,Diego,COC,87
-Juventus,Alessandro Del Piero,COC,86
-Juventus,Alessandro Del Piero,ATT,86
+Juventus,Alessandro Del Piero,AT,86
 Juventus,Giorgio Chiellini,DC,86
 Juventus,Mauro German Camoranesi,ED,84
 Juventus,Amauri,ATT,84
@@ -303,8 +287,7 @@ Juventus,Simone Esposito,RWM,60
 Juventus,Carlo Pinsoglio,POR,59
 Juventus,Mario Kirev,POR,59
 Lazio,Mauro Matías Zárate,AD,84
-Lazio,Goran Pandev,COC,82
-Lazio,Goran Pandev,ATT,82
+Lazio,Goran Pandev,AT,82
 Lazio,Tommaso Rocchi,ATT,81
 Lazio,Cristian Daniel Ledesma,CC,81
 Lazio,Julio Ricardo Cruz,ATT,80
@@ -333,8 +316,7 @@ Lazio,Simone Inzaghi,ATT,69
 Lazio,Christian Manfredini,ES,69
 Lazio,Riccardo Bonetto,ASA,68
 Lazio,Vincent Degré,POR,64
-Livorno,Francesco Tavano,COC,78
-Livorno,Francesco Tavano,ATT,78
+Livorno,Francesco Tavano,AT,78
 Livorno,Cristiano Lucarelli,ATT,76
 Livorno,Nelson Rivas,DC,74
 Livorno,Nico Pulzetti,CC,73
@@ -355,16 +337,13 @@ Livorno,Fabio Galante,DC,68
 Livorno,Romano Perticone,DC,68
 Livorno,Davide Marchini,CC,67
 Livorno,Marcus Plínio Diniz Paixão,DC,67
-Livorno,Gastón Cellerino,COC,65
-Livorno,Gastón Cellerino,ATT,65
+Livorno,Gastón Cellerino,AT,65
 Livorno,Federico Dionisi,ATT,63
 Livorno,Francesco Bardi,POR,61
 Milan,Andrea Pirlo,CC,85
 Milan,Alessandro Nesta,DC,84
-Milan,Ronaldinho,COC,84
-Milan,Ronaldinho,ATT,84
-Milan,Alexandre Pato,COC,84
-Milan,Alexandre Pato,ATT,84
+Milan,Ronaldinho,AT,84
+Milan,Alexandre Pato,AT,84
 Milan,Gennaro Ivan Gattuso,CC,83
 Milan,Christian Abbiati,POR,82
 Milan,Massimo Ambrosini,CC,82
@@ -390,10 +369,8 @@ Milan,Davide Di Gennaro,COC,72
 Milan,Michelangelo Albertazzi,DC,65
 Milan,Gianmarco Zigoni,ATT,65
 Milan,Rodney Strasser,COC,64
-Napoli,Fabio Quagliarella,COC,83
-Napoli,Fabio Quagliarella,ATT,83
-Napoli,Ezequiel Lavezzi,COC,82
-Napoli,Ezequiel Lavezzi,ATT,82
+Napoli,Fabio Quagliarella,AT,83
+Napoli,Ezequiel Lavezzi,AT,82
 Napoli,Marek Hamšik,CC,81
 Napoli,Christian Maggio,ADA,80
 Napoli,Walter Alejandro Gargano,CC,78
@@ -419,12 +396,10 @@ Napoli,Erminio Rullo,ASA,65
 Napoli,Gianluca Grava,TD,59
 Napoli,Luigi Sepe,POR,58
 Napoli,Nicolas Amodio,CC,48
-Palermo,Fabrizio Miccoli,COC,82
-Palermo,Fabrizio Miccoli,ATT,82
+Palermo,Fabrizio Miccoli,AT,82
 Palermo,Manuele Blasi,CDC,78
 Palermo,Rubinho,POR,77
-Palermo,Fábio Simplício,COC,77
-Palermo,Fábio Simplício,ATT,77
+Palermo,Fábio Simplício,AT,77
 Palermo,Edinson Cavani,COC,77
 Palermo,Igor Budan,ATT,76
 Palermo,Fabio Liverani,CDC,76
@@ -477,23 +452,19 @@ Parma,Massimo Paci,TD,63
 Parma,Luca Antonelli,TS,59
 Parma,Alessio Manzoni,CC,58
 Parma,Mohamed Lamine Traore,DC,58
-Parma,Dragan Mihajlovic,COC,48
-Parma,Dragan Mihajlovic,ATT,48
-Roma,Francesco Totti,COC,86
-Roma,Francesco Totti,ATT,86
+Parma,Dragan Mihajlovic,AT,48
+Roma,Francesco Totti,AT,86
 Roma,Daniele De Rossi,CDC,85
 Roma,Philippe Mexès,DC,84
 Roma,Juan,DC,84
 Roma,Mirko Vučinić,ATT,83
 Roma,David Pizarro,CDC,81
-Roma,Julio Baptista,COC,81
-Roma,Julio Baptista,ATT,81
+Roma,Julio Baptista,AT,81
 Roma,Rodrigo Ferrante Taddei,COC,80
 Roma,Simone Perrotta,CC,79
 Roma,Doni,POR,79
 Roma,Bogdan Ionuţ Lobonţ,POR,79
-Roma,Jérémy Ménez,COC,79
-Roma,Jérémy Ménez,ATT,79
+Roma,Jérémy Ménez,AT,79
 Roma,John Arne Riise,TS,78
 Roma,Matteo Brighi,CDC,77
 Roma,Cicinho,ADA,77
@@ -517,13 +488,11 @@ Roma,Leandro Greco,CDC,60
 Roma,Pietro Pipolo,POR,59
 Roma,Adrian Stojan,CC,48
 Roma,Andrea Bertolacci,CC,46
-Sampdoria,Antonio Cassano,COC,86
-Sampdoria,Antonio Cassano,ATT,86
+Sampdoria,Antonio Cassano,AT,86
 Sampdoria,Giampaolo Pazzini,ATT,82
 Sampdoria,Angelo Palombo,CC,80
 Sampdoria,Luca Castellazzi,POR,78
-Sampdoria,Claudio Bellucci,COC,77
-Sampdoria,Claudio Bellucci,ATT,77
+Sampdoria,Claudio Bellucci,AT,77
 Sampdoria,Franco Semioli,ED,77
 Sampdoria,Pietro Accardi,DC,77
 Sampdoria,Fernando Damián Tissone,CC,76
@@ -552,17 +521,14 @@ Siena,Massimo Maccarone,ATT,75
 Siena,Michele Paolucci,ATT,75
 Siena,Simone Vergassola,CC,74
 Siena,Paul Costantin Codrea,CC,74
-Siena,Abdel Kader Ghezzal,COC,73
-Siena,Abdel Kader Ghezzal,ATT,73
+Siena,Abdel Kader Ghezzal,AT,73
 Siena,Gonçalo Brandão,DC,72
 Siena,Cristiano Del Grosso,TS,72
 Siena,Daniele Ficagna,DC,71
 Siena,Reginaldo,AD,70
 Siena,Luca Rossettini,TD,70
-Siena,Lukáš Jarolím,COC,68
-Siena,Lukáš Jarolím,ATT,68
-Siena,Emanuele Calaió,COC,68
-Siena,Emanuele Calaió,ATT,68
+Siena,Lukáš Jarolím,AT,68
+Siena,Emanuele Calaió,AT,68
 Siena,Gaël Genevier,CC,68
 Siena,Agostino Garofalo,TS,68
 Siena,Aleandro Rosi,ADA,68
@@ -571,8 +537,7 @@ Siena,Albin Ekdal,CC,67
 Siena,Claudio Terzi,TD,65
 Siena,Mato Jajalo,CC,65
 Siena,Francesco Parravicini,CDC,63
-Siena,Marcelo Larrondo,COC,63
-Siena,Marcelo Larrondo,ATT,63
+Siena,Marcelo Larrondo,AT,63
 Siena,Gianluca Pegolo,POR,62
 Siena,Felipe,CC,60
 Siena,Mihail Aleksandrov Ivanov,POR,60

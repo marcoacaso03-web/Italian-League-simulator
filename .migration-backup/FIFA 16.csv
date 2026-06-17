@@ -1,4 +1,4 @@
-Squadra,Giocatore,Ruolo,Valutazione
+﻿Squadra,Giocatore,Ruolo,Valutazione
 Atalanta,Alejandro Gómez,COC,78
 Atalanta,Marco Sportiello,POR,78
 Atalanta,Gabriel Paletta,DC,77
@@ -74,8 +74,7 @@ Bologna,Cesare Gianf. Rickler Del Mare,DC,67
 Bologna,Emil Krafth,TD,67
 Bologna,Alex Ferrari,TD,67
 Bologna,Marco Crimi,CC,66
-Bologna,Filippo Falco,COC,64
-Bologna,Filippo Falco,ATT,64
+Bologna,Filippo Falco,AT,64
 Bologna,Marko Krivičič,COC,62
 Bologna,Dejan Stojanovic,POR,60
 Bologna,Ruben Palomeque,TD,59
@@ -87,10 +86,8 @@ Bologna,Matteo Malagoli,POR,49
 Carpi,Jonathan De Guzmán,COC,76
 Carpi,Marco Borriello,ATT,74
 Carpi,Nicolás Spolli,DC,74
-Carpi,Simone Verdi,COC,74
-Carpi,Simone Verdi,ATT,74
-Carpi,Ryder Matos Santos,COC,74
-Carpi,Ryder Matos Santos,ATT,74
+Carpi,Simone Verdi,AT,74
+Carpi,Ryder Matos Santos,AT,74
 Carpi,Cristian Zaccardo,DC,73
 Carpi,Jerry Mbakogu,ATT,73
 Carpi,Andrea Lazzari,CDC,72
@@ -326,8 +323,7 @@ Genoa,Andrea Gulli,ED,56
 Genoa,Paolo Parente,TS,56
 Genoa,Paolo Ghiglione,AD,55
 Genoa,Mario Ierardi,TD,55
-Genoa,Tiberio Velocci,COC,52
-Genoa,Tiberio Velocci,ATT,52
+Genoa,Tiberio Velocci,AT,52
 Genoa,Zaine Pierre,ES,47
 Hellas Verona,Luca Toni,ATT,76
 Hellas Verona,Rafael Márquez,DC,76
@@ -382,8 +378,7 @@ Inter,Stevan Jovetić,COC,80
 Inter,Mauro Icardi,ATT,80
 Inter,Felipe Melo de Carvalho,CDC,79
 Inter,Rodrigo Palacio,ATT,79
-Inter,Eder Citadin Martins,COC,79
-Inter,Eder Citadin Martins,ATT,79
+Inter,Eder Citadin Martins,AT,79
 Inter,Adem Ljajić,AS,79
 Inter,Jeison Murillo,DC,79
 Inter,Martín Montoya Torralbo,TD,78
@@ -391,8 +386,7 @@ Inter,Marcelo Brozović,COC,78
 Inter,Marco Andreolli,DC,77
 Inter,Andrea Ranocchia,DC,77
 Inter,Jonathan Biabiany,AD,77
-Inter,Ricardo Álvarez,COC,77
-Inter,Ricardo Álvarez,ATT,77
+Inter,Ricardo Álvarez,AT,77
 Inter,Geoffrey Kondogbia,CDC,76
 Inter,Alex Nicolao Telles,TS,76
 Inter,Davide Santon,TD,75
@@ -500,8 +494,7 @@ Lazio,Simone Mattia,DC,58
 Lazio,Luca Germoni,TS,56
 Lazio,Kristjan Matošević,POR,53
 Milan,Carlos Bacca,ATT,82
-Milan,Jérémy Ménez,COC,81
-Milan,Jérémy Ménez,ATT,81
+Milan,Jérémy Ménez,AT,81
 Milan,Giacomo Bonaventura,AS,80
 Milan,Alex Rodrigo Dias da Costa,DC,79
 Milan,Diego López Rodríguez,POR,79
@@ -605,8 +598,7 @@ Palermo,Aljaz Struna,TD,67
 Palermo,Andrea Rispoli,ED,64
 Palermo,Manuel Arteaga,ATT,62
 Palermo,Norbert Balogh,ATT,62
-Palermo,Matheus Cassini,COC,61
-Palermo,Matheus Cassini,ATT,61
+Palermo,Matheus Cassini,AT,61
 Palermo,Giuseppe Pezzella,TS,60
 Palermo,Antonino La Gumina,ATT,58
 Palermo,Accursio Bentivegna,ED,57
@@ -621,11 +613,9 @@ Roma,Gervais Yao Kouassi,AS,80
 Roma,Edin Džeko,ATT,80
 Roma,Kevin Strootman,CC,80
 Roma,Mohamed Salah,AD,80
-Roma,Francesco Totti,COC,79
-Roma,Francesco Totti,ATT,79
+Roma,Francesco Totti,AT,79
 Roma,Leandro Castán da Silva,DC,79
-Roma,Diego Perotti,COC,79
-Roma,Diego Perotti,ATT,79
+Roma,Diego Perotti,AT,79
 Roma,Seydou Doumbia,ATT,79
 Roma,Adem Ljajić,AD,79
 Roma,Stephan El Shaarawy,AS,79
@@ -651,8 +641,7 @@ Roma,Daniele Verde,AS,69
 Roma,Emerson Palmieri dos Santos,TS,68
 Roma,Giammario Piscitella,AS,65
 Roma,Ezequiel Ponce,ATT,65
-Roma,Kevin Méndez,COC,65
-Roma,Kevin Méndez,ATT,65
+Roma,Kevin Méndez,AT,65
 Roma,Sadiq Umar,ATT,63
 Roma,Elio Capradossi,DC,60
 Roma,Lorenzo Di Livio,COC,60
@@ -661,8 +650,7 @@ Roma,Francesco Di Mariano,AS,56
 Roma,Silvio Anočič,TS,54
 Roma,Marco Tumminello,ATT,52
 Sampdoria,Emiliano Viviano,POR,80
-Sampdoria,Antonio Cassano,COC,79
-Sampdoria,Antonio Cassano,ATT,79
+Sampdoria,Antonio Cassano,AT,79
 Sampdoria,Eder Citadin Martins,AS,79
 Sampdoria,Fabio Quagliarella,ATT,78
 Sampdoria,Andrea Ranocchia,DC,77
@@ -757,8 +745,7 @@ Torino,Alessandro Gazzi,CDC,74
 Torino,Giuseppe Vives,CC,74
 Torino,Amauri Carvalho De Oliv.,ATT,73
 Torino,Afriyie Acquah,CC,73
-Torino,Josef Alexander Martínez,COC,73
-Torino,Josef Alexander Martínez,ATT,73
+Torino,Josef Alexander Martínez,AT,73
 Torino,Alexander Farnerud,CC,72
 Torino,Joel Obi,CC,72
 Torino,Alen Stevanovic,ED,72
@@ -793,11 +780,9 @@ Udinese,Silvan Widmer,ED,75
 Udinese,Zdravko Kuzmanović,CDC,74
 Udinese,Manuel Iturra,CDC,74
 Udinese,Emmanuel Badu,CC,74
-Udinese,Ryder Matos Santos,COC,74
-Udinese,Ryder Matos Santos,ATT,74
+Udinese,Ryder Matos Santos,AT,74
 Udinese,Edenílson Andrade dos Santos,ED,74
-Udinese,Nicolas López,COC,74
-Udinese,Nicolas López,ATT,74
+Udinese,Nicolas López,AT,74
 Udinese,Guilherme dos Santos Torres,CDC,74
 Udinese,Giampiero Pinzi,CC,73
 Udinese,Felipe Dal Bello,DC,73

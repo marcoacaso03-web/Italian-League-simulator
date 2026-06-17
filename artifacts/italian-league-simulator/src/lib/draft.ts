@@ -1,5 +1,5 @@
 import type { SetupConfig } from '../pages/GamePage';
-import { getClubSeasonPool, getClubSeasonPositions, getSquad, getPrimeSquad, toCategory } from './data';
+import { getClubSeasonPool, getSquad, getPrimeSquad, toCategory } from './data';
 import { FORMATION_SLOTS, type FormationSlot } from './formations';
 
 export interface DraftedPlayer {
@@ -56,22 +56,10 @@ export function seasonYear(season: string): number {
   return parseInt(season.split(separator)[0], 10);
 }
 
-/**
- * Restituisce il pool di club+stagione validi per il config.
- * Se `formationSlots` è fornito, esclude i combo che non coprono
- * almeno un giocatore per ogni slot della formazione.
- */
-function filteredPool(config: SetupConfig, formationSlots?: FormationSlot[]) {
-  const coverageMap = formationSlots ? getClubSeasonPositions() : null;
+function filteredPool(config: SetupConfig) {
   return getClubSeasonPool().filter((e) => {
     const y = seasonYear(e.season);
-    if (y < config.eraFrom || y > config.eraTo) return false;
-    if (!coverageMap || !formationSlots) return true;
-    const covered = coverageMap.get(`${e.club}|||${e.season}`) ?? new Set<string>();
-    // Ogni slot della formazione deve avere almeno una posizione coperta
-    return formationSlots.every((s) =>
-      s.acceptedPositions.some((pos) => covered.has(pos))
-    );
+    return y >= config.eraFrom && y <= config.eraTo;
   });
 }
 
@@ -109,9 +97,8 @@ export function spin(
   config: SetupConfig,
   usedCombos: Set<string>,
   positionFilter: string[],
-  formationSlots?: FormationSlot[],
 ): SpinResult | null {
-  const pool = filteredPool(config, formationSlots).filter((e) => !usedCombos.has(`${e.club}|||${e.season}`));
+  const pool = filteredPool(config).filter((e) => !usedCombos.has(`${e.club}|||${e.season}`));
   if (pool.length === 0) return null;
   const entry = pickRandom(pool);
   const rawSquad = config.ratingsMode === 'prime'

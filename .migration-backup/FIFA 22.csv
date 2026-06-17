@@ -1,4 +1,4 @@
-Squadra,Giocatore,Ruolo,Valutazione
+﻿Squadra,Giocatore,Ruolo,Valutazione
 Atalanta,Duván Nirennold,ATT,84
 Atalanta,Ruslan Malinovskyi,AD,82
 Atalanta,Rafael Tolói,DC,81
@@ -11,8 +11,7 @@ Atalanta,Berat Djimsiti,DC,79
 Atalanta,Davide Tin Angulo,ES,79
 Atalanta,Merih Demiral,DC,77
 Atalanta,Luis Muriel,ATT,82
-Atalanta,Josip Iličić,COC,82
-Atalanta,Josip Iličić,ATT,82
+Atalanta,Josip Iličić,AT,82
 Atalanta,Teun Koopmeiners,CC,79
 Atalanta,Alexey Miranchuk,COC,78
 Atalanta,Jérémie Boga,AS,77
@@ -26,8 +25,7 @@ Atalanta,Francesco Rossi,POR,60
 Atalanta,Moustapha Cissé,ATT,63
 Atalanta,Alassane Sidibe,CC,61
 Atalanta,Giorgio Cittadini,DC,60
-Atalanta,Tommaso De Nipoti,COC,60
-Atalanta,Tommaso De Nipoti,ATT,60
+Atalanta,Tommaso De Nipoti,AT,60
 Atalanta,Robin Gosens,ASA,83
 Atalanta,José Luis Palomino,DC,77
 Atalanta,Matteo Lovato,DC,73
@@ -136,8 +134,7 @@ Empoli,Leonardo Mancuso,ATT,70
 Empoli,Giovanni Crociata,COC,68
 Empoli,Roberto Pirrello,DC,65
 Empoli,Samuele Damiani,CDC,62
-Empoli,Kevin Piscopo,COC,61
-Empoli,Kevin Piscopo,ATT,61
+Empoli,Kevin Piscopo,AT,61
 Empoli,Davide Peña Biafore,TD,54
 Fiorentina,Lucas Torreira,CC,79
 Fiorentina,Giacomo Bonaventura,CC,78
@@ -235,8 +232,7 @@ Hellas Verona,Martin Hongla,CC,72
 Hellas Verona,Boško Manuel Maria,DC,72
 Hellas Verona,Ivor Pandur,POR,72
 Hellas Verona,Matteo Cancellieri,AD,68
-Hellas Verona,Mateusz Praszelik,COC,65
-Hellas Verona,Mateusz Praszelik,ATT,65
+Hellas Verona,Mateusz Praszelik,AT,65
 Hellas Verona,Alessandro Berardi,POR,62
 Hellas Verona,Gianluca Frabotta,ASA,70
 Hellas Verona,Nikola Kalinić,ATT,74
@@ -244,8 +240,7 @@ Hellas Verona,Giangiacomo Magnani,DC,74
 Hellas Verona,Mert F. Díaz,DC,71
 Hellas Verona,Antonino Ragusa,AD,70
 Hellas Verona,Kevin Rüegg,ADA,70
-Hellas Verona,Philip F. Villalba,COC,59
-Hellas Verona,Philip F. Villalba,ATT,59
+Hellas Verona,Philip F. Villalba,AT,59
 Inter,Milan Regalado,DC,86
 Inter,Samir Handanovič,POR,85
 Inter,Nicolò Barella,CC,85
@@ -258,10 +253,8 @@ Inter,Ivan Perišić,ES,82
 Inter,Hakan T. Galletto,CC,82
 Inter,Denzel Dumfries,ED,81
 Inter,Arturo Vidal,CC,81
-Inter,Joaquín Correa,COC,81
-Inter,Joaquín Correa,ATT,81
-Inter,Alexis Sánchez,COC,80
-Inter,Alexis Sánchez,ATT,80
+Inter,Joaquín Correa,AT,81
+Inter,Alexis Sánchez,AT,80
 Inter,Matteo Darmian,ADA,79
 Inter,Danilo D'Ambrosio,DC,78
 Inter,Matias Vecino,CC,78
@@ -337,8 +330,7 @@ Lazio,Denis Vavro,DC,72
 Lazio,Riza Durmisi,TS,71
 Lazio,Cristiano Lombardi,AD,68
 Lazio,Bobby Adekanye,AD,64
-Lazio,André Anderson Pomilio Lima,COC,64
-Lazio,André Anderson Pomilio Lima,ATT,64
+Lazio,André Anderson Pomilio Lima,AT,64
 Milan,Mike Maignan,POR,85
 Milan,Franck Yannick Kessié,CDC,84
 Milan,Theo Hernández,TS,84
@@ -381,8 +373,7 @@ Napoli,Amir Rrahmani,DC,79
 Napoli,David Ospina,POR,78
 Napoli,Mário Rui Silva Duarte,TS,77
 Napoli,Alessandro Zanoli,TD,66
-Napoli,Dries Mertens,COC,84
-Napoli,Dries Mertens,ATT,84
+Napoli,Dries Mertens,AT,84
 Napoli,Giovanni Di Lorenzo,TD,81
 Napoli,Stanislav Lobotka,CDC,79
 Napoli,Alex Meret,POR,78
@@ -518,8 +509,7 @@ Sassuolo,Gian Marco Ferrari,DC,73
 Sassuolo,Vlad Chiricheș,DC,72
 Sassuolo,Mert Müldür,TD,71
 Sassuolo,Rogério Oliveira da Silva,TS,70
-Sassuolo,Gregoire Defrel,COC,76
-Sassuolo,Gregoire Defrel,ATT,76
+Sassuolo,Gregoire Defrel,AT,76
 Sassuolo,Filip F. Bonifazi,COC,75
 Sassuolo,Matheus Henrique de Souza,CC,74
 Sassuolo,Pedro Mba Obiang Avomo,CDC,73
@@ -557,12 +547,10 @@ Spezia,Dimitrios Nikolaou,DC,70
 Spezia,Simone Bastoni,CC,69
 Spezia,Kevin Agudelo,AD,69
 Spezia,Mehdi Bourabia,CDC,68
-Spezia,Eddie Salcedo,COC,68
-Spezia,Eddie Salcedo,ATT,68
+Spezia,Eddie Salcedo,AT,68
 Spezia,Janis Antiste,ATT,68
 Spezia,Salvador Ferrer Canals,TD,67
-Spezia,Ebrima Colley,COC,67
-Spezia,Ebrima Colley,ATT,67
+Spezia,Ebrima Colley,AT,67
 Spezia,Leonardo Athanasiadis,CC,65
 Spezia,Petko Hristov,DC,63
 Torino,Gleison Bremer Silva Nascimento,DC,80
@@ -579,8 +567,7 @@ Torino,Wilfried Singo,ED,73
 Torino,Andrea Belotti,ATT,80
 Torino,Dennis Praet,COC,78
 Torino,Cristian Ansaldi,ASA,76
-Torino,Marko Pjaca,COC,75
-Torino,Marko Pjaca,ATT,75
+Torino,Marko Pjaca,AT,75
 Torino,Karol Linetty,CC,74
 Torino,Ola Aina,ASA,74
 Torino,Etrit Berisha,POR,73
@@ -597,16 +584,14 @@ Torino,Matthew Garbett,COC,63
 Torino,Magnus Warming,AS,62
 Torino,Demba Seck,AD,62
 Torino,Thibo Baeten,ATT,61
-Torino,Simone Verdi,COC,74
-Torino,Simone Verdi,ATT,74
+Torino,Simone Verdi,AT,74
 Torino,Tomás Rincón,CC,72
 Torino,Daniele Baselli,CC,72
 Torino,Krisztofer Horváth,COC,60
 Torino,Ben Lhassine Kone,AS,58
 Torino,Ibrahim Karamoko,CC,55
 Udinese,Marco Silvestri,POR,79
-Udinese,Gerard Deulofeu Lázaro,COC,79
-Udinese,Gerard Deulofeu Lázaro,ATT,79
+Udinese,Gerard Deulofeu Lázaro,AT,79
 Udinese,Roberto Pereyra,CC,78
 Udinese,Nahuel Molina,ED,76
 Udinese,Norberto Gomes Betuncal,ATT,75
@@ -657,8 +642,7 @@ Venezia,Michael Svoboda,CDC,66
 Venezia,Dor Peretz,CDC,66
 Venezia,Tanner Tessmann,CDC,64
 Venezia,Aleš Matějů,TD,72
-Venezia,Arnór Sigurðsson,COC,70
-Venezia,Arnór Sigurðsson,ATT,70
+Venezia,Arnór Sigurðsson,AT,70
 Venezia,Marco Modolo,DC,68
 Venezia,Antonio Vacca,CC,67
 Venezia,Bruno Oliveira Bertinato,POR,58

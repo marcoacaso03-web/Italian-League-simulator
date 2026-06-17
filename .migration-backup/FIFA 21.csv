@@ -1,4 +1,4 @@
-Squadra,Giocatore,Ruolo,Valutazione
+﻿Squadra,Giocatore,Ruolo,Valutazione
 AS Roma,Edin Džeko,ATT,83
 AS Roma,Henrikh Mkhitaryan,AS,82
 AS Roma,Jordan Veretout,CC,81
@@ -10,8 +10,7 @@ AS Roma,Chris Smalling,DC,79
 AS Roma,Lorenzo Pellegrini,AD,79
 AS Roma,Antonio Mirante,POR,78
 AS Roma,Diego Perotti,ES,78
-AS Roma,Pedro Rodríguez Ledesma,COC,78
-AS Roma,Pedro Rodríguez Ledesma,ATT,78
+AS Roma,Pedro Rodríguez Ledesma,AT,78
 AS Roma,Stephan El Shaarawy,AS,78
 AS Roma,Bryan Cristante,CDC,78
 AS Roma,Davide Zappacosta,ADA,78
@@ -85,8 +84,7 @@ Atalanta,Lennart Czyborra,TS,69
 Atalanta,Boris Radunović,POR,68
 Atalanta,Raoul Bellanova,TD,68
 Atalanta,Gaetano Monachello,ATT,67
-Atalanta,Ebrima Colley,COC,67
-Atalanta,Ebrima Colley,ATT,67
+Atalanta,Ebrima Colley,AT,67
 Atalanta,Christian Capone,AS,66
 Atalanta,Marco Carraro,CC,66
 Atalanta,Marco Carnesecchi,POR,66
@@ -99,8 +97,7 @@ Atalanta,Emmanuel Gyabuaa,CC,61
 Atalanta,Davide Ghislandi,ED,61
 Atalanta,Francesco Rossi,POR,60
 Atalanta,Khadim Ndiaye,POR,58
-Benevento,Iago Falqué Silva,COC,75
-Benevento,Iago Falqué Silva,ATT,75
+Benevento,Iago Falqué Silva,AT,75
 Benevento,Kamil Glik,DC,75
 Benevento,Gianluca Caprari,AS,75
 Benevento,Christian Maggio,TD,73
@@ -323,8 +320,7 @@ Crotone,Niccolò Zanellato,CC,61
 Crotone,Giuseppe Cuomo,DC,58
 Crotone,Giuseppe Borello,AD,58
 Crotone,Gabriele Bellodi,DC,58
-Crotone,Zak Ruggiero,COC,58
-Crotone,Zak Ruggiero,ATT,58
+Crotone,Zak Ruggiero,AT,58
 Crotone,Luis Rojas,COC,57
 Crotone,Luka Marković,ATT,55
 Crotone,Alessandro Garattoni,TD,55
@@ -335,8 +331,7 @@ Fiorentina,Franck Ribéry,ATT,81
 Fiorentina,José María Callejón Bueno,ED,81
 Fiorentina,Giacomo Bonaventura,CC,79
 Fiorentina,Federico Chiesa,ED,79
-Fiorentina,Kevin-Prince Boateng,COC,78
-Fiorentina,Kevin-Prince Boateng,ATT,78
+Fiorentina,Kevin-Prince Boateng,AT,78
 Fiorentina,Alexandr Kokorin,ATT,77
 Fiorentina,Germán Pezzella,DC,77
 Fiorentina,Bartłomiej Drągowski,POR,77
@@ -391,8 +386,7 @@ Genoa,Adama Soumaoro,DC,76
 Genoa,Milan Badelj,CDC,76
 Genoa,Andrea Masiello,DC,75
 Genoa,Lasse Schøne,CC,75
-Genoa,Iago Falqué Silva,COC,75
-Genoa,Iago Falqué Silva,ATT,75
+Genoa,Iago Falqué Silva,AT,75
 Genoa,Marko Pjaca,AS,75
 Genoa,Ivan Radovanović,DC,74
 Genoa,Antonio Sanabria,ATT,74
@@ -487,10 +481,8 @@ Hellas Verona,Luigi Vitale,ES,68
 Hellas Verona,Boris Radunović,POR,68
 Hellas Verona,Andrea Favilli,ATT,67
 Hellas Verona,Alan Pereira Empereur,DC,67
-Hellas Verona,Eddie Salcedo,COC,67
-Hellas Verona,Eddie Salcedo,ATT,67
-Hellas Verona,Ebrima Colley,COC,67
-Hellas Verona,Ebrima Colley,ATT,67
+Hellas Verona,Eddie Salcedo,AT,67
+Hellas Verona,Ebrima Colley,AT,67
 Hellas Verona,Karamoko Cissé,ATT,66
 Hellas Verona,Andrea Danzi,CC,66
 Hellas Verona,Simone Calvano,CC,64
@@ -499,8 +491,7 @@ Hellas Verona,Lucas Felippe,CC,63
 Hellas Verona,Alessandro Berardi,POR,62
 Hellas Verona,Luca Checchin,CC,62
 Hellas Verona,Ľubomír Tupta,ATT,62
-Hellas Verona,Philip Yeboah,COC,59
-Hellas Verona,Philip Yeboah,ATT,59
+Hellas Verona,Philip Yeboah,AT,59
 Inter,Samir Handanovič,POR,87
 Inter,Romelu Lukaku,ATT,86
 Inter,Milan Škriniar,DC,86
@@ -514,8 +505,7 @@ Inter,Diego Godín,DC,82
 Inter,Nicolò Barella,CC,82
 Inter,Ivan Perišić,ES,81
 Inter,Arturo Vidal,CC,81
-Inter,Alexis Sánchez,COC,80
-Inter,Alexis Sánchez,ATT,80
+Inter,Alexis Sánchez,AT,80
 Inter,João Mário Naval Costa Eduardo,CC,80
 Inter,Ashley Young,ES,79
 Inter,Aleksandar Kolarov,TS,79
@@ -537,8 +527,7 @@ Inter,Daniele Padelli,POR,73
 Inter,Dalbert Chagas Estevão,ES,71
 Inter,Samuele Longo,ATT,68
 Inter,Andrea Pinamonti,ATT,68
-Inter,Eddie Salcedo,COC,67
-Inter,Eddie Salcedo,ATT,67
+Inter,Eddie Salcedo,AT,67
 Inter,Gabriel Resende Brazão,POR,66
 Inter,Sebastiano Esposito,ATT,66
 Inter,Tommaso Berni,POR,64
@@ -547,8 +536,7 @@ Inter,Lucien Agoume,CC,64
 Inter,Lorenzo Pirola,DC,64
 Juventus,C. Ronaldo dos Santos Aveiro,ATT,92
 Juventus,Wojciech Szczęsny,POR,87
-Juventus,Paulo Dybala,COC,87
-Juventus,Paulo Dybala,ATT,87
+Juventus,Paulo Dybala,AT,87
 Juventus,Giorgio Chiellini,DC,86
 Juventus,Matthijs de Ligt,DC,85
 Juventus,Leonardo Bonucci,DC,84
@@ -599,8 +587,7 @@ Lazio,Manuel Lazzari,ED,81
 Lazio,José Manuel Reina Páez,POR,80
 Lazio,Marco Parolo,CDC,79
 Lazio,Ștefan Radu,DC,78
-Lazio,Felipe Caicedo,COC,78
-Lazio,Felipe Caicedo,ATT,78
+Lazio,Felipe Caicedo,AT,78
 Lazio,Jonathan Rodríguez Menéndez,ES,78
 Lazio,Adam Marušić,DC,78
 Lazio,Luiz Felipe Ramos Marchi,DC,78
@@ -627,8 +614,7 @@ Lazio,Davide Di Gennaro,CC,66
 Lazio,Djavan Anderson,ED,65
 Lazio,Nicolò Armini,DC,65
 Lazio,Bobby Adekanye,AD,64
-Lazio,André Anderson Pomilio Lima,COC,64
-Lazio,André Anderson Pomilio Lima,ATT,64
+Lazio,André Anderson Pomilio Lima,AT,64
 Lazio,Jorge Filipe Soares Silva,DC,64
 Lazio,Szymon Czyż,COC,64
 Lazio,Guido Guerrieri,POR,62
@@ -677,8 +663,7 @@ Milan,Daniel Maldini,COC,59
 Milan,Gabriele Bellodi,DC,58
 Milan,Giacomo Olzer,COC,58
 Napoli,Kalidou Koulibaly,DC,88
-Napoli,Dries Mertens,COC,85
-Napoli,Dries Mertens,ATT,85
+Napoli,Dries Mertens,AT,85
 Napoli,Lorenzo Insigne,AS,85
 Napoli,Kostas Manolas,DC,83
 Napoli,Allan Marques Loureiro,CC,83
@@ -713,8 +698,7 @@ Napoli,Luca Palmiero,CC,71
 Napoli,Sebastiano Luperto,DC,71
 Napoli,Zinédine Machach,COC,68
 Napoli,Nikita Contini,POR,64
-Napoli,Alfredo Bifulco,COC,62
-Napoli,Alfredo Bifulco,ATT,62
+Napoli,Alfredo Bifulco,AT,62
 Napoli,Alessio Zerbin,AS,53
 Parma,Matteo Darmian,TD,78
 Parma,Dejan Kulusevski,AD,78
@@ -722,8 +706,7 @@ Parma,Juraj Kucka,CC,77
 Parma,Luigi Sepe,POR,77
 Parma,Gervais Yao Kouassi,AS,76
 Parma,Andrea Conti,TD,76
-Parma,Gianluca Caprari,COC,75
-Parma,Gianluca Caprari,ATT,75
+Parma,Gianluca Caprari,AT,75
 Parma,Hernani Azevedo Júnior,CC,75
 Parma,Yann Karamoh,ED,75
 Parma,Ionuț Andrei Radu,POR,75
@@ -862,14 +845,12 @@ Torino,Alejandro Berenguer Remiro,COC,79
 Torino,Cristian Ansaldi,ES,78
 Torino,Nicolas Nkoulou,DC,78
 Torino,Ricardo Rodríguez,TS,76
-Torino,Simone Verdi,COC,76
-Torino,Simone Verdi,ATT,76
+Torino,Simone Verdi,AT,76
 Torino,Simone Zaza,ATT,76
 Torino,Soualiho Meïté,CC,76
 Torino,Daniele Baselli,CC,76
 Torino,Lorenzo De Silvestri,ED,75
-Torino,Iago Falqué Silva,COC,75
-Torino,Iago Falqué Silva,ATT,75
+Torino,Iago Falqué Silva,AT,75
 Torino,Tomás Rincón,CC,75
 Torino,Saša Lukić,CC,75
 Torino,Karol Linetty,CC,74
@@ -904,8 +885,7 @@ Torino,Ibrahim Karamoko,CC,56
 Torino,Filip Nagy,DC,53
 Udinese,Juan Musso,POR,81
 Udinese,Rodrigo Javier De Paul,CC,80
-Udinese,Roberto Pereyra,COC,79
-Udinese,Roberto Pereyra,ATT,79
+Udinese,Roberto Pereyra,AT,79
 Udinese,Gerard Deulofeu Lázaro,ES,79
 Udinese,Seko Fofana,CC,76
 Udinese,Stefano Okaka,ATT,75
@@ -946,8 +926,7 @@ Udinese,Mamadou Coulibaly,CC,66
 Udinese,Petar Mićin,AD,65
 Udinese,Samuele Perisan,POR,63
 Udinese,Jayden Braaf,AS,63
-Udinese,Emanuele Rovini,COC,59
-Udinese,Emanuele Rovini,ATT,59
+Udinese,Emanuele Rovini,AT,59
 Udinese,Marco Ballarini,CC,59
 Udinese,Martin Niøten Palumbo,CC,59
 Udinese,Manuel Gasparini,POR,57

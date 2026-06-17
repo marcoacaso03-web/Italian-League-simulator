@@ -1,20 +1,11 @@
-import React, { useMemo, useEffect, useState } from 'react';
-import { Link } from 'wouter';
+import React, { useMemo } from 'react';
 import type { DraftSlot } from '../lib/draft';
 import type { SeasonResult, TeamOverall } from '../lib/simulation';
-import type { SetupConfig } from '../pages/GamePage';
-import {
-  calcScore,
-  checkInTop50,
-  submitScore,
-} from '../lib/leaderboard';
-import { useAuth } from '../context/AuthContext';
 
 interface Props {
-  result:    SeasonResult;
-  overall:   TeamOverall;
-  slots:     DraftSlot[];
-  config:    SetupConfig;
+  result: SeasonResult;
+  overall: TeamOverall;
+  slots: DraftSlot[];
   onRestart: () => void;
 }
 
@@ -60,11 +51,7 @@ function buildTechComment(pos: number, pts: number, overall: TeamOverall, gf: nu
   return lines.join(' ');
 }
 
-type SubmitState = 'idle' | 'checking' | 'show_form' | 'not_top50' | 'submitting' | 'done' | 'error' | 'not_improved';
-
-export default function ResultsScreen({ result, overall, slots, config, onRestart }: Props) {
-  const { user, signIn } = useAuth();
-
+export default function ResultsScreen({ result, overall, slots, onRestart }: Props) {
   const badge     = finishBadge(result.playerFinalPosition);
   const playerRow = result.standings.find((s) => s.isPlayer);
   const gd        = (playerRow?.gf ?? 0) - (playerRow?.ga ?? 0);
@@ -87,60 +74,10 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
     return cats;
   }, [slots]);
 
-  const myScore = useMemo(() => calcScore({
-    points:      result.playerPoints,
-    position:    result.playerFinalPosition,
-    overall:     overall.overall,
-    difficulty:  config.difficulty,
-    showRatings: config.showRatings,
-  }), [result, overall, config]);
-
-  const [submitState, setSubmitState] = useState<SubmitState>('idle');
-
-  // Check top-50 eligibility when user is logged in
-  useEffect(() => {
-    if (!user) { setSubmitState('idle'); return; }
-    setSubmitState('checking');
-    checkInTop50(myScore).then((inTop) => {
-      if (inTop) setSubmitState('show_form');
-      else       setSubmitState('not_top50');
-    }).catch(() => setSubmitState('show_form'));
-  }, [myScore, user]);
-
-  async function handleSubmit() {
-    if (!user) return;
-    setSubmitState('submitting');
-    try {
-      const res = await submitScore({
-        nickname:    user.displayName ?? user.email ?? 'Anonimo',
-        uid:         user.uid,
-        score:       myScore,
-        overall:     overall.overall,
-        points:      result.playerPoints,
-        position:    result.playerFinalPosition,
-        formation:   config.formation,
-        difficulty:  config.difficulty,
-        showRatings: config.showRatings,
-        eraFrom:     config.eraFrom,
-        eraTo:       config.eraTo,
-      });
-      if (res.inserted) {
-        setSubmitState('done');
-      } else if (res.reason === 'existing_score_better') {
-        setSubmitState('not_improved');
-      } else {
-        setSubmitState('not_top50');
-      }
-    } catch {
-      setSubmitState('error');
-    }
-  }
-
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md space-y-5">
 
-        {/* Badge risultato */}
         <div className="text-center space-y-2 py-4">
           <p className="text-5xl">{badge.emoji}</p>
           <h1 className="text-2xl font-black text-white">{badge.label}</h1>
@@ -152,120 +89,6 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
           </p>
         </div>
 
-        {/* ── Classifica Globale (prima sezione) ── */}
-        <section className="glass rounded-2xl p-5 space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">🌍 CLASSIFICA GLOBALE</p>
-            <Link href="/leaderboard">
-              <button className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-semibold">
-                Vedi classifica →
-              </button>
-            </Link>
-          </div>
-
-          {/* Score card */}
-          <div className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
-            <div>
-              <p className="text-xs text-slate-500">Il tuo score</p>
-              <p className="text-2xl font-black text-emerald-400">{myScore.toLocaleString()}</p>
-            </div>
-            <div className="text-right text-xs text-slate-500 space-y-0.5">
-              <p>{config.formation} · {config.difficulty === 'hard' ? '🔴' : config.difficulty === 'normal' ? '🟡' : '🟢'} {config.difficulty}</p>
-              {config.showRatings === 'off' && <p className="text-purple-400">🔒 blind mode</p>}
-              <p>{config.eraFrom}–{config.eraTo}</p>
-            </div>
-          </div>
-
-          {/* Stato: non loggato */}
-          {!user && (
-            <div className="space-y-3">
-              <p className="text-xs text-slate-400 text-center">
-                Accedi con Google per salvare il tuo punteggio in classifica
-              </p>
-              <button
-                onClick={signIn}
-                className="w-full flex items-center justify-center gap-3 rounded-xl bg-white py-3 text-sm font-bold text-gray-800 hover:bg-gray-100 transition-all"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
-                Accedi con Google
-              </button>
-            </div>
-          )}
-
-          {/* Stato: loggato, checking */}
-          {user && submitState === 'checking' && (
-            <p className="text-xs text-slate-500 text-center animate-pulse">Controllo classifica…</p>
-          )}
-
-          {/* Stato: non in top 50 */}
-          {user && submitState === 'not_top50' && (
-            <p className="text-xs text-slate-500 text-center">
-              Il tuo score non è ancora nella top 50. Riprova con una difficoltà più alta!
-            </p>
-          )}
-
-          {/* Stato: punteggio non migliorato */}
-          {user && submitState === 'not_improved' && (
-            <p className="text-xs text-slate-500 text-center">
-              Hai già un punteggio migliore in classifica. Continua così!
-            </p>
-          )}
-
-          {/* Stato: pronto per il submit */}
-          {user && submitState === 'show_form' && (
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3">
-                {user.photoURL && (
-                  <img src={user.photoURL} alt="avatar" className="w-8 h-8 rounded-full flex-shrink-0" />
-                )}
-                <div className="min-w-0">
-                  <p className="text-sm font-bold text-white truncate">{user.displayName ?? user.email}</p>
-                  <p className="text-[10px] text-slate-500">Salverai come questo account</p>
-                </div>
-              </div>
-              <button
-                onClick={handleSubmit}
-                className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-black text-black hover:bg-emerald-400 transition-all"
-              >
-                🏆 Salva in classifica
-              </button>
-            </div>
-          )}
-
-          {/* Stato: salvataggio in corso */}
-          {user && submitState === 'submitting' && (
-            <p className="text-xs text-slate-500 text-center animate-pulse">Salvataggio in corso…</p>
-          )}
-
-          {/* Stato: salvato */}
-          {user && submitState === 'done' && (
-            <div className="space-y-3">
-              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 text-center">
-                <p className="text-emerald-400 font-black text-sm">✅ Score salvato in classifica!</p>
-                <p className="text-[10px] text-slate-500 mt-1">Sarà aggiornato automaticamente se migliori.</p>
-              </div>
-              <Link href="/leaderboard">
-                <button className="w-full rounded-xl border border-emerald-500/30 py-3 text-sm font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all">
-                  🌍 Vedi la classifica globale
-                </button>
-              </Link>
-            </div>
-          )}
-
-          {/* Stato: errore */}
-          {user && submitState === 'error' && (
-            <p className="text-xs text-red-400 text-center">
-              Errore di connessione. Controlla la rete e riprova.
-            </p>
-          )}
-        </section>
-
-        {/* Stagione stats */}
         <section className="glass rounded-2xl p-5">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">LA TUA STAGIONE</p>
           <div className="grid grid-cols-4 gap-3 text-center">
@@ -287,7 +110,6 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
           </div>
         </section>
 
-        {/* Analisi tecnica */}
         <section className="glass rounded-2xl p-5">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">📋 ANALISI TECNICA</p>
           <div className="grid grid-cols-4 gap-2 mb-4">
@@ -306,7 +128,6 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
           <p className="text-sm text-slate-300 leading-relaxed">{techComment}</p>
         </section>
 
-        {/* Rosa */}
         <section className="glass rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-white/5">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">LA TUA ROSA</p>
@@ -343,7 +164,6 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
           })}
         </section>
 
-        {/* Classifica finale */}
         <section className="glass rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-white/5">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">CLASSIFICA FINALE</p>

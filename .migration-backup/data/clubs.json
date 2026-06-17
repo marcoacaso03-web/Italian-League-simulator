@@ -1,0 +1,254 @@
+[
+  {
+    "id": "c001",
+    "name": "AC Milan"
+  },
+  {
+    "id": "c002",
+    "name": "AC Monza"
+  },
+  {
+    "id": "c003",
+    "name": "AS Roma"
+  },
+  {
+    "id": "c004",
+    "name": "Ancona"
+  },
+  {
+    "id": "c005",
+    "name": "Ascoli"
+  },
+  {
+    "id": "c006",
+    "name": "Atalanta"
+  },
+  {
+    "id": "c007",
+    "name": "Atalanta BC"
+  },
+  {
+    "id": "c008",
+    "name": "Bari"
+  },
+  {
+    "id": "c009",
+    "name": "Benevento"
+  },
+  {
+    "id": "c010",
+    "name": "Bologna"
+  },
+  {
+    "id": "c011",
+    "name": "Borgocalcio (Spezia)"
+  },
+  {
+    "id": "c012",
+    "name": "Brescia"
+  },
+  {
+    "id": "c013",
+    "name": "Cagliari"
+  },
+  {
+    "id": "c014",
+    "name": "Carpi"
+  },
+  {
+    "id": "c015",
+    "name": "Catania"
+  },
+  {
+    "id": "c016",
+    "name": "Cesena"
+  },
+  {
+    "id": "c017",
+    "name": "Chievo Verona"
+  },
+  {
+    "id": "c018",
+    "name": "Como"
+  },
+  {
+    "id": "c019",
+    "name": "Cremonese"
+  },
+  {
+    "id": "c020",
+    "name": "Crotone"
+  },
+  {
+    "id": "c021",
+    "name": "Doria"
+  },
+  {
+    "id": "c022",
+    "name": "Empoli"
+  },
+  {
+    "id": "c023",
+    "name": "F. Genova"
+  },
+  {
+    "id": "c024",
+    "name": "Fiorentina"
+  },
+  {
+    "id": "c025",
+    "name": "Firenze"
+  },
+  {
+    "id": "c026",
+    "name": "Frosinone"
+  },
+  {
+    "id": "c027",
+    "name": "Genoa"
+  },
+  {
+    "id": "c028",
+    "name": "Hellas Verona"
+  },
+  {
+    "id": "c029",
+    "name": "Inter"
+  },
+  {
+    "id": "c030",
+    "name": "Inter Milan"
+  },
+  {
+    "id": "c031",
+    "name": "Juventus"
+  },
+  {
+    "id": "c032",
+    "name": "Lazio"
+  },
+  {
+    "id": "c033",
+    "name": "Lecce"
+  },
+  {
+    "id": "c034",
+    "name": "Livorno"
+  },
+  {
+    "id": "c035",
+    "name": "Messina"
+  },
+  {
+    "id": "c036",
+    "name": "Milano FC"
+  },
+  {
+    "id": "c037",
+    "name": "Modena"
+  },
+  {
+    "id": "c038",
+    "name": "Monza"
+  },
+  {
+    "id": "c039",
+    "name": "Napoli"
+  },
+  {
+    "id": "c040",
+    "name": "Novara"
+  },
+  {
+    "id": "c041",
+    "name": "Palermo"
+  },
+  {
+    "id": "c042",
+    "name": "Parma"
+  },
+  {
+    "id": "c043",
+    "name": "Perugia"
+  },
+  {
+    "id": "c044",
+    "name": "Pescara"
+  },
+  {
+    "id": "c045",
+    "name": "Piacenza"
+  },
+  {
+    "id": "c046",
+    "name": "Pisa"
+  },
+  {
+    "id": "c047",
+    "name": "Reggiana"
+  },
+  {
+    "id": "c048",
+    "name": "Reggina"
+  },
+  {
+    "id": "c049",
+    "name": "Reggina Calcio"
+  },
+  {
+    "id": "c050",
+    "name": "Roma"
+  },
+  {
+    "id": "c051",
+    "name": "Roma FC"
+  },
+  {
+    "id": "c052",
+    "name": "SS Lazio"
+  },
+  {
+    "id": "c053",
+    "name": "Salernitana"
+  },
+  {
+    "id": "c054",
+    "name": "Sampdoria"
+  },
+  {
+    "id": "c055",
+    "name": "Sassuolo"
+  },
+  {
+    "id": "c056",
+    "name": "Siena"
+  },
+  {
+    "id": "c057",
+    "name": "Spal"
+  },
+  {
+    "id": "c058",
+    "name": "Spezia"
+  },
+  {
+    "id": "c059",
+    "name": "Torino"
+  },
+  {
+    "id": "c060",
+    "name": "Treviso"
+  },
+  {
+    "id": "c061",
+    "name": "Udinese"
+  },
+  {
+    "id": "c062",
+    "name": "Venezia"
+  },
+  {
+    "id": "c063",
+    "name": "Vicenza"
+  }
+]

@@ -1,1 +1,0 @@
-- [Firebase API key in Vite](firebase-vite-key.md) — Replit secrets non sono disponibili via process.env nel vite.config; usare endpoint /api/config su Express per esporre la config Firebase a runtime.

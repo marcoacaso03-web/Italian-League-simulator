@@ -8,28 +8,26 @@ export interface SerieATeam {
   rating: number;
 }
 
-// Squadre Serie A 2025-26 — ordine e rating basati sulla classifica finale reale
-// (Sassuolo 11° escluso; Pisa e Cremonese aggiunte come neo-promosse)
 export const SERIE_A_2526: SerieATeam[] = [
-  { id: 'int', name: 'Inter',        abbr: 'INT', color: '#1d4ed8', rating: 89 }, // 1°
-  { id: 'nap', name: 'Napoli',       abbr: 'NAP', color: '#2563eb', rating: 87 }, // 2°
-  { id: 'rom', name: 'Roma',         abbr: 'ROM', color: '#b91c1c', rating: 84 }, // 3°
-  { id: 'com', name: 'Como',         abbr: 'COM', color: '#155e75', rating: 82 }, // 4°
-  { id: 'mil', name: 'Milan',        abbr: 'MIL', color: '#dc2626', rating: 81 }, // 5°
-  { id: 'juv', name: 'Juventus',     abbr: 'JUV', color: '#e5e7eb', rating: 80 }, // 6°
-  { id: 'ata', name: 'Atalanta',     abbr: 'ATA', color: '#1e3a8a', rating: 79 }, // 7°
-  { id: 'bol', name: 'Bologna',      abbr: 'BOL', color: '#92400e', rating: 77 }, // 8°
-  { id: 'laz', name: 'Lazio',        abbr: 'LAZ', color: '#38bdf8', rating: 75 }, // 9°
-  { id: 'udi', name: 'Udinese',      abbr: 'UDI', color: '#1f2937', rating: 73 }, // 10°
-  { id: 'tor', name: 'Torino',       abbr: 'TOR', color: '#78350f', rating: 71 }, // 12° (Sassuolo 11° escluso)
-  { id: 'par', name: 'Parma',        abbr: 'PAR', color: '#fbbf24', rating: 69 }, // 13°
-  { id: 'cag', name: 'Cagliari',     abbr: 'CAG', color: '#b45309', rating: 68 }, // 14°
-  { id: 'fio', name: 'Fiorentina',   abbr: 'FIO', color: '#7c3aed', rating: 67 }, // 15°
-  { id: 'gen', name: 'Genoa',        abbr: 'GEN', color: '#991b1b', rating: 66 }, // 16°
-  { id: 'lec', name: 'Lecce',        abbr: 'LEC', color: '#f59e0b', rating: 65 }, // 17°
-  { id: 'cre', name: 'Cremonese',    abbr: 'CRE', color: '#dc2626', rating: 64 }, // 18°
-  { id: 'ver', name: 'Hellas Verona',abbr: 'VER', color: '#065f46', rating: 63 }, // 19°
-  { id: 'pis', name: 'Pisa',         abbr: 'PIS', color: '#1e3a5f', rating: 62 }, // 20°
+  { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89 },
+  { id: 'nap', name: 'Napoli',      abbr: 'NAP', color: '#2563eb', rating: 87 },
+  { id: 'mil', name: 'Milan',       abbr: 'MIL', color: '#dc2626', rating: 85 },
+  { id: 'juv', name: 'Juventus',    abbr: 'JUV', color: '#e5e7eb', rating: 85 },
+  { id: 'ata', name: 'Atalanta',    abbr: 'ATA', color: '#1e3a8a', rating: 84 },
+  { id: 'laz', name: 'Lazio',       abbr: 'LAZ', color: '#38bdf8', rating: 81 },
+  { id: 'rom', name: 'Roma',        abbr: 'ROM', color: '#b91c1c', rating: 80 },
+  { id: 'fio', name: 'Fiorentina',  abbr: 'FIO', color: '#7c3aed', rating: 79 },
+  { id: 'bol', name: 'Bologna',     abbr: 'BOL', color: '#92400e', rating: 77 },
+  { id: 'tor', name: 'Torino',      abbr: 'TOR', color: '#78350f', rating: 75 },
+  { id: 'udi', name: 'Udinese',     abbr: 'UDI', color: '#1f2937', rating: 72 },
+  { id: 'cag', name: 'Cagliari',    abbr: 'CAG', color: '#b45309', rating: 71 },
+  { id: 'par', name: 'Parma',       abbr: 'PAR', color: '#fbbf24', rating: 70 },
+  { id: 'com', name: 'Como',        abbr: 'COM', color: '#155e75', rating: 70 },
+  { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69 },
+  { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 68 },
+  { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67 },
+  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66 },
+  { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65 },
 ];
 
 export interface TeamOverall {
