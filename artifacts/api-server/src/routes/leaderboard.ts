@@ -49,19 +49,24 @@ router.post("/leaderboard", async (req, res) => {
       }
     }
 
-    const existing = await pool.query(
-      "SELECT id, score FROM leaderboard WHERE nickname = $1",
-      [nickname]
-    );
-    if (existing.rows.length > 0) {
-      if (score > (existing.rows[0].score as number)) {
+    const uid = (req.body as Record<string, unknown>).uid as string | undefined;
+
+    // Match by uid (Firebase) if provided, else by nickname (legacy)
+    const existingQuery = uid
+      ? await pool.query("SELECT id, score FROM leaderboard WHERE uid = $1", [uid])
+      : await pool.query("SELECT id, score FROM leaderboard WHERE nickname = $1", [nickname]);
+
+    if (existingQuery.rows.length > 0) {
+      if (score > (existingQuery.rows[0].score as number)) {
+        const whereCol = uid ? "uid" : "nickname";
+        const whereVal = uid ?? nickname;
         await pool.query(
           `UPDATE leaderboard
            SET score=$1, overall=$2, points=$3, position=$4,
                formation=$5, difficulty=$6, show_ratings=$7,
-               era_from=$8, era_to=$9, created_at=NOW()
-           WHERE nickname=$10`,
-          [score, overall, points, position, formation, difficulty, show_ratings, era_from, era_to, nickname]
+               era_from=$8, era_to=$9, nickname=$10, created_at=NOW()
+           WHERE ${whereCol}=$11`,
+          [score, overall, points, position, formation, difficulty, show_ratings, era_from, era_to, nickname, whereVal]
         );
         res.json({ inserted: true, updated: true }); return;
       }
@@ -76,9 +81,9 @@ router.post("/leaderboard", async (req, res) => {
 
     await pool.query(
       `INSERT INTO leaderboard
-         (nickname, score, overall, points, position, formation, difficulty, show_ratings, era_from, era_to)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
-      [nickname, score, overall, points, position, formation, difficulty, show_ratings, era_from, era_to]
+         (nickname, uid, score, overall, points, position, formation, difficulty, show_ratings, era_from, era_to)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
+      [nickname, uid ?? null, score, overall, points, position, formation, difficulty, show_ratings, era_from, era_to]
     );
     res.json({ inserted: true, updated: false });
   } catch {

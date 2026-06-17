@@ -59,6 +59,7 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
 
 export async function submitScore(params: {
   nickname: string;
+  uid?: string;
   score: number;
   overall: number;
   points: number;
@@ -73,16 +74,17 @@ export async function submitScore(params: {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      nickname:    params.nickname,
-      score:       params.score,
-      overall:     params.overall,
-      points:      params.points,
-      position:    params.position,
-      formation:   params.formation,
-      difficulty:  params.difficulty,
+      nickname:     params.nickname,
+      uid:          params.uid ?? null,
+      score:        params.score,
+      overall:      params.overall,
+      points:       params.points,
+      position:     params.position,
+      formation:    params.formation,
+      difficulty:   params.difficulty,
       show_ratings: params.showRatings,
-      era_from:    params.eraFrom,
-      era_to:      params.eraTo,
+      era_from:     params.eraFrom,
+      era_to:       params.eraTo,
     }),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
