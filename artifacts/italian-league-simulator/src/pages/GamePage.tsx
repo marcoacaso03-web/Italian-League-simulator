@@ -225,7 +225,7 @@ export default function GamePage() {
   }, []);
 
   if (phase === 'setup' || config === null) return <SetupScreen onStart={handleStart} />;
-  if (phase === 'draft')   return <DraftScreen   config={config} onComplete={handleDraftComplete} />;
+  if (phase === 'draft')   return <DraftScreen   config={config} onBack={handleRestart} onComplete={handleDraftComplete} />;
   if (phase === 'preview') return <SquadPreviewScreen slots={draftSlots} onSimulate={handleSimStart} onRestart={handleRestart} />;
   if (phase === 'sim')     return <SimScreen slots={draftSlots} onComplete={handleSimComplete} />;
   if (phase === 'results' && results && teamOverall) return <ResultsScreen result={results} overall={teamOverall} slots={draftSlots} onRestart={handleRestart} />;

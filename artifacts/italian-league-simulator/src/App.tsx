@@ -13,6 +13,18 @@ function LoadingScreen() {
   );
 }
 
+function ErrorScreen({ onRetry }: { onRetry: () => void }) {
+  return (
+    <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center gap-4">
+      <span className="text-5xl">⚠️</span>
+      <p className="text-red-400 text-sm font-semibold uppercase tracking-widest">Errore nel caricamento dati</p>
+      <button onClick={onRetry} className="mt-2 px-6 py-3 rounded-xl bg-emerald-500 text-black font-bold hover:bg-emerald-400 transition-colors">
+        Riprova
+      </button>
+    </div>
+  );
+}
+
 function Router() {
   return (
     <Switch>
@@ -29,11 +41,18 @@ function Router() {
 
 function App() {
   const [dataReady, setDataReady] = useState(false);
+  const [error,     setError]     = useState(false);
 
-  useEffect(() => {
-    initData().then(() => setDataReady(true));
-  }, []);
+  function load() {
+    setError(false);
+    initData()
+      .then(() => setDataReady(true))
+      .catch(() => setError(true));
+  }
 
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (error)     return <ErrorScreen onRetry={load} />;
   if (!dataReady) return <LoadingScreen />;
 
   return (

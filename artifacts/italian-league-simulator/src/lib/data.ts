@@ -62,21 +62,16 @@ export async function initData(): Promise<void> {
   if (_players !== null) return;
   if (_initPromise) return _initPromise;
   _initPromise = (async () => {
-    const [playersRes, clubsRes] = await Promise.all([
-      fetch('/data/players.json'),
-      fetch('/data/clubs.json'),
-    ]);
-    _players = await playersRes.json() as Player[];
-    _clubs   = await clubsRes.json()   as Club[];
-    _clubsBySeason = {};
-    _players.forEach((p) => {
-      p.seasons.forEach((s) => {
-        if (!_clubsBySeason[s.season]) _clubsBySeason[s.season] = [];
-        if (!_clubsBySeason[s.season].includes(s.club)) {
-          _clubsBySeason[s.season].push(s.club);
-        }
-      });
-    });
+    const res = await fetch('/api/data');
+    if (!res.ok) throw new Error(`initData: HTTP ${res.status}`);
+    const json = await res.json() as {
+      players: Player[];
+      clubs: Club[];
+      clubsBySeason: Record<string, string[]>;
+    };
+    _players       = json.players;
+    _clubs         = json.clubs;
+    _clubsBySeason = json.clubsBySeason ?? {};
   })();
   return _initPromise;
 }
