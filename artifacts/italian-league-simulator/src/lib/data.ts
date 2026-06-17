@@ -58,20 +58,34 @@ let _initPromise: Promise<void> | null = null;
 /** Map<"club|||season", Set<position>> — built once, reused by filteredPool. */
 let _clubSeasonPositions: Map<string, Set<string>> | null = null;
 
+/**
+ * Tenta prima il file statico generato durante la build (/data/players.json).
+ * Se fallisce (ambiente Replit con API server), prova /api/data come fallback.
+ */
 export async function initData(): Promise<void> {
   if (_players !== null) return;
   if (_initPromise) return _initPromise;
   _initPromise = (async () => {
-    const res = await fetch('/api/data');
-    if (!res.ok) throw new Error(`initData: HTTP ${res.status}`);
-    const json = await res.json() as {
-      players: Player[];
-      clubs: Club[];
-      clubsBySeason: Record<string, string[]>;
-    };
-    _players       = json.players;
-    _clubs         = json.clubs;
-    _clubsBySeason = json.clubsBySeason ?? {};
+    let json: { players: Player[]; clubs: Club[]; clubsBySeason: Record<string, string[]> } | null = null;
+
+    // Prova 1: file statico pre-generato (Vercel)
+    try {
+      const res = await fetch('/data/players.json');
+      if (res.ok) {
+        json = await res.json();
+      }
+    } catch { /* fallback */ }
+
+    // Prova 2: API Express (Replit)
+    if (!json) {
+      const res = await fetch('/api/data');
+      if (!res.ok) throw new Error(`initData: HTTP ${res.status}`);
+      json = await res.json();
+    }
+
+    _players       = json!.players;
+    _clubs         = json!.clubs;
+    _clubsBySeason = json!.clubsBySeason ?? {};
   })();
   return _initPromise;
 }
@@ -79,7 +93,6 @@ export async function initData(): Promise<void> {
 /**
  * Restituisce una Map<"club|||season", Set<string>> con tutte le posizioni
  * coperte da almeno un giocatore per quella combinazione club+stagione.
- * Il risultato è calcolato una volta sola e poi riutilizzato (lazy singleton).
  */
 export function getClubSeasonPositions(): Map<string, Set<string>> {
   if (_clubSeasonPositions) return _clubSeasonPositions;
