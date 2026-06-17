@@ -152,6 +152,105 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
           </p>
         </div>
 
+        {/* ── Leaderboard section (prima cosa dopo il badge) ── */}
+        <section className="glass rounded-2xl p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">🌍 CLASSIFICA GLOBALE</p>
+            <Link href="/leaderboard">
+              <button className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-semibold">
+                Vedi classifica →
+              </button>
+            </Link>
+          </div>
+
+          <div className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
+            <div>
+              <p className="text-xs text-slate-500">Il tuo score</p>
+              <p className="text-2xl font-black text-emerald-400">{myScore.toLocaleString()}</p>
+            </div>
+            <div className="text-right text-xs text-slate-500 space-y-0.5">
+              <p>{config.formation} · {config.difficulty === 'hard' ? '🔴' : config.difficulty === 'normal' ? '🟡' : '🟢'} {config.difficulty}</p>
+              {config.showRatings === 'off' && <p className="text-purple-400">🔒 blind mode</p>}
+              <p>{config.eraFrom}–{config.eraTo}</p>
+            </div>
+          </div>
+
+          {submitState === 'checking' && (
+            <p className="text-xs text-slate-500 text-center animate-pulse">Controllo classifica…</p>
+          )}
+
+          {submitState === 'not_top50' && (
+            <p className="text-xs text-slate-500 text-center">
+              Il tuo score non è ancora nella top 50. Riprova con una difficoltà più alta!
+            </p>
+          )}
+
+          {submitState === 'not_improved' && (
+            <p className="text-xs text-slate-500 text-center">
+              Hai già un punteggio migliore in classifica. Continua così!
+            </p>
+          )}
+
+          {submitState === 'show_form' && (
+            <form onSubmit={handleSubmit} className="space-y-3">
+              {existingCode ? (
+                <div className="bg-emerald-500/10 rounded-xl px-4 py-3">
+                  <p className="text-xs text-slate-400">Il tuo codice salvato</p>
+                  <p className="text-base font-black text-emerald-300">{existingCode}</p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <label className="text-xs text-slate-400 block">Scegli un nickname (solo lettere e numeri)</label>
+                  <input
+                    type="text"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12))}
+                    placeholder="ES. ROSSI"
+                    maxLength={12}
+                    required={!existingCode}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:bg-white/8 transition-all"
+                  />
+                  <p className="text-[10px] text-slate-600">
+                    Il sistema assegnerà un codice univoco tipo <span className="text-slate-400">ROSSI#4821</span>
+                  </p>
+                </div>
+              )}
+              <button
+                type="submit"
+                disabled={!existingCode && nickname.length < 2}
+                className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-black text-black hover:bg-emerald-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                🏆 Salva in classifica
+              </button>
+            </form>
+          )}
+
+          {submitState === 'submitting' && (
+            <p className="text-xs text-slate-500 text-center animate-pulse">Salvataggio in corso…</p>
+          )}
+
+          {submitState === 'done' && (
+            <div className="space-y-3">
+              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 text-center">
+                <p className="text-emerald-400 font-black text-sm">✅ Score salvato!</p>
+                {finalCode && <p className="text-xs text-slate-400 mt-1">Il tuo codice: <span className="text-emerald-300 font-bold">{finalCode}</span></p>}
+                <p className="text-[10px] text-slate-500 mt-1">Salvato su questo dispositivo. Potrai aggiornarlo se migliori.</p>
+              </div>
+              <Link href="/leaderboard">
+                <button className="w-full rounded-xl border border-emerald-500/30 py-3 text-sm font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all">
+                  🌍 Vedi la classifica globale
+                </button>
+              </Link>
+            </div>
+          )}
+
+          {submitState === 'error' && (
+            <p className="text-xs text-red-400 text-center">
+              Errore di connessione. Controlla la rete e riprova.
+            </p>
+          )}
+        </section>
+
         <section className="glass rounded-2xl p-5">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">LA TUA STAGIONE</p>
           <div className="grid grid-cols-4 gap-3 text-center">
@@ -259,105 +358,6 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
               </div>
             );
           })}
-        </section>
-
-        {/* ── Leaderboard section ── */}
-        <section className="glass rounded-2xl p-5 space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">🌍 CLASSIFICA GLOBALE</p>
-            <Link href="/leaderboard">
-              <button className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-semibold">
-                Vedi classifica →
-              </button>
-            </Link>
-          </div>
-
-          <div className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
-            <div>
-              <p className="text-xs text-slate-500">Il tuo score</p>
-              <p className="text-2xl font-black text-emerald-400">{myScore.toLocaleString()}</p>
-            </div>
-            <div className="text-right text-xs text-slate-500 space-y-0.5">
-              <p>{config.formation} · {config.difficulty === 'hard' ? '🔴' : config.difficulty === 'normal' ? '🟡' : '🟢'} {config.difficulty}</p>
-              {config.showRatings === 'off' && <p className="text-purple-400">🔒 blind mode</p>}
-              <p>{config.eraFrom}–{config.eraTo}</p>
-            </div>
-          </div>
-
-          {submitState === 'checking' && (
-            <p className="text-xs text-slate-500 text-center animate-pulse">Controllo classifica…</p>
-          )}
-
-          {submitState === 'not_top50' && (
-            <p className="text-xs text-slate-500 text-center">
-              Il tuo score non è ancora nella top 50. Riprova con una difficoltà più alta!
-            </p>
-          )}
-
-          {submitState === 'not_improved' && (
-            <p className="text-xs text-slate-500 text-center">
-              Hai già un punteggio migliore in classifica. Continua così!
-            </p>
-          )}
-
-          {submitState === 'show_form' && (
-            <form onSubmit={handleSubmit} className="space-y-3">
-              {existingCode ? (
-                <div className="bg-emerald-500/10 rounded-xl px-4 py-3">
-                  <p className="text-xs text-slate-400">Il tuo codice salvato</p>
-                  <p className="text-base font-black text-emerald-300">{existingCode}</p>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <label className="text-xs text-slate-400 block">Scegli un nickname (solo lettere e numeri)</label>
-                  <input
-                    type="text"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12))}
-                    placeholder="ES. ROSSI"
-                    maxLength={12}
-                    required={!existingCode}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:bg-white/8 transition-all"
-                  />
-                  <p className="text-[10px] text-slate-600">
-                    Il sistema assegnerà un codice univoco tipo <span className="text-slate-400">ROSSI#4821</span>
-                  </p>
-                </div>
-              )}
-              <button
-                type="submit"
-                disabled={!existingCode && nickname.length < 2}
-                className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-black text-black hover:bg-emerald-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                🏆 Salva in classifica
-              </button>
-            </form>
-          )}
-
-          {submitState === 'submitting' && (
-            <p className="text-xs text-slate-500 text-center animate-pulse">Salvataggio in corso…</p>
-          )}
-
-          {submitState === 'done' && (
-            <div className="space-y-3">
-              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 text-center">
-                <p className="text-emerald-400 font-black text-sm">✅ Score salvato!</p>
-                {finalCode && <p className="text-xs text-slate-400 mt-1">Il tuo codice: <span className="text-emerald-300 font-bold">{finalCode}</span></p>}
-                <p className="text-[10px] text-slate-500 mt-1">Salvato su questo dispositivo. Potrai aggiornarlo se migliori.</p>
-              </div>
-              <Link href="/leaderboard">
-                <button className="w-full rounded-xl border border-emerald-500/30 py-3 text-sm font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all">
-                  🌍 Vedi la classifica globale
-                </button>
-              </Link>
-            </div>
-          )}
-
-          {submitState === 'error' && (
-            <p className="text-xs text-red-400 text-center">
-              Errore di connessione. Controlla la rete e riprova.
-            </p>
-          )}
         </section>
 
         <button onClick={onRestart} className="w-full rounded-2xl bg-emerald-500 py-5 text-lg font-black text-black transition-all hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98]">

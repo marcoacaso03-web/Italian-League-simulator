@@ -54,49 +54,39 @@ export default function LeaderboardPage() {
 
         {!loading && entries.length > 0 && (
           <section className="glass rounded-2xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-white/5">
-              <div className="grid grid-cols-[2rem_1fr_4rem_3rem_3rem_4rem] gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                <span>#</span>
-                <span>Nickname</span>
-                <span className="text-right">Score</span>
-                <span className="text-right">OVR</span>
-                <span className="text-right">Pts</span>
-                <span className="text-right">Info</span>
-              </div>
-            </div>
             {entries.map((e, i) => {
-              const rank  = i + 1;
-              const isMe  = myCode !== null && e.nickname === myCode;
+              const rank = i + 1;
+              const isMe = myCode !== null && e.nickname === myCode;
               return (
                 <div key={e.id}
                   className={[
-                    'grid grid-cols-[2rem_1fr_4rem_3rem_3rem_4rem] gap-2 items-center px-4 py-2.5 border-b border-white/[0.04] last:border-b-0',
+                    'flex items-center gap-3 px-4 py-3 border-b border-white/[0.04] last:border-b-0',
                     isMe ? 'bg-emerald-500/10 border-l-2 border-l-emerald-500' : '',
                   ].join(' ')}>
 
-                  <span className={`text-sm font-bold text-center ${rank <= 3 ? 'text-lg leading-none' : 'text-slate-500'}`}>
+                  <span className={`w-7 flex-shrink-0 text-center font-bold ${rank <= 3 ? 'text-xl leading-none' : 'text-xs text-slate-500'}`}>
                     {medalEmoji(rank)}
                   </span>
 
-                  <div className="min-w-0">
-                    <p className={`text-sm font-bold truncate ${isMe ? 'text-emerald-300' : 'text-white'}`}>
+                  <div className="flex-1">
+                    <p className={`text-sm font-bold break-all ${isMe ? 'text-emerald-300' : 'text-white'}`}>
                       {e.nickname}
                     </p>
-                    <p className="text-[10px] text-slate-500 truncate">
+                    <p className="text-[10px] text-slate-500 mt-0.5">
                       {e.formation} · {difficultyLabel(e.difficulty)}
-                      {e.show_ratings === 'off' ? ' · blind' : ''}
+                      {e.show_ratings === 'off' ? ' · 🔒 blind' : ''} · {e.era_from}–{e.era_to}
                     </p>
                   </div>
 
-                  <p className="text-sm font-black text-emerald-400 text-right">{e.score.toLocaleString()}</p>
-                  <p className="text-sm font-bold text-white text-right">{e.overall}</p>
-                  <p className="text-sm text-slate-300 text-right">{e.points}</p>
-                  <p className="text-[10px] text-slate-500 text-right leading-tight">
-                    {e.era_from}–{e.era_to}<br />
-                    <span className={`font-semibold ${e.position <= 4 ? 'text-emerald-400' : e.position >= 18 ? 'text-red-400' : 'text-slate-400'}`}>
-                      {e.position}°
-                    </span>
-                  </p>
+                  <div className="flex-shrink-0 text-right space-y-0.5">
+                    <p className="text-sm font-black text-emerald-400">{e.score.toLocaleString()}</p>
+                    <p className="text-[10px] text-slate-500">
+                      {e.points}pts · OVR {e.overall} ·{' '}
+                      <span className={e.position <= 4 ? 'text-emerald-400' : e.position >= 18 ? 'text-red-400' : 'text-slate-400'}>
+                        {e.position}°
+                      </span>
+                    </p>
+                  </div>
                 </div>
               );
             })}
