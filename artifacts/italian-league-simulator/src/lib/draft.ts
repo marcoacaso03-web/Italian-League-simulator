@@ -67,9 +67,23 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/** Fisher-Yates shuffle — restituisce un nuovo array con elementi in ordine casuale. */
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/** Restituisce true quando il rating dei giocatori deve essere nascosto. */
+export function isBlindMode(config: Pick<SetupConfig, 'showRatings' | 'difficulty'>): boolean {
+  return config.difficulty === 'hard' || config.showRatings === 'off';
+}
+
 export function findCompatibleSlots(slots: DraftSlot[], player: DraftedPlayer): DraftSlot[] {
   const empty = slots.filter((s) => s.player === null);
-  // Usa tutte le posizioni del giocatore (primaria + alternative)
   const positions = player.all_positions?.length ? player.all_positions : parsePositions(player.position);
   return empty.filter((s) =>
     positions.some((pos) => s.formationSlot.acceptedPositions.includes(pos))
@@ -116,7 +130,9 @@ export function spin(
       club: entry.club,
       season: entry.season,
     }));
-  return { club: entry.club, season: entry.season, players: draftedPlayers };
+  // In blind mode l'ordine per overall svelerebbe il rating migliore: randomizza.
+  const players = isBlindMode(config) ? shuffle(draftedPlayers) : draftedPlayers;
+  return { club: entry.club, season: entry.season, players };
 }
 
 export function displayRating(
