@@ -116,6 +116,13 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
     setEraFrom(from); setEraTo(MAX_YEAR);
   }
 
+  function handleDifficultyChange(newDifficulty: Difficulty) {
+    setDifficulty(newDifficulty);
+    if (newDifficulty === 'hard') {
+      setShowRatings('off');
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md flex items-center justify-between mb-8">
@@ -131,15 +138,15 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
               { id: 'normal' as Difficulty, label: 'Normale',   sub: '1 reroll disponibile',        color: 'amber' },
               { id: 'hard'   as Difficulty, label: 'Difficile', sub: 'No reroll · rating nascosti', color: 'red' },
             ] as const).map((d) => (
-              <ToggleCard key={d.id} active={difficulty === d.id} onClick={() => setDifficulty(d.id)} title={d.label} sub={d.sub} accentColor={d.color} />
+              <ToggleCard key={d.id} active={difficulty === d.id} onClick={() => handleDifficultyChange(d.id)} title={d.label} sub={d.sub} accentColor={d.color} />
             ))}
           </div>
         </section>
         <section className="glass rounded-2xl p-5">
           <SectionLabel label="MOSTRA RATING" />
           <div className="grid grid-cols-2 gap-3">
-            <ToggleCard active={showRatings === 'on'}  onClick={() => setShowRatings('on')}  title="On"  sub="Overall giocatori visibili"          accentColor="violet" />
-            <ToggleCard active={showRatings === 'off'} onClick={() => setShowRatings('off')} title="Off" sub="Blind mode — fidati del tuo istinto" accentColor="violet" />
+            <ToggleCard active={showRatings === 'on'}  onClick={() => difficulty !== 'hard' && setShowRatings('on')}  title="On"  sub="Overall giocatori visibili"          accentColor="violet" />
+            <ToggleCard active={showRatings === 'off'} onClick={() => difficulty !== 'hard' && setShowRatings('off')} title="Off" sub={difficulty === 'hard' ? 'Blind mode — forzato in modalità difficile' : 'Blind mode — fidati del tuo istinto'} accentColor="violet" />
           </div>
         </section>
         <section className="glass rounded-2xl p-5">
