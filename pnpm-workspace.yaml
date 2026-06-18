@@ -159,3 +159,6 @@ overrides:
   "@esbuild-kit/esm-loader": "npm:tsx@^4.21.0"
   esbuild: "0.28.1"
   qs: ">=6.15.2"
+
+allowBuilds:
+  esbuild: set this to true or false

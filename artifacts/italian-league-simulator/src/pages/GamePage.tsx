@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { Link } from 'wouter';
+import { useTranslation } from 'react-i18next';
 import FormationSelector from '../components/FormationSelector';
+import LanguageSelector from '../components/LanguageSelector';
 import DraftScreen from '../game/DraftScreen';
 import SquadPreviewScreen from '../game/SquadPreviewScreen';
 import SimScreen from '../game/SimScreen';
@@ -68,6 +70,7 @@ function SectionLabel({ label }: { label: string }) {
 function EraSlider({ fromYear, toYear, onFromChange, onToChange }: {
   fromYear: number; toYear: number; onFromChange: (_v: number) => void; onToChange: (_v: number) => void;
 }) {
+  const { t } = useTranslation();
   const fromPct    = ((fromYear - MIN_YEAR) / (TOTAL_SEASONS - 1)) * 100;
   const toPct      = ((toYear   - MIN_YEAR) / (TOTAL_SEASONS - 1)) * 100;
   const seasonCount = toYear - fromYear + 1;
@@ -90,17 +93,18 @@ function EraSlider({ fromYear, toYear, onFromChange, onToChange }: {
       </div>
       <div className="flex items-center justify-between mt-6">
         <span className="text-sm font-bold text-emerald-400">{fromYear}/{String(fromYear + 1).slice(2)}</span>
-        <span className="text-xs text-slate-400 text-center">{seasonCount} di {TOTAL_SEASONS} stagioni</span>
+        <span className="text-xs text-slate-400 text-center">{seasonCount} {t('era_seasons')} {TOTAL_SEASONS}</span>
         <span className="text-sm font-bold text-emerald-400">{toYear}/{String(toYear + 1).slice(2)}</span>
       </div>
       <p className="text-xs text-slate-500 text-center mt-1 leading-snug">
-        Solo le stagioni in questo range verranno sorteggiate — restringi per un&apos;era che conosci.
+        {t('era_hint')}
       </p>
     </div>
   );
 }
 
 function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
+  const { t } = useTranslation();
   const [difficulty,   setDifficulty]   = useState<Difficulty>('normal');
   const [showRatings,  setShowRatings]  = useState<ShowRatings>('on');
   const [draftMode,    setDraftMode]    = useState<DraftMode>('squad_first');
@@ -128,6 +132,9 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
       <div className="w-full max-w-md flex items-center justify-between mb-8">
         <Link href="/" className="text-slate-500 hover:text-white transition-colors text-sm flex items-center gap-1">← Torna alla Home</Link>
         <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">Italian League Simulator</span>
+        <div className="absolute top-4 right-4">
+          <LanguageSelector />
+        </div>
       </div>
       <div className="w-full max-w-md space-y-7">
         <section className="glass rounded-2xl p-5">
