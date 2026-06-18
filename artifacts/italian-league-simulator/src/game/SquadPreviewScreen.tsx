@@ -13,10 +13,20 @@ function positionBadgeClass(cat: string): string {
   }
 }
 
-function ordinal(n: number): string {
-  if (n === 1) return '1°';
-  if (n === 2) return '2°';
-  if (n === 3) return '3°';
+/**
+ * Formatta un numero ordinale localizzato.
+ * - it/es/pt/fr → sempre °  (1°, 2°, 3°)
+ * - en          → 1st, 2nd, 3rd, 4th…
+ * - de          → 1., 2., 3.  (forma abbreviata tedesca)
+ */
+function ordinal(n: number, lang: string): string {
+  if (lang === 'de') return `${n}.`;
+  if (lang === 'en') {
+    const pr = new Intl.PluralRules('en', { type: 'ordinal' });
+    const suffixes: Record<string, string> = { one: 'st', two: 'nd', few: 'rd', other: 'th' };
+    return `${n}${suffixes[pr.select(n)]}`;
+  }
+  // it, es, fr, pt e qualsiasi altra lingua → °
   return `${n}°`;
 }
 
@@ -55,7 +65,7 @@ interface Props {
 }
 
 export default function SquadPreviewScreen({ slots, onSimulate, onRestart }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const overall = useMemo(() => calcTeamOverall(slots), [slots]);
   const odds    = useMemo(() => preSeasonOdds(overall.overall), [overall.overall]);
   const filledSlots = slots.filter((s) => s.player !== null);
@@ -103,7 +113,7 @@ export default function SquadPreviewScreen({ slots, onSimulate, onRestart }: Pro
           <div className="flex items-end justify-between">
             <div>
               <p className="text-xs text-slate-500 uppercase tracking-widest">{t('projected_finish')}</p>
-              <p className="text-5xl font-black text-white leading-none mt-1">{ordinal(odds.projectedFinish)}</p>
+              <p className="text-5xl font-black text-white leading-none mt-1">{ordinal(odds.projectedFinish, i18n.language)}</p>
             </div>
             <div className="text-right">
               <p className="text-xs text-slate-500 uppercase tracking-widest">{t('expected_points')}</p>
