@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { SetupConfig } from '../pages/GamePage';
 import { useDraft } from '../lib/useDraft';
+import { useTranslation } from 'react-i18next';
 import SlotMachine from '../components/SlotMachine';
 import {
   emptySlots, findBestSlot, findCompatibleSlots, REROLLS_BY_DIFFICULTY,
@@ -17,14 +18,8 @@ function catColor(cat: string): string {
     default:    return '#6b7280';
   }
 }
-function catLabel(cat: string): string {
-  switch (cat) {
-    case 'GK':  return 'Goalkeeper';
-    case 'DEF': return 'Defender';
-    case 'MID': return 'Midfielder';
-    case 'ATT': return 'Attacker';
-    default:    return cat;
-  }
+function catLabel(cat: string, t: any): string {
+  return t(cat);
 }
 function posCategory(pos: string): string {
   if (pos === 'GK') return 'GK';
@@ -33,36 +28,36 @@ function posCategory(pos: string): string {
   return 'ATT';
 }
 
-function slotPositionLabel(id: string): string {
+function slotPositionLabel(id: string, t: any): string {
   const labels: Record<string, string> = {
-    gk: 'Goalkeeper',
-    rb: 'Right', lb: 'Left',
-    'cb-1': 'Centre', 'cb-2': 'Centre',
-    'cb-r': 'Centre', 'cb-c': 'Centre', 'cb-l': 'Centre',
-    'cdm-r': 'Defensive', 'cdm-l': 'Defensive',
-    'cm-r': 'Central', 'cm-c': 'Central', 'cm-l': 'Central',
-    cam: 'Attacking',
-    rm: 'Right', lm: 'Left',
-    rw: 'Right', lw: 'Left',
-    st: 'Striker', 'st-r': 'Striker', 'st-l': 'Striker',
-    cf: 'Forward',
+    gk: t('pos_gk'),
+    rb: t('pos_label_right'), lb: t('pos_label_left'),
+    'cb-1': t('pos_label_centre'), 'cb-2': t('pos_label_centre'),
+    'cb-r': t('pos_label_centre'), 'cb-c': t('pos_label_centre'), 'cb-l': t('pos_label_centre'),
+    'cdm-r': t('pos_label_defensive'), 'cdm-l': t('pos_label_defensive'),
+    'cm-r': t('pos_label_central'), 'cm-c': t('pos_label_central'), 'cm-l': t('pos_label_central'),
+    cam: t('pos_label_attacking'),
+    rm: t('pos_label_right'), lm: t('pos_label_left'),
+    rw: t('pos_label_right'), lw: t('pos_label_left'),
+    st: t('pos_label_striker'), 'st-r': t('pos_label_striker'), 'st-l': t('pos_label_striker'),
+    cf: t('pos_label_forward'),
   };
   return labels[id] ?? id.toUpperCase();
 }
 
-function slotFullLabel(id: string): string {
+function slotFullLabel(id: string, t: any): string {
   const labels: Record<string, string> = {
-    gk: 'Goalkeeper (GK)',
-    rb: 'Right Back (RB)', lb: 'Left Back (LB)',
-    'cb-1': 'Centre Back (CB)', 'cb-2': 'Centre Back (CB)',
-    'cb-r': 'Centre Back (CB)', 'cb-c': 'Centre Back (CB)', 'cb-l': 'Centre Back (CB)',
-    'cdm-r': 'Defensive Mid (CDM)', 'cdm-l': 'Defensive Mid (CDM)',
-    'cm-r': 'Central Mid (CM)', 'cm-c': 'Central Mid (CM)', 'cm-l': 'Central Mid (CM)',
-    cam: 'Attacking Mid (CAM)',
-    rm: 'Right Mid (RM)', lm: 'Left Mid (LM)',
-    rw: 'Right Wing (RW)', lw: 'Left Wing (LW)',
-    st: 'Striker (ST)', 'st-r': 'Striker (ST)', 'st-l': 'Striker (ST)',
-    cf: 'Centre Forward (CF)',
+    gk: t('pos_full_gk'),
+    rb: t('pos_full_rb'), lb: t('pos_full_lb'),
+    'cb-1': t('pos_full_cb'), 'cb-2': t('pos_full_cb'),
+    'cb-r': t('pos_full_cb'), 'cb-c': t('pos_full_cb'), 'cb-l': t('pos_full_cb'),
+    'cdm-r': t('pos_full_cdm'), 'cdm-l': t('pos_full_cdm'),
+    'cm-r': t('pos_full_cm'), 'cm-c': t('pos_full_cm'), 'cm-l': t('pos_full_cm'),
+    cam: t('pos_full_cam'),
+    rm: t('pos_full_rm'), lm: t('pos_full_lm'),
+    rw: t('pos_full_rw'), lw: t('pos_full_lw'),
+    st: t('pos_full_st'), 'st-r': t('pos_full_st'), 'st-l': t('pos_full_st'),
+    cf: t('pos_full_cf'),
   };
   return labels[id] ?? id.toUpperCase();
 }
@@ -82,6 +77,7 @@ function slotBadge(fs: { id: string; acceptedPositions: string[] }): string {
 
 interface PitchProps { formation: string; slots: DraftSlot[]; }
 function Pitch({ formation, slots }: PitchProps) {
+  const { t } = useTranslation();
   const formSlots = FORMATION_SLOTS[formation] ?? [];
   const slotMap = new Map(slots.map((s) => [s.formationSlot.id, s]));
 
@@ -106,7 +102,7 @@ function Pitch({ formation, slots }: PitchProps) {
         const player = ds?.player ?? null;
         const color  = catColor(fs.category);
         const badge    = slotBadge(fs);
-        const posLabel = slotPositionLabel(fs.id);
+        const posLabel = slotPositionLabel(fs.id, t);
         const surname  = player ? player.name.trim().split(' ').pop() ?? '' : '';
 
         return (
@@ -162,20 +158,21 @@ interface SlotPickerProps {
   availableSlots: DraftSlot[]; onPick: (_slotId: string) => void; onCancel: () => void;
 }
 function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: SlotPickerProps) {
+  const { t } = useTranslation();
   const availableIds = new Set(availableSlots.map((s) => s.formationSlot.id));
   const unavailable = allSlots.filter((s) => !availableIds.has(s.formationSlot.id));
   return (
     <div className="rounded-2xl border border-emerald-500/30 bg-[#0d1f18] p-4 space-y-4">
       <div className="flex items-center justify-between">
         <p className="text-base font-black text-white">
-          Place <span className="text-emerald-400">{player.name}</span>
+          {t('place_player')} <span className="text-emerald-400">{player.name}</span>
         </p>
         <button onClick={onCancel} className="text-xs font-semibold text-slate-400 border border-slate-600 rounded-lg px-3 py-1.5 hover:text-white hover:border-slate-400 transition-colors">
-          Cancel
+          {t('cancel')}
         </button>
       </div>
       <div>
-        <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">Available ({availableSlots.length})</p>
+        <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">{t('available')} ({availableSlots.length})</p>
         <div className="flex flex-wrap gap-2">
           {availableSlots.map((s) => {
             const color = catColor(slotCat(s));
@@ -183,7 +180,7 @@ function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: Slot
               <button key={s.formationSlot.id} onClick={() => onPick(s.formationSlot.id)}
                 className="px-4 py-3 rounded-xl text-sm font-black text-white transition-all active:scale-95 hover:brightness-110"
                 style={{ backgroundColor: color }}>
-                {slotFullLabel(s.formationSlot.id)}
+                {slotFullLabel(s.formationSlot.id, t)}
               </button>
             );
           })}
@@ -191,7 +188,7 @@ function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: Slot
       </div>
       {unavailable.length > 0 && (
         <div>
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Unavailable</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('unavailable')}</p>
           <div className="flex flex-wrap gap-1.5">
             {unavailable.map((s) => {
               const occupant = s.player ? s.player.name.split(' ').pop() : 'N/A';
@@ -214,6 +211,7 @@ interface PlayerCardProps {
   compatibleSlotLabels: string[]; selected: boolean; onClick: () => void;
 }
 function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, selected, onClick }: PlayerCardProps) {
+  const { t } = useTranslation();
   const color = catColor(player.position_category);
   return (
     <button onClick={onClick} disabled={disabled}
@@ -249,7 +247,7 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
             })}
           </div>
         ) : (
-          <p className="text-xs text-slate-500 truncate">{catLabel(player.position_category)}</p>
+          <p className="text-xs text-slate-500 truncate">{catLabel(player.position_category, t)}</p>
         )}
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">
@@ -267,6 +265,7 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
 interface Props { config: SetupConfig; onBack?: () => void; onComplete: (_slots: DraftSlot[]) => void; }
 
 export default function DraftScreen({ config, onBack, onComplete }: Props) {
+  const { t } = useTranslation();
   const { state, reveal, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel } = useDraft(config);
   const [pendingPlayer, setPendingPlayer] = useState<DraftedPlayer | null>(null);
 
@@ -303,12 +302,12 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
       <div className="px-4 pt-5 pb-3 flex flex-col gap-0.5">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">FORMATION</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t('formation')}</p>
             <p className="text-2xl font-black text-white">{config.formation}</p>
           </div>
           <div className="flex items-center gap-3">
             <span style={{ color: diffColor(config.difficulty) }} className="text-sm font-black uppercase tracking-widest">
-              {config.difficulty.toUpperCase()}
+              {t(`difficulty_${config.difficulty}`).toUpperCase()}
             </span>
             <span className="text-sm font-bold text-white">
               <span style={{ color: filled > 0 ? '#22c55e' : '#6b7280' }}>{filled}</span>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props { club: string; season: string; onReveal?: () => void; }
 
 export default function SlotMachine({ club, season, onReveal }: Props) {
+  const { t } = useTranslation();
   type Phase = 'rolling' | 'settling' | 'revealed';
   const [phase, setPhase] = useState<Phase>('rolling');
   const [dc, setDc] = useState('???');
@@ -34,7 +36,7 @@ export default function SlotMachine({ club, season, onReveal }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-3 py-6">
-      <p className="text-xs text-slate-500">Sorteggio</p>
+      <p className="text-xs text-slate-500">{t('step_spin')}</p>
       <div className="flex items-center gap-3">
         <div className={cls()} style={{ minWidth: '130px', textAlign: 'center' }}>{dc}</div>
         <span className="text-slate-600">·</span>

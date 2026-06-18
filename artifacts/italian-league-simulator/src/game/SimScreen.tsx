@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { DraftSlot } from '../lib/draft';
 import {
   calcTeamOverall, simulateSeason,
@@ -19,6 +20,7 @@ function outcomeColors(o: 'W' | 'D' | 'L') {
 }
 
 export default function SimScreen({ slots, onComplete }: Props) {
+  const { t } = useTranslation();
   const [snapshots, setSnapshots] = useState<MatchdaySnapshot[]>([]);
   const [currentMd, setCurrentMd] = useState(0);
   const [playerPos, setPlayerPos] = useState<number | null>(null);
@@ -72,20 +74,20 @@ export default function SimScreen({ slots, onComplete }: Props) {
       <div className="sticky top-0 z-20 bg-[#0a0a0f]/95 backdrop-blur-sm px-4 pt-5 pb-3 border-b border-white/5">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">POSIZIONE</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">{t('position')}</p>
             <p className="text-3xl font-black text-white">{playerPos !== null ? `${playerPos}°` : '—'}</p>
           </div>
           <div className="text-right">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">PUNTI</p>
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">{t('points')}</p>
             <p className="text-3xl font-black text-emerald-400">{playerPts}</p>
           </div>
         </div>
         <div className="flex items-center justify-between mb-2">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
-            MATCHWEEK <span className="text-white">{currentMd}</span> / 38
+            {t('matchweek')} <span className="text-white">{currentMd}</span> / 38
           </p>
           <button onClick={handleSkip} className="text-xs font-semibold text-slate-400 hover:text-white transition-colors">
-            Skip all →
+            {t('skip_all')}
           </button>
         </div>
         <div className="h-1 w-full bg-white/5 rounded-full">
@@ -107,7 +109,7 @@ export default function SimScreen({ slots, onComplete }: Props) {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="text-sm font-black text-white">{m.opponentName}</span>
-                    <span className="text-xs text-slate-500">({m.isHome ? 'H' : 'A'})</span>
+                    <span className="text-xs text-slate-500">({m.isHome ? t('match_h') : t('match_a')})</span>
                   </div>
                 </div>
                 <span className={`text-lg font-black tabular-nums ${c.score}`}>{displayScore}</span>
@@ -127,7 +129,7 @@ export default function SimScreen({ slots, onComplete }: Props) {
         {visibleSnaps.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 gap-3 text-slate-600">
             <span className="text-4xl animate-spin" style={{ animationDuration: '2s' }}>⚽</span>
-            <p className="text-sm">Inizio campionato…</p>
+            <p className="text-sm">{t('league_start')}</p>
           </div>
         )}
       </div>
