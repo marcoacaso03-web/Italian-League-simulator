@@ -71,6 +71,11 @@ export default function ResultsScreen({ result, overall, slots, onRestart }: Pro
     return cats;
   }, [slots]);
 
+  // Sort standings by position field if available, otherwise by points desc
+  const sortedStandings = useMemo(() => {
+    return [...result.standings].sort((a, b) => b.points - a.points || (b.gf - b.ga) - (a.gf - a.ga));
+  }, [result.standings]);
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md space-y-5">
@@ -161,27 +166,29 @@ export default function ResultsScreen({ result, overall, slots, onRestart }: Pro
           })}
         </section>
 
+        {/* FINAL STANDINGS — uses row.name (TeamStanding field), NOT row.club */}
         <section className="glass rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-white/5">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t('final_standing')}</p>
           </div>
-          {result.standings.map((row) => {
+          {sortedStandings.map((row, idx) => {
             const isPlayer = row.isPlayer;
+            const position = idx + 1;
             return (
               <div
-                key={row.club}
+                key={row.teamId}
                 className={`flex items-center gap-3 px-4 py-2.5 border-b border-white/[0.04] last:border-b-0 ${
                   isPlayer ? 'bg-emerald-500/10' : ''
                 }`}
               >
                 <span className={`w-6 text-center text-xs font-black ${
-                  row.position <= 4 ? 'text-emerald-400' :
-                  row.position <= 7 ? 'text-blue-400' :
-                  row.position >= 18 ? 'text-red-400' : 'text-slate-500'
-                }`}>{row.position}</span>
+                  position <= 4 ? 'text-emerald-400' :
+                  position <= 7 ? 'text-blue-400' :
+                  position >= 18 ? 'text-red-400' : 'text-slate-500'
+                }`}>{position}</span>
                 <span className={`flex-1 text-sm font-bold truncate ${
                   isPlayer ? 'text-emerald-400' : 'text-white'
-                }`}>{row.club}</span>
+                }`}>{row.name}</span>
                 <span className="text-xs text-slate-400 font-semibold">{row.points} {t('points').toLowerCase()}</span>
               </div>
             );
