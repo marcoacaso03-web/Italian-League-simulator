@@ -161,4 +161,6 @@ overrides:
   qs: ">=6.15.2"
 
 allowBuilds:
-  esbuild: set this to true or false
+  '@firebase/util': false
+  esbuild: false
+  protobufjs: false

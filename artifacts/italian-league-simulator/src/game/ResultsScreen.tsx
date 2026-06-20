@@ -1,12 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
+import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import type { DraftSlot } from '../lib/draft';
 import type { SeasonResult, TeamOverall } from '../lib/simulation';
+import type { SetupConfig } from '../pages/GamePage';
+import {
+  calcScore,
+  submitScore,
+  getUserCode,
+  createAndSaveCode,
+} from '../lib/leaderboard';
+import { useAuth } from '../context/AuthContext';
 
 interface Props {
-  result: SeasonResult;
-  overall: TeamOverall;
-  slots: DraftSlot[];
+  result:    SeasonResult;
+  overall:   TeamOverall;
+  slots:     DraftSlot[];
+  config:    SetupConfig;
   onRestart: () => void;
 }
 
@@ -46,8 +56,11 @@ function buildTechComment(
   return                     t('tech_relegated',{ pts });
 }
 
-export default function ResultsScreen({ result, overall, slots, onRestart }: Props) {
+type SubmitState = 'idle' | 'show_form' | 'submitting' | 'done' | 'error';
+
+export default function ResultsScreen({ result, overall, slots, config, onRestart }: Props) {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const badge     = finishBadge(result.playerFinalPosition, t);
   const playerRow = result.standings.find((s) => s.isPlayer);
   const gd        = (playerRow?.gf ?? 0) - (playerRow?.ga ?? 0);
@@ -71,10 +84,54 @@ export default function ResultsScreen({ result, overall, slots, onRestart }: Pro
     return cats;
   }, [slots]);
 
-  // Sort standings by position field if available, otherwise by points desc
   const sortedStandings = useMemo(() => {
     return [...result.standings].sort((a, b) => b.points - a.points || (b.gf - b.ga) - (a.gf - a.ga));
   }, [result.standings]);
+
+  // Score calculation
+  const myScore = useMemo(() => calcScore({
+    points:      result.playerPoints,
+    position:    result.playerFinalPosition,
+    overall:     overall.overall,
+    difficulty:  config.difficulty,
+    showRatings: config.showRatings,
+  }), [result, overall, config]);
+
+  // Submit state
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [nickname, setNickname]       = useState('');
+  const [finalCode, setFinalCode]     = useState<string | null>(null);
+  const existingCode                  = useMemo(() => getUserCode(), []);
+
+  // Auto-show form (no top-50 check needed with Firestore — just let user submit)
+  useEffect(() => {
+    setSubmitState('show_form');
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const code = existingCode ?? createAndSaveCode(nickname);
+    setSubmitState('submitting');
+    try {
+      await submitScore({
+        nickname:    code,
+        uid:         user?.uid ?? null,
+        score:       myScore,
+        overall:     overall.overall,
+        points:      result.playerPoints,
+        position:    result.playerFinalPosition,
+        formation:   config.formation,
+        difficulty:  config.difficulty,
+        showRatings: config.showRatings,
+        eraFrom:     config.eraFrom,
+        eraTo:       config.eraTo,
+      });
+      setFinalCode(code);
+      setSubmitState('done');
+    } catch {
+      setSubmitState('error');
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
@@ -90,6 +147,86 @@ export default function ResultsScreen({ result, overall, slots, onRestart }: Pro
             <span className="font-bold text-emerald-400">{result.playerPoints} {t('points').toLowerCase()}</span>
           </p>
         </div>
+
+        {/* ── Leaderboard section ── */}
+        <section className="glass rounded-2xl p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">🌍 {t('lb_title')}</p>
+            <Link href="/leaderboard">
+              <button className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-semibold">
+                {t('lb_view_full')} →
+              </button>
+            </Link>
+          </div>
+
+          <div className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
+            <div>
+              <p className="text-xs text-slate-500">{t('lb_your_score')}</p>
+              <p className="text-2xl font-black text-emerald-400">{myScore.toLocaleString()}</p>
+            </div>
+            <div className="text-right text-xs text-slate-500 space-y-0.5">
+              <p>{config.formation} · {config.difficulty === 'hard' ? '🔴' : config.difficulty === 'normal' ? '🟡' : '🟢'} {config.difficulty}</p>
+              {config.showRatings === 'off' && <p className="text-purple-400">🔒 {t('lb_blind')}</p>}
+              <p>{config.eraFrom}–{config.eraTo}</p>
+            </div>
+          </div>
+
+          {submitState === 'show_form' && (
+            <form onSubmit={handleSubmit} className="space-y-3">
+              {existingCode ? (
+                <div className="bg-emerald-500/10 rounded-xl px-4 py-3">
+                  <p className="text-xs text-slate-400">{t('lb_your_code')}</p>
+                  <p className="text-base font-black text-emerald-300">{existingCode}</p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <label className="text-xs text-slate-400 block">{t('lb_choose_nickname')}</label>
+                  <input
+                    type="text"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12))}
+                    placeholder="ES. ROSSI"
+                    maxLength={12}
+                    required={!existingCode}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:bg-white/8 transition-all"
+                  />
+                  <p className="text-[10px] text-slate-600">
+                    {t('lb_code_hint')} <span className="text-slate-400">ROSSI#4821</span>
+                  </p>
+                </div>
+              )}
+              <button
+                type="submit"
+                disabled={!existingCode && nickname.length < 2}
+                className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-black text-black hover:bg-emerald-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                🏆 {t('lb_save_score')}
+              </button>
+            </form>
+          )}
+
+          {submitState === 'submitting' && (
+            <p className="text-xs text-slate-500 text-center animate-pulse">{t('lb_saving')}</p>
+          )}
+
+          {submitState === 'done' && (
+            <div className="space-y-3">
+              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 text-center">
+                <p className="text-emerald-400 font-black text-sm">✅ {t('lb_saved')}</p>
+                {finalCode && <p className="text-xs text-slate-400 mt-1">{t('lb_your_code')}: <span className="text-emerald-300 font-bold">{finalCode}</span></p>}
+              </div>
+              <Link href="/leaderboard">
+                <button className="w-full rounded-xl border border-emerald-500/30 py-3 text-sm font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all">
+                  🌍 {t('lb_view_full')}
+                </button>
+              </Link>
+            </div>
+          )}
+
+          {submitState === 'error' && (
+            <p className="text-xs text-red-400 text-center">{t('lb_error')}</p>
+          )}
+        </section>
 
         <section className="glass rounded-2xl p-5">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">{t('season_recap')}</p>
@@ -166,7 +303,6 @@ export default function ResultsScreen({ result, overall, slots, onRestart }: Pro
           })}
         </section>
 
-        {/* FINAL STANDINGS — uses row.name (TeamStanding field), NOT row.club */}
         <section className="glass rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-white/5">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">{t('final_standing')}</p>

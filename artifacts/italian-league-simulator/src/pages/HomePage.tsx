@@ -61,6 +61,9 @@ export default function HomePage() {
             <Link href="/game" className="glow-emerald rounded-xl bg-emerald-500 px-8 py-4 text-lg font-bold text-black transition-all hover:bg-emerald-400 hover:scale-105">
               {t('start_playing')}
             </Link>
+            <Link href="/leaderboard" className="rounded-xl border border-white/10 px-8 py-4 text-lg font-bold text-slate-300 transition-all hover:bg-white/5 hover:scale-105">
+              🌍 {t('lb_title')}
+            </Link>
           </div>
         </div>
         <div className="animate-slide-up relative z-10 mt-16 grid grid-cols-3 gap-8 sm:gap-16">
