@@ -214,7 +214,9 @@ const resources = {
       'lb_code_hint': 'The system will assign a unique code like',
       'lb_your_code': 'Your code',
       'lb_play_cta': 'Play and climb the rankings',
-    },
+      'lb_save_with_google': 'Save with Google',
+      'lb_save_as_guest': 'Continue as guest',
+      'lb_or_continue_guest': 'or continue as guest',    },
   },
 
   it: {
@@ -429,7 +431,9 @@ const resources = {
       'lb_code_hint': 'Il sistema assegnerà un codice univoco tipo',
       'lb_your_code': 'Il tuo codice',
       'lb_play_cta': 'Gioca e scala la classifica',
-    },
+      'lb_save_with_google': 'Salva con Google',
+      'lb_save_as_guest': 'Continua come ospite',
+      'lb_or_continue_guest': 'o continua come ospite',    },
   },
 
   es: {
@@ -629,7 +633,9 @@ const resources = {
       'lb_code_hint': 'El sistema asignará un código único como',
       'lb_your_code': 'Tu código',
       'lb_play_cta': 'Juega y sube en la clasificación',
-    },
+      'lb_save_with_google': 'Guardar con Google',
+      'lb_save_as_guest': 'Continuar como invitado',
+      'lb_or_continue_guest': 'o continuar como invitado',    },
   },
 
   fr: {
@@ -829,7 +835,9 @@ const resources = {
       'lb_code_hint': 'Le système attribuera un code unique comme',
       'lb_your_code': 'Ton code',
       'lb_play_cta': 'Joue et grimpe au classement',
-    },
+      'lb_save_with_google': 'Sauvegarder avec Google',
+      'lb_save_as_guest': 'Continuer en tant qu\'invité',
+      'lb_or_continue_guest': 'ou continuer en tant qu\'invité',    },
   },
 
   de: {
@@ -1029,7 +1037,9 @@ const resources = {
       'lb_code_hint': 'Das System vergibt einen eindeutigen Code wie',
       'lb_your_code': 'Dein Code',
       'lb_play_cta': 'Spiele und steige in der Rangliste auf',
-    },
+      'lb_save_with_google': 'Mit Google speichern',
+      'lb_save_as_guest': 'Als Gast fortfahren',
+      'lb_or_continue_guest': 'oder als Gast fortfahren',    },
   },
 
   pt: {
@@ -1244,7 +1254,9 @@ const resources = {
       'lb_code_hint': 'O sistema atribuirá um código único como',
       'lb_your_code': 'O teu código',
       'lb_play_cta': 'Joga e sobe na classificação',
-    },
+      'lb_save_with_google': 'Guardar com Google',
+      'lb_save_as_guest': 'Continuar como convidado',
+      'lb_or_continue_guest': 'ou continuar como convidado',    },
   },
 };
 

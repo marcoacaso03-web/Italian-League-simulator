@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import type { DraftSlot } from '../lib/draft';
@@ -56,18 +56,15 @@ function buildTechComment(
   return                     t('tech_relegated',{ pts });
 }
 
-type SubmitState = 'idle' | 'show_form' | 'submitting' | 'done' | 'error';
-
 export default function ResultsScreen({ result, overall, slots, config, onRestart }: Props) {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, signIn, firebaseReady } = useAuth();
   const badge     = finishBadge(result.playerFinalPosition, t);
   const playerRow = result.standings.find((s) => s.isPlayer);
   const gd        = (playerRow?.gf ?? 0) - (playerRow?.ga ?? 0);
 
   const techComment = useMemo(
     () => buildTechComment(result.playerFinalPosition, result.playerPoints, t),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [result, t],
   );
 
@@ -88,7 +85,6 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
     return [...result.standings].sort((a, b) => b.points - a.points || (b.gf - b.ga) - (a.gf - a.ga));
   }, [result.standings]);
 
-  // Score calculation
   const myScore = useMemo(() => calcScore({
     points:      result.playerPoints,
     position:    result.playerFinalPosition,
@@ -97,25 +93,20 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
     showRatings: config.showRatings,
   }), [result, overall, config]);
 
-  // Submit state
-  const [submitState, setSubmitState] = useState<SubmitState>('idle');
-  const [nickname, setNickname]       = useState('');
-  const [finalCode, setFinalCode]     = useState<string | null>(null);
-  const existingCode                  = useMemo(() => getUserCode(), []);
+  // Submit state: 'form' | 'submitting' | 'done' | 'error'
+  const [submitState, setSubmitState] = useState<'form' | 'submitting' | 'done' | 'error'>('form');
+  const [nickname, setNickname] = useState('');
+  const [finalCode, setFinalCode] = useState<string | null>(null);
+  const existingCode = useMemo(() => getUserCode(), []);
 
-  // Auto-show form (no top-50 check needed with Firestore — just let user submit)
-  useEffect(() => {
-    setSubmitState('show_form');
-  }, []);
-
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSaveAsGuest(e: React.FormEvent) {
     e.preventDefault();
     const code = existingCode ?? createAndSaveCode(nickname);
     setSubmitState('submitting');
     try {
       await submitScore({
         nickname:    code,
-        uid:         user?.uid ?? null,
+        uid:         null,
         score:       myScore,
         overall:     overall.overall,
         points:      result.playerPoints,
@@ -133,6 +124,41 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
     }
   }
 
+  async function handleSaveWithGoogle() {
+    // If not signed in, sign in first
+    if (!user && firebaseReady) {
+      try {
+        await signIn();
+      } catch {
+        return;
+      }
+    }
+    // After sign-in (or if already signed in), submit
+    // We need to wait for the auth state to update, so we use a small delay
+    setTimeout(async () => {
+      setSubmitState('submitting');
+      try {
+        await submitScore({
+          nickname:    `${user?.displayName ?? 'PLAYER'}#${String(Math.floor(Math.random() * 9000) + 1000)}`,
+          uid:         user?.uid ?? null,
+          score:       myScore,
+          overall:     overall.overall,
+          points:      result.playerPoints,
+          position:    result.playerFinalPosition,
+          formation:   config.formation,
+          difficulty:  config.difficulty,
+          showRatings: config.showRatings,
+          eraFrom:     config.eraFrom,
+          eraTo:       config.eraTo,
+        });
+        setFinalCode(null);
+        setSubmitState('done');
+      } catch {
+        setSubmitState('error');
+      }
+    }, 1500);
+  }
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md space-y-5">
@@ -148,7 +174,7 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
           </p>
         </div>
 
-        {/* ── Leaderboard section ── */}
+        {/* ── Leaderboard save section ── */}
         <section className="glass rounded-2xl p-5 space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">🌍 {t('lb_title')}</p>
@@ -159,6 +185,7 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
             </Link>
           </div>
 
+          {/* Score display */}
           <div className="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
             <div>
               <p className="text-xs text-slate-500">{t('lb_your_score')}</p>
@@ -171,38 +198,75 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
             </div>
           </div>
 
-          {submitState === 'show_form' && (
-            <form onSubmit={handleSubmit} className="space-y-3">
-              {existingCode ? (
-                <div className="bg-emerald-500/10 rounded-xl px-4 py-3">
-                  <p className="text-xs text-slate-400">{t('lb_your_code')}</p>
-                  <p className="text-base font-black text-emerald-300">{existingCode}</p>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <label className="text-xs text-slate-400 block">{t('lb_choose_nickname')}</label>
-                  <input
-                    type="text"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12))}
-                    placeholder="ES. ROSSI"
-                    maxLength={12}
-                    required={!existingCode}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:bg-white/8 transition-all"
-                  />
-                  <p className="text-[10px] text-slate-600">
-                    {t('lb_code_hint')} <span className="text-slate-400">ROSSI#4821</span>
-                  </p>
-                </div>
+          {/* Show form only if not yet submitted */}
+          {submitState === 'form' && (
+            <>
+              {/* Google sign-in button */}
+              {firebaseReady && !user && (
+                <button
+                  onClick={handleSaveWithGoogle}
+                  className="w-full flex items-center justify-center gap-3 rounded-xl border border-white/10 py-3 text-sm font-bold text-white hover:bg-white/5 transition-all"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
+                  {t('lb_save_with_google')}
+                </button>
               )}
-              <button
-                type="submit"
-                disabled={!existingCode && nickname.length < 2}
-                className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-black text-black hover:bg-emerald-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                🏆 {t('lb_save_score')}
-              </button>
-            </form>
+
+              {/* Already signed in — show save button */}
+              {firebaseReady && user && (
+                <button
+                  onClick={handleSaveWithGoogle}
+                  className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-black text-black hover:bg-emerald-400 transition-all"
+                >
+                  🏆 {t('lb_save_score')}
+                </button>
+              )}
+
+              {/* Divider */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-white/10" />
+                <span className="text-[10px] text-slate-500 uppercase">{t('lb_or_continue_guest')}</span>
+                <div className="flex-1 h-px bg-white/10" />
+              </div>
+
+              {/* Guest form */}
+              <form onSubmit={handleSaveAsGuest} className="space-y-3">
+                {existingCode ? (
+                  <div className="bg-emerald-500/10 rounded-xl px-4 py-3">
+                    <p className="text-xs text-slate-400">{t('lb_your_code')}</p>
+                    <p className="text-base font-black text-emerald-300">{existingCode}</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <label className="text-xs text-slate-400 block">{t('lb_choose_nickname')}</label>
+                    <input
+                      type="text"
+                      value={nickname}
+                      onChange={(e) => setNickname(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12))}
+                      placeholder="ES. ROSSI"
+                      maxLength={12}
+                      required={!existingCode}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 transition-all"
+                    />
+                    <p className="text-[10px] text-slate-600">
+                      {t('lb_code_hint')} <span className="text-slate-400">ROSSI#4821</span>
+                    </p>
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  disabled={!existingCode && nickname.length < 2}
+                  className="w-full rounded-xl border border-emerald-500/30 py-3 text-sm font-bold text-emerald-400 hover:bg-emerald-500/10 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  👤 {t('lb_save_as_guest')}
+                </button>
+              </form>
+            </>
           )}
 
           {submitState === 'submitting' && (
