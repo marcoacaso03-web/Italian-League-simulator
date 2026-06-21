@@ -376,7 +376,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
 
         {state.phase === 'idle' && remaining.length > 0 && (
           <button onClick={doSpin} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98]">
-            🎲 {t('spin_club')}
+            🎲 {t('spin')}
           </button>
         )}
       </div>

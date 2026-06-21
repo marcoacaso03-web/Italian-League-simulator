@@ -106,7 +106,6 @@ const resources = {
       'start_draft': 'Start Draft →',
 
       // Draft Screen
-      'spin_club': 'Spin a Club',
       'select_slot_spin': 'Select a slot to spin',
       'squad_spun': 'SQUAD SPUN',
       'choose_player': 'CHOOSE A PLAYER',
@@ -321,9 +320,8 @@ const resources = {
       'era_seasons': 'stagioni di',
       'era_hint': 'Verranno estratte solo le stagioni in questo intervallo — restringi a un\'era che conosci.',
       'start_draft': 'Inizia il Draft →',
-
+      'spin': 'Gira',
       // Draft Screen
-      'spin_club': 'Gira un Club',
       'select_slot_spin': 'Seleziona uno slot per girare',
       'squad_spun': 'SQUADRA ESTRATTA',
       'choose_player': 'SCEGLI UN GIOCATORE',
@@ -533,7 +531,6 @@ const resources = {
       'era_seasons': 'temporadas de',
       'era_hint': 'Solo se extraerán temporadas en este rango.',
       'start_draft': 'Iniciar Draft →',
-      'spin_club': 'Girar un Club',
       'select_slot_spin': 'Selecciona un hueco para girar',
       'squad_spun': 'EQUIPO EXTRAÍDO',
       'choose_player': 'ELIGE UN JUGADOR',
@@ -735,7 +732,6 @@ const resources = {
       'era_seasons': 'saisons de',
       'era_hint': 'Seules les saisons dans cette plage seront tirées.',
       'start_draft': 'Lancer le Draft →',
-      'spin_club': 'Tourner un Club',
       'select_slot_spin': 'Sélectionne un emplacement pour tourner',
       'squad_spun': 'ÉQUIPE TIRÉE',
       'choose_player': 'CHOISIS UN JOUEUR',
@@ -937,7 +933,6 @@ const resources = {
       'era_seasons': 'Saisons von',
       'era_hint': 'Nur Saisons in diesem Bereich werden gezogen.',
       'start_draft': 'Draft starten →',
-      'spin_club': 'Club drehen',
       'select_slot_spin': 'Wähle einen Platz zum Drehen',
       'squad_spun': 'TEAM GEZOGEN',
       'choose_player': 'WÄHLE EINEN SPIELER',
@@ -1144,9 +1139,8 @@ const resources = {
       'era_seasons': 'temporadas de',
       'era_hint': 'Apenas temporadas neste intervalo serão sorteadas — restringe a uma era que conheces.',
       'start_draft': 'Iniciar Draft →',
-
+      'spin': 'Rodar',
       // Draft Screen
-      'spin_club': 'Rodar um Clube',
       'select_slot_spin': 'Seleciona um lugar para rodar',
       'squad_spun': 'PLANTEL SORTEADO',
       'choose_player': 'ESCOLHE UM JOGADOR',
