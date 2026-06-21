@@ -291,13 +291,13 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
       else if (hg < ag) { away.won++; away.points += 3; home.lost++; }
       else { home.drawn++; home.points++; away.drawn++; away.points++; }
 
-      const isPlayerHome = homeId === 'player';
-      const isPlayerAway = awayId === 'player';
+      const isPlayerHome = homeId === PLAYER_TEAM_ID;
+      const isPlayerAway = awayId === PLAYER_TEAM_ID;
       if (isPlayerHome || isPlayerAway) {
         const pGoals = isPlayerHome ? hg : ag;
         const oGoals = isPlayerHome ? ag : hg;
         const oppId  = isPlayerHome ? awayId : homeId;
-        const opp    = teams.find((t) => t.id === oppId);
+        const opp    = aiTeams.find((t) => t.id === oppId);
         const outcome: 'W' | 'D' | 'L' = pGoals > oGoals ? 'W' : pGoals < oGoals ? 'L' : 'D';
         playerMatch = {
           opponentId: oppId,
