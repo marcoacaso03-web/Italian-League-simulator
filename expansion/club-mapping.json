@@ -1,0 +1,65 @@
+{
+  "_description": "Mapping club names (as they appear in FIFA/EA FC datasets) → leagueId. One entry per FIFA version where club names differ.",
+  "fifa-26": {
+    "premier-league": [
+      "Manchester City", "Arsenal", "Liverpool", "Chelsea", "Manchester United",
+      "Tottenham Hotspur", "Newcastle United", "Aston Villa", "Brighton & Hove Albion", "West Ham United",
+      "Crystal Palace", "Fulham", "Wolverhampton Wanderers", "AFC Bournemouth", "Nottingham Forest",
+      "Everton", "Brentford", "Leicester City", "Ipswich Town", "Southampton"
+    ],
+    "la-liga": [
+      "Real Madrid", "FC Barcelona", "Atlético de Madrid", "Real Sociedad", "Athletic Club",
+      "Real Betis", "Villarreal CF", "Girona FC", "Sevilla FC", "Valencia CF",
+      "RC Celta", "CA Osasuna", "Getafe CF", "RCD Mallorca", "UD Las Palmas",
+      "Rayo Vallecano", "Deportivo Alavés", "RCD Espanyol", "Levante UD", "Granada CF"
+    ],
+    "ligue-1": [
+      "Paris Saint-Germain", "Olympique de Marseille", "AS Monaco", "LOSC Lille", "Olympique Lyonnais",
+      "OGC Nice", "RC Lens", "Stade Rennais FC", "RC Strasbourg Alsace", "Toulouse FC",
+      "Montpellier HSC", "FC Nantes", "Stade de Reims", "Stade Brestois 29", "Le Havre AC",
+      "FC Lorient", "FC Metz", "AJ Auxerre"
+    ],
+    "bundesliga": [
+      "FC Bayern München", "Borussia Dortmund", "RB Leipzig", "Bayer 04 Leverkusen", "Eintracht Frankfurt",
+      "VfB Stuttgart", "1. FC Union Berlin", "SC Freiburg", "VfL Wolfsburg", "TSG 1899 Hoffenheim",
+      "SV Werder Bremen", "1. FSV Mainz 05", "FC Augsburg", "Borussia Mönchengladbach", "1. FC Heidenheim",
+      "Holstein Kiel", "FC St. Pauli", "VfL Bochum"
+    ]
+  },
+  "fifa-25": {
+    "premier-league": [
+      "Manchester City", "Arsenal", "Liverpool", "Chelsea", "Manchester United",
+      "Tottenham Hotspur", "Newcastle United", "Aston Villa", "Brighton & Hove Albion", "West Ham United",
+      "Crystal Palace", "Fulham", "Wolverhampton Wanderers", "AFC Bournemouth", "Nottingham Forest",
+      "Everton", "Brentford", "Leicester City", "Ipswich Town", "Southampton"
+    ],
+    "la-liga": [
+      "Real Madrid", "FC Barcelona", "Atlético de Madrid", "Real Sociedad", "Athletic Club",
+      "Real Betis", "Villarreal CF", "Girona FC", "Sevilla FC", "Valencia CF",
+      "RC Celta", "CA Osasuna", "Getafe CF", "RCD Mallorca", "UD Las Palmas",
+      "Rayo Vallecano", "Deportivo Alavés", "RCD Espanyol", "Levante UD", "Granada CF"
+    ],
+    "ligue-1": [
+      "Paris Saint-Germain", "Olympique de Marseille", "AS Monaco", "LOSC Lille", "Olympique Lyonnais",
+      "OGC Nice", "RC Lens", "Stade Rennais FC", "RC Strasbourg Alsace", "Toulouse FC",
+      "Montpellier HSC", "FC Nantes", "Stade de Reims", "Stade Brestois 29", "Le Havre AC",
+      "FC Lorient", "FC Metz", "AJ Auxerre"
+    ],
+    "bundesliga": [
+      "FC Bayern München", "Borussia Dortmund", "RB Leipzig", "Bayer 04 Leverkusen", "Eintracht Frankfurt",
+      "VfB Stuttgart", "1. FC Union Berlin", "SC Freiburg", "VfL Wolfsburg", "TSG 1899 Hoffenheim",
+      "SV Werder Bremen", "1. FSV Mainz 05", "FC Augsburg", "Borussia Mönchengladbach", "1. FC Heidenheim",
+      "Holstein Kiel", "FC St. Pauli", "VfL Bochum"
+    ]
+  },
+  "_note": "FIFA 05-16 club names may differ (e.g. 'Man United' vs 'Manchester United'). Add version-specific overrides below when needed.",
+  "fifa-16": {
+    "_overrides": {
+      "premier-league": {
+        "Man United": "Manchester United",
+        "Man City": "Manchester City",
+        "Spurs": "Tottenham Hotspur"
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
     if (!hostName.trim()) {
-      setError('Inserisci il tuo nickname');
+      setError(t('lobby_error_code'));
       return;
     }
 
@@ -47,23 +47,30 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
       const lobby = await createLobby(hostName.trim(), 'league', config, maxPlayers);
       onLobbyCreated(lobby.code);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Errore nella creazione');
+      setError(err instanceof Error ? err.message : t('lobby_unknown_error'));
     } finally {
       setCreating(false);
     }
   }
+
+  const ERA_PRESETS = [
+    { id: 'all' as const, labelKey: 'lobby_era_all', from: 1996 },
+    { id: '2000s' as const, labelKey: 'lobby_era_2000s', from: 2000 },
+    { id: '2010s' as const, labelKey: 'lobby_era_2010s', from: 2010 },
+    { id: 'modern' as const, labelKey: 'lobby_era_modern', from: 2016 },
+  ];
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md space-y-5">
         <div className="text-center space-y-2">
           <p className="text-4xl">🏠</p>
-          <h1 className="text-2xl font-black text-white">Crea Lobby</h1>
-          <p className="text-sm text-slate-400">Configura le regole per i tuoi amici</p>
+          <h1 className="text-2xl font-black text-white">{t('lobby_create')}</h1>
+          <p className="text-sm text-slate-400">{t('lobby_create_desc')}</p>
         </div>
 
         <Link href="/lobby">
-          <button className="text-slate-500 hover:text-white transition-colors text-sm">← Indietro</button>
+          <button className="text-slate-500 hover:text-white transition-colors text-sm">← {t('back_to_home')}</button>
         </Link>
 
         {error && (
@@ -73,23 +80,21 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
         )}
 
         <form onSubmit={handleCreate} className="space-y-4">
-          {/* Nickname */}
           <section className="glass rounded-2xl p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Il tuo Nickname</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_host_nickname')}</p>
             <input
               type="text"
               value={hostName}
               onChange={(e) => setHostName(e.target.value.toUpperCase().replace(/[^A-Z0-9 ]/g, '').slice(0, 16))}
-              placeholder="ES. MARCO"
+              placeholder={t('lobby_host_nickname_placeholder')}
               maxLength={16}
               required
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50"
             />
           </section>
 
-          {/* Difficoltà */}
           <section className="glass rounded-2xl p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Difficoltà</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_difficulty')}</p>
             <div className="grid grid-cols-3 gap-2">
               {(['easy', 'normal', 'hard'] as const).map((d) => (
                 <button
@@ -104,19 +109,18 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
                       : 'border-white/10 bg-white/[0.03] text-slate-400 hover:border-white/20'
                   }`}
                 >
-                  <p className="text-sm font-bold">{d === 'easy' ? '🟢 Easy' : d === 'normal' ? '🟡 Normal' : '🔴 Hard'}</p>
+                  <p className="text-sm font-bold">{d === 'easy' ? '🟢' : d === 'normal' ? '🟡' : '🔴'} {t('difficulty_' + d)}</p>
                 </button>
               ))}
             </div>
           </section>
 
-          {/* Modalità Draft */}
           <section className="glass rounded-2xl p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Modalità Draft</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_draft_mode')}</p>
             <div className="grid grid-cols-2 gap-2">
               {([
-                { id: 'squad_first' as const, emoji: '🎰', label: 'Squadra Prima', desc: 'Sorteiga poi pesca' },
-                { id: 'position_first' as const, emoji: '📋', label: 'Ruolo Prima', desc: 'Scegli ruolo poi sorteiga' },
+                { id: 'squad_first' as const, emoji: '�0', labelKey: 'draft_mode_squad', subKey: 'draft_mode_squad_sub' },
+                { id: 'position_first' as const, emoji: '📋', labelKey: 'draft_mode_position', subKey: 'draft_mode_position_sub' },
               ]).map((m) => (
                 <button
                   key={m.id}
@@ -129,23 +133,17 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
                   }`}
                 >
                   <p className="text-xl mb-1">{m.emoji}</p>
-                  <p className={`text-sm font-bold ${mode === m.id ? 'text-emerald-300' : 'text-slate-300'}`}>{m.label}</p>
-                  <p className="text-[10px] text-slate-500 mt-0.5">{m.desc}</p>
+                  <p className={`text-sm font-bold ${mode === m.id ? 'text-emerald-300' : 'text-slate-300'}`}>{t(m.labelKey)}</p>
+                  <p className="text-[10px] text-slate-500 mt-0.5">{t(m.subKey)}</p>
                 </button>
               ))}
             </div>
           </section>
 
-          {/* Era */}
           <section className="glass rounded-2xl p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Era</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_era')}</p>
             <div className="grid grid-cols-4 gap-2 mb-3">
-              {([
-                { id: 'all' as const, label: 'Tutte', from: 1996 },
-                { id: '2000s' as const, label: '2000s', from: 2000 },
-                { id: '2010s' as const, label: '2010s', from: 2010 },
-                { id: 'modern' as const, label: 'Moderno', from: 2016 },
-              ]).map((ep) => (
+              {ERA_PRESETS.map((ep) => (
                 <button
                   key={ep.id}
                   type="button"
@@ -156,16 +154,15 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
                       : 'border-white/10 bg-white/[0.03] hover:border-white/20'
                   }`}
                 >
-                  <p className={`text-xs font-bold ${eraPreset === ep.id ? 'text-emerald-300' : 'text-slate-400'}`}>{ep.label}</p>
+                  <p className={`text-xs font-bold ${eraPreset === ep.id ? 'text-emerald-300' : 'text-slate-400'}`}>{t(ep.labelKey)}</p>
                 </button>
               ))}
             </div>
             <div className="text-xs text-slate-500 text-center">{eraFrom}–{eraTo}</div>
           </section>
 
-          {/* Max giocatori */}
           <section className="glass rounded-2xl p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Max Giocatori</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_max_players')}</p>
             <div className="flex items-center gap-3">
               {[2, 3, 4, 6, 8].map((n) => (
                 <button
@@ -184,13 +181,12 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
             </div>
           </section>
 
-          {/* Crea */}
           <button
             type="submit"
             disabled={creating || !hostName.trim()}
             className="w-full rounded-2xl bg-emerald-500 py-5 text-lg font-black text-black hover:bg-emerald-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {creating ? '⏳ Creo...' : '🚀 Crea Lobby'}
+            {creating ? '⏳ ' + t('lobby_creating_text') : '🚀 ' + t('lobby_create_btn_text')}
           </button>
         </form>
       </div>
