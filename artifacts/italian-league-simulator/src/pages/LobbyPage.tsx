@@ -130,7 +130,7 @@ export default function LobbyPage({ onLobbyJoined }: LobbyPageProps) {
         </div>
 
         <button onClick={() => setMode('menu')} className="text-slate-500 hover:text-white transition-colors text-sm">
-          ← {t('back_to_home')}
+          ← {t('lobby_title')}
         </button>
 
         {error && (
