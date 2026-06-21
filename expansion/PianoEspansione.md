@@ -222,55 +222,152 @@ Per ogni lega, creare `data/leagues/<leagueId>/` con:
 |------|-----------|-------|
 | `meta.json` | Nome, paese, colori, num squadre/giornate | Manuale |
 | `clubs.json` | 18-20 club della lega | Kaggle dataset |
-| `players.json` | Giocatori con stagione migliore per club | Kaggle dataset |
+| `players.json` | Giocatori con stagione migliore per club | Kaggle dataset + rating conversion |
 
-**Fonte primaria: Kaggle**
+**Fonte primaria: Kaggle — "Player Scores" di davidcariboo**
+- Dataset: `https://www.kaggle.com/datasets/davidcariboo/player-scores/`
+- Copre: **2000/01 → 2024/25** (25 stagioni), tutte e 5 le leghe top europee
+- Contenuto per ogni giocatore/stagione: nome, club, competizioni, valore di mercato, presenze, gol, assist, cartellini, rating ponderato
 - API Key: salvata in `.env` come `KAGGLE_KEY` (non committata)
-- Dataset target: statistiche calcistiche per lega/stagione (giocatori, club, rating)
 - Script di download: `scripts/src/fetch-kaggle-data.ts`
 
+**Cosa abbiamo già (non da Kaggle):**
+- `Stagione 1996-97.csv` → `Stagione 2003-04.csv`: 8 stagioni Serie A (solo club italiani, formato `Squadra,Giocatore,Ruolo,Valutazione`)
+- `FIFA 05.csv` → `FIFA 16.csv`: da fifaindex.com (formato completo multi-lega)
+- `FIFA 17.csv` → `FIFA 23.csv`: da Kaggle bryanb/fifa-player-stats-database
+- `FC 24.csv` → `FC 26.csv`: da Kaggle (rovnez, rehandl23, aniss7)
+
+**Gap da colmare con Kaggle Player Scores:**
+- **2000/01 → 2003/04**: per Serie A (complementa i CSV Stagione parziali) + per le altre 4 leghe
+- **2004/05 → 2016/17**: per tutte e 5 le leghe (gap tra FIFA 05 e FIFA 17)
+- **2017/18 → 2024/25**: per tutte e 5 le leghe (complementa i FIFA/FC 17-26)
+
+**Pipeline di conversione rating (valore di mercato → rating 1-99):**
+
+Il dataset Kaggle fornisce valori di mercato (es. €50M) ma non rating FIFA-style. Serve una funzione di conversione:
+
+```typescript
+// scripts/src/convert-rating.ts
+
+/**
+ * Converte un valore di mercato (in milioni €) in un rating FIFA-style (1-99).
+ * La distribuzione è calibrata per concentrare la maggior parte dei giocatori nel range 60-80.
+ *
+ * Logica:
+ * - Usa una curva logistica (sigmoid) mappata su range 1-99
+ * - I top player (valore > €150M) → rating 90-99
+ * - I buoni player (valore €30-150M) → rating 75-89
+ * - I player medi (valore €5-30M) → rating 60-74
+ * - I player di ruolo (valore €1-5M) → rating 50-64
+ * - I giovani/riserve (valore < €1M) → rating 40-59
+ *
+ * @param marketValueInMillions - Valore di mercato in milioni di euro
+ * @returns Rating FIFA-style (intero 1-99)
+ */
+export function marketValueToRating(marketValueInMillions: number): number {
+  if (marketValueInMillions <= 0) return 45;
+
+  // Logistic curve: output 0-1, poi scalato a 40-99
+  // k controlla la "ripidità" della curva (più alto = più ripida)
+  // x0 è il punto medio (valore in M€ dove rating ≈ 70)
+  const k = 0.04;
+  const x0 = 25; // €25M → rating ~70
+  const sigmoid = 1 / (1 + Math.exp(-k * (marketValueInMillions - x0)));
+
+  // Mappa sigmoid (0-1) → rating (40-99)
+  const rating = Math.round(40 + sigmoid * 59);
+
+  return Math.max(1, Math.min(99, rating));
+}
+
+/**
+ * Verifica la distribuzione dei rating generati.
+ * La concentrazione deve essere più alta nel range 60-80.
+ *
+ * @param ratings - Array di rating generati
+ * @returns Statistiche di distribuzione
+ */
+export function validateRatingDistribution(ratings: number[]): {
+  total: number;
+  mean: number;
+  median: number;
+  stdDev: number;
+  range_40_59: number;  // % player in range 40-59
+  range_60_74: number;  // % player in range 60-74 (media)
+  range_75_89: number;  // % player in range 75-89 (buoni)
+  range_90_99: number;  // % player in range 90-99 (top)
+} {
+  const sorted = [...ratings].sort((a, b) => a - b);
+  const total = sorted.length;
+  const mean = sorted.reduce((s, r) => s + r, 0) / total;
+  const median = total % 2 === 0
+    ? (sorted[total / 2 - 1] + sorted[total / 2]) / 2
+    : sorted[Math.floor(total / 2)];
+  const stdDev = Math.sqrt(sorted.reduce((s, r) => s + (r - mean) ** 2, 0) / total);
+
+  return {
+    total,
+    mean: Math.round(mean * 10) / 10,
+    median: Math.round(median * 10) / 10,
+    stdDev: Math.round(stdDev * 10) / 10,
+    range_40_59: Math.round(sorted.filter(r => r >= 40 && r <= 59).length / total * 100),
+    range_60_74: Math.round(sorted.filter(r => r >= 60 && r <= 74).length / total * 100),
+    range_75_89: Math.round(sorted.filter(r => r >= 75 && r <= 89).length / total * 100),
+    range_90_99: Math.round(sorted.filter(r => r >= 90 && r <= 99).length / total * 100),
+  };
+}
+```
+
+**Criteri di accettanza per la distribuzione rating:**
+- Range 60-74 (media): **40-55%** dei giocatori ← concentrazione principale
+- Range 75-89 (buoni): **20-30%** dei giocatori
+- Range 40-59 (ruolo/riserve): **15-25%** dei giocatori
+- Range 90-99 (top): **2-5%** dei giocatori
+- Media attesa: **65-72**
+- Deviazione standard attesa: **10-15**
+
 **Approccio pragmatico per v1:**
-- **Serie A:** Replicare i dati esistenti in `data/leagues/serie-a/` (copia da `data/clubs.json` + `data/players.json`, filtrando per club Serie A)
-- **Altre 4 leghe:** Creare dataset minimi ma funzionanti:
-  - 18-20 club per lega (quelli principali)
-  - 11-15 giocatori per club (sufficienti per draft variegato)
-  - Rating realistici (top player 85-95, media 65-75)
+- **Serie A 2000-2004:** Usa CSV Stagione esistenti (già hanno rating) + Kaggle per le altre leghe
+- **Tutte le leghe 2004-2017:** Kaggle Player Scores → conversione rating
+- **Tutte le leghe 2017-2025:** FIFA/FC CSV esistenti (già hanno rating) + Kaggle per stagioni mancanti
 
 **Checklist per ogni lega:**
 - [ ] `meta.json` creato con colori ufficiali
 - [ ] `clubs.json` con 18-20 club (formato `LeagueClub`)
 - [ ] `players.json` con almeno 150 giocatori totali (sufficiente per draft variegato)
 - [ ] Dati validati: ogni giocatore ha almeno una stagione, ogni stagione riferisce un club esistente
-- [ ] Dati incrociati con Kaggle per verifica bontà
+- [ ] Rating distribution validata: concentrazione 60-74 nel range 40-55%
 
-### 1.1b — Verifica bontà dati con Kaggle
-
-Prima di finalizzare i dataset, verificare la qualità incrociando con i dati Kaggle:
+### 1.1b — Download e processing Kaggle
 
 ```bash
 # Setup Kaggle API (key già in .env)
 pip install kaggle
 export KAGGLE_KEY=$(grep KAGGLE_KEY .env | cut -d= -f2)
 
-# Cerca dataset rilevanti
-kaggle datasets search "football players stats"
-kaggle datasets search "european football"
+# Scarica dataset Player Scores
+kaggle datasets download -d davidcariboo/player-scores -p data/kaggle-raw/ --unzip
 
-# Scarica dataset target (da definire dopo esplorazione)
-kaggle datasets download -d <dataset-owner>/<dataset-name> -p data/kaggle-raw/
+# Struttura file attesa:
+# data/kaggle-raw/
+# ├── players.csv          # Anagrafica giocatori
+# ├── clubs.csv            # Anagrafica club
+# ├── competitions.csv     # Anagrafia competizioni
+# ├── appearances.csv      # Presenze/gol/assist per stagione
+# ├── player_valuations.csv # Valori di mercato per stagione
+# └── game_events.csv      # Eventi di gioco (dettaglio)
 ```
 
-**Script di verifica** (`scripts/src/validate-data.ts`):
-1. Carica i dati Kaggle scaricati
-2. Confronta numero giocatori per club con il nostro dataset
-3. Verifica che i rating siano in range realistico per ogni lega
-4. Segnala discrepanze >20% rispetto alle attese
-5. Output: report `data/validation-report.json`
-
-**Criteri di accettanza:**
-- Differenza media rating per lega <15% rispetto a Kaggle
-- Tutti i principali club presenti (almeno 15 per lega)
-- Almeno 100 giocatori per lega con dati completi
+**Script di processing** (`scripts/src/process-kaggle-data.ts`):
+1. Leggi `player_valuations.csv` + `appearances.csv` + `clubs.csv`
+2. Filtra per competizioni top 5 legue (Premier League, La Liga, Serie A, Bundesliga, Ligue 1)
+3. Per ogni giocatore × stagione × club:
+   - Prendi il valore di mercato più recente
+   - Calcola rating con `marketValueToRating()`
+   - Estrai presenze, gol, assist
+4. Genera `players.json` per ogni lega nel formato `LeaguePlayer`
+5. Esegui `validateRatingDistribution()` e stampa report
+6. Se la distribuzione non rispetta i criteri, calibra i parametri `k` e `x0` della curva logistica
 
 ### 1.2 — League Loader
 
