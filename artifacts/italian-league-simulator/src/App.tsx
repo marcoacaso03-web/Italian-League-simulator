@@ -7,6 +7,9 @@ import LobbyPage from './pages/LobbyPage';
 import LobbyCreatePage from './pages/LobbyCreatePage';
 import LobbyRoomPage from './pages/LobbyRoomPage';
 import LobbyGamePage from './pages/LobbyGamePage';
+import Lobby1v1CreatePage from './pages/Lobby1v1CreatePage';
+import Lobby1v1JoinPage from './pages/Lobby1v1JoinPage';
+import Lobby1v1GamePage from './pages/Lobby1v1GamePage';
 import { initData } from './lib/data';
 import { getLobby } from './lib/lobby';
 import type { Lobby } from './lib/lobby';
@@ -33,7 +36,6 @@ function ErrorScreen({ onRetry }: { onRetry: () => void }) {
   );
 }
 
-// Wrapper per leggere il codice lobby dalla URL
 function LobbyRoomRoute() {
   const { setLobbyCode, setLobby } = useLobby();
   const [ready, setReady] = useState(false);
@@ -52,35 +54,53 @@ function LobbyRoomRoute() {
     }
   }, [setLobbyCode, setLobby]);
 
-  if (!ready) {
-    return <LoadingScreen />;
-  }
-
+  if (!ready) return <LoadingScreen />;
   return <LobbyRoomPageWrapper />;
 }
 
 function LobbyRoomPageWrapper() {
   const { lobbyCode, lobby, setLobby } = useLobby();
-
-  if (!lobbyCode || !lobby) {
-    return <Redirect to="/lobby" />;
-  }
-
-  const handleStartGame = (startedLobby: Lobby) => {
-    setLobby(startedLobby);
-  };
-
-  return <LobbyRoomPage lobbyCode={lobbyCode} onStartGame={handleStartGame} />;
+  if (!lobbyCode || !lobby) return <Redirect to="/lobby" />;
+  return <LobbyRoomPage lobbyCode={lobbyCode} onStartGame={(l) => setLobby(l)} />;
 }
 
 function LobbyGameRoute() {
   const { lobby } = useLobby();
-
-  if (!lobby) {
-    return <Redirect to="/lobby" />;
-  }
-
+  if (!lobby) return <Redirect to="/lobby" />;
   return <LobbyGamePage lobby={lobby} />;
+}
+
+function Lobby1v1CreateRoute() {
+  const { setLobby } = useLobby();
+  return <Lobby1v1CreatePage onLobbyReady={(l) => setLobby(l)} />;
+}
+
+function Lobby1v1JoinRoute() {
+  const { setLobbyCode, setLobby } = useLobby();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (code) {
+      setLobbyCode(code.toUpperCase());
+      getLobby(code.toUpperCase()).then((lobby) => {
+        if (lobby) setLobby(lobby);
+        setReady(true);
+      });
+    } else {
+      setReady(true);
+    }
+  }, [setLobbyCode, setLobby]);
+
+  if (!ready) return <LoadingScreen />;
+  return <Lobby1v1JoinPage onLobbyJoined={(l) => setLobby(l)} />;
+}
+
+function Lobby1v1GameRoute() {
+  const { lobby } = useLobby();
+  if (!lobby) return <Redirect to="/lobby" />;
+  return <Lobby1v1GamePage lobby={lobby} />;
 }
 
 function Router() {
@@ -113,6 +133,15 @@ function Router() {
       <Route path="/lobby/game">
         <LobbyGameRoute />
       </Route>
+      <Route path="/lobby/1v1/create">
+        <Lobby1v1CreateRoute />
+      </Route>
+      <Route path="/lobby/1v1/join">
+        <Lobby1v1JoinRoute />
+      </Route>
+      <Route path="/lobby/1v1/game">
+        <Lobby1v1GameRoute />
+      </Route>
       <Route>
         <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
           <p className="text-slate-400">Pagina non trovata</p>
@@ -128,9 +157,7 @@ function App() {
 
   function load() {
     setError(false);
-    initData()
-      .then(() => setDataReady(true))
-      .catch(() => setError(true));
+    initData().then(() => setDataReady(true)).catch(() => setError(true));
   }
 
   useEffect(() => { load(); }, []);
