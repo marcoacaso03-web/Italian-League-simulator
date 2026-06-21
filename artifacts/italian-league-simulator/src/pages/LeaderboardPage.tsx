@@ -83,51 +83,56 @@ export default function LeaderboardPage() {
         )}
 
         {!loading && entries.length > 0 && (
-          <section className="glass rounded-2xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-white/5">
-              <div className="grid grid-cols-[2rem_minmax(7rem,1fr)_4rem_3rem_3rem_4rem] gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                <span>#</span>
-                <span>{t('lb_col_nickname')}</span>
-                <span className="text-right">{t('lb_col_score')}</span>
-                <span className="text-right">OVR</span>
-                <span className="text-right">{t('lb_col_points')}</span>
-                <span className="text-right">{t('lb_col_info')}</span>
-              </div>
-            </div>
+          <section className="space-y-2">
             {entries.map((e, i) => {
               const rank = i + 1;
               const isMe = myCode && e.nickname === myCode;
               return (
                 <div key={`${e.id}-${i}`}
                   className={[
-                    'grid grid-cols-[2rem_minmax(7rem,1fr)_4rem_3rem_3rem_4rem] gap-2 items-center px-4 py-2.5 border-b border-white/[0.04] last:border-b-0',
-                    isMe ? 'bg-emerald-500/10 border-l-2 border-l-emerald-500' : '',
+                    'glass rounded-xl px-4 py-3 border border-white/[0.06]',
+                    isMe ? 'bg-emerald-500/10 border-emerald-500/30 ring-1 ring-emerald-500/20' : '',
                   ].join(' ')}>
 
-                  <span className={`text-sm font-bold text-center ${rank <= 3 ? 'text-lg leading-none' : 'text-slate-500'}`}>
-                    {medalEmoji(rank)}
-                  </span>
+                  {/* Top row: rank + nickname (full width) */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className={`text-sm font-bold w-8 text-center shrink-0 ${rank <= 3 ? 'text-lg leading-none' : 'text-slate-500'}`}>
+                      {medalEmoji(rank)}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className={`text-sm font-bold ${isMe ? 'text-emerald-300' : 'text-white'}`}>
+                        {e.nickname}
+                        {isMe && <span className="ml-2 text-[10px] text-emerald-500 font-normal">{t('lb_you')}</span>}
+                      </p>
+                    </div>
+                  </div>
 
-                  <div className="min-w-0 flex-1">
-                    <p className={`text-sm font-bold ${isMe ? 'text-emerald-300' : 'text-white'}`}>
-                      {e.nickname}
-                      {isMe && <span className="ml-2 text-[10px] text-emerald-500 font-normal">{t('lb_you')}</span>}
+                  {/* Bottom row: stats */}
+                  <div className="grid grid-cols-[2rem_1fr_1fr_1fr_1fr_1fr] gap-2 text-[10px] text-slate-500 uppercase tracking-wider mb-1 pl-11">
+                    <span></span>
+                    <span>{t('lb_col_score')}</span>
+                    <span>OVR</span>
+                    <span>{t('lb_col_points')}</span>
+                    <span>{t('lb_col_info')}</span>
+                    <span>Info</span>
+                  </div>
+                  <div className="grid grid-cols-[2rem_1fr_1fr_1fr_1fr_1fr] gap-2 items-center pl-11">
+                    <span></span>
+                    <p className="text-sm font-black text-emerald-400">{e.score.toLocaleString()}</p>
+                    <p className="text-sm font-bold text-white">{e.overall}</p>
+                    <p className="text-sm text-slate-300">{e.points}</p>
+                    <p className="text-[11px] text-slate-400 leading-tight">
+                      {e.era_from}–{e.era_to}<br />
+                      <span className={`font-semibold ${e.position <= 4 ? 'text-emerald-400' : e.position >= 18 ? 'text-red-400' : 'text-slate-400'}`}>
+                        {e.position}°
+                      </span>
                     </p>
-                    <p className="text-[10px] text-slate-500 truncate">
-                      {e.formation} · {difficultyEmoji(e.difficulty)} {e.difficulty}
+                    <p className="text-[11px] text-slate-500 leading-tight">
+                      {e.formation}<br />
+                      {difficultyEmoji(e.difficulty)} {e.difficulty}
                       {e.show_ratings === 'off' ? ` · ${t('lb_blind')}` : ''}
                     </p>
                   </div>
-
-                  <p className="text-sm font-black text-emerald-400 text-right">{e.score.toLocaleString()}</p>
-                  <p className="text-sm font-bold text-white text-right">{e.overall}</p>
-                  <p className="text-sm text-slate-300 text-right">{e.points}</p>
-                  <p className="text-[10px] text-slate-500 text-right leading-tight">
-                    {e.era_from}–{e.era_to}<br />
-                    <span className={`font-semibold ${e.position <= 4 ? 'text-emerald-400' : e.position >= 18 ? 'text-red-400' : 'text-slate-400'}`}>
-                      {e.position}°
-                    </span>
-                  </p>
                 </div>
               );
             })}
