@@ -267,7 +267,7 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
   });
   standingsMap.set(PLAYER_TEAM_ID, {
     teamId: PLAYER_TEAM_ID,
-    name: 'Sassuolo', abbr: 'SAS', color: '#27ae60',
+    name: 'La Tua Squadra', abbr: 'YOU', color: '#10b981',
     isPlayer: true, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, points: 0,
   });
 
