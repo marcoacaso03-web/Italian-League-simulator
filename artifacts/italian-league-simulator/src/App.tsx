@@ -3,7 +3,6 @@ import { Switch, Route, Router as WouterRouter } from 'wouter';
 import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 import LeaderboardPage from './pages/LeaderboardPage';
-import { AuthProvider } from './context/AuthContext';
 import { initData } from './lib/data';
 
 function LoadingScreen() {
@@ -59,11 +58,9 @@ function App() {
   if (!dataReady) return <LoadingScreen />;
 
   return (
-    <AuthProvider>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-        <Router />
-      </WouterRouter>
-    </AuthProvider>
+    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+      <Router />
+    </WouterRouter>
   );
 }
 

@@ -1,4 +1,4 @@
-import { getLeaderboard, addLeaderboardEntry, type LeaderboardEntry } from './firebase';
+import { getLeaderboard, addLeaderboardEntry, type LeaderboardEntry } from './supabase';
 
 export type { LeaderboardEntry };
 

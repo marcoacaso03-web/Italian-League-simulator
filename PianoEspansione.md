@@ -27,34 +27,34 @@
 
 | Aspetto | Stato | Note |
 |---------|-------|------|
-| **Framework** | Next.js 16 + React 19 + Tailwind 4 | Solido, nessun cambiamento necessario |
-| **Dati** | `data/clubs.json` (50 club Serie A storici) + `data/players.json` (~4000 giocatori, solo Serie A) | Vincolati alla Serie A |
+|| **Framework** | Vite + React 19 + Tailwind CSS (via `@tailwindcss/vite`) | Solido, nessun cambiamento necessario |
+| **Build Tool** | Vite con `pnpm` workspace mono-repo | `scripts/generate-data.ts` genera JSON statici in `public/data/` |
+| **Dati** | `public/data/players.json` (~4000 giocatori, solo Serie A) | Vincolati alla Serie A; generati da script in `scripts/src/` |
 | **Data Layer** | `lib/data.ts` — helper per club, giocatori, squad+season pool | Hardcoded "Serie A" implicito |
-| **Landing** | `app/page.tsx` — hero "38-0 Serie A", FAQ, sfide | Testi hardcoded "Serie A" |
-| **Game** | `app/game/page.tsx` — setup, draft, simulazione, risultato | Flusso completo ma Serie A-only |
-| **Componenti** | `FormationSelector`, `DifficultySelector`, `DraftWheel`, `Pitch`, `PlayerCard`, `SeasonSimulator` | Riusabili, nessun refactoring necessario |
+| **Landing** | `src/pages/HomePage.tsx` — hero "38-0 Serie A", FAQ, sfide | Testi hardcoded "Serie A" |
+| **Game** | `src/pages/GamePage.tsx` — setup, draft, simulazione, risultato | Flusso completo ma Serie A-only; wouter per routing |
+| **Componenti** | `FormationSelector`, `SlotMachine`, `Pitch`, `PlayerCard` | Riusabili, nessun refactoring necessario |
+| **Routing** | `wouter` (non Next.js Router) | Route: `/`, `/game`, `/leaderboard` |
 | **Deploy** | Vercel, dominio `38-0-serie-a.vercel.app` | Configurato e funzionante |
-| **Nessun backend** | Tutto client-side, niente Firebase/auth in runtime | ✅ Vantaggio: niente migrazione DB |
+| **Nessun backend** | Tutto client-side; Firebase solo per leaderboard (Firestore) | ✅ Vantaggio: niente migrazione DB |
 
 ### Cosa è hardcoded "Serie A"
 
-1. **`clubs.json`** — 50 club, tutti italiani
-2. **`players.json`** — giocatori con stagioni solo in club italiani
-3. **`page.tsx`** — titoli "38-0 Serie A", "Serie A" in testi/FAQ
-4. **`game/page.tsx`** — simulazione usa `clubs.slice(0, 20)` → 20 squadre fisse, 38 giornate
-5. **`game/page.tsx`** — `DIFFICULTY_REROLLS` e `POSITION_COMPATIBILITY` sono OK (generici)
-6. **`SeasonSimulator.tsx`** — `teamName = "La Mia Squadra"` → OK (generico)
+1. **`public/data/players.json`** — giocatori con stagioni solo in club italiani
+2. **`src/pages/HomePage.tsx`** — titoli "38-0 Serie A", "Serie A" in testi/FAQ
+3. **`src/pages/GamePage.tsx`** — simulazione usa `SERIE_A_2526` (20 squadre fisse), 38 giornate hardcoded
+4. **`src/lib/simulation.ts`** — `SERIE_A_2526` array hardcoded, `simulateSeason` usa `slice(0, 20)` e loop `md < 38`
 
 ### Cosa è già generico (riusabile)
 
-- Formazioni (`FORMATIONS` record) — 7 formazioni, già parametriche
-- `POSITION_COMPATIBILITY` — generico
-- `DifficultySelector` — generico
+- Formazioni (`FORMATION_SLOTS` in `lib/formations.ts`) — 5 formazioni, già parametriche
+- `DraftScreen` — accetta `SetupConfig`, non lega a lega specifica
+- `SquadPreviewScreen` — generico
+- `SimScreen` — accetta `DraftSlot[]`, generico
+- `ResultsScreen` — accetta `SeasonResult`, generico
+- `SlotMachine` — generico
 - `FormationSelector` — generico
-- `SeasonSimulator` — accetta props, non lega a lega specifica
-- `DraftWheel` — generico
-- `PlayerCard` — generico
-- `Pitch` — generico
+- `PlayerCard` — generico (in `DraftScreen`)
 
 ---
 
@@ -64,11 +64,11 @@
 
 ### D1 — Struttura dati: JSON statici per league
 
-**Decisione:** Ogni lega ha il suo file JSON in `data/leagues/<leagueId>/`.
+**Decisione:** Ogni lega ha il suo file JSON in `public/data/leagues/<leagueId>/`.
 Nessuna API esterna per v1. I dati vengono da dataset open (fonte: football.json.org, FBref scraping, o manuale).
 
 ```
-data/
+public/data/
 ├── leagues/
 │   ├── serie-a/
 │   │   ├── clubs.json
@@ -81,11 +81,13 @@ data/
 │   ├── la-liga/
 │   ├── ligue-1/
 │   └── bundesliga/
-├── clubs.json                # DEPRECATED — rimuovere in Fase 5
-└── players.json              # DEPRECATED — rimuovere in Fase 5
+├── players.json              # DEPRECATED — re-export temporaneo (Fase 1), rimuovere in Fase 5
+└── clubs-by-season.json      # DEPRECATED — re-export temporaneo (Fase 1), rimuovere in Fase 5
 ```
 
 **Motivazione:** Zero dipendenze esterne, build deterministica, performance massime. API live = Fase stretch.
+
+**Nota sui path:** In Vite, i file statici serviti da `public/` sono accessibili come `/data/...`. Il loader in `lib/leagues.ts` usa `fetch('/data/leagues/<id>/players.json')` con dynamic `import()` per lazy loading.
 
 ### D2 — Identificatore lega
 
@@ -167,10 +169,21 @@ export interface LeagueMeta {
 export interface LeagueClub {
   id: string;    // "manchester-united"
   name: string;  // "Manchester United"
+  rating: number; // 60-95, forza del club nella simulazione
+}
+
+/**
+ * Entry del pool draft per una combinazione club+stagione.
+ * `club` deve matchare un `LeagueClub.id` nella stessa lega.
+ */
+export interface LeagueClubSeasonEntry {
+  club: string;   // LeagueClub.id
+  season: string; // "2024-2025"
+  playerCount: number;
 }
 
 export interface LeaguePlayerSeason {
-  club: string;   // club id
+  club: string;   // Deve matchare un LeagueClub.id nella stessa lega (vincolo runtime, non tipografico)
   season: string; // "2024-2025"
   rating: number;
   apps: number;
@@ -226,40 +239,77 @@ Per ogni lega, creare `data/leagues/<leagueId>/` con:
 
 ### 1.2 — League Loader
 
-Creare `lib/leagues.ts`:
+Creare `lib/leagues.ts` con **dynamic import** per lazy loading:
 
 ```typescript
 // lib/leagues.ts
 import type { LeagueDataSource, LeagueMeta } from "@/types/league";
 
-// Static imports — tutti i dati sono nel bundle
-import serieAMeta from "@/data/leagues/serie-a/meta.json";
-import serieAClubs from "@/data/leagues/serie-a/clubs.json";
-import serieAPlayers from "@/data/leagues/serie-a/players.json";
-// ... import per ogni lega
-
-const LEAGUES: Record<string, LeagueDataSource> = {
-  "serie-a": { meta: serieAMeta, clubs: serieAClubs, players: serieAPlayers },
-  // ...
+type LeagueModule = {
+  meta: LeagueMeta;
+  clubs: LeagueClub[];
+  players: LeaguePlayer[];
 };
 
-export function getLeague(leagueId: string): LeagueDataSource {
-  const league = LEAGUES[leagueId];
-  if (!league) throw new Error(`Unknown league: ${leagueId}`);
-  return league;
+// Dynamic imports — ogni lega viene caricata solo quando serve
+const leagueLoaders: Record<string, () => Promise<LeagueModule>> = {
+  "serie-a":      () => import("@/data/leagues/serie-a/module.json"),
+  "premier-league": () => import("@/data/leagues/premier-league/module.json"),
+  "la-liga":      () => import("@/data/leagues/la-liga/module.json"),
+  "ligue-1":      () => import("@/data/leagues/ligue-1/module.json"),
+  "bundesliga":   () => import("@/data/leagues/bundesliga/module.json"),
+};
+
+// Cache dopo il primo caricamento
+const cache: Record<string, LeagueDataSource> = {};
+
+export async function getLeague(leagueId: string): Promise<LeagueDataSource> {
+  if (cache[leagueId]) return cache[leagueId];
+  const loader = leagueLoaders[leagueId];
+  if (!loader) {
+    // Errore esplicito — niente fallback silenzioso
+    throw new Error(`Lega non trovata: "${leagueId}". Leghe disponibili: ${Object.keys(leagueLoaders).join(", ")}`);
+  }
+  const mod = await loader();
+  const ds: LeagueDataSource = { meta: mod.meta, clubs: mod.clubs, players: mod.players };
+  cache[leagueId] = ds;
+  return ds;
 }
 
 export function listLeagues(): LeagueMeta[] {
-  return Object.values(LEAGUES).map(l => l.meta);
+  // Ritorna solo i meta (leggeri) senza caricare i dati completi
+  return Object.values(leagueLoaders).map(() => {
+    // I meta sono noti a compile-time tramite un elenco statico
+    // per evitare di caricare tutto solo per elencare le leghe
+  });
 }
+
+/** Elenco statico dei meta per il selector (non richiede caricamento dati) */
+export const LEAGUE_META_STATIC: LeagueMeta[] = [
+  { id: "serie-a",        name: "Serie A",        country: "Italia",       countryCode: "it", numTeams: 20, numMatchdays: 38, season: "2024-2025", colors: { primary: "#02448E", secondary: "#00C200", accent: "#FFFFFF" } },
+  { id: "premier-league",  name: "Premier League",  country: "Inghilterra",  countryCode: "gb", numTeams: 20, numMatchdays: 38, season: "2024-2025", colors: { primary: "#3D195B", secondary: "#FF2882", accent: "#00FF87" } },
+  { id: "la-liga",         name: "La Liga",         country: "Spagna",       countryCode: "es", numTeams: 20, numMatchdays: 38, season: "2024-2025", colors: { primary: "#000000", secondary: "#FFFFFF", accent: "#FF0000" } },
+  { id: "ligue-1",         name: "Ligue 1",         country: "Francia",      countryCode: "fr", numTeams: 18, numMatchdays: 34, season: "2024-2025", colors: { primary: "#091C3E", secondary: "#DA020E", accent: "#FFD700" } },
+  { id: "bundesliga",      name: "Bundesliga",      country: "Germania",     countryCode: "de", numTeams: 18, numMatchdays: 34, season: "2024-2025", colors: { primary: "#D20515", secondary: "#FFFFFF", accent: "#000000" } },
+];
 ```
+
+**Nota:** In Vite, `import()` su file JSON genera un chunk separato per ogni lega. Il bundle iniziale contiene solo i meta statici (~1KB). I dati completi (~2-3MB per lega) vengono caricati on-demand quando l'utente seleziona una lega.
 
 ### 1.3 — Migrazione dati Serie A esistente
 
-- [ ] Copiare `data/clubs.json` → `data/leagues/serie-a/clubs.json` (stesso formato)
-- [ ] Copiare `data/players.json` → `data/leagues/serie-a/players.json` (stesso formato)
-- [ ] Creare `data/leagues/serie-a/meta.json`
+- [ ] Creare `public/data/leagues/serie-a/module.json` (unico file con meta+clubs+players)
+- [ ] Creare `public/data/leagues/serie-a/meta.json` (re-export di `module.json` per compatibilità)
+- [ ] Creare `public/data/players.json` come re-export che punta ai dati Serie A (deprecato, mantiene compatibilità con `lib/data.ts` esistente)
+- [ ] Creare `public/data/clubs-by-season.json` come re-export (deprecato)
 - [ ] Verificare che i `club` nei player seasons corrispondano agli `id` in clubs
+
+**Pattern deprecazione (Fase 1 → Fase 5):**
+```
+Fase 1: I file vecchi (players.json, clubs-by-season.json) diventano re-export
+        che puntano ai nuovi dati. Nessuna rottura.
+Fase 5: Dopo verifica in produzione, rimuovere i file deprecati.
+```
 
 **Gate:** `getLeague("serie-a")` restituisce gli stessi dati di prima. `getLeague("premier-league")` restituisce i nuovi dati.
 
@@ -306,7 +356,7 @@ Il draft pool (club+season) deve essere filtrato per lega:
 // Prima: getClubSeasonPool() — tutti i dati globali
 // Dopo: getClubSeasonPool(leagueId) — filtrato per league
 
-function getClubSeasonPool(leagueId: string): ClubSeasonEntry[] {
+function getClubSeasonPool(leagueId: string): LeagueClubSeasonEntry[] {
   const league = getLeague(leagueId);
   const clubIds = new Set(league.clubs.map(c => c.id));
   // Filtra i player seasons per club appartenenti alla lega
@@ -405,6 +455,28 @@ const LAST_LEAGUE_KEY = "38-0-last-league";
 
 **Gate:** L'utente può selezionare una delle 5 leghe, il tema cambia, il draft usa i dati della lega scelta.
 
+### 3.6 — i18n per contenuti multi-lega
+
+Il progetto supporta EN/IT/ES/FR/DE/PT. Nuove stringhe da tradurre:
+
+| Key | EN | IT | ES | FR | DE | PT |
+|-----|----|----|----|----|----|-----|
+| `league_select_title` | Choose Your League | Scegli la tua Lega | Elige tu Liga | Choisis ta Liga | Wähge deine Liga | Escolha a sua Liga |
+| `league_5_leagues` | 5 Leagues | 5 Leghe | 5 Ligas | 5 Ligues | 5 Ligen | 5 Ligas |
+| `league_x_players` | 20,000+ Players | 20.000+ Giocatori | 20.000+ Jugadores | 20.000+ Joueurs | 20.000+ Spieler | 20.000+ Jogadores |
+| `league_country_it` | Italy | Italia | Italia | Italie | Italien | Itália |
+| `league_country_gb` | England | Inghilterra | Inglaterra | Angleterre | England | Inglaterra |
+| `league_country_es` | Spain | Spagna | España | Espagne | Spanien | Espanha |
+| `league_country_fr` | France | Francia | Francia | France | Frankreich | França |
+| `league_country_de` | Germany | Germania | Alemania | Allemagne | Deutschland | Alemanha |
+| `simulate_league` | Simulate {{league}} | Simula {{league}} | Simula {{league}} | Simule {{league}} | Simuliere {{league}} | Simule {{league}} |
+| `result_in_league` | in {{league}} con | in {{league}} con | en {{league}} con | en {{league}} con | in {{league}} con | na {{league}} com |
+| `finish_league_completed` | {{league}} completed | {{league}} completata | {{league}} completada | {{league}} terminée | {{league}} abgeschlossen | {{league}} concluída |
+
+**Nota:** I nomi delle leghe (Serie A, Premier League, ecc.) sono nomi propri e **non vanno tradotti**. Usare `league.meta.name` direttamente.
+
+Aggiungere le chiavi sopra in tutti i 6 file di traduzione (`en`, `it`, `es`, `fr`, `de`, `pt`).
+
 ---
 
 ## Fase 4 — Funzionalità Cross-Liga
@@ -457,11 +529,13 @@ interface SavedSimulation {
 ### 4.3 — Champions League (STRETCH)
 
 Se c'è tempo:
-- [ ] Selezionare top 4 da ogni lega
+- [ ] Selezionare top N da ogni lega (top 4 per leghe da 20 squadre, top 3 per leghe da 18 — **non hardcoded "top 4"**)
 - [ ] Generare tabellone Champions (fase a gironi + knockout)
 - [ ] Simulare con motore esistente
 
 **Non blocca il release.** Gate: se non è fatto, si sposta a v2.
+
+**Nota qualificazione:** Le leghe da 18 squadre (Ligue 1, Bundesliga) hanno meno squadre. La qualificazione deve essere proporzionale: `Math.round(4 * league.meta.numTeams / 20)` → 4 per 20 squadre, 3 per 18.
 
 ---
 
@@ -472,9 +546,9 @@ Se c'è tempo:
 
 ### 5.1 — Performance
 
-- [ ] Verificare bundle size con 5 leghe di dati (`npm run build` → analizzare output)
-- [ ] Se `players.json` totale > 5MB: valutare lazy loading per lega
-- [ ] Memoizzazione di `getLeague()` e `getClubSeasonPool()`
+- [ ] Verificare bundle size con 5 leghe di dati (`pnpm run build` → analizzare output)
+- [ ] ✅ Lazy loading già implementato in Fase 1 (dynamic `import()` per lega)
+- [ ] Memoizzazione di `getLeague()` (cache dopo primo caricamento, già in Fase 1)
 - [ ] Lighthouse audit: target Performance > 80
 
 ### 5.2 — Responsive
@@ -485,9 +559,27 @@ Se c'è tempo:
 
 ### 5.3 — Error handling
 
-- [ ] Cosa succede se una lega non ha dati? → Fallback a Serie A con messaggio
-- [ ] Cosa succede se il draft pool è vuoto? → Messaggio "Nessun dato per questa lega"
-- [ ] Boundary: Ligue 1 con 18 squadre → 34 giornate, non 38
+- [ ] Se una lega non ha dati → **errore esplicito** con messaggio chiaro, niente fallback silenzioso a Serie A
+  ```typescript
+  // ❌ SBAGLIATO — fallback silenzioso
+  const league = getLeague(leagueId) ?? getLeague("serie-a");
+
+  // ✅ CORRETTO — errore esplicito
+  const league = await getLeague(leagueId); // throw se non trovata
+  // Nel UI: mostra toast "Lega non trovata. Seleziona una lega valida."
+  ```
+- [ ] Se il draft pool è vuoto → Messaggio "Nessun dato per questa lega. Prova un'altra lega o era."
+- [ ] Boundary: Ligue 1 con 18 squadre → 34 giornate, non 38 (già gestito da `meta.json`)
+- [ ] Limite localStorage: max 20 simulazioni salvate. Le più vecchie vengono eliminate (FIFO).
+  ```typescript
+  const MAX_SAVED_SIMS = 20;
+  function saveSimulation(sim: SavedSimulation) {
+    const saved = JSON.parse(localStorage.getItem("38-0-sims") || "[]");
+    saved.push(sim);
+    if (saved.length > MAX_SAVED_SIMS) saved.shift(); // rimuovi la più vecchia
+    localStorage.setItem("38-0-sims", JSON.stringify(saved));
+  }
+  ```
 
 ### 5.4 — SEO & Meta
 
@@ -500,7 +592,8 @@ Se c'è tempo:
 - [ ] Merge `feat/multi-league` → `main`
 - [ ] Deploy su Vercel (automatico)
 - [ ] Verificare produzione: test E2E su ogni lega
-- [ ] Rimuovere file deprecati (`data/clubs.json`, `data/players.json`) — solo dopo verifica
+- [ ] **Fase 1 (ora):** I file deprecati (`public/data/players.json`, `public/data/clubs-by-season.json`) diventano re-export che puntano ai nuovi dati
+- [ ] **Fase 5 (dopo 2 settimane in produzione):** Rimuovere i file deprecati una volta confermato che nessun import diretti rimane
 
 ---
 
