@@ -1,0 +1,14 @@
+{
+  "id": "ligue-1",
+  "name": "Ligue 1",
+  "country": "Francia",
+  "countryCode": "fr",
+  "numTeams": 18,
+  "numMatchdays": 34,
+  "season": "2024-2025",
+  "colors": {
+    "primary": "#091C3E",
+    "secondary": "#DA020E",
+    "accent": "#FFD700"
+  }
+}

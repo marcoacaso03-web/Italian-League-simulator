@@ -1,0 +1,14 @@
+{
+  "id": "la-liga",
+  "name": "La Liga",
+  "country": "Spagna",
+  "countryCode": "es",
+  "numTeams": 20,
+  "numMatchdays": 38,
+  "season": "2024-2025",
+  "colors": {
+    "primary": "#000000",
+    "secondary": "#FFFFFF",
+    "accent": "#FF0000"
+  }
+}

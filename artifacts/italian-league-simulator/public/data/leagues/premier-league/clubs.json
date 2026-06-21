@@ -1,0 +1,22 @@
+[
+  { "id": "manchester-city", "name": "Manchester City", "rating": 92 },
+  { "id": "arsenal", "name": "Arsenal", "rating": 90 },
+  { "id": "liverpool", "name": "Liverpool", "rating": 89 },
+  { "id": "chelsea", "name": "Chelsea", "rating": 84 },
+  { "id": "manchester-united", "name": "Manchester United", "rating": 82 },
+  { "id": "tottenham", "name": "Tottenham", "rating": 81 },
+  { "id": "newcastle", "name": "Newcastle", "rating": 80 },
+  { "id": "aston-villa", "name": "Aston Villa", "rating": 79 },
+  { "id": "brighton", "name": "Brighton", "rating": 77 },
+  { "id": "west-ham", "name": "West Ham", "rating": 75 },
+  { "id": "crystal-palace", "name": "Crystal Palace", "rating": 73 },
+  { "id": "fulham", "name": "Fulham", "rating": 72 },
+  { "id": "wolverhampton", "name": "Wolverhampton", "rating": 71 },
+  { "id": "bournemouth", "name": "Bournemouth", "rating": 70 },
+  { "id": "nottingham-forest", "name": "Nottingham Forest", "rating": 69 },
+  { "id": "everton", "name": "Everton", "rating": 68 },
+  { "id": "brentford", "name": "Brentford", "rating": 67 },
+  { "id": "southampton", "name": "Southampton", "rating": 64 },
+  { "id": "leicester", "name": "Leicester", "rating": 63 },
+  { "id": "ipswich", "name": "Ipswich", "rating": 60 }
+]

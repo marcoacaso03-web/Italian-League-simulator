@@ -1,0 +1,20 @@
+[
+  { "id": "bayern-munich", "name": "Bayern München", "rating": 92 },
+  { "id": "borussia-dortmund", "name": "Borussia Dortmund", "rating": 86 },
+  { "id": "rb-leipzig", "name": "RB Leipzig", "rating": 83 },
+  { "id": "bayer-leverkusen", "name": "Bayer Leverkusen", "rating": 85 },
+  { "id": "eintracht-frankfurt", "name": "Eintracht Frankfurt", "rating": 79 },
+  { "id": "wolfsburg", "name": "Wolfsburg", "rating": 77 },
+  { "id": "freiburg", "name": "Freiburg", "rating": 76 },
+  { "id": "stuttgart", "name": "Stuttgart", "rating": 78 },
+  { "id": "hoffenheim", "name": "Hoffenheim", "rating": 74 },
+  { "id": "werder-bremen", "name": "Werder Bremen", "rating": 72 },
+  { "id": "mainz", "name": "Mainz", "rating": 71 },
+  { "id": "augsburg", "name": "Augsburg", "rating": 69 },
+  { "id": "borussia-mgladbach", "name": "Borussia M'gladbach", "rating": 70 },
+  { "id": "union-berlin", "name": "Union Berlin", "rating": 68 },
+  { "id": "bochum", "name": "Bochum", "rating": 65 },
+  { "id": "heidenheim", "name": "Heidenheim", "rating": 63 },
+  { "id": "darmstadt", "name": "Darmstadt", "rating": 60 },
+  { "id": "koln", "name": "Köln", "rating": 64 }
+]

@@ -1,0 +1,14 @@
+{
+  "id": "premier-league",
+  "name": "Premier League",
+  "country": "Inghilterra",
+  "countryCode": "gb",
+  "numTeams": 20,
+  "numMatchdays": 38,
+  "season": "2024-2025",
+  "colors": {
+    "primary": "#3D195B",
+    "secondary": "#FF2882",
+    "accent": "#00FF87"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  { "id": "real-madrid", "name": "Real Madrid", "rating": 93 },
+  { "id": "barcelona", "name": "Barcelona", "rating": 91 },
+  { "id": "atletico-madrid", "name": "Atlético Madrid", "rating": 86 },
+  { "id": "real-sociedad", "name": "Real Sociedad", "rating": 82 },
+  { "id": "athletic-bilbao", "name": "Athletic Bilbao", "rating": 80 },
+  { "id": "villarreal", "name": "Villarreal", "rating": 79 },
+  { "id": "real-betis", "name": "Real Betis", "rating": 78 },
+  { "id": "sevilla", "name": "Sevilla", "rating": 76 },
+  { "id": "valencia", "name": "Valencia", "rating": 74 },
+  { "id": "celta-vigo", "name": "Celta Vigo", "rating": 72 },
+  { "id": "getafe", "name": "Getafe", "rating": 71 },
+  { "id": "osasuna", "name": "Osasuna", "rating": 70 },
+  { "id": "girona", "name": "Girona", "rating": 73 },
+  { "id": "mallorca", "name": "Mallorca", "rating": 69 },
+  { "id": "rayo-vallecano", "name": "Rayo Vallecano", "rating": 68 },
+  { "id": "las-palmas", "name": "Las Palmas", "rating": 65 },
+  { "id": "alaves", "name": "Alavés", "rating": 66 },
+  { "id": "cadiz", "name": "Cádiz", "rating": 62 },
+  { "id": "granada", "name": "Granada", "rating": 61 },
+  { "id": "almeria", "name": "Almería", "rating": 59 }
+]

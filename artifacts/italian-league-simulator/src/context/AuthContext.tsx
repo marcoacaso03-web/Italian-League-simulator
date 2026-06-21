@@ -1,19 +1,17 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 
 interface AuthContextValue {
-  user:          null;
-  loading:       boolean;
-  firebaseReady: boolean;
-  signIn:        () => Promise<void>;
-  logOut:        () => Promise<void>;
+  user:    null;
+  loading: boolean;
+  signIn:  () => Promise<void>;
+  logOut:  () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue>({
-  user:          null,
-  loading:       false,
-  firebaseReady: false,
-  signIn:        async () => {},
-  logOut:        async () => {},
+  user:    null,
+  loading: false,
+  signIn:  async () => {},
+  logOut:  async () => {},
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -21,7 +19,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider value={{
       user: null,
       loading: false,
-      firebaseReady: false,
       signIn: async () => {},
       logOut: async () => {},
     }}>

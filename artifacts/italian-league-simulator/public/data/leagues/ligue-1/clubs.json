@@ -1,0 +1,20 @@
+[
+  { "id": "psg", "name": "Paris Saint-Germain", "rating": 91 },
+  { "id": "marseille", "name": "Marseille", "rating": 82 },
+  { "id": "lyon", "name": "Lyon", "rating": 80 },
+  { "id": "monaco", "name": "Monaco", "rating": 79 },
+  { "id": "lille", "name": "Lille", "rating": 78 },
+  { "id": "nice", "name": "Nice", "rating": 77 },
+  { "id": "rennes", "name": "Rennes", "rating": 75 },
+  { "id": "lens", "name": "Lens", "rating": 74 },
+  { "id": "strasbourg", "name": "Strasbourg", "rating": 72 },
+  { "id": "toulouse", "name": "Toulouse", "rating": 70 },
+  { "id": "montpellier", "name": "Montpellier", "rating": 69 },
+  { "id": "nantes", "name": "Nantes", "rating": 68 },
+  { "id": "brest", "name": "Brest", "rating": 71 },
+  { "id": "reims", "name": "Reims", "rating": 67 },
+  { "id": "lorient", "name": "Lorient", "rating": 64 },
+  { "id": "le-havre", "name": "Le Havre", "rating": 62 },
+  { "id": "metz", "name": "Metz", "rating": 60 },
+  { "id": "clermont", "name": "Clermont", "rating": 58 }
+]

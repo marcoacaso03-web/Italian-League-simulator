@@ -1,0 +1,14 @@
+{
+  "id": "serie-a",
+  "name": "Serie A",
+  "country": "Italia",
+  "countryCode": "it",
+  "numTeams": 20,
+  "numMatchdays": 38,
+  "season": "2024-2025",
+  "colors": {
+    "primary": "#02448E",
+    "secondary": "#00C200",
+    "accent": "#FFFFFF"
+  }
+}

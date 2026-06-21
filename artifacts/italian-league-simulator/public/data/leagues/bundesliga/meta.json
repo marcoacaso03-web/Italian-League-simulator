@@ -1,0 +1,14 @@
+{
+  "id": "bundesliga",
+  "name": "Bundesliga",
+  "country": "Germania",
+  "countryCode": "de",
+  "numTeams": 18,
+  "numMatchdays": 34,
+  "season": "2024-2025",
+  "colors": {
+    "primary": "#D20515",
+    "secondary": "#FFFFFF",
+    "accent": "#000000"
+  }
+}
