@@ -221,14 +221,19 @@ Per ogni lega, creare `data/leagues/<leagueId>/` con:
 | File | Contenuto | Fonte |
 |------|-----------|-------|
 | `meta.json` | Nome, paese, colori, num squadre/giornate | Manuale |
-| `clubs.json` | 18-20 club della lega | Manuale o scraping |
-| `players.json` | Giocatori con stagione migliore per club | FBref / manuale |
+| `clubs.json` | 18-20 club della lega | Kaggle dataset |
+| `players.json` | Giocatori con stagione migliore per club | Kaggle dataset |
+
+**Fonte primaria: Kaggle**
+- API Key: salvata in `.env` come `KAGGLE_KEY` (non committata)
+- Dataset target: statistiche calcistiche per lega/stagione (giocatori, club, rating)
+- Script di download: `scripts/src/fetch-kaggle-data.ts`
 
 **Approccio pragmatico per v1:**
 - **Serie A:** Replicare i dati esistenti in `data/leagues/serie-a/` (copia da `data/clubs.json` + `data/players.json`, filtrando per club Serie A)
 - **Altre 4 leghe:** Creare dataset minimi ma funzionanti:
   - 18-20 club per lega (quelli principali)
-  - 11-15 giocatori per club (sufficienti per il draft)
+  - 11-15 giocatori per club (sufficienti per draft variegato)
   - Rating realistici (top player 85-95, media 65-75)
 
 **Checklist per ogni lega:**
@@ -236,6 +241,36 @@ Per ogni lega, creare `data/leagues/<leagueId>/` con:
 - [ ] `clubs.json` con 18-20 club (formato `LeagueClub`)
 - [ ] `players.json` con almeno 150 giocatori totali (sufficiente per draft variegato)
 - [ ] Dati validati: ogni giocatore ha almeno una stagione, ogni stagione riferisce un club esistente
+- [ ] Dati incrociati con Kaggle per verifica bontà
+
+### 1.1b — Verifica bontà dati con Kaggle
+
+Prima di finalizzare i dataset, verificare la qualità incrociando con i dati Kaggle:
+
+```bash
+# Setup Kaggle API (key già in .env)
+pip install kaggle
+export KAGGLE_KEY=$(grep KAGGLE_KEY .env | cut -d= -f2)
+
+# Cerca dataset rilevanti
+kaggle datasets search "football players stats"
+kaggle datasets search "european football"
+
+# Scarica dataset target (da definire dopo esplorazione)
+kaggle datasets download -d <dataset-owner>/<dataset-name> -p data/kaggle-raw/
+```
+
+**Script di verifica** (`scripts/src/validate-data.ts`):
+1. Carica i dati Kaggle scaricati
+2. Confronta numero giocatori per club con il nostro dataset
+3. Verifica che i rating siano in range realistico per ogni lega
+4. Segnala discrepanze >20% rispetto alle attese
+5. Output: report `data/validation-report.json`
+
+**Criteri di accettanza:**
+- Differenza media rating per lega <15% rispetto a Kaggle
+- Tutti i principali club presenti (almeno 15 per lega)
+- Almeno 100 giocatori per lega con dati completi
 
 ### 1.2 — League Loader
 
