@@ -137,6 +137,9 @@ export default function HomePage() {
       <footer className="border-t border-white/5 py-8 text-center text-sm text-slate-500 space-y-3">
         <p>{t('footer_unofficial')}</p>
         <p>{t('footer_disclaimer')}</p>
+        <a href="https://ko-fi.com/losviluppatore" target="_blank" rel="noopener noreferrer" className="inline-block mx-auto hover:opacity-80 transition-opacity">
+          <img height="36" style={{ border: '0px', height: 36 }} src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" alt="Buy Me a Coffee at ko-fi.com" />
+        </a>
         <div className="flex items-center justify-center gap-4 pt-2">
           <Link href="/terms">
             <span className="text-slate-500 hover:text-emerald-400 transition-colors cursor-pointer text-xs">{t('footer_terms')}</span>
