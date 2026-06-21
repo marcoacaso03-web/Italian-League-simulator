@@ -11,21 +11,25 @@ export interface SerieATeam {
 }
 
 /**
- * Mappatura nome simulazione → nome nel CSV players.json.
- * Tutti e 20 i club sono nel CSV FC 26 → nessun fallback hardcoded necessario.
+ * Mappatura nome simulazione → nome canonico in players.json.
+ * Dopo la normalizzazione in generate-data.ts, i nomi in players.json
+ * sono già quelli canonici → la mappa è quasi identità.
+ * Solo Cremonese/Pisa/Sassuolo restano mappati perché non hanno
+ * varianti CSV (sono già canonici).
  */
 const CSV_NAME_MAP: Record<string, string> = {
-  Milan:       'Milano FC',
-  Verona:      'Hellas Verona',
-  Cremonese:   'Cremonese',
-  Pisa:        'Pisa',
-  Sassuolo:    'Sassuolo',
+  Milan:    'Milan',
+  Verona:   'Verona',
+  Cremonese: 'Cremonese',
+  Pisa:     'Pisa',
+  Sassuolo: 'Sassuolo',
 };
-
 /**
- * Le 20 squadre del campionato 25/26, basate sui dati del CSV FC 26.
- * Il campo `rating` viene sovrascritto a runtime da `getSERIE_A_2526()`
- * con la media top-11 calcolata dai dati reali dei giocatori.
+ * Le 19 squadre AI del campionato 25/26, basate sui dati del CSV FC 26.
+ * Il campionato ha sempre 20 squadre: 19 AI + 1 giocatore.
+ * Se il giocatore sceglie una squadra dal CSV 26, questa viene rimossa dalla lista AI
+ * e sostituita dalla squadra del giocatore.
+ * Nota: Sassuolo è escluso dalla lista AI di default (può essere scelto dal giocatore).
  */
 const SERIE_A_2526_BASE: SerieATeam[] = [
   { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89, csvName: 'Inter' },
@@ -47,7 +51,6 @@ const SERIE_A_2526_BASE: SerieATeam[] = [
   { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67, csvName: 'Hellas Verona' },
   { id: 'cre', name: 'Cremonese',  abbr: 'CRE', color: '#c0392b', rating: 70, csvName: 'Cremonese' },
   { id: 'pis', name: 'Pisa',        abbr: 'PIS', color: '#2c3e50', rating: 68, csvName: 'Pisa' },
-  { id: 'sas', name: 'Sassuolo',    abbr: 'SAS', color: '#27ae60', rating: 66, csvName: 'Sassuolo' },
 ];
 
 const SEASON_2526 = '2025-2026';
@@ -249,23 +252,27 @@ function buildRoundRobin(teamIds: string[]): [string, string][][] {
 export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): SeasonResult {
   const playerRating = overall.overall;
   const scorerPool = buildScorerPool(slots);
-  const teams = getSERIE_A_2526();
-  const allTeamIds = ['player', ...teams.map((t) => t.id)];
+  const aiTeams = getSERIE_A_2526();
+
+  // La squadra del giocatore sostituisce sempre Sassuolo nel campionato
+  const PLAYER_TEAM_ID = 'player';
+  const allTeamIds = [PLAYER_TEAM_ID, ...aiTeams.map((t) => t.id)];
 
   const standingsMap = new Map<string, TeamStanding>();
-  teams.forEach((t) => {
+  aiTeams.forEach((t) => {
     standingsMap.set(t.id, {
       teamId: t.id, name: t.name, abbr: t.abbr, color: t.color,
       isPlayer: false, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, points: 0,
     });
   });
-  standingsMap.set('player', {
-    teamId: 'player', name: 'La Tua Squadra', abbr: 'YOU', color: '#10b981',
+  standingsMap.set(PLAYER_TEAM_ID, {
+    teamId: PLAYER_TEAM_ID,
+    name: 'Sassuolo', abbr: 'SAS', color: '#27ae60',
     isPlayer: true, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, points: 0,
   });
 
   const getRating = (id: string) =>
-    id === 'player' ? playerRating : (teams.find((t) => t.id === id)?.rating ?? 70);
+    id === PLAYER_TEAM_ID ? playerRating : (aiTeams.find((t) => t.id === id)?.rating ?? 70);
 
   const schedule = buildRoundRobin(allTeamIds);
   const matchdaySnapshots: MatchdaySnapshot[] = [];

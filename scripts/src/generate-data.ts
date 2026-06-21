@@ -75,6 +75,47 @@ function ruoloToPositionCategory(ruolo: string): { position: string; category: s
 }
 
 // ---------------------------------------------------------------------------
+// Mapping nomi club CSV → nome canonico
+// I giochi FIFA/FC usano nomi diversi per licenze (es. "Milano FC" per Milan,
+// "Doria" per Sampdoria, "Piemonte Calcio" per Juventus, ecc.).
+// Questa mappa normalizza tutti i varianti al nome reale e consistente.
+// ---------------------------------------------------------------------------
+const CLUB_NAME_MAP: Record<string, string> = {
+  // Milan
+  'Milano FC':    'Milan',
+  'AC Milan':     'Milan',
+  // Roma
+  'AS Roma':      'Roma',
+  'Roma FC':      'Roma',
+  // Inter
+  'Inter Milan':  'Inter',
+  // Juventus (FIFA branding) — copre eventuali file futuri
+  'Piemonte Calcio': 'Juventus',
+  // Hellas Verona / Verona
+  'Hellas Verona':     'Verona',
+  'Chievo Verona':     'Verona',
+  // Lazio
+  'SS Lazio':     'Lazio',
+  // Genoa / Sampdoria
+  'F. Genova':    'Genoa',
+  'Doria':        'Sampdoria',
+  // Atalanta
+  'Atalanta BC':  'Atalanta',
+  // Fiorentina
+  'Firenze':      'Fiorentina',
+  // Monza
+  'AC Monza':     'Monza',
+  // Reggina
+  'Reggina Calcio': 'Reggina',
+  // Spezia (FIFA 21)
+  'Borgocalcio (Spezia)': 'Spezia',
+};
+
+function normalizeClubName(name: string): string {
+  return CLUB_NAME_MAP[name] ?? name;
+}
+
+// ---------------------------------------------------------------------------
 // Parsing CSV
 // ---------------------------------------------------------------------------
 function parseSimpleCsv(content: string): CsvRow[] {
@@ -217,10 +258,11 @@ for (const [filename, annoStagione] of Object.entries(seasonMap)) {
     const { position, category } = ruoloToPositionCategory(row.Ruolo);
     const rating = parseInt(row.Valutazione, 10);
     if (isNaN(rating)) continue;
-    const fileKey = `${row.Giocatore}|${row.Squadra}`;
+    const club = normalizeClubName(row.Squadra);
+    const fileKey = `${row.Giocatore}|${club}`;
     if (!fileGroups.has(fileKey)) {
       fileGroups.set(fileKey, {
-        name: row.Giocatore, club: row.Squadra,
+        name: row.Giocatore, club,
         primaryPos: position, primaryCat: category, rating,
         allPos: [position], allCat: [category],
       });

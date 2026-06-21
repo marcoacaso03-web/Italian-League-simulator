@@ -15,7 +15,7 @@
   { "id": "genoa", "name": "Genoa", "rating": 74 },
   { "id": "parma", "name": "Parma", "rating": 74 },
   { "id": "udinese", "name": "Udinese", "rating": 74 },
-  { "id": "hellas-verona", "name": "Hellas Verona", "rating": 74 },
+  { "id": "verona", "name": "Verona", "rating": 74 },
   { "id": "lecce", "name": "Lecce", "rating": 73 },
   { "id": "cremonese", "name": "Cremonese", "rating": 74 },
   { "id": "pisa", "name": "Pisa", "rating": 74 }
