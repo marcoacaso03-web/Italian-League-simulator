@@ -134,9 +134,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/5 py-8 text-center text-sm text-slate-500">
+      <footer className="border-t border-white/5 py-8 text-center text-sm text-slate-500 space-y-3">
         <p>{t('footer_unofficial')}</p>
-        <p className="mt-2">{t('footer_disclaimer')}</p>
+        <p>{t('footer_disclaimer')}</p>
+        <div className="flex items-center justify-center gap-4 pt-2">
+          <Link href="/terms">
+            <span className="text-slate-500 hover:text-emerald-400 transition-colors cursor-pointer text-xs">{t('footer_terms')}</span>
+          </Link>
+          <span className="text-slate-700">·</span>
+          <Link href="/privacy">
+            <span className="text-slate-500 hover:text-emerald-400 transition-colors cursor-pointer text-xs">{t('footer_privacy')}</span>
+          </Link>
+        </div>
+        <p className="text-[10px] text-slate-600 pt-1">{t('footer_contact')}: losviluppatore@hotmail.com</p>
       </footer>
     </main>
   );

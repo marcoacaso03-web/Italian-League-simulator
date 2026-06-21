@@ -10,6 +10,8 @@ import LobbyGamePage from './pages/LobbyGamePage';
 import Lobby1v1CreatePage from './pages/Lobby1v1CreatePage';
 import Lobby1v1JoinPage from './pages/Lobby1v1JoinPage';
 import Lobby1v1GamePage from './pages/Lobby1v1GamePage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 import { initData } from './lib/data';
 import { getLobby } from './lib/lobby';
 import type { Lobby } from './lib/lobby';
@@ -142,6 +144,8 @@ function Router() {
       <Route path="/lobby/1v1/game">
         <Lobby1v1GameRoute />
       </Route>
+      <Route path="/terms" component={TermsPage} />
+      <Route path="/privacy" component={PrivacyPage} />
       <Route>
         <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
           <p className="text-slate-400">Pagina non trovata</p>
