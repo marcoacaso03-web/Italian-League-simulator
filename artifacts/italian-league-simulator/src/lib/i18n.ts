@@ -190,6 +190,7 @@ const resources = {
     'player_ratings': 'Ratings Mode', 'player_ratings_career': 'Career', 'player_ratings_career_sub': 'Use career-average ratings',
     'player_ratings_prime': 'Prime', 'player_ratings_prime_sub': 'Use peak/prime ratings',
     'era': 'Era', 'era_seasons': 'seasons of', 'era_hint': 'Select the range of seasons for player data',
+    'era_all': 'All', 'era_2000s': '2000s', 'era_2010s': '2010s', 'era_modern': 'Modern', 'era_modern_sub': '2016+',
     'start_draft': 'Start Draft →',
     // Draft
     'place_player': 'Place player',
@@ -268,6 +269,7 @@ const resources = {
     'player_ratings': 'Modalità Rating', 'player_ratings_career': 'Carriera', 'player_ratings_career_sub': 'Usa i rating medi di carriera',
     'player_ratings_prime': 'Picco', 'player_ratings_prime_sub': 'Usa i rating di picco',
     'era': 'Era', 'era_seasons': 'stagioni di', 'era_hint': 'Seleziona l\'intervallo di stagioni per i dati dei giocatori',
+    'era_all': 'Tutto', 'era_2000s': '2000s', 'era_2010s': '2010s', 'era_modern': 'Moderno', 'era_modern_sub': '2016+',
     'start_draft': 'Inizia Draft →',
     // Draft
     'place_player': 'Posiziona giocatore',
@@ -346,6 +348,7 @@ const resources = {
     'player_ratings': 'Modo Ratings', 'player_ratings_career': 'Carrera', 'player_ratings_career_sub': 'Usa ratings promedio de carrera',
     'player_ratings_prime': 'Prime', 'player_ratings_prime_sub': 'Usa ratings de pico',
     'era': 'Era', 'era_seasons': 'temporadas de', 'era_hint': 'Selecciona el rango de temporadas para datos de jugadores',
+    'era_all': 'Todo', 'era_2000s': '2000s', 'era_2010s': '2010s', 'era_modern': 'Moderno', 'era_modern_sub': '2016+',
     'start_draft': 'Iniciar Draft →',
     // Draft
     'place_player': 'Colocar jugador',
@@ -424,6 +427,7 @@ const resources = {
     'player_ratings': 'Mode Ratings', 'player_ratings_career': 'Carrière', 'player_ratings_career_sub': 'Utilise les ratings moyens de carrière',
     'player_ratings_prime': 'Pic', 'player_ratings_prime_sub': 'Utilise les ratings de pic',
     'era': 'Ère', 'era_seasons': 'saisons sur', 'era_hint': 'Sélectionne la plage de saisons pour les données joueurs',
+    'era_all': 'Tout', 'era_2000s': '2000s', 'era_2010s': '2010s', 'era_modern': 'Moderne', 'era_modern_sub': '2016+',
     'start_draft': 'Commencer Draft →',
     // Draft
     'place_player': 'Placer joueur',
@@ -502,6 +506,7 @@ const resources = {
     'player_ratings': 'Ratings-Modus', 'player_ratings_career': 'Karriere', 'player_ratings_career_sub': 'Verwende Karriere-Durchschnittsratings',
     'player_ratings_prime': 'Prime', 'player_ratings_prime_sub': 'Verwende Spitzenratings',
     'era': 'Ära', 'era_seasons': 'Saisons von', 'era_hint': 'Wähle den Saisonbereicher für Spielerdaten',
+    'era_all': 'Alle', 'era_2000s': '2000er', 'era_2010s': '2010er', 'era_modern': 'Modern', 'era_modern_sub': '2016+',
     'start_draft': 'Draft Starten →',
     // Draft
     'place_player': 'Spieler platzieren',
@@ -580,6 +585,7 @@ const resources = {
     'player_ratings': 'Modo Ratings', 'player_ratings_career': 'Carreira', 'player_ratings_career_sub': 'Usa ratings médios de carreira',
     'player_ratings_prime': 'Prime', 'player_ratings_prime_sub': 'Usa ratings de pico',
     'era': 'Era', 'era_seasons': 'temporadas de', 'era_hint': 'Selecione o intervalo de temporadas para dados de jogadores',
+    'era_all': 'Tudo', 'era_2000s': '2000s', 'era_2010s': '2010s', 'era_modern': 'Moderno', 'era_modern_sub': '2016+',
     'start_draft': 'Iniciar Draft →',
     // Draft
     'place_player': 'Posicionar jogador',

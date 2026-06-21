@@ -66,7 +66,7 @@ export default function HomePage() {
               🌍 {t('lb_title')}
             </Link>
             <Link href="/lobby" className="rounded-xl border border-violet-500/30 bg-violet-500/10 px-8 py-4 text-lg font-bold text-violet-300 transition-all hover:bg-violet-500/20 hover:scale-105">
-              🎮 Giochi con Amici
+              🎮 {t('lobby_title')}
             </Link>
           </div>
         </div>
