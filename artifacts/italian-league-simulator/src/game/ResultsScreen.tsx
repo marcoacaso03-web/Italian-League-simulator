@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import type { DraftSlot } from '../lib/draft';
@@ -98,9 +98,14 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
   const [nickname, setNickname] = useState('');
   const [finalCode, setFinalCode] = useState<string | null>(null);
   const existingCode = useMemo(() => getUserCode(), []);
+  // Ref to prevent double submission
+  const isSubmitting = useRef(false);
 
   async function handleSaveAsGuest(e: React.FormEvent) {
     e.preventDefault();
+    if (isSubmitting.current || submitState !== 'form') return;
+    isSubmitting.current = true;
+
     const code = existingCode ?? createAndSaveCode(nickname);
     setSubmitState('submitting');
     try {
@@ -121,42 +126,48 @@ export default function ResultsScreen({ result, overall, slots, config, onRestar
       setSubmitState('done');
     } catch {
       setSubmitState('error');
+    } finally {
+      isSubmitting.current = false;
     }
   }
 
   async function handleSaveWithGoogle() {
-    // If not signed in, sign in first
-    if (!user && firebaseReady) {
-      try {
+    if (isSubmitting.current || submitState !== 'form') return;
+    isSubmitting.current = true;
+
+    try {
+      // If not signed in, sign in first
+      if (!user && firebaseReady) {
         await signIn();
-      } catch {
-        return;
+        // Wait for auth state to update
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
-    }
-    // After sign-in (or if already signed in), submit
-    // We need to wait for the auth state to update, so we use a small delay
-    setTimeout(async () => {
+
+      const currentUser = user; // user may have been updated after signIn
+      const nick = currentUser?.displayName ?? 'PLAYER';
+      const code = `${nick}#${String(Math.floor(Math.random() * 9000) + 1000)}`;
+
       setSubmitState('submitting');
-      try {
-        await submitScore({
-          nickname:    `${user?.displayName ?? 'PLAYER'}#${String(Math.floor(Math.random() * 9000) + 1000)}`,
-          uid:         user?.uid ?? null,
-          score:       myScore,
-          overall:     overall.overall,
-          points:      result.playerPoints,
-          position:    result.playerFinalPosition,
-          formation:   config.formation,
-          difficulty:  config.difficulty,
-          showRatings: config.showRatings,
-          eraFrom:     config.eraFrom,
-          eraTo:       config.eraTo,
-        });
-        setFinalCode(null);
-        setSubmitState('done');
-      } catch {
-        setSubmitState('error');
-      }
-    }, 1500);
+      await submitScore({
+        nickname:    code,
+        uid:         currentUser?.uid ?? null,
+        score:       myScore,
+        overall:     overall.overall,
+        points:      result.playerPoints,
+        position:    result.playerFinalPosition,
+        formation:   config.formation,
+        difficulty:  config.difficulty,
+        showRatings: config.showRatings,
+        eraFrom:     config.eraFrom,
+        eraTo:       config.eraTo,
+      });
+      setFinalCode(code);
+      setSubmitState('done');
+    } catch {
+      setSubmitState('error');
+    } finally {
+      isSubmitting.current = false;
+    }
   }
 
   return (

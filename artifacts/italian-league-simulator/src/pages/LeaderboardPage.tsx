@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { fetchLeaderboard, getUserCode, type LeaderboardEntry } from '../lib/leaderboard';
 import { useAuth } from '../context/AuthContext';
+
+// Client-side cache
+let cachedEntries: LeaderboardEntry[] | null = null;
+let cacheTime = 0;
+const CACHE_TTL = 30_000; // 30 seconds
 
 function medalEmoji(rank: number): string {
   if (rank === 1) return '🥇';
@@ -20,17 +25,35 @@ function difficultyEmoji(d: string): string {
 export default function LeaderboardPage() {
   const { t } = useTranslation();
   const { user, signIn, logOut, firebaseReady } = useAuth();
-  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [entries, setEntries] = useState<LeaderboardEntry[]>(cachedEntries ?? []);
+  const [loading, setLoading] = useState(!cachedEntries);
   const [error, setError]   = useState<string | null>(null);
   const myCode = getUserCode();
 
-  useEffect(() => {
-    fetchLeaderboard()
-      .then(setEntries)
-      .catch(() => setError(t('lb_error')))
-      .finally(() => setLoading(false));
+  const loadLeaderboard = useCallback(async () => {
+    // Use cache if fresh
+    if (cachedEntries && Date.now() - cacheTime < CACHE_TTL) {
+      setEntries(cachedEntries);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const data = await fetchLeaderboard();
+      cachedEntries = data;
+      cacheTime = Date.now();
+      setEntries(data);
+      setError(null);
+    } catch {
+      setError(t('lb_error'));
+    } finally {
+      setLoading(false);
+    }
   }, [t]);
+
+  useEffect(() => {
+    loadLeaderboard();
+  }, [loadLeaderboard]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
