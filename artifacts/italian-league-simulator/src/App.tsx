@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, Router as WouterRouter } from 'wouter';
+import { Switch, Route, Router as WouterRouter, Redirect } from 'wouter';
 import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import LobbyPage from './pages/LobbyPage';
+import LobbyCreatePage from './pages/LobbyCreatePage';
+import LobbyRoomPage from './pages/LobbyRoomPage';
+import LobbyGamePage from './pages/LobbyGamePage';
 import { initData } from './lib/data';
+import { getLobby } from './lib/lobby';
+import type { Lobby } from './lib/lobby';
+import { LobbyProvider, useLobby } from './context/LobbyContext';
 
 function LoadingScreen() {
   return (
@@ -26,12 +33,86 @@ function ErrorScreen({ onRetry }: { onRetry: () => void }) {
   );
 }
 
+// Wrapper per leggere il codice lobby dalla URL
+function LobbyRoomRoute() {
+  const { setLobbyCode, setLobby } = useLobby();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (code) {
+      setLobbyCode(code.toUpperCase());
+      getLobby(code.toUpperCase()).then((lobby) => {
+        if (lobby) setLobby(lobby);
+        setReady(true);
+      });
+    } else {
+      setReady(true);
+    }
+  }, [setLobbyCode, setLobby]);
+
+  if (!ready) {
+    return <LoadingScreen />;
+  }
+
+  return <LobbyRoomPageWrapper />;
+}
+
+function LobbyRoomPageWrapper() {
+  const { lobbyCode, lobby, setLobby } = useLobby();
+
+  if (!lobbyCode || !lobby) {
+    return <Redirect to="/lobby" />;
+  }
+
+  const handleStartGame = (startedLobby: Lobby) => {
+    setLobby(startedLobby);
+  };
+
+  return <LobbyRoomPage lobbyCode={lobbyCode} onStartGame={handleStartGame} />;
+}
+
+function LobbyGameRoute() {
+  const { lobby } = useLobby();
+
+  if (!lobby) {
+    return <Redirect to="/lobby" />;
+  }
+
+  return <LobbyGamePage lobby={lobby} />;
+}
+
 function Router() {
+  const { setLobbyCode, setLobby } = useLobby();
+
   return (
     <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/game" component={GamePage} />
       <Route path="/leaderboard" component={LeaderboardPage} />
+      <Route path="/lobby">
+        <LobbyPage
+          onLobbyJoined={(code) => {
+            setLobbyCode(code);
+            window.location.href = `/lobby/room?code=${code}`;
+          }}
+        />
+      </Route>
+      <Route path="/lobby/create">
+        <LobbyCreatePage
+          onLobbyCreated={(code) => {
+            setLobbyCode(code);
+            window.location.href = `/lobby/room?code=${code}`;
+          }}
+        />
+      </Route>
+      <Route path="/lobby/room">
+        <LobbyRoomRoute />
+      </Route>
+      <Route path="/lobby/game">
+        <LobbyGameRoute />
+      </Route>
       <Route>
         <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
           <p className="text-slate-400">Pagina non trovata</p>
@@ -43,7 +124,7 @@ function Router() {
 
 function App() {
   const [dataReady, setDataReady] = useState(false);
-  const [error,     setError]     = useState(false);
+  const [error, setError] = useState(false);
 
   function load() {
     setError(false);
@@ -52,14 +133,16 @@ function App() {
       .catch(() => setError(true));
   }
 
-  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { load(); }, []);
 
-  if (error)     return <ErrorScreen onRetry={load} />;
+  if (error) return <ErrorScreen onRetry={load} />;
   if (!dataReady) return <LoadingScreen />;
 
   return (
     <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-      <Router />
+      <LobbyProvider>
+        <Router />
+      </LobbyProvider>
     </WouterRouter>
   );
 }
