@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Leaderboard collection — anyone can read, anyone can write
+    match /leaderboard/{document} {
+      allow read: if true;
+      allow create: if true;
+      // Allow update only if the document belongs to the same user (by uid)
+      allow update: if request.auth != null
+        && request.auth.uid == resource.data.uid;
+      // No deletes from client
+      allow delete: if false;
+    }
+  }
+}
