@@ -85,7 +85,7 @@ export default function LeaderboardPage() {
         {!loading && entries.length > 0 && (
           <section className="glass rounded-2xl overflow-hidden">
             <div className="px-4 py-3 border-b border-white/5">
-              <div className="grid grid-cols-[2rem_1fr_4rem_3rem_3rem_4rem] gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+              <div className="grid grid-cols-[2rem_minmax(7rem,1fr)_4rem_3rem_3rem_4rem] gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                 <span>#</span>
                 <span>{t('lb_col_nickname')}</span>
                 <span className="text-right">{t('lb_col_score')}</span>
@@ -100,7 +100,7 @@ export default function LeaderboardPage() {
               return (
                 <div key={`${e.id}-${i}`}
                   className={[
-                    'grid grid-cols-[2rem_1fr_4rem_3rem_3rem_4rem] gap-2 items-center px-4 py-2.5 border-b border-white/[0.04] last:border-b-0',
+                    'grid grid-cols-[2rem_minmax(7rem,1fr)_4rem_3rem_3rem_4rem] gap-2 items-center px-4 py-2.5 border-b border-white/[0.04] last:border-b-0',
                     isMe ? 'bg-emerald-500/10 border-l-2 border-l-emerald-500' : '',
                   ].join(' ')}>
 
@@ -108,8 +108,8 @@ export default function LeaderboardPage() {
                     {medalEmoji(rank)}
                   </span>
 
-                  <div className="min-w-0">
-                    <p className={`text-sm font-bold truncate ${isMe ? 'text-emerald-300' : 'text-white'}`}>
+                  <div className="min-w-0 flex-1">
+                    <p className={`text-sm font-bold ${isMe ? 'text-emerald-300' : 'text-white'}`}>
                       {e.nickname}
                       {isMe && <span className="ml-2 text-[10px] text-emerald-500 font-normal">{t('lb_you')}</span>}
                     </p>
