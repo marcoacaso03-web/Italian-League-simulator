@@ -1,3 +1,4 @@
+import { getTop11Average } from './data';
 import type { DraftSlot } from './draft';
 
 export interface SerieATeam {
@@ -6,29 +7,68 @@ export interface SerieATeam {
   abbr: string;
   color: string;
   rating: number;
+  csvName: string; // nome del club nel CSV/players.json
 }
 
-export const SERIE_A_2526: SerieATeam[] = [
-  { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89 },
-  { id: 'nap', name: 'Napoli',      abbr: 'NAP', color: '#2563eb', rating: 87 },
-  { id: 'mil', name: 'Milan',       abbr: 'MIL', color: '#dc2626', rating: 85 },
-  { id: 'juv', name: 'Juventus',    abbr: 'JUV', color: '#e5e7eb', rating: 85 },
-  { id: 'ata', name: 'Atalanta',    abbr: 'ATA', color: '#1e3a8a', rating: 84 },
-  { id: 'laz', name: 'Lazio',       abbr: 'LAZ', color: '#38bdf8', rating: 81 },
-  { id: 'rom', name: 'Roma',        abbr: 'ROM', color: '#b91c1c', rating: 80 },
-  { id: 'fio', name: 'Fiorentina',  abbr: 'FIO', color: '#7c3aed', rating: 79 },
-  { id: 'bol', name: 'Bologna',     abbr: 'BOL', color: '#92400e', rating: 77 },
-  { id: 'tor', name: 'Torino',      abbr: 'TOR', color: '#78350f', rating: 75 },
-  { id: 'udi', name: 'Udinese',     abbr: 'UDI', color: '#1f2937', rating: 72 },
-  { id: 'cag', name: 'Cagliari',    abbr: 'CAG', color: '#b45309', rating: 71 },
-  { id: 'par', name: 'Parma',       abbr: 'PAR', color: '#fbbf24', rating: 70 },
-  { id: 'com', name: 'Como',        abbr: 'COM', color: '#155e75', rating: 70 },
-  { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69 },
-  { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 68 },
-  { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67 },
-  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66 },
-  { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65 },
+/**
+ * Mappatura nome simulazione → nome nel CSV players.json.
+ * I club senza corrispondenza nel CSV (Empoli, Venezia, Monza in Serie B 25/26)
+ * usano il proprio nome e ricadono sul rating hardcoded di fallback.
+ */
+const CSV_NAME_MAP: Record<string, string> = {
+  Milan:    'Milano FC',
+  Verona:   'Hellas Verona',
+};
+
+/**
+ * Dati base delle 20 squadre Serie A 25/26.
+ * Il campo `rating` viene sovrascritto a runtime da `getSERIE_A_2526()`
+ * con la media top-11 calcolata dai dati dei giocatori.
+ */
+const SERIE_A_2526_BASE: SerieATeam[] = [
+  { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89, csvName: 'Inter' },
+  { id: 'nap', name: 'Napoli',      abbr: 'NAP', color: '#2563eb', rating: 87, csvName: 'Napoli' },
+  { id: 'mil', name: 'Milan',       abbr: 'MIL', color: '#dc2626', rating: 85, csvName: 'Milano FC' },
+  { id: 'juv', name: 'Juventus',    abbr: 'JUV', color: '#e5e7eb', rating: 85, csvName: 'Juventus' },
+  { id: 'ata', name: 'Atalanta',    abbr: 'ATA', color: '#1e3a8a', rating: 84, csvName: 'Atalanta' },
+  { id: 'laz', name: 'Lazio',       abbr: 'LAZ', color: '#38bdf8', rating: 81, csvName: 'Lazio' },
+  { id: 'rom', name: 'Roma',        abbr: 'ROM', color: '#b91c1c', rating: 80, csvName: 'Roma' },
+  { id: 'fio', name: 'Fiorentina',  abbr: 'FIO', color: '#7c3aed', rating: 79, csvName: 'Fiorentina' },
+  { id: 'bol', name: 'Bologna',     abbr: 'BOL', color: '#92400e', rating: 77, csvName: 'Bologna' },
+  { id: 'tor', name: 'Torino',      abbr: 'TOR', color: '#78350f', rating: 75, csvName: 'Torino' },
+  { id: 'udi', name: 'Udinese',     abbr: 'UDI', color: '#1f2937', rating: 72, csvName: 'Udinese' },
+  { id: 'cag', name: 'Cagliari',    abbr: 'CAG', color: '#b45309', rating: 71, csvName: 'Cagliari' },
+  { id: 'par', name: 'Parma',       abbr: 'PAR', color: '#fbbf24', rating: 70, csvName: 'Parma' },
+  { id: 'com', name: 'Como',        abbr: 'COM', color: '#155e75', rating: 70, csvName: 'Como' },
+  { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69, csvName: 'Genoa' },
+  { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 68, csvName: 'Lecce' },
+  { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67, csvName: 'Hellas Verona' },
+  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66, csvName: 'Empoli' },
+  { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65, csvName: 'Venezia' },
 ];
+
+const SEASON_2526 = '2025-2026';
+
+/** Cache: rating calcolati una volta per tutta la sessione */
+let _cachedTeams: SerieATeam[] | null = null;
+
+/**
+ * Restituisce le 20 squadre Serie A 25/26 con i rating calcolati
+ * dalla media dei 11 giocatori con overall più alto nel club.
+ * I club senza dati nel CSV (es. Empoli, Venezia) mantengono il rating hardcoded.
+ */
+export function getSERIE_A_2526(): SerieATeam[] {
+  if (_cachedTeams) return _cachedTeams;
+
+  _cachedTeams = SERIE_A_2526_BASE.map((team) => {
+    const avg = getTop11Average(team.csvName, SEASON_2526);
+    // Se non trovati dati (avg = 70 fallback), usa il rating hardcoded
+    const rating = avg > 70 ? avg : team.rating;
+    return { ...team, rating };
+  });
+
+  return _cachedTeams;
+}
 
 export interface TeamOverall {
   overall: number;
@@ -72,9 +112,10 @@ export interface PreSeasonOdds {
 }
 
 export function preSeasonOdds(teamRating: number): PreSeasonOdds {
-  const leagueRatings = [...SERIE_A_2526.map((t) => t.rating), teamRating].sort((a, b) => b - a);
+  const teams = getSERIE_A_2526();
+  const leagueRatings = [...teams.map((t) => t.rating), teamRating].sort((a, b) => b - a);
   const rank = leagueRatings.indexOf(teamRating) + 1;
-  const leagueAvg = SERIE_A_2526.reduce((s, t) => s + t.rating, 0) / SERIE_A_2526.length;
+  const leagueAvg = teams.reduce((s, t) => s + t.rating, 0) / teams.length;
   const diff = teamRating - leagueAvg;
   const expectedPoints = Math.round(Math.min(99, Math.max(20, 50 + diff * 1.2)));
   const sig = (x: number, scale = 8) => Math.round(100 / (1 + Math.exp(-x / scale)) * 10) / 10;
@@ -205,10 +246,11 @@ function buildRoundRobin(teamIds: string[]): [string, string][][] {
 export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): SeasonResult {
   const playerRating = overall.overall;
   const scorerPool = buildScorerPool(slots);
-  const allTeamIds = ['player', ...SERIE_A_2526.map((t) => t.id)];
+  const teams = getSERIE_A_2526();
+  const allTeamIds = ['player', ...teams.map((t) => t.id)];
 
   const standingsMap = new Map<string, TeamStanding>();
-  SERIE_A_2526.forEach((t) => {
+  teams.forEach((t) => {
     standingsMap.set(t.id, {
       teamId: t.id, name: t.name, abbr: t.abbr, color: t.color,
       isPlayer: false, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, points: 0,
@@ -220,7 +262,7 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
   });
 
   const getRating = (id: string) =>
-    id === 'player' ? playerRating : (SERIE_A_2526.find((t) => t.id === id)?.rating ?? 70);
+    id === 'player' ? playerRating : (teams.find((t) => t.id === id)?.rating ?? 70);
 
   const schedule = buildRoundRobin(allTeamIds);
   const matchdaySnapshots: MatchdaySnapshot[] = [];
@@ -245,7 +287,7 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
         const pGoals = isPlayerHome ? hg : ag;
         const oGoals = isPlayerHome ? ag : hg;
         const oppId  = isPlayerHome ? awayId : homeId;
-        const opp    = SERIE_A_2526.find((t) => t.id === oppId);
+        const opp    = teams.find((t) => t.id === oppId);
         const outcome: 'W' | 'D' | 'L' = pGoals > oGoals ? 'W' : pGoals < oGoals ? 'L' : 'D';
         playerMatch = {
           opponentId: oppId,

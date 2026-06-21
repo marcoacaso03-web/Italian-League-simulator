@@ -175,6 +175,25 @@ export function getPrimeSquad(club: string, season: string): SquadPlayer[] {
   });
 }
 
+/**
+ * Calcola la media dei 11 giocatori con rating più alto
+ * per un dato club e stagione. Usato per i rating delle squadre AI 25/26.
+ */
+export function getTop11Average(club: string, season: string): number {
+  const players = loadPlayers();
+  const ratings = players
+    .filter((p) => p.seasons.some((s) => s.club === club && s.season === season))
+    .map((p) => {
+      const ps = p.seasons.find((s) => s.club === club && s.season === season);
+      return ps?.rating ?? 0;
+    })
+    .sort((a, b) => b - a);
+
+  if (ratings.length === 0) return 70; // fallback
+  const top11 = ratings.slice(0, 11);
+  return Math.round(top11.reduce((sum, r) => sum + r, 0) / top11.length);
+}
+
 export function ratingColor(rating: number): string {
   if (rating >= 85) return 'text-emerald-400';
   if (rating >= 72) return 'text-amber-400';
