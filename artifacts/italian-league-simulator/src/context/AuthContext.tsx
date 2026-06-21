@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check if Firebase is configured before subscribing
-    const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+    const apiKey = import.meta.env.FIREBASE_API_KEY ?? import.meta.env.VITE_FIREBASE_API_KEY;
     if (!apiKey) {
       console.warn('[Auth] VITE_FIREBASE_API_KEY not set — auth disabled');
       setLoading(false);
