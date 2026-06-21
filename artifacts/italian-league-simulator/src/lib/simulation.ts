@@ -12,18 +12,20 @@ export interface SerieATeam {
 
 /**
  * Mappatura nome simulazione → nome nel CSV players.json.
- * I club senza corrispondenza nel CSV (Empoli, Venezia, Monza in Serie B 25/26)
- * usano il proprio nome e ricadono sul rating hardcoded di fallback.
+ * Tutti e 20 i club sono nel CSV FC 26 → nessun fallback hardcoded necessario.
  */
 const CSV_NAME_MAP: Record<string, string> = {
-  Milan:    'Milano FC',
-  Verona:   'Hellas Verona',
+  Milan:       'Milano FC',
+  Verona:      'Hellas Verona',
+  Cremonese:   'Cremonese',
+  Pisa:        'Pisa',
+  Sassuolo:    'Sassuolo',
 };
 
 /**
- * Dati base delle 20 squadre Serie A 25/26.
+ * Le 20 squadre del campionato 25/26, basate sui dati del CSV FC 26.
  * Il campo `rating` viene sovrascritto a runtime da `getSERIE_A_2526()`
- * con la media top-11 calcolata dai dati dei giocatori.
+ * con la media top-11 calcolata dai dati reali dei giocatori.
  */
 const SERIE_A_2526_BASE: SerieATeam[] = [
   { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89, csvName: 'Inter' },
@@ -43,8 +45,9 @@ const SERIE_A_2526_BASE: SerieATeam[] = [
   { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69, csvName: 'Genoa' },
   { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 68, csvName: 'Lecce' },
   { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67, csvName: 'Hellas Verona' },
-  { id: 'emp', name: 'Empoli',      abbr: 'EMP', color: '#1d4ed8', rating: 66, csvName: 'Empoli' },
-  { id: 'ven', name: 'Venezia',     abbr: 'VEN', color: '#1e293b', rating: 65, csvName: 'Venezia' },
+  { id: 'cre', name: 'Cremonese',  abbr: 'CRE', color: '#c0392b', rating: 70, csvName: 'Cremonese' },
+  { id: 'pis', name: 'Pisa',        abbr: 'PIS', color: '#2c3e50', rating: 68, csvName: 'Pisa' },
+  { id: 'sas', name: 'Sassuolo',    abbr: 'SAS', color: '#27ae60', rating: 66, csvName: 'Sassuolo' },
 ];
 
 const SEASON_2526 = '2025-2026';
@@ -53,9 +56,9 @@ const SEASON_2526 = '2025-2026';
 let _cachedTeams: SerieATeam[] | null = null;
 
 /**
- * Restituisce le 20 squadre Serie A 25/26 con i rating calcolati
- * dalla media dei 11 giocatori con overall più alto nel club.
- * I club senza dati nel CSV (es. Empoli, Venezia) mantengono il rating hardcoded.
+ * Restituisce le 20 squadre del campionato 25/26 con i rating calcolati
+ * dalla media dei 11 giocatori con overall più alto nel club (dati FC 26).
+ * Tutti i 20 club hanno dati nel CSV → rating 100% basati sui giocatori reali.
  */
 export function getSERIE_A_2526(): SerieATeam[] {
   if (_cachedTeams) return _cachedTeams;
