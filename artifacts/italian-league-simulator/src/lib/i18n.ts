@@ -856,7 +856,7 @@ const resources = {
     'difficulty_hard': 'Difícil', 'difficulty_hard_sub': 'Sem rerolls, ratings mais baixos, modo cego',
     'show_ratings': 'Ratings Jogadores', 'show_ratings_on': 'Visíveis', 'show_ratings_on_sub': 'Ver overalls durante o draft',
     'show_ratings_off': 'Cego', 'show_ratings_off_sub': 'Draftar sem ver os ratings',
-    'show_ratings_off_forçado': 'Forçado no modo Difícil',
+    'show_ratings_off_forced': 'Forçado no modo Difícil',
     'draft_mode': 'Modo Draft', 'draft_mode_squad': 'Time Primeiro', 'draft_mode_squad_sub': 'Escolha um club, drafte seus jogadores',
     'draft_mode_position': 'Posição Primeiro', 'draft_mode_position_sub': 'Escolha posição, obtenha jogador aleatório',
     'player_ratings': 'Modo Ratings', 'player_ratings_career': 'Carreira', 'player_ratings_career_sub': 'Usa ratings médios de carreira',

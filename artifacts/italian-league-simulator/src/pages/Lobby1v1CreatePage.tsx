@@ -30,7 +30,7 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
     e.preventDefault();
     if (!hostName.trim()) { setError(t('lobby_error_code')); return; }
     setCreating(true); setError(null);
-    const config = { difficulty: 'hard' as const, showRatings: 'off' as const, draftMode: 'squad_first' as const, ratingsMode: 'career' as const, eraPreset, eraFrom, eraTo, formation: '4-3-3' };
+    const config = { difficulty: 'hard' as const, showRatings: 'off' as const, draftMode: 'squad_first' as const, ratingsMode: 'career' as const, eraPreset, eraFrom, eraTo, formation: '4-3-3', leagueId: 'serie-a' };
     try {
       const created = await createLobby(hostName.trim(), '1v1_blind', config, 2);
       setLobby(created);

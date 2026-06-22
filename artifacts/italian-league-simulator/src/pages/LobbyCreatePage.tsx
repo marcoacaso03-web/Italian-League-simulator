@@ -40,7 +40,7 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
       eraPreset,
       eraFrom,
       eraTo,
-      formation: '4-3-3',
+      formation: '4-3-3', leagueId: 'serie-a',
     };
 
     try {

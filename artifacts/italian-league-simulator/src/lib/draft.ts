@@ -45,6 +45,31 @@ function parsePositions(position: string): string[] {
   return position.split(',').map((p) => p.trim()).filter(Boolean);
 }
 
+/** Mappa una posizione specifica alla sua categoria */
+function posToCategory(pos: string): string {
+  if (pos === 'GK') return 'GK';
+  if (['CB', 'RB', 'LB', 'WB', 'LWB', 'RWB', 'SW'].includes(pos)) return 'DEF';
+  if (['CDM', 'CM', 'CAM', 'LM', 'RM'].includes(pos)) return 'MID';
+  if (['ST', 'CF', 'LW', 'RW', 'LF', 'RF', 'LS', 'RS'].includes(pos)) return 'ATT';
+  return pos; // fallback: la posizione è già una categoria
+}
+
+/** Verifica se una posizione del giocatore matcha una posizione richiesta dello slot.
+ *  Supporta sia posizioni specifiche che categorie.
+ *  Es: playerPos="ATT" matcha slotPos="ST" perché posToCategory("ST") === "ATT"
+ *  Es: playerPos="ST" matcha slotPos="ST" (match esatto)
+ *  Es: playerPos="ST" NON matcha slotPos="CB" (categorie diverse)
+ */
+function positionMatches(playerPos: string, slotPos: string): boolean {
+  if (playerPos === slotPos) return true;
+  // Se il giocatore ha una categoria generica (es "ATT"), matcha qualsiasi posizione della stessa categoria
+  const playerCat = posToCategory(playerPos);
+  const slotCat = posToCategory(slotPos);
+  // Match per categoria: se il giocatore è "ATT" e lo slot è "ST", match
+  if (playerCat === slotCat) return true;
+  return false;
+}
+
 export function buildSlots(formation: string): DraftSlot[] {
   const fs = FORMATION_SLOTS[formation];
   if (!fs) throw new Error(`Formazione sconosciuta: ${formation}`);
@@ -70,8 +95,11 @@ function filteredPool(config: SetupConfig, emptyFormationSlots: FormationSlot[] 
     const available = positions.get(`${e.club}|||${e.season}`);
     if (!available) return false;
     // Tieni la combo solo se copre almeno uno slot aperto
+    // Supporta sia posizioni specifiche che categorie (es "ATT" matcha "ST", "LW", ecc.)
     return emptyFormationSlots.some((fs) =>
-      fs.acceptedPositions.some((pos) => available.has(pos))
+      fs.acceptedPositions.some((slotPos) =>
+        available.has(slotPos) || available.has(posToCategory(slotPos))
+      )
     );
   });
 }
@@ -99,7 +127,7 @@ export function findCompatibleSlots(slots: DraftSlot[], player: DraftedPlayer): 
   const empty = slots.filter((s) => s.player === null);
   const positions = player.all_positions?.length ? player.all_positions : parsePositions(player.position);
   return empty.filter((s) =>
-    positions.some((pos) => s.formationSlot.acceptedPositions.includes(pos))
+    positions.some((pos) => s.formationSlot.acceptedPositions.some((slotPos) => positionMatches(pos, slotPos)))
   );
 }
 

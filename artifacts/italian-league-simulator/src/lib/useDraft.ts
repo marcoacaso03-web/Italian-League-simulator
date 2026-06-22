@@ -1,10 +1,11 @@
-import { useReducer, useCallback, useRef } from 'react';
+import { useReducer, useCallback, useRef, useEffect, useState } from 'react';
 import type { SetupConfig } from '../pages/GamePage';
 import {
   buildSlots, spin, findBestSlot, assignToSlot, initialRerolls, emptySlots,
   type DraftState, type DraftedPlayer, type SpinResult,
 } from './draft';
 import { FORMATION_SLOTS } from './formations';
+import { setActiveLeague } from './data';
 
 type Action =
   | { type: 'SPIN';        result: SpinResult }
@@ -34,6 +35,13 @@ function reducer(state: DraftState, action: Action): DraftState {
 
 export function useDraft(config: SetupConfig) {
   const usedCombosRef = useRef(new Set<string>());
+  const [leagueLoaded, setLeagueLoaded] = useState(false);
+
+  useEffect(() => {
+    setLeagueLoaded(false);
+    void setActiveLeague(config.leagueId).then(() => setLeagueLoaded(true));
+  }, [config.leagueId]);
+
   const [state, dispatch] = useReducer(reducer, {
     slots: buildSlots(config.formation),
     currentSpin: null,
@@ -45,6 +53,7 @@ export function useDraft(config: SetupConfig) {
   const reveal = useCallback(() => dispatch({ type: 'REVEAL' }), []);
 
   const spinSquadFirst = useCallback(() => {
+    if (!leagueLoaded) return;
     const emptyFormationSlots = emptySlots(state.slots).map((s) => s.formationSlot);
     const r = spin(config, usedCombosRef.current, [], emptyFormationSlots);
     if (!r) return;
@@ -53,6 +62,7 @@ export function useDraft(config: SetupConfig) {
   }, [config, state.slots]);
 
   const selectSlotAndSpin = useCallback((slotId: string) => {
+    if (!leagueLoaded) return;
     dispatch({ type: 'SELECT_SLOT', slotId });
     const slot = state.slots.find((s) => s.formationSlot.id === slotId);
     if (!slot) return;
@@ -61,12 +71,13 @@ export function useDraft(config: SetupConfig) {
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'SPIN', result: r });
-  }, [config, state.slots]);
+  }, [config, state.slots, leagueLoaded]);
 
   const pick = useCallback((player: DraftedPlayer, slotId?: string) =>
     dispatch({ type: 'PICK', player, slotId }), []);
 
   const reroll = useCallback(() => {
+    if (!leagueLoaded) return;
     if (state.rerollsLeft <= 0) return;
     const pf = state.activeSlotId
       ? (state.slots.find((s) => s.formationSlot.id === state.activeSlotId)?.formationSlot.acceptedPositions ?? [])
@@ -76,7 +87,7 @@ export function useDraft(config: SetupConfig) {
     if (!r) return;
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'REROLL', result: r });
-  }, [config, state.rerollsLeft, state.activeSlotId, state.slots]);
+  }, [config, state.rerollsLeft, state.activeSlotId, state.slots, leagueLoaded]);
 
   const cancel = useCallback(() => dispatch({ type: 'CANCEL_PICK' }), []);
 
