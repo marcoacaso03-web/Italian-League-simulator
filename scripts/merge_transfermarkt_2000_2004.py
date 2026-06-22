@@ -443,6 +443,38 @@ TM_MAP = {
     "Stade brestois 29": ("ligue-1", "brest"),
 }
 
+# Transfermarkt sub_position → specific position mapping
+SUB_POS_MAP = {
+    "Centre-Back": "CB",
+    "Left-Back": "LB",
+    "Right-Back": "RB",
+    "Centre-Forward": "ST",
+    "Second Striker": "CF",
+    "Attacking Midfield": "CAM",
+    "Central Midfield": "CM",
+    "Defensive Midfield": "CDM",
+    "Left Midfield": "LM",
+    "Right Midfield": "RM",
+    "Left Winger": "LW",
+    "Right Winger": "RW",
+    "Goalkeeper": "GK",
+}
+
+def pos_to_category(pos):
+    """Map specific position to category."""
+    if not pos:
+        return "MID"
+    pos = pos.upper().strip()
+    if pos == "GK":
+        return "GK"
+    if pos in ("CB", "LB", "RB", "LWB", "RWB", "SW", "LCB", "RCB"):
+        return "DEF"
+    if pos in ("CDM", "CM", "CAM", "LM", "RM", "LDM", "RDM", "LCM", "RCM", "LAM", "RAM"):
+        return "MID"
+    if pos in ("ST", "CF", "LW", "RW", "LF", "RF", "LS", "RS"):
+        return "ATT"
+    return "MID"
+
 def market_value_to_rating(mv):
     if mv <= 0:
         return 45
@@ -450,12 +482,17 @@ def market_value_to_rating(mv):
     r = 55 + (38 * mv) / (mv + c)
     return max(50, min(95, round(r)))
 
-# Load player names
+# Load player names AND sub_positions
 player_names = {}
+player_positions = {}
 with open(f"{DATA_DIR}/players.csv") as f:
     reader = csv.DictReader(f)
     for row in reader:
-        player_names[row['player_id']] = row['name']
+        pid = row['player_id']
+        player_names[pid] = row['name']
+        sub_pos = row.get('sub_position', '').strip()
+        if sub_pos in SUB_POS_MAP:
+            player_positions[pid] = SUB_POS_MAP[sub_pos]
 
 # Load valuations for 2000-2004
 player_data = defaultdict(lambda: defaultdict(dict))
@@ -487,6 +524,10 @@ unmapped = defaultdict(int)
 
 for pid, seasons in player_data.items():
     name = player_names.get(pid, f"Unknown_{pid}")
+    # Get specific position from sub_position mapping
+    specific_pos = player_positions.get(pid, "MID")
+    pos_category = pos_to_category(specific_pos)
+    
     for season, data in seasons.items():
         club_name = data['club']
         value = int(data['value'])
@@ -498,9 +539,15 @@ for pid, seasons in player_data.items():
             continue
         rating = market_value_to_rating(value)
         player = league_data[league_id][club_id][name]
+        # Store position info in the player data
+        if "positions" not in player:
+            player["positions"] = set()
+            player["categories"] = set()
+        player["positions"].add(specific_pos)
+        player["categories"].add(pos_category)
         player["seasons"].append({
             "club": club_id, "season": season, "rating": rating,
-            "positions": ["MID"], "categories": ["MID"],
+            "positions": [specific_pos], "categories": [pos_category],
         })
 
 print(f"Mapped: {mapped_count}, Unmapped clubs: {len(unmapped)}")
@@ -516,15 +563,38 @@ for league_id in ["premier-league", "la-liga", "ligue-1", "bundesliga"]:
     
     for club_id, players in league_data[league_id].items():
         for name, data in players.items():
+            # Compute all_positions and all_categories from collected data
+            all_positions = data.get("positions", set())
+            all_categories = data.get("categories", set())
+            if not all_positions:
+                all_positions = {"MID"}
+                all_categories = {"MID"}
+            
+            # Primary position: most specific (not a category)
+            specific_pos = [p for p in all_positions if p not in ("GK", "DEF", "MID", "ATT")]
+            if not specific_pos:
+                specific_pos = list(all_positions)
+            primary_position = specific_pos[0] if specific_pos else "MID"
+            primary_category = pos_to_category(primary_position)
+            
             if name in existing_players:
                 existing_seasons = {(s['club'], s['season']) for s in existing_players[name]['seasons']}
                 for s in data['seasons']:
                     if (s['club'], s['season']) not in existing_seasons:
                         existing_players[name]['seasons'].append(s)
+                # Update all_positions and all_categories
+                existing_players[name]['all_positions'] = sorted(all_positions)
+                existing_players[name]['all_categories'] = sorted(all_categories)
+                existing_players[name]['position'] = primary_position
+                existing_players[name]['position_category'] = primary_category
             else:
                 existing_players[name] = {
-                    "id": f"{name}__MID", "name": name,
-                    "position": "MID", "position_category": "MID",
+                    "id": f"{name}__{primary_position}",
+                    "name": name,
+                    "position": primary_position,
+                    "position_category": primary_category,
+                    "all_positions": sorted(all_positions),
+                    "all_categories": sorted(all_categories),
                     "seasons": data['seasons'],
                 }
     
