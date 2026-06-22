@@ -183,6 +183,7 @@ export async function spin(
       position_category: toCategory(p.position),
       club: entry.club,
       season: entry.season,
+      rating: p.rating,
     }))
     .sort((a, b) => b.rating - a.rating);
 
