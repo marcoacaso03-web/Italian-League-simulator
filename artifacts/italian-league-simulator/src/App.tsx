@@ -78,24 +78,7 @@ function Lobby1v1CreateRoute() {
 }
 
 function Lobby1v1JoinRoute() {
-  const { setLobbyCode, setLobby } = useLobby();
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code');
-    if (code) {
-      setLobbyCode(code.toUpperCase());
-      getLobby(code.toUpperCase()).then((lobby) => {
-        if (lobby) setLobby(lobby);
-        setReady(true);
-      });
-    } else {
-      setReady(true);
-    }
-  }, [setLobbyCode, setLobby]);
-
-  if (!ready) return <LoadingScreen />;
+  const { setLobby } = useLobby();
   return <Lobby1v1JoinPage onLobbyJoined={(l) => setLobby(l)} />;
 }
 

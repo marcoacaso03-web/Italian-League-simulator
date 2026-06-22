@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { joinLobby, getPlayerId, type Lobby } from '../lib/lobby';
@@ -12,9 +12,18 @@ export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Leggi il codice dall'URL (es: /lobby/1v1/join?code=ABC123)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlCode = params.get('code');
+    if (urlCode) {
+      setCode(urlCode.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6));
+    }
+  }, []);
+
   async function handleJoin(e: React.FormEvent) {
     e.preventDefault();
-    if (loading) return; // Previene doppio click
+    if (loading) return;
     if (!playerName.trim() || !code.trim()) { setError(t('lobby_error_code')); return; }
 
     setLoading(true);
@@ -25,7 +34,6 @@ export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
       onLobbyJoined(result.lobby);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : t('lobby_unknown_error');
-      // Se il giocatore è già nella lobby, vai comunque alla stanza
       if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('già')) {
         try {
           const { getLobby } = await import('../lib/lobby');
@@ -34,9 +42,7 @@ export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
             onLobbyJoined(lobby);
             return;
           }
-        } catch {
-          // fallback all'errore originale
-        }
+        } catch { /* fallback */ }
       }
       setError(msg);
     } finally {
