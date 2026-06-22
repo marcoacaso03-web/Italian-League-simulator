@@ -83,9 +83,10 @@ interface PitchProps {
   slots: DraftSlot[];
   pendingPlayer: DraftedPlayer | null;
   onSlotClick: (slotId: string) => void;
+  showRating: boolean;
 }
 
-function Pitch({ formation, slots, pendingPlayer, onSlotClick }: PitchProps) {
+function Pitch({ formation, slots, pendingPlayer, onSlotClick, showRating }: PitchProps) {
   const { t } = useTranslation();
   const formSlots = FORMATION_SLOTS[formation] ?? [];
   const slotMap = new Map(slots.map((s) => [s.formationSlot.id, s]));
@@ -161,7 +162,7 @@ function Pitch({ formation, slots, pendingPlayer, onSlotClick }: PitchProps) {
             }}>
               {player && (
                 <span style={{ fontSize: 9, fontWeight: 900, color: '#fff', letterSpacing: -0.5 }}>
-                  {player.rating}
+                  {showRating ? player.rating : '?'}
                 </span>
               )}
               {isCompatible && !player && (
@@ -340,6 +341,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
             slots={state.slots}
             pendingPlayer={pendingPlayer}
             onSlotClick={handleSlotClick}
+            showRating={showRating}
           />
         </div>
       </div>
@@ -350,7 +352,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-black"
               style={{ backgroundColor: catColor(pendingPlayer.position_category) + '33', color: catColor(pendingPlayer.position_category) }}>
-              {pendingPlayer.rating}
+              {showRating ? pendingPlayer.rating : '?'}
             </div>
             <div>
               <p className="text-sm font-bold text-white">{pendingPlayer.name}</p>
