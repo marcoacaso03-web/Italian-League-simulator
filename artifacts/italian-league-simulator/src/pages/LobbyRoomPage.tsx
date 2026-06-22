@@ -7,6 +7,7 @@ import {
   getPlayerId, type Lobby, type LobbyPlayer,
 } from '../lib/lobby';
 import { subscribeToLobby, subscribeToPresence } from '../lib/lobbyRealtime';
+import { LEAGUES } from '../lib/leagues';
 
 interface LobbyRoomPageProps {
   lobbyCode: string;
@@ -120,21 +121,29 @@ export default function LobbyRoomPage({ lobbyCode, onStartGame }: LobbyRoomPageP
           <p className="text-xs text-slate-500">{t('lobby_share')}</p>
         </div>
 
-        {lobbyConfig && (
-          <div className="glass rounded-2xl p-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{t('lobby_rules')}</p>
-            <div className="flex flex-wrap gap-2 text-xs">
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">
-                {lobbyConfig.difficulty === 'easy' ? '🟢' : lobbyConfig.difficulty === 'normal' ? '🟡' : '🔴'} {t('difficulty_' + lobbyConfig.difficulty)}
-              </span>
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📐 {lobbyConfig.formation}</span>
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">
-                🎰 {lobbyConfig.draftMode === 'squad_first' ? t('draft_mode_squad') : t('draft_mode_position')}
-              </span>
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📅 {lobbyConfig.eraFrom}–{lobbyConfig.eraTo}</span>
+        {lobbyConfig && (() => {
+          const league = LEAGUES.find((l) => l.id === (lobbyConfig as any).leagueId);
+          return (
+            <div className="glass rounded-2xl p-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{t('lobby_rules')}</p>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {league && (
+                  <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">
+                    🏆 {league.name}
+                  </span>
+                )}
+                <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">
+                  {lobbyConfig.difficulty === 'easy' ? '🟢' : lobbyConfig.difficulty === 'normal' ? '🟡' : '🔴'} {t('difficulty_' + lobbyConfig.difficulty)}
+                </span>
+                <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📐 {lobbyConfig.formation}</span>
+                <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">
+                  🎰 {lobbyConfig.draftMode === 'squad_first' ? t('draft_mode_squad') : t('draft_mode_position')}
+                </span>
+                <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📅 {lobbyConfig.eraFrom}–{lobbyConfig.eraTo}</span>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         <div className="glass rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">

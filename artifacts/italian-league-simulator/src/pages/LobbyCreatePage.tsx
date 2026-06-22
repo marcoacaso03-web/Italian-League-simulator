@@ -4,6 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { createLobby } from '../lib/lobby';
 import type { SetupConfig } from './GamePage';
 
+const LEAGUES = [
+  { id: 'serie-a',        name: 'Serie A',        flag: '🇮🇹' },
+  { id: 'premier-league',  name: 'Premier League',  flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
+  { id: 'la-liga',        name: 'La Liga',         flag: '🇪🇸' },
+  { id: 'ligue-1',        name: 'Ligue 1',         flag: '🇫🇷' },
+  { id: 'bundesliga',     name: 'Bundesliga',      flag: '🇩🇪' },
+];
+
 interface LobbyCreatePageProps {
   onLobbyCreated: (code: string) => void;
 }
@@ -19,6 +27,7 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
   const [eraFrom, setEraFrom] = useState(1996);
   const [eraTo, setEraTo] = useState(2025);
   const [maxPlayers, setMaxPlayers] = useState(8);
+  const [leagueId, setLeagueId] = useState('serie-a');
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,7 +49,7 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
       eraPreset,
       eraFrom,
       eraTo,
-      formation: '4-3-3', leagueId: 'serie-a',
+      formation: '4-3-3', leagueId,
     };
 
     try {
@@ -91,6 +100,28 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
               required
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-emerald-500/50"
             />
+          </section>
+
+          {/* Selezione Lega */}
+          <section className="glass rounded-2xl p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Campionato</p>
+            <div className="grid grid-cols-2 gap-2">
+              {LEAGUES.map((lg) => (
+                <button
+                  key={lg.id}
+                  type="button"
+                  onClick={() => setLeagueId(lg.id)}
+                  className={`rounded-xl border-2 py-3 px-2 text-center transition-all flex items-center justify-center gap-2 ${
+                    leagueId === lg.id
+                      ? 'border-emerald-500/60 bg-emerald-500/10'
+                      : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+                  }`}
+                >
+                  <span className="text-xl">{lg.flag}</span>
+                  <span className={`text-xs font-bold ${leagueId === lg.id ? 'text-emerald-300' : 'text-slate-300'}`}>{lg.name}</span>
+                </button>
+              ))}
+            </div>
           </section>
 
           <section className="glass rounded-2xl p-5">

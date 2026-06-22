@@ -64,7 +64,8 @@ export default function SimScreen({ slots, onComplete, leagueId }: Props) {
     }
   }, [snapshots]);
 
-  const progress = (currentMd / 38) * 100;
+  const numMatchdays = leagueId === 'ligue-1' || leagueId === 'bundesliga' ? 34 : 38;
+  const progress = (currentMd / numMatchdays) * 100;
   const visibleSnaps = snapshots.filter((s) => s.playerMatch !== null);
 
   function handleSkip() {
@@ -88,7 +89,7 @@ export default function SimScreen({ slots, onComplete, leagueId }: Props) {
         </div>
         <div className="flex items-center justify-between mb-2">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-500">
-            {t('matchweek')} <span className="text-white">{currentMd}</span> / 38
+            {t('matchweek')} <span className="text-white">{currentMd}</span> / {numMatchdays}
           </p>
           <button onClick={handleSkip} className="text-xs font-semibold text-slate-400 hover:text-white transition-colors">
             {t('skip_all')}
