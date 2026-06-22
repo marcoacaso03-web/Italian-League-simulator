@@ -156,14 +156,29 @@ export async function spin(
   positionFilter: string[],
   formationSlots: FormationSlot[] = [],
 ): Promise<SpinResult | null> {
+  console.log('[SPIN] called', { leagueId: config.leagueId, eraFrom: config.eraFrom, eraTo: config.eraTo, formationSlots: formationSlots.length });
+  
   const pool = filteredPool(config, formationSlots)
     .filter((e) => !usedCombos.has(`${e.club}|||${e.season}`));
-  if (pool.length === 0) return null;
+  
+  console.log('[SPIN] pool length:', pool.length);
+  if (pool.length > 0) {
+    console.log('[SPIN] pool sample:', pool.slice(0, 3).map(e => `${e.club} ${e.season}`));
+  }
+  
+  if (pool.length === 0) {
+    console.warn('[SPIN] pool is empty, returning null');
+    return null;
+  }
+  
   const entry = pickRandom(pool);
+  console.log('[SPIN] picked:', entry.club, entry.season);
   
   // Carica la squadra on-demand
   const { loadSquadForLeague } = await import('./data');
+  console.log('[SPIN] loading squad...');
   const rawSquad = await loadSquadForLeague(config.leagueId, entry.club, entry.season);
+  console.log('[SPIN] squad loaded:', rawSquad.length, 'players');
   
   const draftedPlayers: DraftedPlayer[] = rawSquad
     .filter((p) => {
@@ -177,6 +192,9 @@ export async function spin(
       club: entry.club,
       season: entry.season,
     }));
+  
+  console.log('[SPIN] drafted players:', draftedPlayers.length);
+  
   // In blind mode l'ordine per overall svelerebbe il rating migliore: randomizza.
   const players = isBlindMode(config) ? shuffle(draftedPlayers) : draftedPlayers;
   return { club: entry.club, season: entry.season, players };

@@ -386,7 +386,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
         )}
 
         {state.phase === 'idle' && remaining.length > 0 && (
-          <button onClick={doSpin} disabled={isLoading} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+          <button onClick={() => { console.log('[DraftScreen] Spin clicked, phase:', state.phase, 'loading:', isLoading, 'remaining:', remaining.length); doSpin(); }} disabled={isLoading} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
             {isLoading ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="animate-spin">⏳</span> Loading...

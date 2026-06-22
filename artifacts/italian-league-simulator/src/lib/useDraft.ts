@@ -55,10 +55,16 @@ export function useDraft(config: SetupConfig) {
   const reveal = useCallback(() => dispatch({ type: 'REVEAL' }), []);
 
   const spinSquadFirst = useCallback(async () => {
-    if (!leagueLoaded) return;
+    console.log('[useDraft] spinSquadFirst called, leagueLoaded:', leagueLoaded);
+    if (!leagueLoaded) {
+      console.warn('[useDraft] league not loaded yet');
+      return;
+    }
     dispatch({ type: 'SET_LOADING', loading: true });
     const emptyFormationSlots = emptySlots(state.slots).map((s) => s.formationSlot);
+    console.log('[useDraft] calling spin with', emptyFormationSlots.length, 'empty slots');
     const r = await spin(config, usedCombosRef.current, [], emptyFormationSlots);
+    console.log('[useDraft] spin result:', r ? `${r.club} ${r.season} (${r.players.length} players)` : 'null');
     if (!r) { dispatch({ type: 'SET_LOADING', loading: false }); return; }
     usedCombosRef.current.add(`${r.club}|||${r.season}`);
     dispatch({ type: 'SPIN', result: r });
