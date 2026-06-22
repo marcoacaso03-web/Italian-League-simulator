@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'qrcode';
-import { createLobby, getPlayerId, type Lobby } from '../lib/lobby';
+import { createLobby, getPlayerId, type Lobby, type LobbyPlayer } from '../lib/lobby';
 import { subscribeToLobby } from '../lib/lobbyRealtime';
 
 interface Props { onLobbyReady: (lobby: Lobby) => void; }
@@ -15,9 +15,12 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
   const [eraTo, setEraTo] = useState(2025);
   const [creating, setCreating] = useState(false);
   const [lobby, setLobby] = useState<Lobby | null>(null);
+  const [players, setPlayers] = useState<LobbyPlayer[]>([]);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const onLobbyReadyRef = useRef(onLobbyReady);
+  onLobbyReadyRef.current = onLobbyReady;
 
   const ERA_PRESETS = [
     { id: 'all' as const, labelKey: 'lobby_era_all', from: 1996 },
@@ -26,41 +29,115 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
     { id: 'modern' as const, labelKey: 'lobby_era_modern', from: 2016 },
   ];
 
+  // Subscribe to lobby updates when lobby is created
+  useEffect(() => {
+    if (!lobby) return;
+
+    const unsub = subscribeToLobby(
+      lobby.id,
+      (updatedPlayers) => {
+        setPlayers(updatedPlayers);
+        if (updatedPlayers.length >= 2) {
+          onLobbyReadyRef.current(lobby);
+        }
+      },
+      () => {}
+    );
+
+    return () => { unsub(); };
+  }, [lobby]);
+
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
     if (!hostName.trim()) { setError(t('lobby_error_code')); return; }
     setCreating(true); setError(null);
-    const config = { difficulty: 'hard' as const, showRatings: 'off' as const, draftMode: 'squad_first' as const, ratingsMode: 'career' as const, eraPreset, eraFrom, eraTo, formation: '4-3-3', leagueId: 'serie-a' };
+    const config = {
+      difficulty: 'hard' as const,
+      showRatings: 'off' as const,
+      draftMode: 'squad_first' as const,
+      ratingsMode: 'career' as const,
+      eraPreset,
+      eraFrom,
+      eraTo,
+      formation: '4-3-3',
+      leagueId: 'serie-a',
+    };
     try {
       const created = await createLobby(hostName.trim(), '1v1_blind', config, 2);
       setLobby(created);
       const joinUrl = `${window.location.origin}/lobby/1v1/join?code=${created.code}`;
       const qr = await QRCode.toDataURL(joinUrl, { width: 200, margin: 2, color: { dark: '#8b5cf6', light: '#0a0a0f' } });
       setQrDataUrl(qr);
-      subscribeToLobby(created.id, (players) => { if (players.length >= 2) onLobbyReady(created); }, () => {});
-    } catch (err: unknown) { setError(err instanceof Error ? err.message : t('lobby_unknown_error')); }
-    finally { setCreating(false); }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : t('lobby_unknown_error'));
+    } finally {
+      setCreating(false);
+    }
   }
 
-  function handleCopy() { if (lobby) { navigator.clipboard.writeText(lobby.code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }); } }
+  function handleCopy() {
+    if (lobby) {
+      navigator.clipboard.writeText(lobby.code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    }
+  }
 
+  // Waiting for opponent view
   if (lobby) {
+    const opponent = players.find((p) => p.player_id !== getPlayerId());
+
     return (
       <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
         <div className="w-full max-w-md space-y-5">
           <div className="text-center space-y-3">
             <p className="text-4xl">⚔️</p>
             <h1 className="text-2xl font-black text-white">{t('lobby_1v1')}</h1>
-            <p className="text-sm text-slate-400">{t('lobby_waiting_opponent')}</p>
           </div>
+
+          {/* Code + QR */}
           <div className="text-center space-y-3">
             <button onClick={handleCopy} className="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-xl px-5 py-3 hover:bg-violet-500/20 transition-all">
               <span className="text-2xl font-black text-violet-400 tracking-[0.2em] font-mono">{lobby.code}</span>
               <span className="text-xs text-violet-400">{copied ? '✅' : '📋'}</span>
             </button>
-            {qrDataUrl && (<div className="flex justify-center"><div className="bg-white rounded-2xl p-3 inline-block"><img src={qrDataUrl} alt="QR" className="w-40 h-40" /></div></div>)}
+            {qrDataUrl && (
+              <div className="flex justify-center">
+                <div className="bg-white rounded-2xl p-3 inline-block">
+                  <img src={qrDataUrl} alt="QR" className="w-40 h-40" />
+                </div>
+              </div>
+            )}
             <p className="text-xs text-slate-500">{t('lobby_share')}</p>
           </div>
+
+          {/* Players */}
+          <div className="glass rounded-2xl overflow-hidden">
+            <div className="px-4 py-3 border-b border-white/5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                {t('lobby_players')} ({players.length}/2)
+              </p>
+            </div>
+            {players.map((player) => {
+              const isMe = player.player_id === getPlayerId();
+              return (
+                <div key={player.id} className={`flex items-center gap-3 px-4 py-3 border-b border-white/[0.04] last:border-b-0 ${isMe ? 'bg-violet-500/5' : 'bg-emerald-500/5'}`}>
+                  <div className={`w-2.5 h-2.5 rounded-full ${isMe ? 'bg-violet-400' : 'bg-emerald-400'} ${!isMe ? 'animate-pulse' : ''}`} />
+                  <p className={`text-sm font-bold ${isMe ? 'text-violet-300' : 'text-emerald-300'}`}>
+                    {player.player_name}
+                    {isMe && <span className="ml-1 text-[10px] text-violet-500 font-normal">{t('lobby_you_suffix')}</span>}
+                  </p>
+                  {!isMe && <span className="text-xs text-emerald-400 font-bold">✓ Online</span>}
+                </div>
+              );
+            })}
+            {players.length < 2 && (
+              <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.04] opacity-40">
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-600 animate-pulse" />
+                <p className="text-sm text-slate-500 italic">{t('lobby_waiting_opponent')}</p>
+              </div>
+            )}
+          </div>
+
+          {/* Rules */}
           <div className="glass rounded-2xl p-4">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{t('lobby_challenge_rules')}</p>
             <div className="flex flex-wrap gap-2 text-xs">
@@ -70,20 +147,24 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
               <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📅 {eraFrom}–{eraTo}</span>
             </div>
           </div>
-          <div className="text-center py-6">
-            <div className="inline-flex items-center gap-3 bg-violet-500/5 rounded-2xl px-6 py-4">
-              <div className="w-3 h-3 rounded-full bg-violet-400 animate-pulse" />
-              <p className="text-sm text-violet-300">{t('lobby_waiting_opponent')}</p>
+
+          {opponent && (
+            <div className="text-center py-4">
+              <p className="text-emerald-400 font-bold text-sm animate-pulse">🎮 {opponent.player_name} {t('lobby_joining')}...</p>
             </div>
-          </div>
+          )}
+
           <Link href="/lobby">
-            <button className="w-full rounded-xl bg-white/[0.06] border border-white/10 py-3 text-sm font-bold text-slate-400 hover:text-white transition-colors">← {t('lobby_cancel')}</button>
+            <button className="w-full rounded-xl bg-white/[0.06] border border-white/10 py-3 text-sm font-bold text-slate-400 hover:text-white transition-colors">
+              ← {t('lobby_cancel')}
+            </button>
           </Link>
         </div>
       </div>
     );
   }
 
+  // Create form
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-md space-y-5">
