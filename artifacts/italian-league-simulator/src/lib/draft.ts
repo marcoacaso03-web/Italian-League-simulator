@@ -1,5 +1,5 @@
 import type { SetupConfig } from '../pages/GamePage';
-import { getClubSeasonPool, getSquad, getPrimeSquad, toCategory, getClubSeasonPositions } from './data';
+import { getClubSeasonPool, getClubSeasonPositions, toCategory } from './data';
 import { FORMATION_SLOTS, type FormationSlot } from './formations';
 
 export interface DraftedPlayer {
@@ -35,6 +35,7 @@ export interface DraftState {
   rerollsLeft: number;
   phase: 'idle' | 'spinning' | 'picking' | 'complete';
   activeSlotId: string | null;
+  loading?: boolean;
 }
 
 export const REROLLS_BY_DIFFICULTY: Record<SetupConfig['difficulty'], number> = {
@@ -148,19 +149,21 @@ export function emptySlots(slots: DraftSlot[]): DraftSlot[] {
   return slots.filter((s) => s.player === null);
 }
 
-export function spin(
+export async function spin(
   config: SetupConfig,
   usedCombos: Set<string>,
   positionFilter: string[],
   formationSlots: FormationSlot[] = [],
-): SpinResult | null {
+): Promise<SpinResult | null> {
   const pool = filteredPool(config, formationSlots)
     .filter((e) => !usedCombos.has(`${e.club}|||${e.season}`));
   if (pool.length === 0) return null;
   const entry = pickRandom(pool);
-  const rawSquad = config.ratingsMode === 'prime'
-    ? getPrimeSquad(entry.club, entry.season)
-    : getSquad(entry.club, entry.season);
+  
+  // Carica la squadra on-demand
+  const { loadSquadForLeague } = await import('./data');
+  const rawSquad = await loadSquadForLeague(config.leagueId, entry.club, entry.season);
+  
   const draftedPlayers: DraftedPlayer[] = rawSquad
     .filter((p) => {
       if (positionFilter.length === 0) return true;

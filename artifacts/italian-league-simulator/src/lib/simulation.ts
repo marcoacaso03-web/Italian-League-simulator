@@ -16,10 +16,8 @@ export interface TeamOverall {
 
 import {
   getActiveLeagueClubs,
-  getTop11AverageForActiveLeague,
   getActiveLeagueMeta,
   setActiveLeague,
-  getSquadForLeague,
 } from './data';
 
 export interface TeamStanding { teamId: string; name: string; abbr: string; color: string; isPlayer: boolean; played: number; won: number; drawn: number; lost: number; gf: number; ga: number; points: number; }
@@ -182,8 +180,7 @@ export async function initLeague(
   const season = meta?.season ?? '2025-2026';
 
   return clubs.map((club) => {
-    const avg = getTop11AverageForActiveLeague(club.id, season);
-    const rating = avg > 70 ? avg : club.rating;
+    const rating = club.rating;
     const abbr = club.name
       .split(' ')
       .map((w: string) => w[0])
@@ -208,10 +205,7 @@ export function preSeasonOdds(teamRating: number, _leagueId?: string): PreSeason
   const aiTeams = getActiveLeagueClubs();
   const season = getActiveLeagueMeta()?.season ?? '2025-2026';
   const leagueRatings = [
-    ...aiTeams.map((t) => {
-      const avg = getTop11AverageForActiveLeague(t.id, season);
-      return avg > 70 ? avg : t.rating;
-    }),
+    ...aiTeams.map((t) => t.rating),
     teamRating,
   ].sort((a, b) => b - a);
 

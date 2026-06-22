@@ -10,6 +10,21 @@ import type {
   LeagueDataSource,
 } from '../types/league';
 
+// Re-exported from data.ts to avoid circular dependency
+export interface SquadPlayer {
+  id: string;
+  name: string;
+  position: string;
+  position_category: string;
+  all_positions: string[];
+  all_categories: string[];
+  apps: number;
+  goals: number;
+  assists: number;
+  rating: number;
+  primeRating?: number;
+}
+
 // ---------------------------------------------------------------------------
 // Metadati statici — non servono fetch
 // ---------------------------------------------------------------------------
@@ -86,18 +101,46 @@ export async function loadLeague(leagueId: string): Promise<LeagueDataSource | u
   if (_cache.has(leagueId)) return _cache.get(leagueId)!;
 
   try {
-    // Vite/CRA: i file in public/data/ sono serviti come static assets
-    const res = await fetch(`/data/leagues/${leagueId}/data.json`);
+    // Carica pool.json (leggero: meta + clubs + pool club+stagione)
+    const res = await fetch(`/data/leagues/${leagueId}/pool.json`);
     if (!res.ok) {
       console.warn(`loadLeague: ${leagueId} → HTTP ${res.status}`);
       return undefined;
     }
-    const data = (await res.json()) as LeagueDataSource;
-    _cache.set(leagueId, data);
-    return data;
+    const poolData = (await res.json()) as { meta: LeagueMeta; clubs: LeagueClub[]; pool: { club: string; season: string; playerCount: number }[] };
+    
+    // Costruisci LeagueDataSource con players vuoto (caricato on-demand)
+    const ds: LeagueDataSource = {
+      meta: poolData.meta,
+      clubs: poolData.clubs,
+      players: [], // Players caricati on-demand da loadSquad()
+    };
+    _cache.set(leagueId, ds);
+    return ds;
   } catch (err) {
     console.warn(`loadLeague: ${leagueId} errore`, err);
     return undefined;
+  }
+}
+
+/**
+ * Carica la squadra di un club+stagione specifico.
+ * File: /data/leagues/<leagueId>/squads/<club>_<season>.json
+ */
+export async function loadSquad(leagueId: string, club: string, season: string): Promise<SquadPlayer[]> {
+  try {
+    const clubSlug = club.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const seasonSlug = season.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const res = await fetch(`/data/leagues/${leagueId}/squads/${clubSlug}__${seasonSlug}.json`);
+    if (!res.ok) {
+      console.warn(`loadSquad: ${leagueId}/${club}/${season} → HTTP ${res.status}`);
+      return [];
+    }
+    const data = (await res.json()) as { club: string; season: string; players: SquadPlayer[] };
+    return data.players;
+  } catch (err) {
+    console.warn(`loadSquad: ${leagueId}/${club}/${season} errore`, err);
+    return [];
   }
 }
 

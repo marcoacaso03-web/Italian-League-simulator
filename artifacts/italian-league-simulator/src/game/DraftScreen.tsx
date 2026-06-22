@@ -266,7 +266,7 @@ interface Props { config: SetupConfig; onBack?: () => void; onComplete: (_slots:
 
 export default function DraftScreen({ config, onBack, onComplete }: Props) {
   const { t } = useTranslation();
-  const { state, reveal, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel } = useDraft(config);
+  const { state, reveal, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel, leagueLoaded } = useDraft(config);
   const [pendingPlayer, setPendingPlayer] = useState<DraftedPlayer | null>(null);
 
   const isSquadFirst = config.draftMode === 'squad_first';
@@ -275,6 +275,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
   const remaining = emptySlots(state.slots);
   const maxRerolls = REROLLS_BY_DIFFICULTY[config.difficulty];
   const showRating = config.showRatings !== 'off' && config.difficulty !== 'hard';
+  const isLoading = (state as any).loading === true;
 
   void findBestSlot;
 
@@ -296,6 +297,16 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
   const doSpin = isSquadFirst
     ? spinSquadFirst
     : () => selectSlotAndSpin(remaining[0]?.formationSlot.id ?? '');
+
+  // Loading state: dati lega non ancora caricati
+  if (!leagueLoaded) {
+    return (
+      <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-white items-center justify-center gap-4">
+        <span className="text-5xl animate-spin" style={{ animationDuration: '2s' }}>⚽</span>
+        <p className="text-slate-400 text-sm font-semibold uppercase tracking-widest">{t('loading_data')}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-white">
@@ -365,7 +376,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
 
             <div className="flex gap-2 pt-1">
               {state.rerollsLeft > 0 && (
-                <button onClick={reroll} className="flex-1 py-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm font-bold hover:bg-white/10 transition-colors">
+                <button onClick={reroll} disabled={isLoading} className="flex-1 py-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm font-bold hover:bg-white/10 transition-colors disabled:opacity-50">
                   🔄 Reroll ({state.rerollsLeft}/{maxRerolls})
                 </button>
               )}
@@ -375,8 +386,14 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
         )}
 
         {state.phase === 'idle' && remaining.length > 0 && (
-          <button onClick={doSpin} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98]">
-            🎲 {t('spin')}
+          <button onClick={doSpin} disabled={isLoading} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+            {isLoading ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="animate-spin">⏳</span> Loading...
+              </span>
+            ) : (
+              `🎲 ${t('spin')}`
+            )}
           </button>
         )}
       </div>

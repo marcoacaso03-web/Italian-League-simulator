@@ -1,11 +1,12 @@
 // lib/data.ts
 // Layer dati multi-lega.
 //
-// Modalita 1 (legacy): Serie A globale — initData() carica /data/players.json
-// Modalita 2 (multi-lega): setActiveLeague(leagueId) carica /data/leagues/<id>/data.json
+// Modalità 1 (legacy): Serie A globale — initData() carica /data/players.json
+// Modalità 2 (multi-lega): setActiveLeague(leagueId) carica /data/leagues/<id>/pool.json (leggero)
+//                         Le squadre vengono on-demand da /data/leagues/<id>/squads/<club>_<season>.json
 
 import type { LeagueMeta, LeagueClub, LeaguePlayer, LeagueDataSource } from '../types/league';
-import { loadLeague, getClubsForLeague, getTop11AverageForLeague } from './leagues';
+import { loadLeague, loadSquad, getClubsForLeague, getTop11AverageForLeague, type SquadPlayer } from './leagues';
 
 // ---------------------------------------------------------------------------
 // Tipi legacy (coerenti con il formato players.json originale)
@@ -41,19 +42,7 @@ export interface ClubSeasonEntry {
   playerCount: number;
 }
 
-export interface SquadPlayer {
-  id: string;
-  name: string;
-  position: string;
-  position_category: string;
-  all_positions: string[];
-  all_categories: string[];
-  apps: number;
-  goals: number;
-  assists: number;
-  rating: number;
-  primeRating?: number;
-}
+// SquadPlayer type imported from leagues.ts to avoid circular dependency
 
 // ===========================================================================
 // MODALITA LEGACY (Serie A globale)
@@ -66,7 +55,6 @@ let _initPromise: Promise<void> | null = null;
 
 export async function initData(): Promise<void> {
   if (_players !== null) return;
-  // If active league data is already loaded, don't overwrite
   if (_activeLeagueData) return;
   if (_initPromise) return _initPromise;
   _initPromise = (async () => {
@@ -155,6 +143,9 @@ export function getTop11Average(club: string, season: string): number {
 }
 
 export function getClubSeasonPool(): ClubSeasonEntry[] {
+  // Se abbiamo un pool caricato dalla lega attiva, usalo
+  if (_leaguePool.length > 0) return _leaguePool;
+  // Altrimenti calcola da _players (legacy)
   const players = loadPlayers();
   const map = new Map<string, number>();
   players.forEach((p: Player) => {
@@ -197,6 +188,7 @@ export function ratingBg(rating: number): string {
 
 let _activeLeagueId: string | null = null;
 let _activeLeagueData: LeagueDataSource | undefined = undefined;
+let _leaguePool: ClubSeasonEntry[] = [];
 
 export async function setActiveLeague(leagueId: string): Promise<void> {
   if (_activeLeagueId === leagueId && _activeLeagueData) return;
@@ -205,33 +197,48 @@ export async function setActiveLeague(leagueId: string): Promise<void> {
   if (!_activeLeagueData) {
     throw new Error(`Campionato "${leagueId}" non trovato`);
   }
-  // Populate legacy global state for draft/compat
-  const ds = _activeLeagueData;
-  _players = ds.players.map((p) => ({
-    id: p.id,
-    name: p.name,
-    position: p.position,
-    position_category: p.position_category,
-    seasons: p.seasons.map((s) => ({
-      club: s.club,
-      season: s.season,
-      rating: s.rating,
-      positions: s.positions,
-      categories: s.categories,
-      apps: s.apps ?? 0,
-      goals: s.goals ?? 0,
-      assists: s.assists ?? 0,
-    })),
-  }));
-  _clubs = ds.clubs.map((c) => ({ id: c.id, name: c.name }));
-  // Rebuild clubs-by-season
+  // Salva il pool per getClubSeasonPool()
+  _leaguePool = (_activeLeagueData as any).pool ?? [];
+  // Popola _clubs per loadClubs()
+  _clubs = _activeLeagueData.clubs.map((c) => ({ id: c.id, name: c.name }));
+  // _players resta vuoto — le squadre vengono caricate on-demand
+  _players = [];
   _clubsBySeason = {};
-  for (const p of _players) {
-    for (const s of p.seasons) {
-      if (!_clubsBySeason[s.season]) _clubsBySeason[s.season] = [];
-      if (!_clubsBySeason[s.season].includes(s.club)) _clubsBySeason[s.season].push(s.club);
+}
+
+/**
+ * Carica una squadra on-demand e la aggiunge a _players per compatibilità.
+ */
+export async function loadSquadForLeague(leagueId: string, club: string, season: string): Promise<SquadPlayer[]> {
+  const players = await loadSquad(leagueId, club, season);
+  // Aggiungi i giocatori a _players per compatibilità con getSquad(), getClubSeasonPositions(), ecc.
+  for (const sp of players) {
+    let existing = _players!.find((p) => p.id === sp.id);
+    if (!existing) {
+      existing = {
+        id: sp.id,
+        name: sp.name,
+        position: sp.position,
+        position_category: sp.position_category,
+        seasons: [],
+      };
+      _players!.push(existing);
     }
+    existing.seasons.push({
+      club,
+      season,
+      rating: sp.rating,
+      positions: sp.all_positions,
+      categories: sp.all_categories,
+      apps: sp.apps,
+      goals: sp.goals,
+      assists: sp.assists,
+    });
   }
+  // Aggiorna clubs-by-season
+  if (!_clubsBySeason[season]) _clubsBySeason[season] = [];
+  if (!_clubsBySeason[season].includes(club)) _clubsBySeason[season].push(club);
+  return players;
 }
 
 export function getActiveLeagueMeta(): LeagueMeta | undefined {
