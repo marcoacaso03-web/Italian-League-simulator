@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'qrcode';
 import { createLobby, getPlayerId, type Lobby, type LobbyPlayer } from '../lib/lobby';
@@ -17,6 +17,7 @@ interface Props { onLobbyReady: (lobby: Lobby) => void; }
 
 export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
   const { t } = useTranslation();
+  const [, navigate] = useLocation();
   const [hostName, setHostName] = useState('');
   const [eraPreset, setEraPreset] = useState<'all' | '2000s' | '2010s' | 'modern'>('all');
   const [eraFrom, setEraFrom] = useState(1996);
@@ -48,13 +49,14 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
         setPlayers(updatedPlayers);
         if (updatedPlayers.length >= 2) {
           onLobbyReadyRef.current(lobby);
+          navigate(`/lobby/1v1/game?code=${lobby.code}`, { replace: true });
         }
       },
       () => {}
     );
 
     return () => { unsub(); };
-  }, [lobby]);
+  }, [lobby, navigate]);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
@@ -93,8 +95,6 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
 
   // Waiting for opponent view
   if (lobby) {
-    const opponent = players.find((p) => p.player_id !== getPlayerId());
-
     return (
       <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center px-4 py-10">
         <div className="w-full max-w-md space-y-5">
@@ -165,12 +165,6 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
               </div>
             );
           })()}
-
-          {opponent && (
-            <div className="text-center py-4">
-              <p className="text-emerald-400 font-bold text-sm animate-pulse">🎮 {opponent.player_name} {t('lobby_joining')}...</p>
-            </div>
-          )}
 
           <Link href="/lobby">
             <button className="w-full rounded-xl bg-white/[0.06] border border-white/10 py-3 text-sm font-bold text-slate-400 hover:text-white transition-colors">

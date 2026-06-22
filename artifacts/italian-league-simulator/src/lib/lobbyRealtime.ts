@@ -1,31 +1,34 @@
 import { supabase } from './supabase';
 import type { LobbyPlayer } from './lobby';
 
-type PlayersCallback = (players: LobbyPlayer[]) => void;
-type StatusCallback = (status: string) => void;
-
 /**
- * Sottoscrive ai cambiamenti in tempo reale di una lobby.
- * Restituisce una funzione di cleanup.
+ * Subscribe to lobby player changes via Supabase Realtime.
+ * Calls onPlayersChanged whenever lobby_players rows change.
+ * Returns an unsubscribe function.
  */
 export function subscribeToLobby(
   lobbyId: string,
-  onPlayersChange: PlayersCallback,
-  onStatusChange: StatusCallback
+  onPlayersChanged: (players: LobbyPlayer[]) => void,
+  onStatusChange?: (status: string) => void,
 ): () => void {
-  // Carica inizialmente
+  // Initial fetch
   supabase
     .from('lobby_players')
     .select('*')
     .eq('lobby_id', lobbyId)
     .order('joined_at', { ascending: true })
-    .then(({ data }) => {
-      if (data) onPlayersChange(data);
+    .then(({ data, error }) => {
+      if (error) {
+        console.error('subscribeToLobby initial fetch error:', error);
+        return;
+      }
+      if (data) {
+        onPlayersChanged(data as LobbyPlayer[]);
+      }
     });
 
-  // Ascolta cambiamenti giocatori
-  const playersChannel = supabase
-    .channel(`lobby-p-${lobbyId}`)
+  const channel = supabase
+    .channel(`lobby-players-${lobbyId}`)
     .on(
       'postgres_changes',
       {
@@ -34,78 +37,106 @@ export function subscribeToLobby(
         table: 'lobby_players',
         filter: `lobby_id=eq.${lobbyId}`,
       },
-      () => {
-        supabase
+      async () => {
+        const { data, error } = await supabase
           .from('lobby_players')
           .select('*')
           .eq('lobby_id', lobbyId)
-          .order('joined_at', { ascending: true })
-          .then(({ data }) => {
-            if (data) onPlayersChange(data);
-          });
-      }
-    )
-    .subscribe();
+          .order('joined_at', { ascending: true });
 
-  // Ascolta cambiamenti status lobby
-  const statusChannel = supabase
-    .channel(`lobby-s-${lobbyId}`)
-    .on(
-      'postgres_changes',
-      {
-        event: 'UPDATE',
-        schema: 'public',
-        table: 'lobbies',
-        filter: `id=eq.${lobbyId}`,
-      },
-      (payload) => {
-        if (payload.new?.status) onStatusChange(payload.new.status);
+        if (error) {
+          console.error('subscribeToLobby realtime fetch error:', error);
+          return;
+        }
+        if (data) {
+          onPlayersChanged(data as LobbyPlayer[]);
+        }
       }
     )
-    .subscribe();
+    .subscribe(() => {
+      // Also subscribe to lobby status changes
+      if (onStatusChange) {
+        supabase
+          .channel(`lobby-status-${lobbyId}`)
+          .on(
+            'postgres_changes',
+            {
+              event: 'UPDATE',
+              schema: 'public',
+              table: 'lobbies',
+              filter: `id=eq.${lobbyId}`,
+            },
+            (payload) => {
+              if (payload.new && typeof payload.new === 'object' && 'status' in payload.new) {
+                onStatusChange((payload.new as { status: string }).status);
+              }
+            }
+          )
+          .subscribe();
+      }
+    });
 
   return () => {
-    supabase.removeChannel(playersChannel);
-    supabase.removeChannel(statusChannel);
+    supabase.removeChannel(channel);
   };
 }
 
 /**
- * Sottoscrive al presence tracking (chi è online).
+ * Subscribe to presence (online status) for a lobby.
+ * Uses Supabase Realtime Presence API.
+ * Returns an unsubscribe function.
  */
 export function subscribeToPresence(
   lobbyId: string,
   playerId: string,
   playerName: string,
-  onPresenceChange: (online: { id: string; name: string }[]) => void
+  setOnline: (players: { id: string; name: string }[]) => void,
 ): () => void {
-  const channel = supabase
-    .channel(`lobby-pres-${lobbyId}`, {
-      config: {
-        presence: { key: playerId },
+  const channel = supabase.channel(`lobby-presence-${lobbyId}`, {
+    config: {
+      presence: {
+        key: playerId,
       },
-    })
+    },
+  });
+
+  channel
     .on('presence', { event: 'sync' }, () => {
       const state = channel.presenceState();
-      const online: { id: string; name: string }[] = [];
-      const seen = new Set<string>();
-      Object.entries(state).forEach(([key, presences]) => {
-        (presences as { player_id?: string; player_name?: string }[]).forEach((p) => {
-          if (p.player_id && !seen.has(p.player_id)) {
-            seen.add(p.player_id);
-            online.push({ id: p.player_id, name: p.player_name ?? '???' });
-          }
-        });
-      });
-      onPresenceChange(online);
+      const players: { id: string; name: string }[] = [];
+      for (const key of Object.keys(state)) {
+        const presences = state[key] as { player_id?: string; player_name?: string }[];
+        for (const p of presences) {
+          if (p.player_name) players.push({ id: key, name: p.player_name });
+        }
+      }
+      setOnline(players);
+    })
+    .on('presence', { event: 'join' }, () => {
+      const state = channel.presenceState();
+      const players: { id: string; name: string }[] = [];
+      for (const key of Object.keys(state)) {
+        const presences = state[key] as { player_id?: string; player_name?: string }[];
+        for (const p of presences) {
+          if (p.player_name) players.push({ id: key, name: p.player_name });
+        }
+      }
+      setOnline(players);
+    })
+    .on('presence', { event: 'leave' }, () => {
+      const state = channel.presenceState();
+      const players: { id: string; name: string }[] = [];
+      for (const key of Object.keys(state)) {
+        const presences = state[key] as { player_id?: string; player_name?: string }[];
+        for (const p of presences) {
+          if (p.player_name) players.push({ id: key, name: p.player_name });
+        }
+      }
+      setOnline(players);
     })
     .subscribe(async (status) => {
       if (status === 'SUBSCRIBED') {
-        await channel.track({
-          player_id: playerId,
-          player_name: playerName,
-          online_at: new Date().toISOString(),
-        });
+        await channel.track({ player_id: playerId, player_name: playerName });
       }
     });
 

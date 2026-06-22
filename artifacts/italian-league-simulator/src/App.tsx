@@ -83,7 +83,25 @@ function Lobby1v1JoinRoute() {
 }
 
 function Lobby1v1GameRoute() {
-  const { lobby } = useLobby();
+  const { lobby, setLobby } = useLobby();
+  const [loading, setLoading] = useState(!lobby);
+
+  useEffect(() => {
+    if (lobby) { setLoading(false); return; }
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (!code) return;
+    getLobby(code).then((l) => { if (l) setLobby(l); setLoading(false); });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+        <p className="text-violet-400 animate-pulse">Loading...</p>
+      </div>
+    );
+  }
+
   if (!lobby) return <Redirect to="/lobby" />;
   return <Lobby1v1GamePage lobby={lobby} />;
 }

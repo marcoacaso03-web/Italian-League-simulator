@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { joinLobby, getPlayerId, type Lobby } from '../lib/lobby';
 
@@ -7,6 +7,7 @@ interface Props { onLobbyJoined: (lobby: Lobby) => void; }
 
 export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
   const { t } = useTranslation();
+  const [, navigate] = useLocation();
   const [playerName, setPlayerName] = useState('');
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,7 @@ export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
     try {
       const result = await joinLobby(code.trim(), playerName.trim());
       onLobbyJoined(result.lobby);
+      navigate(`/lobby/1v1/game?code=${code.trim().toUpperCase()}`, { replace: true });
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : t('lobby_unknown_error');
       if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('già')) {
@@ -40,6 +42,7 @@ export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
           const lobby = await getLobby(code.trim());
           if (lobby) {
             onLobbyJoined(lobby);
+            navigate(`/lobby/1v1/game?code=${code.trim().toUpperCase()}`, { replace: true });
             return;
           }
         } catch { /* fallback */ }
