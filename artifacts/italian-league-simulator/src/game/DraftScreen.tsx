@@ -199,10 +199,13 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
   // Deduplicate compatible slot labels
   const uniqueSlots = [...new Set(compatibleSlotLabels)];
 
-  // Build combined badges: player positions + compatible slots (deduplicated)
-  const playerPositions = player.all_positions?.length > 1
+  // Build combined badges: player sub-positions + compatible slots (deduplicated)
+  // Always show sub-positions (LW, CM, CB...) never the category (DEF, ATT, MID)
+  const playerPositions = player.all_positions?.length
     ? player.all_positions
-    : [player.position_category];
+    : player.position
+      ? [player.position]
+      : [player.position_category];
 
   // Merge: player positions first, then compatible slots not already shown
   const allBadges = [
