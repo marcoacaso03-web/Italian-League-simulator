@@ -1,22 +1,252 @@
 [
-  { "id": "inter", "name": "Inter", "rating": 85 },
-  { "id": "napoli", "name": "Napoli", "rating": 83 },
-  { "id": "milan", "name": "Milan", "rating": 83 },
-  { "id": "juventus", "name": "Juventus", "rating": 82 },
-  { "id": "atalanta", "name": "Atalanta", "rating": 80 },
-  { "id": "roma", "name": "Roma", "rating": 81 },
-  { "id": "lazio", "name": "Lazio", "rating": 79 },
-  { "id": "fiorentina", "name": "Fiorentina", "rating": 78 },
-  { "id": "bologna", "name": "Bologna", "rating": 78 },
-  { "id": "como", "name": "Como", "rating": 78 },
-  { "id": "torino", "name": "Torino", "rating": 77 },
-  { "id": "sassuolo", "name": "Sassuolo", "rating": 76 },
-  { "id": "cagliari", "name": "Cagliari", "rating": 74 },
-  { "id": "genoa", "name": "Genoa", "rating": 74 },
-  { "id": "parma", "name": "Parma", "rating": 74 },
-  { "id": "udinese", "name": "Udinese", "rating": 74 },
-  { "id": "verona", "name": "Verona", "rating": 74 },
-  { "id": "lecce", "name": "Lecce", "rating": 73 },
-  { "id": "cremonese", "name": "Cremonese", "rating": 74 },
-  { "id": "pisa", "name": "Pisa", "rating": 74 }
+  {
+    "id": "inter",
+    "name": "Inter",
+    "rating": 85
+  },
+  {
+    "id": "napoli",
+    "name": "Napoli",
+    "rating": 83
+  },
+  {
+    "id": "milan",
+    "name": "Milan",
+    "rating": 83
+  },
+  {
+    "id": "juventus",
+    "name": "Juventus",
+    "rating": 82
+  },
+  {
+    "id": "atalanta",
+    "name": "Atalanta",
+    "rating": 80
+  },
+  {
+    "id": "roma",
+    "name": "Roma",
+    "rating": 81
+  },
+  {
+    "id": "lazio",
+    "name": "Lazio",
+    "rating": 79
+  },
+  {
+    "id": "fiorentina",
+    "name": "Fiorentina",
+    "rating": 78
+  },
+  {
+    "id": "bologna",
+    "name": "Bologna",
+    "rating": 78
+  },
+  {
+    "id": "como",
+    "name": "Como",
+    "rating": 78
+  },
+  {
+    "id": "torino",
+    "name": "Torino",
+    "rating": 77
+  },
+  {
+    "id": "sassuolo",
+    "name": "Sassuolo",
+    "rating": 76
+  },
+  {
+    "id": "cagliari",
+    "name": "Cagliari",
+    "rating": 74
+  },
+  {
+    "id": "genoa",
+    "name": "Genoa",
+    "rating": 74
+  },
+  {
+    "id": "parma",
+    "name": "Parma",
+    "rating": 74
+  },
+  {
+    "id": "udinese",
+    "name": "Udinese",
+    "rating": 74
+  },
+  {
+    "id": "verona",
+    "name": "Verona",
+    "rating": 74
+  },
+  {
+    "id": "lecce",
+    "name": "Lecce",
+    "rating": 73
+  },
+  {
+    "id": "cremonese",
+    "name": "Cremonese",
+    "rating": 74
+  },
+  {
+    "id": "pisa",
+    "name": "Pisa",
+    "rating": 74
+  },
+  {
+    "id": "ancona",
+    "name": "Ancona",
+    "rating": 70
+  },
+  {
+    "id": "ascoli",
+    "name": "Ascoli",
+    "rating": 70
+  },
+  {
+    "id": "bari",
+    "name": "Bari",
+    "rating": 70
+  },
+  {
+    "id": "benevento",
+    "name": "Benevento",
+    "rating": 70
+  },
+  {
+    "id": "brescia",
+    "name": "Brescia",
+    "rating": 70
+  },
+  {
+    "id": "carpi",
+    "name": "Carpi",
+    "rating": 70
+  },
+  {
+    "id": "catania",
+    "name": "Catania",
+    "rating": 70
+  },
+  {
+    "id": "cesena",
+    "name": "Cesena",
+    "rating": 70
+  },
+  {
+    "id": "crotone",
+    "name": "Crotone",
+    "rating": 70
+  },
+  {
+    "id": "empoli",
+    "name": "Empoli",
+    "rating": 70
+  },
+  {
+    "id": "frosinone",
+    "name": "Frosinone",
+    "rating": 70
+  },
+  {
+    "id": "livorno",
+    "name": "Livorno",
+    "rating": 70
+  },
+  {
+    "id": "messina",
+    "name": "Messina",
+    "rating": 70
+  },
+  {
+    "id": "modena",
+    "name": "Modena",
+    "rating": 70
+  },
+  {
+    "id": "monza",
+    "name": "Monza",
+    "rating": 70
+  },
+  {
+    "id": "novara",
+    "name": "Novara",
+    "rating": 70
+  },
+  {
+    "id": "palermo",
+    "name": "Palermo",
+    "rating": 70
+  },
+  {
+    "id": "perugia",
+    "name": "Perugia",
+    "rating": 70
+  },
+  {
+    "id": "pescara",
+    "name": "Pescara",
+    "rating": 70
+  },
+  {
+    "id": "piacenza",
+    "name": "Piacenza",
+    "rating": 70
+  },
+  {
+    "id": "reggiana",
+    "name": "Reggiana",
+    "rating": 70
+  },
+  {
+    "id": "reggina",
+    "name": "Reggina",
+    "rating": 70
+  },
+  {
+    "id": "salernitana",
+    "name": "Salernitana",
+    "rating": 70
+  },
+  {
+    "id": "sampdoria",
+    "name": "Sampdoria",
+    "rating": 70
+  },
+  {
+    "id": "siena",
+    "name": "Siena",
+    "rating": 70
+  },
+  {
+    "id": "spal",
+    "name": "Spal",
+    "rating": 70
+  },
+  {
+    "id": "spezia",
+    "name": "Spezia",
+    "rating": 70
+  },
+  {
+    "id": "treviso",
+    "name": "Treviso",
+    "rating": 70
+  },
+  {
+    "id": "venezia",
+    "name": "Venezia",
+    "rating": 70
+  },
+  {
+    "id": "vicenza",
+    "name": "Vicenza",
+    "rating": 70
+  }
 ]

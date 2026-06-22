@@ -1,81 +1,11 @@
-import { getTop11Average } from './data';
+// lib/simulation.ts
+// Engine di simulazione generico per qualsiasi campionato.
+//
+// Usa getActiveLeagueClubs() per le squadre AI.
+// Calcola rating club da player data (top-11 avg) se disponibile,
+// altrimenti usa il rating hardcoded da clubs.json.
+
 import type { DraftSlot } from './draft';
-
-export interface SerieATeam {
-  id: string;
-  name: string;
-  abbr: string;
-  color: string;
-  rating: number;
-  csvName: string; // nome del club nel CSV/players.json
-}
-
-/**
- * Mappatura nome simulazione → nome canonico in players.json.
- * Dopo la normalizzazione in generate-data.ts, i nomi in players.json
- * sono già quelli canonici → la mappa è quasi identità.
- * Solo Cremonese/Pisa/Sassuolo restano mappati perché non hanno
- * varianti CSV (sono già canonici).
- */
-const CSV_NAME_MAP: Record<string, string> = {
-  Milan:    'Milan',
-  Verona:   'Verona',
-  Cremonese: 'Cremonese',
-  Pisa:     'Pisa',
-  Sassuolo: 'Sassuolo',
-};
-/**
- * Le 19 squadre AI del campionato 25/26, basate sui dati del CSV FC 26.
- * Il campionato ha sempre 20 squadre: 19 AI + 1 giocatore.
- * Se il giocatore sceglie una squadra dal CSV 26, questa viene rimossa dalla lista AI
- * e sostituita dalla squadra del giocatore.
- * Nota: Sassuolo è escluso dalla lista AI di default (può essere scelto dal giocatore).
- */
-const SERIE_A_2526_BASE: SerieATeam[] = [
-  { id: 'int', name: 'Inter',       abbr: 'INT', color: '#1d4ed8', rating: 89, csvName: 'Inter' },
-  { id: 'nap', name: 'Napoli',      abbr: 'NAP', color: '#2563eb', rating: 87, csvName: 'Napoli' },
-  { id: 'mil', name: 'Milan',       abbr: 'MIL', color: '#dc2626', rating: 85, csvName: 'Milano FC' },
-  { id: 'juv', name: 'Juventus',    abbr: 'JUV', color: '#e5e7eb', rating: 85, csvName: 'Juventus' },
-  { id: 'ata', name: 'Atalanta',    abbr: 'ATA', color: '#1e3a8a', rating: 84, csvName: 'Atalanta' },
-  { id: 'laz', name: 'Lazio',       abbr: 'LAZ', color: '#38bdf8', rating: 81, csvName: 'Lazio' },
-  { id: 'rom', name: 'Roma',        abbr: 'ROM', color: '#b91c1c', rating: 80, csvName: 'Roma' },
-  { id: 'fio', name: 'Fiorentina',  abbr: 'FIO', color: '#7c3aed', rating: 79, csvName: 'Fiorentina' },
-  { id: 'bol', name: 'Bologna',     abbr: 'BOL', color: '#92400e', rating: 77, csvName: 'Bologna' },
-  { id: 'tor', name: 'Torino',      abbr: 'TOR', color: '#78350f', rating: 75, csvName: 'Torino' },
-  { id: 'udi', name: 'Udinese',     abbr: 'UDI', color: '#1f2937', rating: 72, csvName: 'Udinese' },
-  { id: 'cag', name: 'Cagliari',    abbr: 'CAG', color: '#b45309', rating: 71, csvName: 'Cagliari' },
-  { id: 'par', name: 'Parma',       abbr: 'PAR', color: '#fbbf24', rating: 70, csvName: 'Parma' },
-  { id: 'com', name: 'Como',        abbr: 'COM', color: '#155e75', rating: 70, csvName: 'Como' },
-  { id: 'gen', name: 'Genoa',       abbr: 'GEN', color: '#991b1b', rating: 69, csvName: 'Genoa' },
-  { id: 'lec', name: 'Lecce',       abbr: 'LEC', color: '#f59e0b', rating: 68, csvName: 'Lecce' },
-  { id: 'ver', name: 'Verona',      abbr: 'VER', color: '#065f46', rating: 67, csvName: 'Hellas Verona' },
-  { id: 'cre', name: 'Cremonese',  abbr: 'CRE', color: '#c0392b', rating: 70, csvName: 'Cremonese' },
-  { id: 'pis', name: 'Pisa',        abbr: 'PIS', color: '#2c3e50', rating: 68, csvName: 'Pisa' },
-];
-
-const SEASON_2526 = '2025-2026';
-
-/** Cache: rating calcolati una volta per tutta la sessione */
-let _cachedTeams: SerieATeam[] | null = null;
-
-/**
- * Restituisce le 20 squadre del campionato 25/26 con i rating calcolati
- * dalla media dei 11 giocatori con overall più alto nel club (dati FC 26).
- * Tutti i 20 club hanno dati nel CSV → rating 100% basati sui giocatori reali.
- */
-export function getSERIE_A_2526(): SerieATeam[] {
-  if (_cachedTeams) return _cachedTeams;
-
-  _cachedTeams = SERIE_A_2526_BASE.map((team) => {
-    const avg = getTop11Average(team.csvName, SEASON_2526);
-    // Se non trovati dati (avg = 70 fallback), usa il rating hardcoded
-    const rating = avg > 70 ? avg : team.rating;
-    return { ...team, rating };
-  });
-
-  return _cachedTeams;
-}
-
 export interface TeamOverall {
   overall: number;
   attack: number;
@@ -84,102 +14,24 @@ export interface TeamOverall {
   gk: number;
 }
 
-export function calcTeamOverall(slots: DraftSlot[]): TeamOverall {
-  const byCategory: Record<string, number[]> = { ATT: [], MID: [], DEF: [], GK: [] };
-  const allRatings: number[] = [];
+import {
+  getActiveLeagueClubs,
+  getTop11AverageForActiveLeague,
+  getActiveLeagueMeta,
+  setActiveLeague,
+  getSquadForLeague,
+} from './data';
 
-  for (const s of slots) {
-    if (!s.player) continue;
-    allRatings.push(s.player.rating);
-    const cat = s.player.position_category;
-    if (cat in byCategory) byCategory[cat].push(s.player.rating);
-  }
+export interface TeamStanding { teamId: string; name: string; abbr: string; color: string; isPlayer: boolean; played: number; won: number; drawn: number; lost: number; gf: number; ga: number; points: number; }
+export interface GoalEvent { scorer: string; minute: number; }
+export interface MatchResult { opponentId: string; opponentName: string; opponentAbbr: string; opponentColor: string; isHome: boolean; playerGoals: number; opponentGoals: number; outcome: 'W'|'D'|'L'; scorers: GoalEvent[]; }
+export interface MatchdaySnapshot { matchday: number; playerPoints: number; playerPosition: number; playerMatch: MatchResult; }
+export interface SeasonResult { standings: TeamStanding[]; matchdaySnapshots: MatchdaySnapshot[]; playerFinalPosition: number; playerPoints: number; playerGF: number; playerGA: number; }
+export interface PreSeasonOdds { projectedFinish: number; expectedPoints: number; scudetto: number; top4: number; top6: number; top10: number; relegation: number; }
 
-  const avg = (arr: number[]) =>
-    arr.length === 0 ? 0 : arr.reduce((a, b) => a + b, 0) / arr.length;
-
-  return {
-    overall:  Math.round(avg(allRatings)),
-    attack:   Math.round(avg(byCategory.ATT)),
-    midfield: Math.round(avg(byCategory.MID)),
-    defence:  Math.round(avg(byCategory.DEF)),
-    gk:       Math.round(avg(byCategory.GK)),
-  };
-}
-
-export interface PreSeasonOdds {
-  projectedFinish: number;
-  expectedPoints: number;
-  scudetto: number;
-  top4: number;
-  top6: number;
-  top10: number;
-  relegation: number;
-}
-
-export function preSeasonOdds(teamRating: number): PreSeasonOdds {
-  const teams = getSERIE_A_2526();
-  const leagueRatings = [...teams.map((t) => t.rating), teamRating].sort((a, b) => b - a);
-  const rank = leagueRatings.indexOf(teamRating) + 1;
-  const leagueAvg = teams.reduce((s, t) => s + t.rating, 0) / teams.length;
-  const diff = teamRating - leagueAvg;
-  const expectedPoints = Math.round(Math.min(99, Math.max(20, 50 + diff * 1.2)));
-  const sig = (x: number, scale = 8) => Math.round(100 / (1 + Math.exp(-x / scale)) * 10) / 10;
-  const scudetto   = rank === 1 ? sig(diff, 5) : Math.max(0.1, Math.round(sig(diff - 10, 5) * 10) / 10);
-  const top4       = Math.min(99, Math.round(sig(diff - 5, 6) * 10) / 10);
-  const top6       = Math.min(99, Math.round(sig(diff - 2, 6) * 10) / 10);
-  const top10      = Math.min(99, Math.round(sig(diff + 2, 6) * 10) / 10);
-  const relegation = Math.max(0.1, Math.round(sig(-diff - 5, 5) * 10) / 10);
-  return { projectedFinish: rank, expectedPoints, scudetto, top4, top6, top10, relegation };
-}
-
-export interface TeamStanding {
-  teamId: string;
-  name: string;
-  abbr: string;
-  color: string;
-  isPlayer: boolean;
-  played: number;
-  won: number;
-  drawn: number;
-  lost: number;
-  gf: number;
-  ga: number;
-  points: number;
-}
-
-export interface GoalEvent {
-  scorer: string;
-  minute: number;
-}
-
-export interface MatchResult {
-  opponentId: string;
-  opponentName: string;
-  opponentAbbr: string;
-  opponentColor: string;
-  isHome: boolean;
-  playerGoals: number;
-  opponentGoals: number;
-  outcome: 'W' | 'D' | 'L';
-  scorers: GoalEvent[];
-}
-
-export interface MatchdaySnapshot {
-  matchday: number;
-  playerPoints: number;
-  playerPosition: number;
-  playerMatch: MatchResult;
-}
-
-export interface SeasonResult {
-  standings: TeamStanding[];
-  matchdaySnapshots: MatchdaySnapshot[];
-  playerFinalPosition: number;
-  playerPoints: number;
-  playerGF: number;
-  playerGA: number;
-}
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
 function poisson(lambda: number): number {
   const l = Math.exp(-Math.min(lambda, 6));
@@ -249,12 +101,150 @@ function buildRoundRobin(teamIds: string[]): [string, string][][] {
   return [...rounds, ...returnRounds];
 }
 
-export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): SeasonResult {
-  const playerRating = overall.overall;
-  const scorerPool = buildScorerPool(slots);
-  const aiTeams = getSERIE_A_2526();
+// ---------------------------------------------------------------------------
+// Colori hardcoded per i club (fallback)
+// ---------------------------------------------------------------------------
 
-  // La squadra del giocatore sostituisce sempre Sassuolo nel campionato
+function getClubColor(clubId: string): string {
+  const COLORS: Record<string, string> = {
+    inter: '#1d4ed8', napoli: '#2563eb', milan: '#dc2626', juventus: '#e5e7eb',
+    atalanta: '#1e3a8a', roma: '#b91c1c', lazio: '#38bdf8', fiorentina: '#7c3aed',
+    bologna: '#92400e', torino: '#78350f', udinese: '#1f2937', cagliari: '#b45309',
+    parma: '#fbbf24', como: '#155e75', genoa: '#991b1b', lecce: '#f59e0b',
+    verona: '#065f46', cremonese: '#c0392b', pisa: '#2c3e50', sassuolo: '#008f68',
+    'manchester-city': '#6CABDD', arsenal: '#EF0107', liverpool: '#C8102E',
+    chelsea: '#034694', 'manchester-united': '#DA291C', tottenham: '#132257',
+    newcastle: '#241F20', 'aston-villa': '#95BFE5', brighton: '#0057B8',
+    'west-ham': '#7A263A', 'crystal-palace': '#1B458F', fulham: '#000000',
+    wolverhampton: '#FDB913', bournemouth: '#DA291C', 'nottingham-forest': '#E5322D',
+    everton: '#003399', brentford: '#E30613', southampton: '#D71920',
+    leicester: '#003090', ipswich: '#3A64A3',
+    'real-madrid': '#FEBE10', barcelona: '#A50044', 'atletico-madrid': '#CB3524',
+    'real-sociedad': '#143C4B', 'athletic-bilbao': '#EE2523', villarreal: '#FFE667',
+    'real-betis': '#00954C', sevilla: '#D4021D', valencia: '#FF7C00',
+    'celta-vigo': '#6AADB6', getafe: '#0B5EBE', osasuna: '#D91A20',
+    girona: '#CD2534', mallorca: '#E20613', 'rayo-vallecano': '#FFFFFF',
+    'las-palmas': '#FFDE00', alaves: '#004B8D', cadiz: '#FAB800',
+    granada: '#E42E2D', almeria: '#FFCShape',
+    psg: '#004170', marseille: '#2FAEE0', lyon: '#1B3F8B', monaco: '#E5293A',
+    lille: '#E3001B', nice: '#000000', rennes: '#E03C31', lens: '#FFE500',
+    strasbourg: '#C7152A', toulouse: '#532A91', montpellier: '#FF6600',
+    nantes: '#007749', brest: '#E4012B', reims: '#2B5EB0',
+    lorient: '#EF7C1C', 'le-havre': '#1E3A5F', metz: '#C71528', clermont: '#CC0808',
+    'bayern-munich': '#DC052D', 'borussia-dortmund': '#FDE100', 'rb-leipzig': '#DD0741',
+    'bayer-leverkusen': '#E32221', 'eintracht-frankfurt': '#E1000F', wolfsburg: '#65B32E',
+    freiburg: '#000000', stuttgart: '#E32219', hoffenheim: '#1B63D7',
+    'werder-bremen': '#1D9053', mainz: '#C3141E', augsburg: '#BA3733',
+    'borussia-mgladbach': '#000000', 'union-berlin': '#EB212B', bochum: '#005CA9',
+    heidenheim: '#B8192D', darmstadt: '#1C2B4A', koln: '#ED3237',
+  };
+  return COLORS[clubId] ?? '#6b7280';
+}
+
+// ---------------------------------------------------------------------------
+// calcTeamOverall (per SquadPreviewScreen)
+// ---------------------------------------------------------------------------
+
+export function calcTeamOverall(slots: DraftSlot[]): TeamOverall {
+  const byCategory: Record<string, number[]> = { ATT: [], MID: [], DEF: [], GK: [] };
+  const allRatings: number[] = [];
+
+  for (const s of slots) {
+    if (!s.player) continue;
+    allRatings.push(s.player.rating);
+    const cat = s.player.position_category;
+    if (cat in byCategory) byCategory[cat].push(s.player.rating);
+  }
+
+  const avg = (arr: number[]) =>
+    arr.length === 0 ? 0 : Math.round(arr.reduce((a, b) => a + b, 0) / arr.length);
+
+  return {
+    overall:  avg(allRatings),
+    attack:   avg(byCategory.ATT),
+    midfield: avg(byCategory.MID),
+    defence:  avg(byCategory.DEF),
+    gk:       avg(byCategory.GK),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Inizializzazione league
+// ---------------------------------------------------------------------------
+
+export async function initLeague(
+  leagueId: string,
+  overall: number,
+): Promise<Array<{ id: string; name: string; abbr: string; color: string; rating: number }>> {
+  await setActiveLeague(leagueId);
+  const clubs = getActiveLeagueClubs();
+  const meta = getActiveLeagueMeta();
+  const season = meta?.season ?? '2025-2026';
+
+  return clubs.map((club) => {
+    const avg = getTop11AverageForActiveLeague(club.id, season);
+    const rating = avg > 70 ? avg : club.rating;
+    const abbr = club.name
+      .split(' ')
+      .map((w: string) => w[0])
+      .join('')
+      .slice(0, 3)
+      .toUpperCase();
+    return {
+      id: club.id,
+      name: club.name,
+      abbr,
+      color: getClubColor(club.id),
+      rating,
+    };
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Pre-season odds
+// ---------------------------------------------------------------------------
+
+export function preSeasonOdds(teamRating: number, _leagueId?: string): PreSeasonOdds {
+  const aiTeams = getActiveLeagueClubs();
+  const season = getActiveLeagueMeta()?.season ?? '2025-2026';
+  const leagueRatings = [
+    ...aiTeams.map((t) => {
+      const avg = getTop11AverageForActiveLeague(t.id, season);
+      return avg > 70 ? avg : t.rating;
+    }),
+    teamRating,
+  ].sort((a, b) => b - a);
+
+  const rank = leagueRatings.indexOf(teamRating) + 1;
+  const leagueAvg = leagueRatings.reduce((s, r) => s + r, 0) / leagueRatings.length;
+  const diff = teamRating - leagueAvg;
+  const expectedPoints = Math.round(Math.min(99, Math.max(20, 50 + diff * 1.2)));
+  const sig = (x: number, scale = 8) => Math.round(100 / (1 + Math.exp(-x / scale)) * 10) / 10;
+
+  return {
+    projectedFinish: rank,
+    expectedPoints,
+    scudetto:   rank === 1 ? sig(diff, 5) : Math.max(0.1, sig(diff - 10, 5)),
+    top4:       Math.min(99, sig(diff - 5, 6)),
+    top6:       Math.min(99, sig(diff - 2, 6)),
+    top10:      Math.min(99, sig(diff + 2, 6)),
+    relegation: Math.max(0.1, sig(-diff - 5, 5)),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Simulazione stagione
+// ---------------------------------------------------------------------------
+
+export async function simulateSeason(
+  slots: DraftSlot[],
+  overall: number,
+  leagueId: string = 'serie-a',
+): Promise<SeasonResult> {
+  const playerRating = overall;
+  const scorerPool = buildScorerPool(slots);
+
+  const aiTeams = await initLeague(leagueId, playerRating);
   const PLAYER_TEAM_ID = 'player';
   const allTeamIds = [PLAYER_TEAM_ID, ...aiTeams.map((t) => t.id)];
 
@@ -266,8 +256,7 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
     });
   });
   standingsMap.set(PLAYER_TEAM_ID, {
-    teamId: PLAYER_TEAM_ID,
-    name: 'La Tua Squadra', abbr: 'YOU', color: '#10b981',
+    teamId: PLAYER_TEAM_ID, name: 'La Tua Squadra', abbr: 'YOU', color: '#10b981',
     isPlayer: true, played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, points: 0,
   });
 
@@ -276,8 +265,9 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
 
   const schedule = buildRoundRobin(allTeamIds);
   const matchdaySnapshots: MatchdaySnapshot[] = [];
+  const numMatchdays = aiTeams.length === 18 ? 34 : 38;
 
-  for (let md = 0; md < 38; md++) {
+  for (let md = 0; md < numMatchdays; md++) {
     const gamesThisRound = schedule[md];
     let playerMatch!: MatchResult;
 
@@ -298,39 +288,36 @@ export function simulateSeason(slots: DraftSlot[], overall: TeamOverall): Season
         const oGoals = isPlayerHome ? ag : hg;
         const oppId  = isPlayerHome ? awayId : homeId;
         const opp    = aiTeams.find((t) => t.id === oppId);
-        const outcome: 'W' | 'D' | 'L' = pGoals > oGoals ? 'W' : pGoals < oGoals ? 'L' : 'D';
+        const outcome: 'W'|'D'|'L' = pGoals > oGoals ? 'W' : pGoals < oGoals ? 'L' : 'D';
         playerMatch = {
-          opponentId: oppId,
-          opponentName: opp?.name ?? oppId,
-          opponentAbbr: opp?.abbr ?? oppId.toUpperCase(),
-          opponentColor: opp?.color ?? '#6b7280',
-          isHome: isPlayerHome,
-          playerGoals: pGoals,
-          opponentGoals: oGoals,
-          outcome,
+          opponentId: oppId, opponentName: opp?.name ?? oppId,
+          opponentAbbr: opp?.abbr ?? oppId.toUpperCase(), opponentColor: opp?.color ?? '#6b7280',
+          isHome: isPlayerHome, playerGoals: pGoals, opponentGoals: oGoals, outcome,
           scorers: generateScorerEvents(pGoals, scorerPool),
         };
       }
     }
 
     const sorted = Array.from(standingsMap.values()).sort(
-      (a, b) => b.points - a.points || (b.gf - b.ga) - (a.gf - a.ga)
+      (a, b) => b.points - a.points || ((b.gf - b.ga) - (a.gf - a.ga))
     );
-    const playerPos = sorted.findIndex((s) => s.isPlayer) + 1;
-    const playerPts = standingsMap.get('player')!.points;
-    matchdaySnapshots.push({ matchday: md + 1, playerPoints: playerPts, playerPosition: playerPos, playerMatch });
+    matchdaySnapshots.push({
+      matchday: md + 1,
+      playerPoints: standingsMap.get('player')!.points,
+      playerPosition: sorted.findIndex((s) => s.isPlayer) + 1,
+      playerMatch,
+    });
   }
 
   const finalStandings = Array.from(standingsMap.values()).sort(
-    (a, b) => b.points - a.points || (b.gf - b.ga) - (a.gf - a.ga)
+    (a, b) => b.points - a.points || ((b.gf - b.ga) - (a.gf - a.ga))
   );
-  const playerFinal = finalStandings.findIndex((s) => s.isPlayer);
   const playerRow = standingsMap.get('player')!;
 
   return {
     standings: finalStandings,
     matchdaySnapshots,
-    playerFinalPosition: playerFinal + 1,
+    playerFinalPosition: finalStandings.findIndex((s) => s.isPlayer) + 1,
     playerPoints: playerRow.points,
     playerGF: playerRow.gf,
     playerGA: playerRow.ga,

@@ -26,6 +26,7 @@ export interface SetupConfig {
   eraFrom: number;
   eraTo: number;
   formation: string;
+  leagueId: string;
 }
 
 const MIN_YEAR = 1996;
@@ -106,6 +107,15 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
   const [eraFrom,      setEraFrom]      = useState(MIN_YEAR);
   const [eraTo,        setEraTo]        = useState(MAX_YEAR);
   const [formation,    setFormation]    = useState('4-3-3');
+  const [leagueId,     setLeagueId]     = useState('serie-a');
+
+  const LEAGUES = [
+    { id: 'serie-a',        name: 'Serie A',        flag: '🇮🇹' },
+    { id: 'premier-league', name: 'Premier League',  flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
+    { id: 'la-liga',        name: 'La Liga',         flag: '🇪🇸' },
+    { id: 'ligue-1',        name: 'Ligue 1',         flag: '🇫🇷' },
+    { id: 'bundesliga',     name: 'Bundesliga',      flag: '🇩🇪' },
+  ];
 
   const ERA_PRESETS: { id: EraPreset; labelKey: string; subKey?: string; from: number }[] = [
     { id: 'all',    labelKey: 'era_all',    from: MIN_YEAR },
@@ -214,8 +224,24 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
           <FormationSelector value={formation} onChange={setFormation} />
         </section>
 
+        {/* LEAGUE */}
+        <section className="glass rounded-2xl p-5">
+          <SectionLabel label="Campionato" />
+          <div className="grid grid-cols-2 gap-3">
+            {LEAGUES.map((lg) => (
+              <button key={lg.id} onClick={() => setLeagueId(lg.id)}
+                className={`rounded-xl border-2 py-3 px-2 text-center transition-all duration-200 flex items-center justify-center gap-2 ${
+                  leagueId === lg.id ? 'border-emerald-500/60 bg-emerald-500/10' : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+                }`}>
+                <span className="text-xl">{lg.flag}</span>
+                <span className={`text-xs font-bold ${leagueId === lg.id ? 'text-emerald-400' : 'text-slate-300'}`}>{lg.name}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
         <button
-          onClick={() => onStart({ difficulty, showRatings, draftMode, ratingsMode, eraPreset, eraFrom, eraTo, formation })}
+          onClick={() => onStart({ difficulty, showRatings, draftMode, ratingsMode, eraPreset, eraFrom, eraTo, formation, leagueId })}
           className="w-full rounded-2xl bg-emerald-500 py-5 text-lg font-black text-black transition-all hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98] glow-emerald"
         >
           {t('start_draft')}
@@ -261,7 +287,7 @@ export default function GamePage() {
   if (phase === 'setup' || config === null) return <SetupScreen onStart={handleStart} />;
   if (phase === 'draft')   return <DraftScreen   config={config} onComplete={handleDraftComplete} onBack={handleRestart} />;
   if (phase === 'preview') return <SquadPreviewScreen slots={draftSlots} onSimulate={handleSimStart} onRestart={handleRestart} />;
-  if (phase === 'sim')     return <SimScreen slots={draftSlots} onComplete={handleSimComplete} />;
+  if (phase === 'sim')     return <SimScreen slots={draftSlots} onComplete={handleSimComplete} leagueId={config.leagueId} />;
   if (phase === 'results' && results && teamOverall) return <ResultsScreen result={results} overall={teamOverall} slots={draftSlots} config={config} onRestart={handleRestart} />;
   return <SetupScreen onStart={handleStart} />;
 }

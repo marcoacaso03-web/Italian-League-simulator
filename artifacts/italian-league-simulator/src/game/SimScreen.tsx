@@ -9,6 +9,7 @@ import {
 interface Props {
   slots: DraftSlot[];
   onComplete: (_result: SeasonResult, _overall: TeamOverall) => void;
+  leagueId?: string;
 }
 
 const TICK_MS = 900;
@@ -19,7 +20,7 @@ function outcomeColors(o: 'W' | 'D' | 'L') {
   return              { bg: 'bg-red-500/10',    border: 'border-red-500/25',    badge: 'bg-red-500',    score: 'text-red-400' };
 }
 
-export default function SimScreen({ slots, onComplete }: Props) {
+export default function SimScreen({ slots, onComplete, leagueId }: Props) {
   const { t } = useTranslation();
   const [snapshots, setSnapshots] = useState<MatchdaySnapshot[]>([]);
   const [currentMd, setCurrentMd] = useState(0);
@@ -33,25 +34,28 @@ export default function SimScreen({ slots, onComplete }: Props) {
     if (hasRun.current) return;
     hasRun.current = true;
 
-    const overall = calcTeamOverall(slots);
-    const result  = simulateSeason(slots, overall);
-    resultRef.current = { result, overall };
+    (async () => {
+      // Nota: GamePage imposta già setActiveLeague prima di montare SimScreen.
+      const overall = calcTeamOverall(slots);
+      const result  = await simulateSeason(slots, overall.overall, leagueId);
+      resultRef.current = { result, overall };
 
-    let i = 0;
-    const tick = () => {
-      if (i >= result.matchdaySnapshots.length) {
-        setTimeout(() => onComplete(result, overall), 800);
-        return;
-      }
-      const snap = result.matchdaySnapshots[i];
-      setCurrentMd(snap.matchday);
-      setPlayerPos(snap.playerPosition);
-      setPlayerPts(snap.playerPoints);
-      setSnapshots((prev) => [...prev, snap]);
-      i++;
-      setTimeout(tick, TICK_MS);
-    };
-    setTimeout(tick, 300);
+      let i = 0;
+      const tick = () => {
+        if (i >= result.matchdaySnapshots.length) {
+          setTimeout(() => onComplete(result, overall), 800);
+          return;
+        }
+        const snap = result.matchdaySnapshots[i];
+        setCurrentMd(snap.matchday);
+        setPlayerPos(snap.playerPosition);
+        setPlayerPts(snap.playerPoints);
+        setSnapshots((prev) => [...prev, snap]);
+        i++;
+        setTimeout(tick, TICK_MS);
+      };
+      setTimeout(tick, 300);
+    })();
   }, [slots, onComplete]);
 
   useEffect(() => {
