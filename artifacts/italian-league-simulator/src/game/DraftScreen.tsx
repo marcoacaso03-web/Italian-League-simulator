@@ -375,7 +375,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
               <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-1">SQUAD SPUN</p>
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0" />
-                <p className="text-xl font-black text-white">{state.currentSpin.club}</p>
+                <p className="text-xl font-black text-white">{state.currentSpin.club.toUpperCase()}</p>
                 <p className="text-xl font-black" style={{ color: '#fbbf24' }}>{state.currentSpin.season}</p>
               </div>
               <p className="text-xs text-slate-500 mt-1">Seleziona un giocatore, poi clicca una posizione in formazione.</p>

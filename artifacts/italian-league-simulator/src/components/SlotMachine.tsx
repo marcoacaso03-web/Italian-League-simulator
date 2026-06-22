@@ -20,7 +20,7 @@ export default function SlotMachine({ club, season, onReveal }: Props) {
       setDs(roll(5));
       if (++t >= 8) clearInterval(iv);
     }, 75);
-    const t1 = setTimeout(() => { clearInterval(iv); setPhase('settling'); setDc(club); setDs(season); }, 620);
+    const t1 = setTimeout(() => { clearInterval(iv); setPhase('settling'); setDc(club.toUpperCase()); setDs(season); }, 620);
     const t2 = setTimeout(() => { setPhase('revealed'); onReveal?.(); }, 980);
     return () => { clearInterval(iv); clearTimeout(t1); clearTimeout(t2); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
