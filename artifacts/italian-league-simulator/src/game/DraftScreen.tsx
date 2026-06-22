@@ -408,10 +408,14 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
             </div>
 
             <div className="flex gap-2 pt-1">
-              {state.rerollsLeft > 0 && (
-                <button onClick={reroll} disabled={isLoading} className="flex-1 py-3 rounded-xl bg-white/[0.06] border border-white/10 text-sm font-bold hover:bg-white/10 transition-colors disabled:opacity-50">
+              {state.rerollsLeft > 0 ? (
+                <button onClick={reroll} disabled={isLoading} className="flex-1 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-sm font-bold text-amber-300 hover:bg-amber-500/20 transition-colors disabled:opacity-50">
                   🔄 Reroll ({state.rerollsLeft}/{maxRerolls})
                 </button>
+              ) : (
+                <div className="flex-1 py-3 rounded-xl bg-white/[0.03] border border-white/5 text-sm font-bold text-slate-600 text-center">
+                  🔄 Reroll esauriti (0/{maxRerolls})
+                </div>
               )}
               <button onClick={onBack} className="flex-1 py-3 rounded-xl text-slate-400 text-sm hover:text-white transition-colors">↺ Restart</button>
             </div>
