@@ -9,7 +9,7 @@ export default function HomePage() {
   const STATS = [
     { value: '20', label: t('stats_clubs') },
     { value: '5.000+', label: t('stats_seasons') },
-    { value: '1996–2026', label: t('stats_years') },
+    { value: '2004–2026', label: t('stats_years') },
   ];
 
   const STEPS = [

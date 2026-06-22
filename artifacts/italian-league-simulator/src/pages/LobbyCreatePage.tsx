@@ -24,7 +24,7 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
   const [difficulty, setDifficulty] = useState<SetupConfig['difficulty']>('normal');
   const [mode, setMode] = useState<SetupConfig['draftMode']>('squad_first');
   const [eraPreset, setEraPreset] = useState<SetupConfig['eraPreset']>('all');
-  const [eraFrom, setEraFrom] = useState(1996);
+  const [eraFrom, setEraFrom] = useState(2004);
   const [eraTo, setEraTo] = useState(2025);
   const [maxPlayers, setMaxPlayers] = useState(8);
   const [leagueId, setLeagueId] = useState('serie-a');
@@ -63,8 +63,8 @@ export default function LobbyCreatePage({ onLobbyCreated }: LobbyCreatePageProps
   }
 
   const ERA_PRESETS = [
-    { id: 'all' as const, labelKey: 'lobby_era_all', from: 1996 },
-    { id: '2000s' as const, labelKey: 'lobby_era_2000s', from: 2000 },
+    { id: 'all' as const, labelKey: 'lobby_era_all', from: 2004 },
+    { id: '2000s' as const, labelKey: 'lobby_era_2000s', from: 2004 },
     { id: '2010s' as const, labelKey: 'lobby_era_2010s', from: 2010 },
     { id: 'modern' as const, labelKey: 'lobby_era_modern', from: 2016 },
   ];

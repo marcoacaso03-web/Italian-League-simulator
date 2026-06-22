@@ -1,1 +1,1 @@
-{"club": "bournemouth", "season": "2010-2011", "players": [{"id": "Brett Pitman__CF", "name": "Brett Pitman", "position": "CF", "position_category": "ATT", "all_positions": ["ST"], "all_categories": ["ATT"], "rating": 60, "apps": 0, "goals": 0, "assists": 0}]}
+{"club": "bournemouth", "clubName": "Bournemouth", "season": "2010-2011", "players": [{"id": "Brett Pitman__CF", "name": "Brett Pitman", "position": "CF", "rating": 60, "all_positions": ["CF"], "all_categories": []}]}

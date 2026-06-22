@@ -29,7 +29,7 @@ export interface SetupConfig {
   leagueId: string;
 }
 
-const MIN_YEAR = 1996;
+const MIN_YEAR = 2004;
 const MAX_YEAR = 2025;
 const TOTAL_SEASONS = MAX_YEAR - MIN_YEAR + 1;
 
@@ -119,7 +119,7 @@ function SetupScreen({ onStart }: { onStart: (_cfg: SetupConfig) => void }) {
 
   const ERA_PRESETS: { id: EraPreset; labelKey: string; subKey?: string; from: number }[] = [
     { id: 'all',    labelKey: 'era_all',    from: MIN_YEAR },
-    { id: '2000s',  labelKey: 'era_2000s',  from: 2000 },
+    { id: '2000s',  labelKey: 'era_2000s',  from: 2004 },
     { id: '2010s',  labelKey: 'era_2010s',  from: 2010 },
     { id: 'modern', labelKey: 'era_modern', subKey: 'era_modern_sub', from: 2016 },
   ];
