@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { SetupConfig } from '../pages/GamePage';
 import { useDraft } from '../lib/useDraft';
 import { useTranslation } from 'react-i18next';
 import SlotMachine from '../components/SlotMachine';
 import {
-  emptySlots, findBestSlot, findCompatibleSlots, REROLLS_BY_DIFFICULTY,
+  emptySlots, findCompatibleSlots, REROLLS_BY_DIFFICULTY,
   type DraftedPlayer, type DraftSlot,
 } from '../lib/draft';
 import { FORMATION_SLOTS } from '../lib/formations';
@@ -18,9 +18,11 @@ function catColor(cat: string): string {
     default:    return '#6b7280';
   }
 }
+
 function catLabel(cat: string, t: any): string {
   return t(cat);
 }
+
 function posCategory(pos: string): string {
   if (pos === 'GK') return 'GK';
   if (['CB','RB','LB','WB','LWB','RWB'].includes(pos)) return 'DEF';
@@ -74,12 +76,26 @@ function slotBadge(fs: { id: string; acceptedPositions: string[] }): string {
   return (fs.acceptedPositions[0] ?? fs.id).toUpperCase();
 }
 
+// ─── Pitch con posizioni cliccabili ───────────────────────────────────────────
 
-interface PitchProps { formation: string; slots: DraftSlot[]; }
-function Pitch({ formation, slots }: PitchProps) {
+interface PitchProps {
+  formation: string;
+  slots: DraftSlot[];
+  pendingPlayer: DraftedPlayer | null;
+  onSlotClick: (slotId: string) => void;
+}
+
+function Pitch({ formation, slots, pendingPlayer, onSlotClick }: PitchProps) {
   const { t } = useTranslation();
   const formSlots = FORMATION_SLOTS[formation] ?? [];
   const slotMap = new Map(slots.map((s) => [s.formationSlot.id, s]));
+
+  // Calcola quali slot sono compatibili con il pendingPlayer
+  const compatibleIds = new Set(
+    pendingPlayer
+      ? findCompatibleSlots(slots, pendingPlayer).map((s) => s.formationSlot.id)
+      : []
+  );
 
   return (
     <div className="relative w-full" style={{ aspectRatio: '100/143' }}>
@@ -100,48 +116,63 @@ function Pitch({ formation, slots }: PitchProps) {
       {formSlots.map((fs) => {
         const ds = slotMap.get(fs.id);
         const player = ds?.player ?? null;
-        const color  = catColor(fs.category);
-        const badge    = slotBadge(fs);
+        const color = catColor(fs.category);
+        const badge = slotBadge(fs);
         const posLabel = slotPositionLabel(fs.id, t);
-        const surname  = player ? player.name.trim().split(' ').pop() ?? '' : '';
+        const surname = player ? player.name.trim().split(' ').pop() ?? '' : '';
+
+        const isCompatible = compatibleIds.has(fs.id);
+        const isClickable = pendingPlayer && isCompatible && !player;
 
         return (
           <div
             key={fs.id}
-            className="absolute flex flex-col items-center"
+            className={`absolute flex flex-col items-center transition-all duration-200 ${isClickable ? 'cursor-pointer scale-110' : ''}`}
             style={{
-              left:      `${fs.x}%`,
-              top:       `${fs.y}%`,
+              left: `${fs.x}%`,
+              top: `${fs.y}%`,
               transform: 'translate(-50%, -50%)',
-              zIndex:    10,
-              gap:       2,
+              zIndex: isClickable ? 20 : 10,
+              gap: 2,
+            }}
+            onClick={() => {
+              if (isClickable) onSlotClick(fs.id);
             }}
           >
+            {/* Badge posizione */}
             <div style={{
-              background:   player ? color : 'rgba(0,0,0,0.55)',
-              border:       player ? 'none' : '1px solid rgba(255,255,255,0.25)',
+              background: player ? color : isCompatible ? '#22c55e' : 'rgba(0,0,0,0.55)',
+              border: player ? 'none' : isCompatible ? '1px solid #22c55e' : '1px solid rgba(255,255,255,0.25)',
               borderRadius: 4, padding: '1px 5px', fontSize: 8, fontWeight: 900,
-              color:        player ? '#000' : 'rgba(255,255,255,0.55)',
+              color: player ? '#000' : isCompatible ? '#fff' : 'rgba(255,255,255,0.55)',
               letterSpacing: 0.3, lineHeight: '1.4', whiteSpace: 'nowrap',
+              boxShadow: isCompatible ? '0 0 8px rgba(34,197,94,0.6)' : 'none',
             }}>
               {badge}
             </div>
+
+            {/* Cerchio giocatore */}
             <div style={{
               width: 32, height: 32, borderRadius: '50%',
-              background: player ? color : 'transparent',
-              border: player ? `2px solid ${color}` : '2px dashed rgba(255,255,255,0.35)',
+              background: player ? color : isCompatible ? 'rgba(34,197,94,0.3)' : 'transparent',
+              border: player ? `2px solid ${color}` : isCompatible ? '2px solid #22c55e' : '2px dashed rgba(255,255,255,0.35)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: player ? `0 0 8px ${color}55` : 'none',
+              boxShadow: player ? `0 0 8px ${color}55` : isCompatible ? '0 0 12px rgba(34,197,94,0.5)' : 'none',
             }}>
               {player && (
                 <span style={{ fontSize: 9, fontWeight: 900, color: '#fff', letterSpacing: -0.5 }}>
                   {player.rating}
                 </span>
               )}
+              {isCompatible && !player && (
+                <span style={{ fontSize: 14, color: '#22c55e' }}>+</span>
+              )}
             </div>
+
+            {/* Nome / Label */}
             <div style={{
               background: 'rgba(0,0,0,0.75)', borderRadius: 3, padding: '1px 5px',
-              fontSize: 7, fontWeight: 700, color: player ? '#fff' : 'rgba(255,255,255,0.55)',
+              fontSize: 7, fontWeight: 700, color: player ? '#fff' : isCompatible ? '#22c55e' : 'rgba(255,255,255,0.55)',
               whiteSpace: 'nowrap', maxWidth: 52, overflow: 'hidden', textOverflow: 'ellipsis',
             }}>
               {player ? surname : posLabel}
@@ -153,70 +184,20 @@ function Pitch({ formation, slots }: PitchProps) {
   );
 }
 
-interface SlotPickerProps {
-  player: DraftedPlayer; allSlots: DraftSlot[];
-  availableSlots: DraftSlot[]; onPick: (_slotId: string) => void; onCancel: () => void;
-}
-function SlotPicker({ player, allSlots, availableSlots, onPick, onCancel }: SlotPickerProps) {
-  const { t } = useTranslation();
-  const availableIds = new Set(availableSlots.map((s) => s.formationSlot.id));
-  const unavailable = allSlots.filter((s) => !availableIds.has(s.formationSlot.id));
-  return (
-    <div className="rounded-2xl border border-emerald-500/30 bg-[#0d1f18] p-4 space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-base font-black text-white">
-          {t('place_player')} <span className="text-emerald-400">{player.name}</span>
-        </p>
-        <button onClick={onCancel} className="text-xs font-semibold text-slate-400 border border-slate-600 rounded-lg px-3 py-1.5 hover:text-white hover:border-slate-400 transition-colors">
-          {t('cancel')}
-        </button>
-      </div>
-      <div>
-        <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">{t('available')} ({availableSlots.length})</p>
-        <div className="flex flex-wrap gap-2">
-          {availableSlots.map((s) => {
-            const color = catColor(slotCat(s));
-            return (
-              <button key={s.formationSlot.id} onClick={() => onPick(s.formationSlot.id)}
-                className="px-4 py-3 rounded-xl text-sm font-black text-white transition-all active:scale-95 hover:brightness-110"
-                style={{ backgroundColor: color }}>
-                {slotFullLabel(s.formationSlot.id, t)}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-      {unavailable.length > 0 && (
-        <div>
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('unavailable')}</p>
-          <div className="flex flex-wrap gap-1.5">
-            {unavailable.map((s) => {
-              const occupant = s.player ? s.player.name.split(' ').pop() : 'N/A';
-              const abbr = s.formationSlot.acceptedPositions[0];
-              return (
-                <span key={s.formationSlot.id} className="text-[11px] font-semibold text-slate-500 border border-slate-700 rounded-lg px-2.5 py-1.5">
-                  {abbr} · {occupant}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+// ─── PlayerCard ───────────────────────────────────────────────────────────────
 
 interface PlayerCardProps {
   player: DraftedPlayer; disabled: boolean; showRating: boolean;
   compatibleSlotLabels: string[]; selected: boolean; onClick: () => void;
 }
+
 function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, selected, onClick }: PlayerCardProps) {
   const { t } = useTranslation();
   const color = catColor(player.position_category);
   return (
     <button onClick={onClick} disabled={disabled}
       className={['relative flex items-center gap-3 w-full px-4 py-3 rounded-2xl transition-all text-left',
-        selected ? 'bg-emerald-500/10 border border-emerald-500/50'
+        selected ? 'bg-emerald-500/10 border-2 border-emerald-500/60 shadow-[0_0_12px_rgba(34,197,94,0.3)]'
           : disabled ? 'opacity-50 cursor-not-allowed grayscale bg-white/[0.06] border border-white/10'
           : 'bg-white/[0.06] border border-white/10 active:scale-[0.98] hover:bg-white/10',
       ].join(' ')}>
@@ -262,12 +243,15 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
   );
 }
 
+// ─── DraftScreen ──────────────────────────────────────────────────────────────
+
 interface Props { config: SetupConfig; onBack?: () => void; onComplete: (_slots: DraftSlot[]) => void; }
 
 export default function DraftScreen({ config, onBack, onComplete }: Props) {
   const { t } = useTranslation();
   const { state, reveal, spinSquadFirst, selectSlotAndSpin, pick, reroll, cancel, leagueLoaded } = useDraft(config);
   const [pendingPlayer, setPendingPlayer] = useState<DraftedPlayer | null>(null);
+  const pitchRef = useRef<HTMLDivElement>(null);
 
   const isSquadFirst = config.draftMode === 'squad_first';
   const filled = state.slots.filter((s) => s.player !== null).length;
@@ -277,18 +261,33 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
   const showRating = config.showRatings !== 'off' && config.difficulty !== 'hard';
   const isLoading = (state as any).loading === true;
 
-  void findBestSlot;
+  // Scroll to pitch when a player is selected
+  useEffect(() => {
+    if (pendingPlayer && pitchRef.current) {
+      pitchRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [pendingPlayer]);
 
   function handlePick(player: DraftedPlayer) {
     const compat = findCompatibleSlots(state.slots, player);
     if (compat.length === 0) return;
-    if (compat.length === 1) { pick(player, compat[0].formationSlot.id); setPendingPlayer(null); }
-    else setPendingPlayer(player);
+    if (compat.length === 1) {
+      // Assegna direttamente se c'è solo una posizione compatibile
+      pick(player, compat[0].formationSlot.id);
+      setPendingPlayer(null);
+    } else {
+      // Mostra il giocatore selezionato e evidenzia le posizioni compatibili
+      setPendingPlayer(player);
+    }
   }
 
-  function handleSlotPick(slotId: string) {
+  function handleSlotClick(slotId: string) {
     if (!pendingPlayer) return;
     pick(pendingPlayer, slotId);
+    setPendingPlayer(null);
+  }
+
+  function handleCancelPick() {
     setPendingPlayer(null);
   }
 
@@ -310,6 +309,7 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-white">
+      {/* Header */}
       <div className="px-4 pt-5 pb-3 flex flex-col gap-0.5">
         <div className="flex items-center justify-between">
           <div>
@@ -332,12 +332,38 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
         </div>
       </div>
 
-      <div className="px-3">
+      {/* Formazione */}
+      <div className="px-3" ref={pitchRef}>
         <div className="rounded-2xl overflow-hidden">
-          <Pitch formation={config.formation} slots={state.slots} />
+          <Pitch
+            formation={config.formation}
+            slots={state.slots}
+            pendingPlayer={pendingPlayer}
+            onSlotClick={handleSlotClick}
+          />
         </div>
       </div>
 
+      {/* Pending player banner */}
+      {pendingPlayer && (
+        <div className="mx-4 mt-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-black"
+              style={{ backgroundColor: catColor(pendingPlayer.position_category) + '33', color: catColor(pendingPlayer.position_category) }}>
+              {pendingPlayer.rating}
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white">{pendingPlayer.name}</p>
+              <p className="text-xs text-emerald-400">Clicca una posizione in formazione per inserirlo</p>
+            </div>
+          </div>
+          <button onClick={handleCancelPick} className="text-xs font-semibold text-slate-400 border border-slate-600 rounded-lg px-3 py-1.5 hover:text-white hover:border-slate-400 transition-colors">
+            ✕
+          </button>
+        </div>
+      )}
+
+      {/* Lista giocatori / Spin */}
       <div className="flex-1 overflow-y-auto px-4 pb-6 pt-4 space-y-3">
         {state.currentSpin && state.phase === 'spinning' && (
           <SlotMachine club={state.currentSpin.club} season={state.currentSpin.season} onReveal={reveal} />
@@ -352,14 +378,8 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
                 <p className="text-xl font-black text-white">{state.currentSpin.club}</p>
                 <p className="text-xl font-black" style={{ color: '#fbbf24' }}>{state.currentSpin.season}</p>
               </div>
-              <p className="text-xs text-slate-500 mt-1">Pick any player, then choose which open position to slot them into.</p>
+              <p className="text-xs text-slate-500 mt-1">Seleziona un giocatore, poi clicca una posizione in formazione.</p>
             </div>
-
-            {pendingPlayer && (
-              <SlotPicker player={pendingPlayer} allSlots={state.slots}
-                availableSlots={findCompatibleSlots(state.slots, pendingPlayer)}
-                onPick={handleSlotPick} onCancel={() => setPendingPlayer(null)} />
-            )}
 
             <div className="space-y-2">
               {state.currentSpin.players.map((player) => {
@@ -386,7 +406,8 @@ export default function DraftScreen({ config, onBack, onComplete }: Props) {
         )}
 
         {state.phase === 'idle' && remaining.length > 0 && (
-          <button onClick={() => { console.log('[DraftScreen] Spin clicked, phase:', state.phase, 'loading:', isLoading, 'remaining:', remaining.length); doSpin(); }} disabled={isLoading} className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+          <button onClick={doSpin} disabled={isLoading}
+            className="w-full py-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 font-black text-lg text-black transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
             {isLoading ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="animate-spin">⏳</span> Loading...
