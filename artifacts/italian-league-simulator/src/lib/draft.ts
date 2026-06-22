@@ -88,21 +88,13 @@ export function seasonYear(season: string): number {
  * degli slot richiesti (ovvero non potrebbero coprire nemmeno uno slot aperto).
  */
 function filteredPool(config: SetupConfig, emptyFormationSlots: FormationSlot[] = []) {
-  const positions = getClubSeasonPositions();
-  const hasPlayerData = positions.size > 0;
+  // Nota: il filtro per posizioni è stato rimosso perché con il lazy loading
+  // i dati dei giocatori non sono disponibili finché non si carica la squadra.
+  // Se una squadra non ha giocatori compatibili, l'utente può fare reroll.
   return getClubSeasonPool().filter((e) => {
     const y = seasonYear(e.season);
     if (y < config.eraFrom || y > config.eraTo) return false;
-    if (emptyFormationSlots.length === 0) return true;
-    // Se non abbiamo dati giocatori (lazy loading), salta il filtro per posizioni
-    if (!hasPlayerData) return true;
-    const available = positions.get(`${e.club}|||${e.season}`);
-    if (!available) return false;
-    return emptyFormationSlots.some((fs) =>
-      fs.acceptedPositions.some((slotPos) =>
-        available.has(slotPos) || available.has(posToCategory(slotPos))
-      )
-    );
+    return true;
   });
 }
 
