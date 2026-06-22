@@ -89,14 +89,15 @@ export function seasonYear(season: string): number {
  */
 function filteredPool(config: SetupConfig, emptyFormationSlots: FormationSlot[] = []) {
   const positions = getClubSeasonPositions();
+  const hasPlayerData = positions.size > 0;
   return getClubSeasonPool().filter((e) => {
     const y = seasonYear(e.season);
     if (y < config.eraFrom || y > config.eraTo) return false;
     if (emptyFormationSlots.length === 0) return true;
+    // Se non abbiamo dati giocatori (lazy loading), salta il filtro per posizioni
+    if (!hasPlayerData) return true;
     const available = positions.get(`${e.club}|||${e.season}`);
     if (!available) return false;
-    // Tieni la combo solo se copre almeno uno slot aperto
-    // Supporta sia posizioni specifiche che categorie (es "ATT" matcha "ST", "LW", ecc.)
     return emptyFormationSlots.some((fs) =>
       fs.acceptedPositions.some((slotPos) =>
         available.has(slotPos) || available.has(posToCategory(slotPos))
