@@ -5,6 +5,14 @@ import QRCode from 'qrcode';
 import { createLobby, getPlayerId, type Lobby, type LobbyPlayer } from '../lib/lobby';
 import { subscribeToLobby } from '../lib/lobbyRealtime';
 
+const LEAGUES_1V1 = [
+  { id: 'serie-a',        name: 'Serie A',        flag: '🇮🇹' },
+  { id: 'premier-league',  name: 'Premier League',  flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
+  { id: 'la-liga',        name: 'La Liga',         flag: '🇪🇸' },
+  { id: 'ligue-1',        name: 'Ligue 1',         flag: '🇫🇷' },
+  { id: 'bundesliga',     name: 'Bundesliga',      flag: '🇩🇪' },
+];
+
 interface Props { onLobbyReady: (lobby: Lobby) => void; }
 
 export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
@@ -13,6 +21,7 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
   const [eraPreset, setEraPreset] = useState<'all' | '2000s' | '2010s' | 'modern'>('all');
   const [eraFrom, setEraFrom] = useState(1996);
   const [eraTo, setEraTo] = useState(2025);
+  const [leagueId, setLeagueId] = useState('serie-a');
   const [creating, setCreating] = useState(false);
   const [lobby, setLobby] = useState<Lobby | null>(null);
   const [players, setPlayers] = useState<LobbyPlayer[]>([]);
@@ -60,7 +69,7 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
       eraFrom,
       eraTo,
       formation: '4-3-3',
-      leagueId: 'serie-a',
+      leagueId,
     };
     try {
       const created = await createLobby(hostName.trim(), '1v1_blind', config, 2);
@@ -138,15 +147,23 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
           </div>
 
           {/* Rules */}
-          <div className="glass rounded-2xl p-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{t('lobby_challenge_rules')}</p>
-            <div className="flex flex-wrap gap-2 text-xs">
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">🔴 {t('lobby_hard_mode')}</span>
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">🔒 {t('lobby_blind_mode')}</span>
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📐 4-3-3</span>
-              <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📅 {eraFrom}–{eraTo}</span>
-            </div>
-          </div>
+          {(() => {
+            const league = LEAGUES_1V1.find((l) => l.id === leagueId);
+            return (
+              <div className="glass rounded-2xl p-4">
+                <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{t('lobby_challenge_rules')}</p>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {league && (
+                    <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">🏆 {league.name}</span>
+                  )}
+                  <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">🔴 {t('lobby_hard_mode')}</span>
+                  <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">🔒 {t('lobby_blind_mode')}</span>
+                  <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📐 4-3-3</span>
+                  <span className="bg-white/5 rounded-lg px-2 py-1 text-slate-300">📅 {eraFrom}–{eraTo}</span>
+                </div>
+              </div>
+            );
+          })()}
 
           {opponent && (
             <div className="text-center py-4">
@@ -181,6 +198,26 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
           <section className="glass rounded-2xl p-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_host_nickname')}</p>
             <input type="text" value={hostName} onChange={(e) => setHostName(e.target.value.toUpperCase().replace(/[^A-Z0-9 ]/g, '').slice(0, 16))} placeholder={t('lobby_host_nickname_placeholder')} maxLength={16} required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sm placeholder-slate-600 focus:outline-none focus:border-violet-500/50" />
+          </section>
+          <section className="glass rounded-2xl p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Campionato</p>
+            <div className="grid grid-cols-2 gap-2">
+              {LEAGUES_1V1.map((lg) => (
+                <button
+                  key={lg.id}
+                  type="button"
+                  onClick={() => setLeagueId(lg.id)}
+                  className={`rounded-xl border-2 py-3 px-2 text-center transition-all flex items-center justify-center gap-2 ${
+                    leagueId === lg.id
+                      ? 'border-violet-500/60 bg-violet-500/10'
+                      : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+                  }`}
+                >
+                  <span className="text-xl">{lg.flag}</span>
+                  <span className={`text-xs font-bold ${leagueId === lg.id ? 'text-violet-300' : 'text-slate-300'}`}>{lg.name}</span>
+                </button>
+              ))}
+            </div>
           </section>
           <section className="glass rounded-2xl p-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">{t('lobby_era')}</p>

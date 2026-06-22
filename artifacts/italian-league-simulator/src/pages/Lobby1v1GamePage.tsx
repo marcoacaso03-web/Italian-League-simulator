@@ -70,7 +70,7 @@ export default function Lobby1v1GamePage({ lobby }: Props) {
 
   if (phase === 'draft') return <DraftScreen config={lobby.config} onComplete={handleDraftComplete} onBack={handleRestart} />;
   if (phase === 'preview') return <SquadPreviewScreen slots={draftSlots} onSimulate={handleSimStart} onRestart={handleRestart} />;
-  if (phase === 'sim') return <SimScreen slots={draftSlots} onComplete={handleSimComplete} />;
+  if (phase === 'sim') return <SimScreen slots={draftSlots} onComplete={handleSimComplete} leagueId={lobby.config.leagueId} />;
 
   if (phase === 'results' && results && teamOverall) {
     return (
