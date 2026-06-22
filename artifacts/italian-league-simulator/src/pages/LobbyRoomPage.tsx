@@ -59,10 +59,20 @@ export default function LobbyRoomPage({ lobbyCode, onStartGame }: LobbyRoomPageP
     return () => { unsubLobby?.(); unsubPresence?.(); };
   }, [lobbyCode, onStartGame, playerId, currentPlayer?.player_name, t]);
 
+  const [readyCooldown, setReadyCooldown] = useState(false);
+
   const handleToggleReady = useCallback(async () => {
-    if (!lobby) return;
-    try { await toggleReady(lobby.id); } catch { setError(t('lobby_unknown_error')); }
-  }, [lobby, t]);
+    if (!lobby || readyCooldown) return;
+    try {
+      await toggleReady(lobby.id);
+      // Se il giocatore ha appena messo ready, attiva il cooldown di 2 secondi
+      // per impedire di togliere il ready per sbaglio
+      if (!currentPlayer?.is_ready) {
+        setReadyCooldown(true);
+        setTimeout(() => setReadyCooldown(false), 2000);
+      }
+    } catch { setError(t('lobby_unknown_error')); }
+  }, [lobby, t, readyCooldown, currentPlayer?.is_ready]);
 
   const handleStart = useCallback(async () => {
     if (!lobby || !allReady) return;
@@ -188,14 +198,14 @@ export default function LobbyRoomPage({ lobbyCode, onStartGame }: LobbyRoomPageP
 
         <div className="space-y-3">
           {!isHost && (
-            <button onClick={handleToggleReady}
-              className={`w-full rounded-xl py-4 text-base font-bold transition-all ${
+            <button onClick={handleToggleReady} disabled={readyCooldown}
+              className={`w-full rounded-xl py-4 text-base font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                 currentPlayer?.is_ready
                   ? 'bg-amber-500/10 border border-amber-500/30 text-amber-400'
                   : 'bg-emerald-500 text-black hover:bg-emerald-400'
               }`}
             >
-              {currentPlayer?.is_ready ? '⏳ ' + t('lobby_not_ready_btn') : '✅ ' + t('lobby_ready_btn')}
+              {readyCooldown ? '⏳ Attendi...' : currentPlayer?.is_ready ? '⏳ ' + t('lobby_not_ready_btn') : '✅ ' + t('lobby_ready_btn')}
             </button>
           )}
           {isHost && (

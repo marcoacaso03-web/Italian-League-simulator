@@ -58,6 +58,7 @@ export default function Lobby1v1CreatePage({ onLobbyReady }: Props) {
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
+    if (creating) return; // Previene doppio click
     if (!hostName.trim()) { setError(t('lobby_error_code')); return; }
     setCreating(true); setError(null);
     const config = {

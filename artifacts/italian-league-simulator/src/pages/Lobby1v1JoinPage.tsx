@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
-import { joinLobby, type Lobby } from '../lib/lobby';
+import { joinLobby, getPlayerId, type Lobby } from '../lib/lobby';
 
 interface Props { onLobbyJoined: (lobby: Lobby) => void; }
 
@@ -14,11 +14,34 @@ export default function Lobby1v1JoinPage({ onLobbyJoined }: Props) {
 
   async function handleJoin(e: React.FormEvent) {
     e.preventDefault();
+    if (loading) return; // Previene doppio click
     if (!playerName.trim() || !code.trim()) { setError(t('lobby_error_code')); return; }
-    setLoading(true); setError(null);
-    try { const { lobby } = await joinLobby(code.trim(), playerName.trim()); onLobbyJoined(lobby); }
-    catch (err: unknown) { setError(err instanceof Error ? err.message : t('lobby_unknown_error')); }
-    finally { setLoading(false); }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const result = await joinLobby(code.trim(), playerName.trim());
+      onLobbyJoined(result.lobby);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : t('lobby_unknown_error');
+      // Se il giocatore è già nella lobby, vai comunque alla stanza
+      if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('già')) {
+        try {
+          const { getLobby } = await import('../lib/lobby');
+          const lobby = await getLobby(code.trim());
+          if (lobby) {
+            onLobbyJoined(lobby);
+            return;
+          }
+        } catch {
+          // fallback all'errore originale
+        }
+      }
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

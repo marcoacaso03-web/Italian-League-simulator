@@ -18,6 +18,7 @@ export default function LobbyPage({ onLobbyJoined }: LobbyPageProps) {
 
   async function handleJoin(e: React.FormEvent) {
     e.preventDefault();
+    if (loading) return; // Previene doppio click
     if (!joinCode.trim() || !joinName.trim()) {
       setError(t('lobby_error_code'));
       return;
@@ -28,7 +29,13 @@ export default function LobbyPage({ onLobbyJoined }: LobbyPageProps) {
       await joinLobby(joinCode.trim(), joinName.trim());
       onLobbyJoined(joinCode.trim().toUpperCase());
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Errore sconosciuto');
+      const msg = err instanceof Error ? err.message : 'Errore sconosciuto';
+      // Se il giocatore è già nella lobby, vai comunque alla stanza
+      if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('già')) {
+        onLobbyJoined(joinCode.trim().toUpperCase());
+        return;
+      }
+      setError(msg);
     } finally {
       setLoading(false);
     }
