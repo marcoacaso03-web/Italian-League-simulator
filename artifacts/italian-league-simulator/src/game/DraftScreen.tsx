@@ -195,6 +195,21 @@ interface PlayerCardProps {
 function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, selected, onClick }: PlayerCardProps) {
   const { t } = useTranslation();
   const color = catColor(player.position_category);
+
+  // Deduplicate compatible slot labels
+  const uniqueSlots = [...new Set(compatibleSlotLabels)];
+
+  // Build combined badges: player positions + compatible slots (deduplicated)
+  const playerPositions = player.all_positions?.length > 1
+    ? player.all_positions
+    : [player.position_category];
+
+  // Merge: player positions first, then compatible slots not already shown
+  const allBadges = [
+    ...playerPositions,
+    ...uniqueSlots.filter((s) => !playerPositions.includes(s)),
+  ];
+
   return (
     <button onClick={onClick} disabled={disabled}
       className={['relative flex items-center gap-3 w-full px-4 py-3 rounded-2xl transition-all text-left',
@@ -215,30 +230,23 @@ function PlayerCard({ player, disabled, showRating, compatibleSlotLabels, select
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-white truncate">{player.name}</p>
-        {player.all_positions?.length > 1 ? (
-          <div className="flex items-center gap-1 mt-0.5 flex-wrap">
-            {player.all_positions.map((pos) => {
-              const posColor = catColor(posCategory(pos));
-              return (
-                <span key={pos}
-                  style={{ backgroundColor: posColor + '22', color: posColor, borderColor: posColor + '55' }}
-                  className="text-[9px] font-black px-1.5 py-0.5 rounded border leading-none">
-                  {pos}
-                </span>
-              );
-            })}
-          </div>
-        ) : (
-          <p className="text-xs text-slate-500 truncate">{catLabel(player.position_category, t)}</p>
-        )}
       </div>
-      <div className="flex items-center gap-2 flex-shrink-0">
-        {compatibleSlotLabels.map((lbl) => (
-          <span key={lbl} style={{ backgroundColor: color + '28', color, borderColor: color + '55' }}
-            className="text-[10px] font-black px-2 py-0.5 rounded-md border">
-            {lbl}
-          </span>
-        ))}
+      <div className="flex items-center gap-1 flex-shrink-0 flex-wrap justify-end">
+        {allBadges.map((badge, i) => {
+          const isCompatible = uniqueSlots.includes(badge);
+          const posColor = catColor(posCategory(badge));
+          return (
+            <span key={`${badge}-${i}`}
+              style={{
+                backgroundColor: isCompatible ? posColor + '28' : posColor + '18',
+                color: posColor,
+                borderColor: posColor + '55',
+              }}
+              className="text-[10px] font-black px-2 py-0.5 rounded-md border">
+              {badge}
+            </span>
+          );
+        })}
       </div>
     </button>
   );
