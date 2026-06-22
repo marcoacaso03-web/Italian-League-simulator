@@ -110,10 +110,12 @@ export async function loadLeague(leagueId: string): Promise<LeagueDataSource | u
     const poolData = (await res.json()) as { meta: LeagueMeta; clubs: LeagueClub[]; pool: { club: string; season: string; playerCount: number }[] };
     
     // Costruisci LeagueDataSource con players vuoto (caricato on-demand)
-    const ds: LeagueDataSource = {
+    // Salva anche il pool come campo extra per getClubSeasonPool()
+    const ds: LeagueDataSource & { pool: typeof poolData.pool } = {
       meta: poolData.meta,
       clubs: poolData.clubs,
       players: [], // Players caricati on-demand da loadSquad()
+      pool: poolData.pool,
     };
     _cache.set(leagueId, ds);
     return ds;
