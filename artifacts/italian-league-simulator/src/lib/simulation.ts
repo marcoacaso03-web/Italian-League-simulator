@@ -17,6 +17,7 @@ export interface TeamOverall {
 import {
   getActiveLeagueClubs,
   getActiveLeagueMeta,
+  getActiveLeaguePlayers,
   setActiveLeague,
 } from './data';
 
@@ -179,7 +180,45 @@ export async function initLeague(
   const meta = getActiveLeagueMeta();
   const season = meta?.season ?? '2025-2026';
 
-  return clubs.map((club) => {
+  // Filtra solo i club che hanno giocato nella stagione corrente
+  const players = getActiveLeaguePlayers();
+  const currentSeasonClubIds = new Set(
+    players
+      .filter((p) => p.seasons.some((s) => s.season === season))
+      .map((p) => {
+        // Trova il club della stagione corrente
+        const cs = p.seasons.find((s) => s.season === season);
+        return cs?.club ?? '';
+      })
+      .filter(Boolean)
+  );
+
+  // Mappa club ID → nome dal clubs.json
+  const clubNameMap = new Map(clubs.map((c) => [c.id, c.name]));
+
+  // Filtra i club che esistono nel clubs.json E hanno giocato la stagione corrente
+  let seasonClubs = clubs.filter((c) => currentSeasonClubIds.has(c.id));
+
+  // Se non abbiamo abbastanza match (dati incompleti), fallback: usa tutti i club
+  if (seasonClubs.length < 10) {
+    seasonClubs = clubs;
+  }
+
+  // Ordina per rating decrescente e rimuovi una squadra di metà classifica
+  // per fare spazio alla squadra dell'utente
+  seasonClubs.sort((a, b) => (b.rating ?? 70) - (a.rating ?? 70));
+
+  const targetCount = meta?.numTeams ?? 20;
+  // Rimuovi la squadra a metà classifica (indice targetCount/2)
+  const midIndex = Math.floor(targetCount / 2);
+  if (seasonClubs.length >= targetCount) {
+    seasonClubs.splice(midIndex, 1);
+  }
+
+  // Prendi solo le prime targetCount squadre
+  seasonClubs = seasonClubs.slice(0, targetCount);
+
+  return seasonClubs.map((club) => {
     const rating = club.rating;
     const abbr = club.name
       .split(' ')
@@ -201,11 +240,34 @@ export async function initLeague(
 // Pre-season odds
 // ---------------------------------------------------------------------------
 
-export function preSeasonOdds(teamRating: number, _leagueId?: string): PreSeasonOdds {
-  const aiTeams = getActiveLeagueClubs();
-  const season = getActiveLeagueMeta()?.season ?? '2025-2026';
+export function preSeasonOdds(teamRating: number, leagueId?: string): PreSeasonOdds {
+  // Usa la stessa logica di initLeague per filtrare le squadre della stagione corrente
+  const clubs = getActiveLeagueClubs();
+  const meta = getActiveLeagueMeta();
+  const season = meta?.season ?? '2025-2026';
+  const targetCount = meta?.numTeams ?? 20;
+
+  // Filtra solo i club che hanno giocato nella stagione corrente
+  const players = getActiveLeaguePlayers();
+  const currentSeasonClubIds = new Set(
+    players
+      .filter((p) => p.seasons.some((s) => s.season === season))
+      .map((p) => {
+        const cs = p.seasons.find((s) => s.season === season);
+        return cs?.club ?? '';
+      })
+      .filter(Boolean)
+  );
+
+  let seasonClubs = clubs.filter((c) => currentSeasonClubIds.has(c.id));
+  if (seasonClubs.length < 10) seasonClubs = clubs;
+
+  // Ordina per rating e prendi targetCount squadre (senza rimuovere metà classifica qui)
+  seasonClubs.sort((a, b) => (b.rating ?? 70) - (a.rating ?? 70));
+  seasonClubs = seasonClubs.slice(0, targetCount);
+
   const leagueRatings = [
-    ...aiTeams.map((t) => t.rating),
+    ...seasonClubs.map((t) => t.rating ?? 70),
     teamRating,
   ].sort((a, b) => b - a);
 
