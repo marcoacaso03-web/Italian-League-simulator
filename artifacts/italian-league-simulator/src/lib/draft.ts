@@ -183,10 +183,11 @@ export async function spin(
       position_category: toCategory(p.position),
       club: entry.club,
       season: entry.season,
-    }));
-  
+    }))
+    .sort((a, b) => b.rating - a.rating);
+
   console.log('[SPIN] drafted players:', draftedPlayers.length);
-  
+
   // In blind mode l'ordine per overall svelerebbe il rating migliore: randomizza.
   const players = isBlindMode(config) ? shuffle(draftedPlayers) : draftedPlayers;
   return { club: entry.club, season: entry.season, players };
